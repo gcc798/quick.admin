@@ -9,7 +9,6 @@ import (
 // User 系统用户
 type User struct {
 	ID          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`        // 用户ID（使用分布式ID）
-	OrgId       int64           `gorm:"column:org_id;not null;index" json:"orgId"`             // 所属组织ID
 	UserName    string          `gorm:"column:user_name;uniqueIndex;not null" json:"userName"` // 用户名（登录账号）
 	NickName    string          `gorm:"column:nick_name" json:"nickName"`                      // 昵称（显示名称）
 	UserType    int32           `gorm:"column:user_type;default:0" json:"userType"`            // 用户类型：0系统用户 1微信用户 2APP用户

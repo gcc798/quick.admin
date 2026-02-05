@@ -28,12 +28,6 @@ auth:
   smsCodeEnabled: true           # 是否启用短信验证码，默认 true
   emailCodeEnabled: true         # 是否启用邮箱验证码，默认 true
 
-# 多租户配置（预留扩展）
-multiTenant:
-  enabled: false                 # 是否启用多租户模式，默认 false（单一企业模式）
-                                 # 设置为 true 时，系统将切换为多租户模式
-                                 # 需要同时修改 Casbin 模型配置
-
 wechat:
   enabled: true
   appId: "wxaa7706c5732cbb05"

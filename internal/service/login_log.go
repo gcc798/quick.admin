@@ -62,7 +62,6 @@ func (s *loginLogService) Create(ctx context.Context, req *request.CreateLoginLo
 		Status:        req.Status,
 		Msg:           req.Msg,
 		LoginTime:     utils.Now(),
-		TenantId:      req.TenantId,
 		ClientId:      req.ClientId,
 	}
 
@@ -100,7 +99,6 @@ func (s *loginLogService) Update(ctx context.Context, req *request.UpdateLoginLo
 		"os":             req.Os,
 		"status":         req.Status,
 		"msg":            req.Msg,
-		"tenant_id":      req.TenantId,
 		"client_id":      req.ClientId,
 	}
 

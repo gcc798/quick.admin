@@ -4,13 +4,13 @@ import "github.com/force-c/nai-tizi/internal/utils/pagination"
 
 // CreateUserRequest 创建用户请求
 type CreateUserRequest struct {
-	OrgId       int64  `json:"orgId" binding:"required"`
-	UserName    string `json:"userName" binding:"required,min=3,max=20"`
-	NickName    string `json:"nickName" binding:"required"`
-	Password    string `json:"password" binding:"required,min=6"`
-	UserType    int32  `json:"userType"` // 用户类型：0系统用户 1微信用户 2APP用户
+	UserName string `json:"userName" binding:"required,min=3,max=20" msg:"用户名长度必须是3-20个字符"`
+	NickName string `json:"nickName" binding:"required" msg:"请输入昵称"`
+	Password string `json:"password" binding:"required,min=6" msg:"密码长度不能少于6位"`
+	UserType int32  `json:"userType"` // 用户类型：0系统用户 1微信用户 2APP用户
+	//Email       string `json:"email" binding:"omitempty,email" msg:"邮箱格式不正确，请输入有效的邮箱地址"`
 	Email       string `json:"email" binding:"omitempty,email"`
-	Phonenumber string `json:"phonenumber" binding:"omitempty,len=11"`
+	Phonenumber string `json:"phonenumber" binding:"omitempty,len=11" msg:"手机号必须是11位数字"`
 	Sex         int32  `json:"sex" binding:"omitempty,oneof=0 1 2"` // 性别：0男 1女 2未知
 	Avatar      string `json:"avatar"`
 	Status      int32  `json:"status" binding:"omitempty,oneof=0 1"` // 状态：0正常 1停用
@@ -22,7 +22,6 @@ type CreateUserRequest struct {
 // UpdateUserRequest 更新用户请求
 type UpdateUserRequest struct {
 	UserId      int64  `json:"-"` // 从路径参数获取，不从 JSON 解析
-	OrgId       int64  `json:"orgId"`
 	UserName    string `json:"userName" binding:"omitempty,min=3,max=20"`
 	NickName    string `json:"nickName"`
 	UserType    int32  `json:"userType"` // 用户类型：0系统用户 1微信用户 2APP用户

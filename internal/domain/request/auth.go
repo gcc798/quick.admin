@@ -5,9 +5,9 @@ package request
 //	@Description	统一登录请求参数，根据 grantType 使用不同的字段组合
 type LoginRequest struct {
 	// 客户端认证（必填）
-	ClientKey    string `json:"clientKey" binding:"required" example:"web-admin"`                           // 客户端Key
-	ClientSecret string `json:"clientSecret" binding:"required" example:"web-secret-2024"`                  // 客户端密钥
-	GrantType    string `json:"grantType" binding:"required" example:"password" enums:"password,email,xcx"` // 授权类型：password-密码登录, email-邮箱验证码, xcx-微信小程序
+	ClientKey    string `json:"clientKey" binding:"required" msg:"客户端Key不能为空" example:"web-admin"`                         // 客户端Key
+	ClientSecret string `json:"clientSecret" binding:"required" msg:"客户端密钥不能为空" example:"web-secret-2024"`                 // 客户端密钥
+	GrantType    string `json:"grantType" binding:"required" msg:"授权类型不能为空" example:"password" enums:"password,email,xcx"` // 授权类型：password-密码登录, email-邮箱验证码, xcx-微信小程序
 
 	// 用户凭证（根据 grantType 选填）
 	Username    string `json:"username" example:"admin"`             // 用户名（password 必填）
@@ -21,10 +21,10 @@ type LoginRequest struct {
 
 // SendSmsCodeRequest 发送短信验证码请求
 type SendSmsCodeRequest struct {
-	Phonenumber string `json:"phonenumber" binding:"required,len=11"`
+	Phonenumber string `json:"phonenumber" binding:"required,len=11" msg:"手机号必须是11位数字"`
 }
 
 // SendEmailCodeRequest 发送邮箱验证码请求
 type SendEmailCodeRequest struct {
-	Email string `json:"email" binding:"required,email"`
+	Email string `json:"email" binding:"required,email" msg:"请输入有效的邮箱地址"`
 }

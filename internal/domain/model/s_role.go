@@ -14,7 +14,6 @@ type Role struct {
 	Status      int32           `gorm:"column:status;default:0" json:"status"`               // 状态：0正常 1停用
 	DataScope   int32           `gorm:"column:data_scope;default:1" json:"dataScope"`        // 数据范围：1全部 2自定义 3本组织 4本组织及以下 5仅本人
 	IsSystem    bool            `gorm:"column:is_system;default:false" json:"isSystem"`      // 是否系统内置角色（内置角色不可删除）
-	TenantId    int64           `gorm:"column:tenant_id;not null;default:1" json:"tenantId"` // 租户ID（预留多租户）
 	Remark      string          `gorm:"column:remark" json:"remark"`                         // 备注
 	CreateBy    int64           `gorm:"column:create_by" json:"createBy"`                    // 创建人
 	UpdateBy    int64           `gorm:"column:update_by" json:"updateBy"`                    // 更新人

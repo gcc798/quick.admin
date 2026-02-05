@@ -35,7 +35,7 @@ type roleController struct {
 }
 
 func NewRoleController(c container.Container) RoleController {
-	casbinService := service.NewCasbinServiceV2(c.GetCasbin(), c.GetDB(), c.GetLogger(), c.GetConfig())
+	casbinService := service.NewCasbinServiceV2(c.GetCasbin(), c.GetDB(), c.GetLogger())
 	return &roleController{
 		roleService: service.NewRoleService(c.GetDB(), casbinService, c.GetLogger()),
 		logger:      c.GetLogger(),
@@ -386,4 +386,3 @@ func (c *roleController) GetRolePermissions(ctx *gin.Context) {
 
 	response.Success(ctx, permissions)
 }
-

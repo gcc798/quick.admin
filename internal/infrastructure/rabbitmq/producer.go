@@ -10,13 +10,28 @@ import (
 	"go.uber.org/zap"
 )
 
+// PublishCallback 发布消息结果回调
+type PublishCallback func(ctx context.Context, exchange, routingKey, messageID string, err error)
+
 // ProducerService RabbitMQ生产者服务
 // 使用常量定义的交换机和路由键，不需要配置生产者
 // 支持同步、异步、单向、延时消息发送
 type ProducerService struct {
-	conn    *Connection
-	channel *amqp.Channel
-	logger  logging.Logger
+	conn             *Connection
+	channel          *amqp.Channel
+	logger           logging.Logger
+	onPublishSuccess []PublishCallback
+	onPublishFailure []PublishCallback
+}
+
+// AddOnPublishSuccess 添加发布成功回调
+func (p *ProducerService) AddOnPublishSuccess(cb PublishCallback) {
+	p.onPublishSuccess = append(p.onPublishSuccess, cb)
+}
+
+// AddOnPublishFailure 添加发布失败回调
+func (p *ProducerService) AddOnPublishFailure(cb PublishCallback) {
+	p.onPublishFailure = append(p.onPublishFailure, cb)
 }
 
 // NewProducerService 创建生产者服务
@@ -70,6 +85,12 @@ func (p *ProducerService) SendSync(exchange, routingKey, messageID, body string)
 			zap.String("routingKey", routingKey),
 			zap.String("messageId", messageID),
 			zap.Error(err))
+
+		// 触发失败回调
+		for _, cb := range p.onPublishFailure {
+			cb(ctx, exchange, routingKey, messageID, err)
+		}
+
 		return false, err
 	}
 
@@ -81,19 +102,39 @@ func (p *ProducerService) SendSync(exchange, routingKey, messageID, body string)
 				zap.String("exchange", exchange),
 				zap.String("routingKey", routingKey),
 				zap.String("messageId", messageID))
+
+			// 触发成功回调
+			for _, cb := range p.onPublishSuccess {
+				cb(ctx, exchange, routingKey, messageID, nil)
+			}
+
 			return true, nil
 		}
 		p.logger.Error("发送同步消息失败 - 未确认",
 			zap.String("exchange", exchange),
 			zap.String("routingKey", routingKey),
 			zap.String("messageId", messageID))
-		return false, fmt.Errorf("消息未被确认")
+
+		err := fmt.Errorf("消息未被确认")
+		// 触发失败回调
+		for _, cb := range p.onPublishFailure {
+			cb(ctx, exchange, routingKey, messageID, err)
+		}
+
+		return false, err
 	case <-ctx.Done():
 		p.logger.Error("发送同步消息超时",
 			zap.String("exchange", exchange),
 			zap.String("routingKey", routingKey),
 			zap.String("messageId", messageID))
-		return false, fmt.Errorf("等待确认超时")
+
+		err := fmt.Errorf("等待确认超时")
+		// 触发失败回调
+		for _, cb := range p.onPublishFailure {
+			cb(ctx, exchange, routingKey, messageID, err)
+		}
+
+		return false, err
 	}
 }
 

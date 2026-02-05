@@ -5,7 +5,6 @@ import "github.com/force-c/nai-tizi/internal/utils"
 // UserResponse 用户响应
 type UserResponse struct {
 	UserId      int64           `json:"userId"`
-	OrgId       int64           `json:"orgId"`
 	UserName    string          `json:"userName"`
 	NickName    string          `json:"nickName"`
 	UserType    int32           `json:"userType"` // 用户类型：0系统用户 1微信用户 2APP用户

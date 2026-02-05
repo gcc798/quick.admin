@@ -10,7 +10,6 @@ import (
 // Config 配置表
 type Config struct {
 	ID          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`        // 配置ID（使用分布式ID）
-	TenantID    int64           `gorm:"column:tenant_id;default:1" json:"tenantId"`            // 租户ID（预留多租户，默认1）
 	Name        string          `gorm:"column:name;not null" json:"name"`                      // 配置名称
 	Code        string          `gorm:"column:code;not null;index" json:"code"`                // 配置编码
 	Data        json.RawMessage `gorm:"column:data;type:jsonb" json:"data"`                    // 配置数据（JSON格式）

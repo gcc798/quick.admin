@@ -13,7 +13,7 @@ import (
 	"github.com/force-c/nai-tizi/internal/domain/model"
 	"github.com/force-c/nai-tizi/internal/infrastructure/captcha"
 	"github.com/force-c/nai-tizi/internal/infrastructure/database"
-	"github.com/force-c/nai-tizi/internal/infrastructure/idempotent"
+	// "github.com/force-c/nai-tizi/internal/infrastructure/idempotent" // TODO: 待实现
 	"github.com/force-c/nai-tizi/internal/infrastructure/jwt"
 	"github.com/force-c/nai-tizi/internal/infrastructure/mqtt"
 	mqtthandler "github.com/force-c/nai-tizi/internal/infrastructure/mqtt/handler"
@@ -62,7 +62,7 @@ type Container interface {
 	GetStorageManager() storage.StorageManager
 	GetWebSocketHub() *websocket.Hub
 	GetScheduler() *scheduler.Scheduler
-	GetIdempotent() *idempotent.Idempotent
+	// GetIdempotent() *idempotent.Idempotent // TODO: 待实现
 	GetCaptchaManager() *captcha.CaptchaManager
 	Start() error
 	Stop()
@@ -86,7 +86,7 @@ type container struct {
 	storageManager storage.StorageManager
 	wsHub          *websocket.Hub
 	sched          *scheduler.Scheduler
-	idempotent     *idempotent.Idempotent
+	// idempotent     *idempotent.Idempotent // TODO: 待实现
 	captchaManager *captcha.CaptchaManager
 
 	components []Component
@@ -111,7 +111,7 @@ func New(cfg *config.Config, v *viper.Viper) (Container, error) {
 		return nil, err
 	}
 	c.initJWT()
-	c.initIdempotent()
+	// c.initIdempotent() // TODO: 待实现
 	if err := c.initCasbin(); err != nil {
 		return nil, err
 	}
@@ -227,10 +227,10 @@ func (c *container) initJWT() {
 	c.jwt = jwt.New(c.config.JWT.Secret, int64(c.config.JWT.Expire))
 }
 
-// initIdempotent 初始化幂等处理器
-func (c *container) initIdempotent() {
-	c.idempotent = idempotent.New(c.db)
-}
+// initIdempotent 初始化幂等处理器 (TODO: 待实现)
+// func (c *container) initIdempotent() {
+// 	c.idempotent = idempotent.New(c.db)
+// }
 
 // initCasbin 初始化 Casbin 权限管理
 func (c *container) initCasbin() error {
@@ -591,9 +591,10 @@ func (c *container) GetScheduler() *scheduler.Scheduler {
 	return c.sched
 }
 
-func (c *container) GetIdempotent() *idempotent.Idempotent {
-	return c.idempotent
-}
+// GetIdempotent TODO: 待实现
+// func (c *container) GetIdempotent() *idempotent.Idempotent {
+// 	return c.idempotent
+// }
 
 func (c *container) GetCaptchaManager() *captcha.CaptchaManager {
 	return c.captchaManager

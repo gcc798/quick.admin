@@ -7,6 +7,7 @@ import (
 	"github.com/force-c/nai-tizi/internal/service"
 	"github.com/force-c/nai-tizi/internal/utils"
 	_ "github.com/force-c/nai-tizi/internal/utils/pagination"
+	"github.com/force-c/nai-tizi/internal/validator"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -53,7 +54,7 @@ func NewUserController(c container.Container) UserController {
 func (h *userController) Create(c *gin.Context) {
 	var req request.CreateUserRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.FailCode(c, response.CodeInvalidParam, "参数错误: "+err.Error())
+		response.FailCode(c, response.CodeInvalidParam, validator.TranslateWithMsg(err, &req))
 		return
 	}
 
@@ -70,7 +71,7 @@ func (h *userController) Create(c *gin.Context) {
 
 	if err := h.userService.Create(c.Request.Context(), &req); err != nil {
 		h.ctr.GetLogger().Error("创建用户失败", zap.Error(err))
-		response.FailWithMsg(c, err.Error())
+		response.Error(c, err)
 		return
 	}
 
@@ -99,7 +100,7 @@ func (h *userController) Update(c *gin.Context) {
 
 	var req request.UpdateUserRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.FailCode(c, response.CodeInvalidParam, "参数错误: "+err.Error())
+		response.FailCode(c, response.CodeInvalidParam, validator.Translate(err))
 		return
 	}
 
@@ -159,7 +160,7 @@ func (h *userController) Delete(c *gin.Context) {
 func (h *userController) BatchDelete(c *gin.Context) {
 	var req request.BatchDeleteUsersRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.FailCode(c, response.CodeInvalidParam, "参数错误: "+err.Error())
+		response.FailCode(c, response.CodeInvalidParam, validator.Translate(err))
 		return
 	}
 
@@ -216,7 +217,7 @@ func (h *userController) GetById(c *gin.Context) {
 func (h *userController) BatchImport(c *gin.Context) {
 	var req request.BatchImportUsersRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.FailCode(c, response.CodeInvalidParam, "参数错误: "+err.Error())
+		response.FailCode(c, response.CodeInvalidParam, validator.Translate(err))
 		return
 	}
 
@@ -270,7 +271,7 @@ func (h *userController) ResetPassword(c *gin.Context) {
 
 	var req request.ResetPasswordRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.FailCode(c, response.CodeInvalidParam, "参数错误: "+err.Error())
+		response.FailCode(c, response.CodeInvalidParam, validator.Translate(err))
 		return
 	}
 
@@ -298,7 +299,7 @@ func (h *userController) ResetPassword(c *gin.Context) {
 func (h *userController) PageUser(c *gin.Context) {
 	var req request.PageUsersRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.FailCode(c, response.CodeInvalidParam, "参数错误: "+err.Error())
+		response.FailCode(c, response.CodeInvalidParam, validator.Translate(err))
 		return
 	}
 
@@ -327,7 +328,7 @@ func (h *userController) PageUser(c *gin.Context) {
 func (h *userController) ChangePassword(c *gin.Context) {
 	var req request.ChangePasswordRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.FailCode(c, response.CodeInvalidParam, "参数错误: "+err.Error())
+		response.FailCode(c, response.CodeInvalidParam, validator.Translate(err))
 		return
 	}
 

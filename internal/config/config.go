@@ -113,29 +113,23 @@ type EmailCaptcha struct {
 	Template string `mapstructure:"template"` // 邮件模板
 }
 
-// MultiTenant 多租户配置（预留扩展）
-type MultiTenant struct {
-	Enabled bool `mapstructure:"enabled"` // 是否启用多租户模式，默认 false（单一企业模式）
-}
-
 type Config struct {
-	AppDir      string // 应用程序所在目录（可执行文件目录）
-	Server      Server
-	Database    Database
-	Redis       Redis
-	JWT         JWT
-	Auth        Auth
-	Captcha     Captcha     // 验证码配置
-	MultiTenant MultiTenant // 多租户配置
-	WeChat      WeChat
-	MQTT        MQTT
-	RabbitMQ    RabbitMQ
-	SMS         SMS
-	Email       Email
-	S3          S3
-	Scheduler   Scheduler
-	WebSocket   WebSocket
-	Env         string
+	AppDir    string // 应用程序所在目录（可执行文件目录）
+	Server    Server
+	Database  Database
+	Redis     Redis
+	JWT       JWT
+	Auth      Auth
+	Captcha   Captcha // 验证码配置
+	WeChat    WeChat
+	MQTT      MQTT
+	RabbitMQ  RabbitMQ
+	SMS       SMS
+	Email     Email
+	S3        S3
+	Scheduler Scheduler
+	WebSocket WebSocket
+	Env       string
 }
 
 func Load(appDir string) (*Config, *viper.Viper, error) {

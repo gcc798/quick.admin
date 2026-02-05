@@ -4,30 +4,30 @@ import "github.com/force-c/nai-tizi/internal/utils/pagination"
 
 // CreateDictRequest 创建字典请求
 type CreateDictRequest struct {
-	ParentId  int64  `json:"parentId"`                     // 父字典ID（0表示根节点）
-	DictType  string `json:"dictType" binding:"required"`  // 字典类型
-	DictLabel string `json:"dictLabel" binding:"required"` // 字典标签
-	DictValue string `json:"dictValue" binding:"required"` // 字典键值
-	Sort      int64  `json:"sort"`                         // 排序
-	IsDefault bool   `json:"isDefault"`                    // 是否默认
-	Status    int32  `json:"status"`                       // 状态：0正常 1停用
-	Remark    string `json:"remark"`                       // 备注
-	CreateBy  int64  `json:"createBy"`                     // 创建者
-	UpdateBy  int64  `json:"updateBy"`                     // 更新者
+	ParentId  int64  `json:"parentId"`                                    // 父字典ID（0表示根节点）
+	DictType  string `json:"dictType" binding:"required" msg:"字典类型不能为空"`  // 字典类型
+	DictLabel string `json:"dictLabel" binding:"required" msg:"字典标签不能为空"` // 字典标签
+	DictValue string `json:"dictValue" binding:"required" msg:"字典键值不能为空"` // 字典键值
+	Sort      int64  `json:"sort"`                                        // 排序
+	IsDefault bool   `json:"isDefault"`                                   // 是否默认
+	Status    int32  `json:"status"`                                      // 状态：0正常 1停用
+	Remark    string `json:"remark"`                                      // 备注
+	CreateBy  int64  `json:"createBy"`                                    // 创建者
+	UpdateBy  int64  `json:"updateBy"`                                    // 更新者
 }
 
 // UpdateDictRequest 更新字典请求
 type UpdateDictRequest struct {
-	ID        int64  `json:"id" binding:"required"`        // 字典ID
-	ParentId  int64  `json:"parentId"`                     // 父字典ID
-	DictType  string `json:"dictType" binding:"required"`  // 字典类型
-	DictLabel string `json:"dictLabel" binding:"required"` // 字典标签
-	DictValue string `json:"dictValue" binding:"required"` // 字典键值
-	Sort      int64  `json:"sort"`                         // 排序
-	IsDefault bool   `json:"isDefault"`                    // 是否默认
-	Status    int32  `json:"status"`                       // 状态
-	Remark    string `json:"remark"`                       // 备注
-	UpdateBy  int64  `json:"updateBy"`                     // 更新者
+	ID        int64  `json:"id" binding:"required" msg:"字典ID不能为空"`        // 字典ID
+	ParentId  int64  `json:"parentId"`                                    // 父字典ID
+	DictType  string `json:"dictType" binding:"required" msg:"字典类型不能为空"`  // 字典类型
+	DictLabel string `json:"dictLabel" binding:"required" msg:"字典标签不能为空"` // 字典标签
+	DictValue string `json:"dictValue" binding:"required" msg:"字典键值不能为空"` // 字典键值
+	Sort      int64  `json:"sort"`                                        // 排序
+	IsDefault bool   `json:"isDefault"`                                   // 是否默认
+	Status    int32  `json:"status"`                                      // 状态
+	Remark    string `json:"remark"`                                      // 备注
+	UpdateBy  int64  `json:"updateBy"`                                    // 更新者
 }
 
 // PageDictRequest 查询字典列表请求
@@ -40,11 +40,11 @@ type PageDictRequest struct {
 
 // GetDictByTypeRequest 根据类型获取字典请求
 type GetDictByTypeRequest struct {
-	DictType string `form:"dictType" binding:"required"` // 字典类型
-	ParentId *int64 `form:"parentId"`                    // 父字典ID（可选，用于获取子字典）
+	DictType string `form:"dictType" binding:"required" msg:"字典类型不能为空"` // 字典类型
+	ParentId *int64 `form:"parentId"`                                   // 父字典ID（可选，用于获取子字典）
 }
 
 // BatchDeleteDictRequest 批量删除字典请求
 type BatchDeleteDictRequest struct {
-	IDs []int64 `json:"ids" binding:"required,min=1"` // 字典ID列表
+	IDs []int64 `json:"ids" binding:"required,min=1" msg:"请至少选择一个字典"` // 字典ID列表
 }

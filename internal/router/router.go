@@ -31,8 +31,8 @@ func Setup(r *gin.Engine, c container.Container) {
 
 	// 初始化统一的中间件（除了 auth 模块，其他模块都需要认证）
 	tokenManager := service.NewTokenManager(c.GetJWT(), c.GetRedis(), c.GetLogger())
-	casbinService := service.NewCasbinServiceV2(c.GetCasbin(), c.GetDB(), c.GetLogger(), c.GetConfig())
-	authMiddleware := middleware.Auth(tokenManager, c.GetConfig(), c.GetDB())
+	casbinService := service.NewCasbinServiceV2(c.GetCasbin(), c.GetDB(), c.GetLogger())
+	authMiddleware := middleware.Auth(tokenManager, c.GetConfig())
 
 	// 创建路由上下文
 	ctx := &RouterContext{

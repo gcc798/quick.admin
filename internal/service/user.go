@@ -9,6 +9,7 @@ import (
 	"github.com/force-c/nai-tizi/internal/domain/request"
 	logging "github.com/force-c/nai-tizi/internal/logger"
 	"github.com/force-c/nai-tizi/internal/utils"
+	apperrors "github.com/force-c/nai-tizi/internal/utils/errors"
 	"github.com/force-c/nai-tizi/internal/utils/pagination"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
@@ -69,13 +70,13 @@ func (s *userService) Create(ctx context.Context, req *request.CreateUserRequest
 	// 在内存中进行多次校验，避免重复查询数据库
 	for _, user := range conflicts {
 		if user.UserName == req.UserName {
-			return fmt.Errorf("用户名已存在")
+			return apperrors.NewBusiness(apperrors.CodeUserNameExists, "用户名已存在")
 		}
 		if req.Phonenumber != "" && user.Phonenumber == req.Phonenumber {
-			return fmt.Errorf("手机号已存在")
+			return apperrors.NewBusiness(apperrors.CodePhoneExists, "手机号已存在")
 		}
 		if req.Email != "" && user.Email == req.Email {
-			return fmt.Errorf("邮箱已存在")
+			return apperrors.NewBusiness(apperrors.CodeEmailExists, "邮箱已存在")
 		}
 	}
 
@@ -92,7 +93,6 @@ func (s *userService) Create(ctx context.Context, req *request.CreateUserRequest
 
 	// 创建用户实体
 	user := &model.User{
-		OrgId:       req.OrgId,
 		UserName:    req.UserName,
 		NickName:    req.NickName,
 		Password:    hashedPassword,
@@ -123,10 +123,10 @@ func (s *userService) Update(ctx context.Context, req *request.UpdateUserRequest
 	existingUser, err := (&model.User{}).FindByID(s.db, req.UserId)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return fmt.Errorf("用户不存在")
+			return apperrors.NewBusiness(apperrors.CodeUserNotFound, "用户不存在")
 		}
 		s.logger.Error("查询用户失败", zap.Error(err))
-		return fmt.Errorf("查询用户失败: %w", err)
+		return apperrors.NewInfrastructure(apperrors.CodeDatabaseError, "数据库查询失败", err)
 	}
 
 	// 一次查询检查所有冲突（排除自己）
@@ -141,19 +141,18 @@ func (s *userService) Update(ctx context.Context, req *request.UpdateUserRequest
 	// 在内存中进行多次校验
 	for _, user := range conflicts {
 		if req.UserName != "" && user.UserName == req.UserName {
-			return fmt.Errorf("用户名已被占用")
+			return apperrors.NewBusiness(apperrors.CodeUserNameExists, "用户名已被占用")
 		}
 		if req.Phonenumber != "" && user.Phonenumber == req.Phonenumber {
-			return fmt.Errorf("手机号已被占用")
+			return apperrors.NewBusiness(apperrors.CodePhoneExists, "手机号已被占用")
 		}
 		if req.Email != "" && user.Email == req.Email {
-			return fmt.Errorf("邮箱已被占用")
+			return apperrors.NewBusiness(apperrors.CodeEmailExists, "邮箱已被占用")
 		}
 	}
 
 	// 构建更新数据
 	updates := map[string]interface{}{
-		"org_id":      req.OrgId,
 		"user_name":   req.UserName,
 		"nick_name":   req.NickName,
 		"user_type":   req.UserType,
@@ -182,10 +181,10 @@ func (s *userService) Delete(ctx context.Context, userId int64) error {
 	user, err := (&model.User{}).FindByID(s.db, userId)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return fmt.Errorf("用户不存在")
+			return apperrors.NewBusiness(apperrors.CodeUserNotFound, "用户不存在")
 		}
 		s.logger.Error("查询用户失败", zap.Error(err))
-		return fmt.Errorf("查询用户失败: %w", err)
+		return apperrors.NewInfrastructure(apperrors.CodeDatabaseError, "数据库查询失败", err)
 	}
 
 	// 调用模型层的删除方法
@@ -220,10 +219,10 @@ func (s *userService) GetById(ctx context.Context, userId int64) (*model.User, e
 	user, err := (&model.User{}).FindByID(s.db, userId)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, fmt.Errorf("用户不存在")
+			return nil, apperrors.NewBusiness(apperrors.CodeUserNotFound, "用户不存在")
 		}
 		s.logger.Error("查询用户失败", zap.Error(err))
-		return nil, fmt.Errorf("查询用户失败: %w", err)
+		return nil, apperrors.NewInfrastructure(apperrors.CodeDatabaseError, "数据库查询失败", err)
 	}
 
 	// 清空密码字段
@@ -293,7 +292,6 @@ func (s *userService) BatchImport(ctx context.Context, req *request.BatchImportU
 
 		// 创建用户
 		user := &model.User{
-			OrgId:       userReq.OrgId,
 			UserName:    userReq.UserName,
 			NickName:    userReq.NickName,
 			Password:    hashedPassword,
@@ -330,10 +328,10 @@ func (s *userService) ResetPassword(ctx context.Context, userId int64, newPasswo
 	user, err := (&model.User{}).FindByID(s.db, userId)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return fmt.Errorf("用户不存在")
+			return apperrors.NewBusiness(apperrors.CodeUserNotFound, "用户不存在")
 		}
 		s.logger.Error("查询用户失败", zap.Error(err))
-		return fmt.Errorf("查询用户失败: %w", err)
+		return apperrors.NewInfrastructure(apperrors.CodeDatabaseError, "数据库查询失败", err)
 	}
 
 	// 加密新密码
@@ -359,16 +357,16 @@ func (s *userService) ChangePassword(ctx context.Context, userId int64, oldPassw
 	user, err := (&model.User{}).FindByID(s.db, userId)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return fmt.Errorf("用户不存在")
+			return apperrors.NewBusiness(apperrors.CodeUserNotFound, "用户不存在")
 		}
 		s.logger.Error("查询用户失败", zap.Error(err))
-		return fmt.Errorf("查询用户失败: %w", err)
+		return apperrors.NewInfrastructure(apperrors.CodeDatabaseError, "数据库查询失败", err)
 	}
 
 	// 2. 验证旧密码
 	if err := utils.VerifyPassword(user.Password, oldPassword); err != nil {
 		s.logger.Warn("旧密码验证失败", zap.Int64("userId", userId))
-		return fmt.Errorf("旧密码不正确")
+		return apperrors.NewBusiness(apperrors.CodeInvalidPassword, "旧密码不正确")
 	}
 
 	// 3. 加密新密码

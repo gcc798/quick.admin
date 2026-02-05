@@ -4,19 +4,16 @@ import (
 	"strings"
 
 	"github.com/force-c/nai-tizi/internal/config"
-	"github.com/force-c/nai-tizi/internal/domain/model"
 	"github.com/force-c/nai-tizi/internal/domain/response"
 	"github.com/force-c/nai-tizi/internal/service"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
 // Auth 认证中间件
 // 1. 从配置的请求头读取 AccessToken
 // 2. 验证 AccessToken
-// 3. 查询用户的组织ID
-// 4. 设置用户信息到 context
-func Auth(tokenManager service.TokenManager, cfg *config.Config, db *gorm.DB) gin.HandlerFunc {
+// 3. 设置用户信息到 context
+func Auth(tokenManager service.TokenManager, cfg *config.Config) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 从配置的请求头读取 Token
 		tokenHeader := cfg.Auth.TokenHeader
@@ -47,13 +44,6 @@ func Auth(tokenManager service.TokenManager, cfg *config.Config, db *gorm.DB) gi
 			response.Unauthorized(c, "客户端ID与Token不匹配")
 			c.Abort()
 			return
-		}
-
-		// 查询用户的组织ID
-		var user model.User
-		if err := db.Select("org_id").Where("id = ?", claims.UserId).First(&user).Error; err == nil {
-			// 设置用户的组织ID到 context
-			c.Set("orgId", user.OrgId)
 		}
 
 		// 设置用户信息到 context

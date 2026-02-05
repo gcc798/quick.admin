@@ -10,7 +10,6 @@ type MUserRole struct {
 	Id          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`            // 使用分布式ID
 	UserId      int64           `gorm:"column:user_id;not null;index:idx_user_role" json:"userId"` // 用户ID
 	RoleId      int64           `gorm:"column:role_id;not null;index:idx_user_role" json:"roleId"` // 角色ID
-	TenantId    int64           `gorm:"column:tenant_id;not null;default:1" json:"tenantId"`       // 租户ID（预留多租户）
 	CreateBy    int64           `gorm:"column:create_by" json:"createBy"`                          // 创建人
 	UpdateBy    int64           `gorm:"column:update_by" json:"updateBy"`                          // 更新人
 	CreatedTime utils.LocalTime `gorm:"column:created_time;autoCreateTime" json:"createdTime"`

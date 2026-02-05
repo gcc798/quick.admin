@@ -16,7 +16,6 @@ type LoginLogResponse struct {
 	Status        int32           `json:"status"`        // 登录状态：0成功 1失败
 	Msg           string          `json:"msg"`           // 提示消息
 	LoginTime     utils.LocalTime `json:"loginTime"`     // 登录时间
-	TenantId      string          `json:"tenantId"`      // 租户ID
 	ClientId      string          `json:"clientId"`      // 客户端ID
 }
 
@@ -38,7 +37,6 @@ func ToLoginLogResponse(log *model.LoginLog) LoginLogResponse {
 		Status:        log.Status,
 		Msg:           log.Msg,
 		LoginTime:     log.LoginTime,
-		TenantId:      log.TenantId,
 		ClientId:      log.ClientId,
 	}
 }

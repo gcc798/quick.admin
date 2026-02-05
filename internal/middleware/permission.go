@@ -31,7 +31,11 @@ func Permission(casbinService service.CasbinServiceV2, resource string) gin.Hand
 			c.Abort()
 			return
 		}
-
+		// userId == 1 为超级管理员，跳过权限验证
+		if userId == 1 {
+			c.Next()
+			return
+		}
 		// 从资源字符串中解析 action
 		// 格式: "resource.action"，例如 "org.read", "org.create"
 		// *.read = read 操作, 其他 = write 操作

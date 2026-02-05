@@ -14,6 +14,7 @@ import (
 
 // Logger 日志接口
 type Logger interface {
+	Get() *zap.Logger
 	Debug(msg string, fields ...zap.Field)
 	Info(msg string, fields ...zap.Field)
 	Warn(msg string, fields ...zap.Field)
@@ -264,6 +265,8 @@ func newDefaultLogger(env string) (Logger, error) {
 }
 
 // 实现Logger接口
+
+func (l *zapLogger) Get() *zap.Logger { return l.logger }
 
 func (l *zapLogger) Debug(msg string, fields ...zap.Field) { l.logger.Debug(msg, fields...) }
 func (l *zapLogger) Info(msg string, fields ...zap.Field)  { l.logger.Info(msg, fields...) }

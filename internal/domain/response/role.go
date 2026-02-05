@@ -17,7 +17,6 @@ type RoleResponse struct {
 // RolePermissionResponse 角色权限响应
 type RolePermissionResponse struct {
 	RoleKey  string `json:"roleKey" example:"admin"` // 角色标识
-	OrgId    string `json:"orgId" example:"org::1"`  // 组织ID
 	Resource string `json:"resource" example:"*"`    // 资源路径
 	Action   string `json:"action" example:"*"`      // 操作类型
 }
@@ -26,6 +25,5 @@ type RolePermissionResponse struct {
 type UserRoleResponse struct {
 	UserId   int64    `json:"userId" example:"1001"`              // 用户ID
 	UserName string   `json:"userName" example:"zhangsan"`        // 用户名
-	OrgId    int64    `json:"orgId" example:"1"`                  // 组织ID
 	Roles    []string `json:"roles" example:"admin,user_manager"` // 角色列表
 }

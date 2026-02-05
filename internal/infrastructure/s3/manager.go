@@ -27,11 +27,36 @@ type Config struct {
 	ForcePathStyle  bool   // 强制路径样式（MinIO需要）
 }
 
+// StorageProvider 存储提供者接口
+type StorageProvider interface {
+	UploadFile(ctx context.Context, key string, reader io.Reader, contentType string) error
+	DownloadFile(ctx context.Context, key string) (io.ReadCloser, error)
+	DeleteFile(ctx context.Context, key string) error
+	FileExists(ctx context.Context, key string) (bool, error)
+	GetPresignedURL(ctx context.Context, key string, expiration time.Duration) (string, error)
+	ListFiles(ctx context.Context, prefix string, maxKeys int32) ([]string, error)
+}
+
+// UploadCallback 上传结果回调
+type UploadCallback func(ctx context.Context, key string, err error)
+
 // Manager S3存储管理器
 type Manager struct {
-	client *s3.Client
-	config *Config
-	logger logger.Logger
+	client          *s3.Client
+	config          *Config
+	logger          logger.Logger
+	onUploadSuccess []UploadCallback
+	onUploadFailure []UploadCallback
+}
+
+// AddOnUploadSuccess 添加上传成功回调
+func (m *Manager) AddOnUploadSuccess(cb UploadCallback) {
+	m.onUploadSuccess = append(m.onUploadSuccess, cb)
+}
+
+// AddOnUploadFailure 添加上传失败回调
+func (m *Manager) AddOnUploadFailure(cb UploadCallback) {
+	m.onUploadFailure = append(m.onUploadFailure, cb)
 }
 
 // NewManager 创建S3管理器
@@ -122,12 +147,23 @@ func (m *Manager) UploadFile(ctx context.Context, key string, reader io.Reader, 
 		m.logger.Error("failed to upload file to S3",
 			zap.String("key", key),
 			zap.Error(err))
+
+		// 触发失败回调
+		for _, cb := range m.onUploadFailure {
+			cb(ctx, key, err)
+		}
+
 		return fmt.Errorf("failed to upload file: %w", err)
 	}
 
 	m.logger.Info("file uploaded successfully",
 		zap.String("key", key),
 		zap.String("bucket", m.config.Bucket))
+
+	// 触发成功回调
+	for _, cb := range m.onUploadSuccess {
+		cb(ctx, key, nil)
+	}
 
 	return nil
 }

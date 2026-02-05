@@ -312,7 +312,6 @@ func (h *authController) recordLoginLog(c *gin.Context, username, clientId strin
 		Status:    status,
 		Msg:       message,
 		LoginTime: utils.Now(),
-		TenantId:  c.GetHeader("Tenant-Id"),
 		ClientId:  clientId,
 	}
 	if err := logEntry.Create(h.ctr.GetDB()); err != nil {
@@ -599,7 +598,6 @@ func (s *XcxAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginR
 	}
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		newUser := &model.User{
-			OrgId:       int64(1880159541355577346),
 			UserName:    req.Phonenumber,
 			NickName:    "微信用户" + req.Phonenumber[7:],
 			UserType:    1,

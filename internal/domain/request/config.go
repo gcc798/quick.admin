@@ -8,27 +8,27 @@ import (
 
 // CreateConfigRequest 创建配置请求
 type CreateConfigRequest struct {
-	Name     string          `json:"name" binding:"required"`     // 配置名称
-	Code     string          `json:"code" binding:"required"`     // 配置编码
-	Data     json.RawMessage `json:"data"`                        // 配置数据（JSON格式）
-	Remark   string          `json:"remark"`                      // 备注
-	CreateBy int64           `json:"createBy" binding:"required"` // 创建者
-	UpdateBy int64           `json:"updateBy" binding:"required"` // 更新者
+	Name     string          `json:"name" binding:"required" msg:"配置名称不能为空"`    // 配置名称
+	Code     string          `json:"code" binding:"required" msg:"配置编码不能为空"`    // 配置编码
+	Data     json.RawMessage `json:"data"`                                      // 配置数据（JSON格式）
+	Remark   string          `json:"remark"`                                    // 备注
+	CreateBy int64           `json:"createBy" binding:"required" msg:"创建者不能为空"` // 创建者
+	UpdateBy int64           `json:"updateBy" binding:"required" msg:"更新者不能为空"` // 更新者
 }
 
 // UpdateConfigRequest 更新配置请求
 type UpdateConfigRequest struct {
-	ID       int64           `json:"id" binding:"required"`       // 配置ID
-	Name     string          `json:"name" binding:"required"`     // 配置名称
-	Code     string          `json:"code" binding:"required"`     // 配置编码
-	Data     json.RawMessage `json:"data"`                        // 配置数据（JSON格式）
-	Remark   string          `json:"remark"`                      // 备注
-	UpdateBy int64           `json:"updateBy" binding:"required"` // 更新者
+	ID       int64           `json:"id" binding:"required" msg:"配置ID不能为空"`      // 配置ID
+	Name     string          `json:"name" binding:"required" msg:"配置名称不能为空"`    // 配置名称
+	Code     string          `json:"code" binding:"required" msg:"配置编码不能为空"`    // 配置编码
+	Data     json.RawMessage `json:"data"`                                      // 配置数据（JSON格式）
+	Remark   string          `json:"remark"`                                    // 备注
+	UpdateBy int64           `json:"updateBy" binding:"required" msg:"更新者不能为空"` // 更新者
 }
 
 // BatchDeleteConfigRequest 批量删除配置请求
 type BatchDeleteConfigRequest struct {
-	IDs []int64 `json:"ids" binding:"required,min=1"` // 配置ID列表
+	IDs []int64 `json:"ids" binding:"required,min=1" msg:"请至少选择一个配置"` // 配置ID列表
 }
 
 // PageConfigRequest 配置列表查询请求
@@ -40,5 +40,5 @@ type PageConfigRequest struct {
 
 // GetConfigByCodeRequest 根据编码获取配置请求
 type GetConfigByCodeRequest struct {
-	Code string `form:"code" binding:"required"` // 配置编码
+	Code string `form:"code" binding:"required" msg:"配置编码不能为空"` // 配置编码
 }

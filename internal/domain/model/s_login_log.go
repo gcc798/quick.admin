@@ -16,7 +16,6 @@ type LoginLog struct {
 	Status        int32           `gorm:"column:status;default:0" json:"status"`          // 登录状态：0成功 1失败
 	Msg           string          `gorm:"column:msg" json:"msg"`                          // 提示消息
 	LoginTime     utils.LocalTime `gorm:"column:login_time;index" json:"loginTime"`       // 登录时间
-	TenantId      string          `gorm:"column:tenant_id" json:"tenantId"`               // 租户ID
 	ClientId      string          `gorm:"column:client_id" json:"clientId"`               // 客户端ID
 }
 

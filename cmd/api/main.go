@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -15,6 +16,7 @@ import (
 	"github.com/force-c/nai-tizi/internal/container"
 	"github.com/force-c/nai-tizi/internal/middleware"
 	"github.com/force-c/nai-tizi/internal/router"
+	"github.com/force-c/nai-tizi/internal/validator"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -86,7 +88,13 @@ func main() {
 	// 初始化HTTP引擎
 	r := gin.New()
 	//binding.EnableDecoderUseNumber = true
-	r.Use(gin.Recovery())
+
+	// 初始化中文验证错误翻译器
+	validator.Init()
+
+	// 使用自定义的 Recovery 中间件（支持结构化错误处理）
+	// 注意：这里替换了 gin.Recovery()，提供更强大的错误处理能力
+	r.Use(middleware.Recovery(logger.Get()))
 	r.Use(gin.Logger())
 
 	// 添加 CORS 中间件（必须在路由注册之前）
@@ -114,7 +122,7 @@ func main() {
 	// 在 goroutine 中启动服务器
 	go func() {
 		logger.Info("starting http server", zap.String("addr", addr))
-		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			logger.Fatal("failed to start http server", zap.Error(err))
 		}
 	}()

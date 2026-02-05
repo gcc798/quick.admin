@@ -14,12 +14,36 @@ type Subscription struct {
 	Handler mqtt.MessageHandler
 }
 
+// MqttCallback MQTT事件回调
+type MqttCallback func(topic string, payload string, err error)
+
+// ConnectCallback 连接事件回调
+type ConnectCallback func(err error)
+
 type Client struct {
 	client           mqtt.Client
 	logger           logging.Logger
 	broker, clientID string
 	qos              byte
 	subscriptions    []Subscription
+	onConnect        []ConnectCallback
+	onPublishSuccess []MqttCallback
+	onPublishFailure []MqttCallback
+}
+
+// AddOnConnect 添加连接成功回调
+func (c *Client) AddOnConnect(cb ConnectCallback) {
+	c.onConnect = append(c.onConnect, cb)
+}
+
+// AddOnPublishSuccess 添加发布成功回调
+func (c *Client) AddOnPublishSuccess(cb MqttCallback) {
+	c.onPublishSuccess = append(c.onPublishSuccess, cb)
+}
+
+// AddOnPublishFailure 添加发布失败回调
+func (c *Client) AddOnPublishFailure(cb MqttCallback) {
+	c.onPublishFailure = append(c.onPublishFailure, cb)
 }
 
 type Config struct {
@@ -76,9 +100,16 @@ func (c *Client) Stop() error {
 func (c *Client) Connect() error {
 	token := c.client.Connect()
 	if token.Wait() && token.Error() != nil {
-		return fmt.Errorf("failed to connect to MQTT broker: %w", token.Error())
+		err := fmt.Errorf("failed to connect to MQTT broker: %w", token.Error())
+		for _, cb := range c.onConnect {
+			cb(err)
+		}
+		return err
 	}
 	c.logger.Info("MQTT client connected successfully")
+	for _, cb := range c.onConnect {
+		cb(nil)
+	}
 	return nil
 }
 func (c *Client) Disconnect() {
@@ -102,11 +133,23 @@ func (c *Client) Unsubscribe(topic string) error {
 }
 func (c *Client) Publish(topic string, payload string) error {
 	if !c.IsConnected() {
-		return fmt.Errorf("MQTT client not connected")
+		err := fmt.Errorf("MQTT client not connected")
+		for _, cb := range c.onPublishFailure {
+			cb(topic, payload, err)
+		}
+		return err
 	}
 	token := c.client.Publish(topic, c.qos, false, payload)
 	if token.Wait() && token.Error() != nil {
-		return fmt.Errorf("failed to publish message: %w", token.Error())
+		err := fmt.Errorf("failed to publish message: %w", token.Error())
+		for _, cb := range c.onPublishFailure {
+			cb(topic, payload, err)
+		}
+		return err
+	}
+
+	for _, cb := range c.onPublishSuccess {
+		cb(topic, payload, nil)
 	}
 	return nil
 }
