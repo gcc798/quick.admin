@@ -3,7 +3,7 @@ import type { CaptchaData, CaptchaType } from '@/types/api';
 
 export const captchaApi = {
   // 获取启用的验证码类型
-  getEnabledTypes: () => request.get<CaptchaType[]>('/captcha/types'),
+  getEnabledTypes: () => request.get<CaptchaType[]>('/captcha/enabled-types'),
 
   // 生成图形验证码
   generateImage: () => request.get<CaptchaData>('/captcha/image'),
