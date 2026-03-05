@@ -19,7 +19,7 @@ type CreateStorageEnvRequest struct {
 
 // UpdateStorageEnvRequest 更新存储环境请求
 type UpdateStorageEnvRequest struct {
-	ID          int64            `json:"id" binding:"required" msg:"环境ID不能为空"`
+	ID          int64            `json:"id"` // 环境ID（由路径参数注入）
 	EnvName     string           `json:"name" binding:"required" msg:"环境名称不能为空"`
 	EnvCode     string           `json:"code" binding:"required" msg:"环境编码不能为空"`
 	StorageType string           `json:"storageType" binding:"required,oneof=local minio s3 oss" msg:"存储类型必须是 local/minio/s3/oss 之一"` // 存储类型：local/minio/s3/oss

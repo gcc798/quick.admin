@@ -18,7 +18,7 @@ type CreateConfigRequest struct {
 
 // UpdateConfigRequest 更新配置请求
 type UpdateConfigRequest struct {
-	ID       int64           `json:"id" binding:"required" msg:"配置ID不能为空"`      // 配置ID
+	ID       int64           `json:"id"`                                       // 配置ID（由路径参数注入）
 	Name     string          `json:"name" binding:"required" msg:"配置名称不能为空"`    // 配置名称
 	Code     string          `json:"code" binding:"required" msg:"配置编码不能为空"`    // 配置编码
 	Data     json.RawMessage `json:"data"`                                      // 配置数据（JSON格式）

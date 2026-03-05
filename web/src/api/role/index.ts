@@ -15,7 +15,7 @@ export const roleApi = {
 
   // 更新角色
   update: (data: Partial<Role>) =>
-    request.put(`/api/v1/role`, data),
+    request.put(`/api/v1/role/${data.roleId}`, data),
 
   // 删除角色
   delete: (roleId: number) => request.delete(`/api/v1/role/${roleId}`),
@@ -25,8 +25,8 @@ export const roleApi = {
     Promise.all(roleIds.map(id => roleApi.delete(id))),
 
   // 为用户分配角色
-  assignToUser: (userId: number, roleId: number, orgId: number) =>
-    request.post('/api/v1/role/assign', { userId, roleId, orgId }),
+  assignToUser: (userId: number, roleId: number, _orgId?: number) =>
+    request.post('/api/v1/role/assign', { userId, roleId }),
 
   // 移除用户角色
   removeFromUser: (userId: number, roleId: number) =>
@@ -41,8 +41,8 @@ export const roleApi = {
     request.get<any[]>(`/api/v1/role/permissions`, { params: { roleKey } }),
 
   // 添加角色权限
-  addPermission: (roleKey: string, resource: string, action: string, orgId: number) =>
-    request.post(`/api/v1/role/permission`, { roleKey, resource, action, orgId }),
+  addPermission: (roleKey: string, resource: string, action: string, _orgId?: number) =>
+    request.post(`/api/v1/role/permission`, { roleKey, resource, action }),
 
   // 删除角色权限
   removePermission: (roleKey: string, resource: string, action: string) =>

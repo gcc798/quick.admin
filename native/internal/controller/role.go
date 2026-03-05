@@ -91,16 +91,25 @@ func (c *roleController) CreateRole(ctx *gin.Context) {
 //	@Accept			json
 //	@Produce		json
 //	@Param			Authorization	header		string						true	"Bearer {token}"
+//	@Param			roleId			path		int							true	"角色ID"
 //	@Param			body			body		request.UpdateRoleRequest	true	"角色信息"
 //	@Success		200				{object}	response.Response
 //	@Failure		400				{object}	response.Response	"参数错误"
-//	@Router			/api/v1/role [put]
+//	@Router			/api/v1/role/{roleId} [put]
 func (c *roleController) UpdateRole(ctx *gin.Context) {
+	roleIdStr := ctx.Param("roleId")
+	roleId, err := strconv.ParseInt(roleIdStr, 10, 64)
+	if err != nil {
+		response.BadRequest(ctx, "角色ID格式错误")
+		return
+	}
+
 	var req request.UpdateRoleRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		response.BadRequest(ctx, "参数错误: "+err.Error())
 		return
 	}
+	req.RoleId = roleId
 
 	userId, _ := ctx.Get("userId")
 

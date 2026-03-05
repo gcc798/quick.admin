@@ -4,7 +4,6 @@ import type {
   LoginResponse,
   RefreshTokenParams,
   RefreshTokenResponse,
-  UserInfo,
 } from '@/types/api';
 
 export const authApi = {

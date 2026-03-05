@@ -77,11 +77,19 @@ func (c *dictController) CreateDict(ctx *gin.Context) {
 //	@Router			/api/v1/dict [put]
 //	@Security		Bearer
 func (c *dictController) UpdateDict(ctx *gin.Context) {
+	idStr := ctx.Param("id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		response.BadRequest(ctx, "无效的字典ID")
+		return
+	}
+
 	var req request.UpdateDictRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		response.BadRequest(ctx, "请求参数错误: "+err.Error())
 		return
 	}
+	req.ID = id
 
 	if err := c.dictService.Update(ctx.Request.Context(), &req); err != nil {
 		response.Fail(ctx, err.Error())

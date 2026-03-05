@@ -84,15 +84,23 @@ func (c *storageEnvController) CreateStorageEnv(ctx *gin.Context) {
 //	@Accept			json
 //	@Produce		json
 //	@Param			Authorization	header		string							true	"Bearer {token}"
+//	@Param			id				path		int								true	"环境ID"
 //	@Param			body			body		request.UpdateStorageEnvRequest	true	"存储环境信息"
 //	@Success		200				{object}	response.Response
-//	@Router			/api/v1/storage-env [put]
+//	@Router			/api/v1/storage-env/{id} [put]
 func (c *storageEnvController) UpdateStorageEnv(ctx *gin.Context) {
+	envId, err := utils.ParseInt64Param(ctx, "id", "required")
+	if err != nil {
+		response.BadRequest(ctx, err.Error())
+		return
+	}
+
 	var req request.UpdateStorageEnvRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		response.BadRequest(ctx, "参数错误: "+err.Error())
 		return
 	}
+	req.ID = envId
 
 	userId, _ := ctx.Get("userId")
 

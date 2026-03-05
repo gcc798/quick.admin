@@ -20,7 +20,7 @@ export interface Dict {
 export const dictApi = {
   // 获取字典列表（分页）
   page: (params: PageParams & { dictType?: string; dictLabel?: string; status?: number }) =>
-    request.post<PageResponse<Dict>>('/api/v1/dict/page', { params }),
+    request.post<PageResponse<Dict>>('/api/v1/dict/page', params),
 
   // 根据字典类型获取字典数据
   getByType: (dictType: string, parentId?: number) =>

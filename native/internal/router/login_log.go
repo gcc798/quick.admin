@@ -27,7 +27,7 @@ func registerLoginLogRoutes(r *gin.Engine, ctx *RouterContext) {
 			loginLog.DELETE("/batch", middleware.Permission(ctx.CasbinService, constants.ResourceLoginLogDelete), loginLogController.BatchDeleteLoginLog)
 
 			// 清理登录日志 - 需要 login_log.delete 权限
-			loginLog.DELETE("/clean", middleware.Permission(ctx.CasbinService, constants.ResourceLoginLogDelete), loginLogController.CleanLoginLog)
+			loginLog.POST("/clean", middleware.Permission(ctx.CasbinService, constants.ResourceLoginLogDelete), loginLogController.CleanLoginLog)
 
 			// 更新、查询和删除登录日志 - 需要 login_log.update/read/delete 权限（带参数的路由放在最后）
 			loginLog.PUT("/:id", middleware.Permission(ctx.CasbinService, constants.ResourceLoginLogUpdate), loginLogController.UpdateLoginLog)

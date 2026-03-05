@@ -27,7 +27,7 @@ func registerOperLogRoutes(r *gin.Engine, ctx *RouterContext) {
 			operLog.DELETE("/batch", middleware.Permission(ctx.CasbinService, constants.ResourceOperLogDelete), operLogController.BatchDeleteOperLog)
 
 			// 清理操作日志 - 需要 oper_log.delete 权限
-			operLog.DELETE("/clean", middleware.Permission(ctx.CasbinService, constants.ResourceOperLogDelete), operLogController.CleanOperLog)
+			operLog.POST("/clean", middleware.Permission(ctx.CasbinService, constants.ResourceOperLogDelete), operLogController.CleanOperLog)
 
 			// 更新、查询和删除操作日志 - 需要 oper_log.update/read/delete 权限（带参数的路由放在最后）
 			operLog.PUT("/:id", middleware.Permission(ctx.CasbinService, constants.ResourceOperLogUpdate), operLogController.UpdateOperLog)

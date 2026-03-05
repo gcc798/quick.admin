@@ -92,7 +92,16 @@ export const useAuthStore = defineStore('auth', {
     async fetchUserInfo() {
       try {
         const res = await authApi.me();
-        this.userInfo = res;
+        if (this.userInfo) {
+          this.userInfo.userId = res.userId;
+          return;
+        }
+        this.userInfo = {
+          userId: res.userId,
+          username: '',
+          nickname: '',
+          userType: '',
+        };
       } catch (error) {
         throw error;
       }

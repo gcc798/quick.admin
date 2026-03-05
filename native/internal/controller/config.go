@@ -77,11 +77,19 @@ func (c *configController) CreateConfig(ctx *gin.Context) {
 //	@Router			/api/v1/config [put]
 //	@Security		Bearer
 func (c *configController) UpdateConfig(ctx *gin.Context) {
+	idStr := ctx.Param("id")
+	id, err := strconv.ParseInt(idStr, 10, 64)
+	if err != nil {
+		response.BadRequest(ctx, "无效的配置ID")
+		return
+	}
+
 	var req request.UpdateConfigRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		response.BadRequest(ctx, "请求参数错误: "+err.Error())
 		return
 	}
+	req.ID = id
 
 	if err := c.configService.Update(ctx.Request.Context(), &req); err != nil {
 		response.Fail(ctx, err.Error())

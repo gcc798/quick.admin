@@ -51,7 +51,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   async (response: AxiosResponse<ApiResponse>) => {
-    const { code, data, message: msg } = response.data;
+    const { code, data, msg } = (response.data || {}) as any;
     
     // 成功响应
     if (code === 200) {
@@ -131,7 +131,7 @@ service.interceptors.response.use(
           message.error('服务器错误');
           break;
         default:
-          message.error(error.response.data?.message || '请求失败');
+          message.error(error.response.data?.msg || '请求失败');
       }
     } else if (error.request) {
       // 网络错误（例如后端服务未启动）
