@@ -1,0 +1,67 @@
+syntax = "v1"
+
+import "common.api"
+
+type LogCleanReq {
+	days int64 `json:"days,optional"`
+}
+
+type LoginLogPageReq {
+	pageNum   int64  `json:"pageNum,optional"`
+	pageSize  int64  `json:"pageSize,optional"`
+	userName  string `json:"userName,optional"`
+	ipaddr    string `json:"ipaddr,optional"`
+	status    int64  `json:"status,optional"`
+	startTime string `json:"startTime,optional"`
+	endTime   string `json:"endTime,optional"`
+}
+
+type LoginLogReq {
+	userName      string `json:"userName,optional"`
+	ipaddr        string `json:"ipaddr,optional"`
+	loginLocation string `json:"loginLocation,optional"`
+	browser       string `json:"browser,optional"`
+	os            string `json:"os,optional"`
+	status        int64  `json:"status,optional"`
+	msg           string `json:"msg,optional"`
+	clientId      string `json:"clientId,optional"`
+}
+
+type LoginLogUpdateReq {
+	id            int64  `path:"id"`
+	userName      string `json:"userName,optional"`
+	ipaddr        string `json:"ipaddr,optional"`
+	loginLocation string `json:"loginLocation,optional"`
+	browser       string `json:"browser,optional"`
+	os            string `json:"os,optional"`
+	status        int64  `json:"status,optional"`
+	msg           string `json:"msg,optional"`
+	clientId      string `json:"clientId,optional"`
+}
+
+@server (
+	group: loginlog
+)
+service sys-api {
+	@handler LoginLogCreate
+	post /api/v1/loginLog (LoginLogReq) returns (CommonResp)
+
+	@handler LoginLogPage
+	post /api/v1/loginLog/page (LoginLogPageReq) returns (CommonResp)
+
+	@handler LoginLogBatchDelete
+	delete /api/v1/loginLog/batch (BatchIdsReq) returns (CommonResp)
+
+	@handler LoginLogClean
+	post /api/v1/loginLog/clean (LogCleanReq) returns (CommonResp)
+
+	@handler LoginLogUpdate
+	put /api/v1/loginLog/:id (LoginLogUpdateReq) returns (CommonResp)
+
+	@handler LoginLogDetail
+	get /api/v1/loginLog/:id (IdPathReq) returns (CommonResp)
+
+	@handler LoginLogDelete
+	delete /api/v1/loginLog/:id (IdPathReq) returns (CommonResp)
+}
+

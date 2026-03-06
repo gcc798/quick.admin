@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/force-c/nai-tizi/application/sys-rpc/pb";
+
+import "proto/common.proto";
+
+message Org {
+  int64 id = 1;
+  int64 org_id = 2;
+  int64 parent_id = 3;
+  string org_name = 4;
+  string org_code = 5;
+  string org_type = 6;
+  string leader = 7;
+  string phone = 8;
+  string email = 9;
+  int32 status = 10;
+  int64 sort = 11;
+  string remark = 12;
+  string created_time = 13;
+  string updated_time = 14;
+  repeated Org children = 15;
+}
+
+message OrgPageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string org_name = 3;
+  string org_code = 4;
+  int32 status = 5;
+  int64 parent_id = 6;
+}
+
+message OrgCreateReq {
+  int64 parent_id = 1;
+  string org_name = 2;
+  string org_code = 3;
+  string org_type = 4;
+  string leader = 5;
+  string phone = 6;
+  string email = 7;
+  int32 status = 8;
+  int64 sort = 9;
+  string remark = 10;
+}
+
+message OrgUpdateReq {
+  int64 id = 1;
+  int64 parent_id = 2;
+  string org_name = 3;
+  string org_code = 4;
+  string org_type = 5;
+  string leader = 6;
+  string phone = 7;
+  string email = 8;
+  int32 status = 9;
+  int64 sort = 10;
+  string remark = 11;
+}
+
+message OrgPageResp { repeated Org records = 1; PageInfo page = 2; }
+message OrgTreeResp { repeated Org records = 1; }

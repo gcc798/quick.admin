@@ -1,0 +1,40 @@
+syntax = "v1"
+
+import "common.api"
+
+type LoginReq {
+	clientKey    string `json:"clientKey"`
+	clientSecret string `json:"clientSecret"`
+	grantType    string `json:"grantType"`
+	username     string `json:"username,optional"`
+	password     string `json:"password,optional"`
+	code         string `json:"code,optional"`
+	phonenumber  string `json:"phonenumber,optional"`
+	email        string `json:"email,optional"`
+	wxCode       string `json:"wxCode,optional"`
+	uuid         string `json:"uuid,optional"`
+}
+
+type RefreshTokenReq {
+	refreshToken string `json:"refreshToken"`
+	clientKey    string `json:"clientKey"`
+	clientSecret string `json:"clientSecret"`
+}
+
+@server (
+	group: auth
+)
+service sys-api {
+	@handler Login
+	post /login (LoginReq) returns (CommonResp)
+
+	@handler Logout
+	post /logout returns (CommonResp)
+
+	@handler RefreshToken
+	post /auth/refresh (RefreshTokenReq) returns (CommonResp)
+
+	@handler Me
+	get /me returns (CommonResp)
+}
+

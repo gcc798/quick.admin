@@ -1,0 +1,48 @@
+syntax = "v1"
+
+import "common.api"
+
+type MenuReq {
+	id        int64  `json:"id,optional"`
+	menuName  string `json:"menuName,optional"`
+	parentId  int64  `json:"parentId,optional"`
+	sort      int64  `json:"sort,optional"`
+	path      string `json:"path,optional"`
+	component string `json:"component,optional"`
+	query     string `json:"query,optional"`
+	isFrame   int64  `json:"isFrame,optional"`
+	isCache   int64  `json:"isCache,optional"`
+	menuType  int64  `json:"menuType,optional"`
+	visible   int64  `json:"visible,optional"`
+	status    int64  `json:"status,optional"`
+	perms     string `json:"perms,optional"`
+	icon      string `json:"icon,optional"`
+	remark    string `json:"remark,optional"`
+}
+
+@server (
+	group: menu
+)
+service sys-api {
+	@handler MenuUserTree
+	get /api/v1/menu/user/tree returns (CommonResp)
+
+	@handler MenuTree
+	get /api/v1/menu/tree returns (CommonResp)
+
+	@handler MenuList
+	get /api/v1/menu returns (CommonResp)
+
+	@handler MenuDetail
+	get /api/v1/menu/:id (IdPathReq) returns (CommonResp)
+
+	@handler MenuCreate
+	post /api/v1/menu (MenuReq) returns (CommonResp)
+
+	@handler MenuUpdate
+	put /api/v1/menu/:id (IdPathReq) returns (CommonResp)
+
+	@handler MenuDelete
+	delete /api/v1/menu/:id (IdPathReq) returns (CommonResp)
+}
+

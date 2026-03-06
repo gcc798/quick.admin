@@ -1,0 +1,668 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/force-c/nai-tizi/application/sys-rpc/pb";
+
+message Empty {}
+message PingReq {}
+message PingResp { string message = 1; }
+message Ack { string msg = 1; }
+message IdReq { int64 id = 1; }
+message StringIdReq { string id = 1; }
+message BatchIdsReq { repeated int64 ids = 1; }
+
+message PageInfo {
+  int64 total = 1;
+  int64 size = 2;
+  int64 current = 3;
+  int64 pages = 4;
+}
+
+message UserInfo {
+  int64 user_id = 1;
+  string username = 2;
+  string nickname = 3;
+  string phonenumber = 4;
+  string email = 5;
+  string avatar = 6;
+  int32 user_type = 7;
+}
+
+message AuthLoginReq {
+  string client_key = 1;
+  string client_secret = 2;
+  string grant_type = 3;
+  string username = 4;
+  string password = 5;
+  string code = 6;
+  string phonenumber = 7;
+  string email = 8;
+  string wx_code = 9;
+  string uuid = 10;
+}
+
+message AuthLoginResp {
+  string client_id = 1;
+  string client_key = 2;
+  string device_type = 3;
+  int64 timeout = 4;
+  int64 active_timeout = 5;
+  UserInfo user_info = 6;
+}
+
+message User {
+  int64 user_id = 1;
+  string user_name = 2;
+  string nick_name = 3;
+  int32 user_type = 4;
+  string email = 5;
+  string phonenumber = 6;
+  int32 sex = 7;
+  string avatar = 8;
+  int32 status = 9;
+  int64 sort = 10;
+  string login_ip = 11;
+  int64 login_date = 12;
+  string open_id = 13;
+  string union_id = 14;
+  string remark = 15;
+  int64 create_by = 16;
+  int64 update_by = 17;
+  string created_at = 18;
+  string updated_at = 19;
+}
+
+message UserPageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string username = 3;
+  string phonenumber = 4;
+  int32 status = 5;
+}
+
+message UserCreateReq {
+  string user_name = 1;
+  string nick_name = 2;
+  string password = 3;
+  int32 user_type = 4;
+  string email = 5;
+  string phonenumber = 6;
+  int32 sex = 7;
+  string avatar = 8;
+  int32 status = 9;
+  string remark = 10;
+}
+
+message UserUpdateReq {
+  int64 id = 1;
+  string user_name = 2;
+  string nick_name = 3;
+  int32 user_type = 4;
+  string email = 5;
+  string phonenumber = 6;
+  int32 sex = 7;
+  string avatar = 8;
+  int32 status = 9;
+  string remark = 10;
+}
+
+message UserImportReq { repeated UserCreateReq users = 1; }
+message UserPasswordReq { int64 id = 1; string new_password = 2; }
+message UserChangePasswordReq { int64 user_id = 1; string old_password = 2; string new_password = 3; }
+message UserPageResp { repeated User records = 1; PageInfo page = 2; }
+message UserListResp { repeated User records = 1; }
+
+message Role {
+  int64 role_id = 1;
+  string role_key = 2;
+  string role_name = 3;
+  int64 sort = 4;
+  int32 status = 5;
+  int32 data_scope = 6;
+  bool is_system = 7;
+  string remark = 8;
+  int64 create_by = 9;
+  string create_time = 10;
+}
+
+message RolePageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string role_name = 3;
+  int32 status = 4;
+}
+
+message RoleCreateReq {
+  string role_key = 1;
+  string role_name = 2;
+  int64 sort = 3;
+  int32 status = 4;
+  int32 data_scope = 5;
+  string remark = 6;
+}
+
+message RoleUpdateReq {
+  int64 role_id = 1;
+  string role_name = 2;
+  int64 sort = 3;
+  int32 status = 4;
+  int32 data_scope = 5;
+  string remark = 6;
+}
+
+message AssignRoleReq { int64 user_id = 1; int64 role_id = 2; }
+message RemoveRoleReq { int64 user_id = 1; int64 role_id = 2; }
+message UserRoleQueryReq { int64 user_id = 1; }
+message RolePermissionReq { string role_key = 1; string resource = 2; string action = 3; }
+message RolePermissionsQueryReq { string role_key = 1; }
+message RolePermission { string role_key = 1; string resource = 2; string action = 3; }
+message RolePermissionsResp { repeated RolePermission records = 1; }
+message RolePageResp { repeated Role records = 1; PageInfo page = 2; }
+message RoleListResp { repeated Role records = 1; }
+
+message Org {
+  int64 id = 1;
+  int64 org_id = 2;
+  int64 parent_id = 3;
+  string org_name = 4;
+  string org_code = 5;
+  string org_type = 6;
+  string leader = 7;
+  string phone = 8;
+  string email = 9;
+  int32 status = 10;
+  int64 sort = 11;
+  string remark = 12;
+  string created_time = 13;
+  string updated_time = 14;
+  repeated Org children = 15;
+}
+
+message OrgPageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string org_name = 3;
+  string org_code = 4;
+  int32 status = 5;
+  int64 parent_id = 6;
+}
+
+message OrgCreateReq {
+  int64 parent_id = 1;
+  string org_name = 2;
+  string org_code = 3;
+  string org_type = 4;
+  string leader = 5;
+  string phone = 6;
+  string email = 7;
+  int32 status = 8;
+  int64 sort = 9;
+  string remark = 10;
+}
+
+message OrgUpdateReq {
+  int64 id = 1;
+  int64 parent_id = 2;
+  string org_name = 3;
+  string org_code = 4;
+  string org_type = 5;
+  string leader = 6;
+  string phone = 7;
+  string email = 8;
+  int32 status = 9;
+  int64 sort = 10;
+  string remark = 11;
+}
+
+message OrgPageResp { repeated Org records = 1; PageInfo page = 2; }
+message OrgTreeResp { repeated Org records = 1; }
+
+message Menu {
+  int64 id = 1;
+  string menu_name = 2;
+  int64 parent_id = 3;
+  int64 sort = 4;
+  string path = 5;
+  string component = 6;
+  string query = 7;
+  int64 is_frame = 8;
+  int64 is_cache = 9;
+  int64 menu_type = 10;
+  int64 visible = 11;
+  int64 status = 12;
+  string perms = 13;
+  string icon = 14;
+  string remark = 15;
+  int64 create_by = 16;
+  string created_time = 17;
+  string updated_time = 18;
+  repeated Menu children = 19;
+}
+
+message MenuReq {
+  int64 id = 1;
+  string menu_name = 2;
+  int64 parent_id = 3;
+  int64 sort = 4;
+  string path = 5;
+  string component = 6;
+  string query = 7;
+  int64 is_frame = 8;
+  int64 is_cache = 9;
+  int64 menu_type = 10;
+  int64 visible = 11;
+  int64 status = 12;
+  string perms = 13;
+  string icon = 14;
+  string remark = 15;
+}
+
+message MenuListResp { repeated Menu records = 1; }
+
+message Dict {
+  int64 id = 1;
+  int64 parent_id = 2;
+  string dict_type = 3;
+  string dict_label = 4;
+  string dict_value = 5;
+  int64 sort = 6;
+  bool is_default = 7;
+  int32 status = 8;
+  string remark = 9;
+  int64 create_by = 10;
+  int64 update_by = 11;
+  string created_time = 12;
+  string updated_time = 13;
+}
+
+message DictPageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string dict_type = 3;
+  string dict_label = 4;
+  int32 status = 5;
+}
+
+message DictCreateReq {
+  int64 parent_id = 1;
+  string dict_type = 2;
+  string dict_label = 3;
+  string dict_value = 4;
+  int64 sort = 5;
+  bool is_default = 6;
+  int32 status = 7;
+  string remark = 8;
+  int64 create_by = 9;
+  int64 update_by = 10;
+}
+
+message DictUpdateReq {
+  string id = 1;
+  int64 parent_id = 2;
+  string dict_type = 3;
+  string dict_label = 4;
+  string dict_value = 5;
+  int64 sort = 6;
+  bool is_default = 7;
+  int32 status = 8;
+  string remark = 9;
+  int64 update_by = 10;
+}
+
+message DictTypeQueryReq { string dict_type = 1; int64 parent_id = 2; }
+message DictLabelQueryReq { string dict_type = 1; string dict_value = 2; }
+message DictLabelResp { string label = 1; }
+message DictPageResp { repeated Dict records = 1; PageInfo page = 2; }
+message DictListResp { repeated Dict records = 1; }
+
+message Config {
+  int64 id = 1;
+  string name = 2;
+  string code = 3;
+  string data_json = 4;
+  string remark = 5;
+  int64 create_by = 6;
+  string created_time = 7;
+  int64 update_by = 8;
+  string updated_time = 9;
+}
+
+message ConfigPageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string name = 3;
+  string code = 4;
+}
+
+message ConfigCreateReq {
+  string name = 1;
+  string code = 2;
+  string data_json = 3;
+  string remark = 4;
+  int64 create_by = 5;
+  int64 update_by = 6;
+}
+
+message ConfigUpdateReq {
+  int64 id = 1;
+  string name = 2;
+  string code = 3;
+  string data_json = 4;
+  string remark = 5;
+  int64 update_by = 6;
+}
+
+message ConfigCodeQueryReq { string code = 1; }
+message ConfigDataResp { string code = 1; string data_json = 2; }
+message ConfigPageResp { repeated Config records = 1; PageInfo page = 2; }
+message ConfigListResp { repeated Config records = 1; }
+
+message LoginLog {
+  int64 id = 1;
+  string user_name = 2;
+  string ipaddr = 3;
+  string login_location = 4;
+  string browser = 5;
+  string os = 6;
+  int32 status = 7;
+  string msg = 8;
+  string login_time = 9;
+  string client_id = 10;
+}
+
+message LoginLogPageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string user_name = 3;
+  string ipaddr = 4;
+  int32 status = 5;
+  string start_time = 6;
+  string end_time = 7;
+}
+
+message LoginLogReq {
+  string user_name = 1;
+  string ipaddr = 2;
+  string login_location = 3;
+  string browser = 4;
+  string os = 5;
+  int32 status = 6;
+  string msg = 7;
+  string client_id = 8;
+}
+
+message LoginLogUpdateReq {
+  int64 id = 1;
+  string user_name = 2;
+  string ipaddr = 3;
+  string login_location = 4;
+  string browser = 5;
+  string os = 6;
+  int32 status = 7;
+  string msg = 8;
+  string client_id = 9;
+}
+
+message LogCleanReq { int64 days = 1; }
+message LoginLogPageResp { repeated LoginLog records = 1; PageInfo page = 2; }
+
+message OperLog {
+  int64 id = 1;
+  string title = 2;
+  string business_type = 3;
+  string method = 4;
+  string request_method = 5;
+  string device_type = 6;
+  string oper_name = 7;
+  string oper_url = 8;
+  string oper_ip = 9;
+  string oper_location = 10;
+  string oper_param = 11;
+  string json_result = 12;
+  string status = 13;
+  string error_msg = 14;
+  string oper_time = 15;
+  int64 cost_time = 16;
+  string user_agent = 17;
+}
+
+message OperLogPageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string title = 3;
+  string oper_name = 4;
+  string business_type = 5;
+  string status = 6;
+  string start_time = 7;
+  string end_time = 8;
+}
+
+message OperLogReq {
+  string title = 1;
+  string business_type = 2;
+  string method = 3;
+  string request_method = 4;
+  string device_type = 5;
+  string oper_name = 6;
+  string oper_url = 7;
+  string oper_ip = 8;
+  string oper_location = 9;
+  string oper_param = 10;
+  string json_result = 11;
+  string status = 12;
+  string error_msg = 13;
+  int64 cost_time = 14;
+  string user_agent = 15;
+}
+
+message OperLogUpdateReq {
+  int64 id = 1;
+  string title = 2;
+  string business_type = 3;
+  string method = 4;
+  string request_method = 5;
+  string device_type = 6;
+  string oper_name = 7;
+  string oper_url = 8;
+  string oper_ip = 9;
+  string oper_location = 10;
+  string oper_param = 11;
+  string json_result = 12;
+  string status = 13;
+  string error_msg = 14;
+  int64 cost_time = 15;
+  string user_agent = 16;
+}
+
+message OperLogPageResp { repeated OperLog records = 1; PageInfo page = 2; }
+
+message StorageEnv {
+  int64 id = 1;
+  string name = 2;
+  string code = 3;
+  string storage_type = 4;
+  bool is_default = 5;
+  int32 status = 6;
+  string config_json = 7;
+  string remark = 8;
+  int64 create_by = 9;
+  string created_at = 10;
+  int64 update_by = 11;
+  string updated_at = 12;
+}
+
+message StorageEnvPageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string name = 3;
+  string storage_type = 4;
+}
+
+message StorageEnvReq {
+  int64 id = 1;
+  string name = 2;
+  string code = 3;
+  string storage_type = 4;
+  bool is_default = 5;
+  int32 status = 6;
+  string config_json = 7;
+  string remark = 8;
+}
+
+message StorageEnvDefaultReq { int64 id = 1; }
+message StorageEnvTestReq { int64 id = 1; }
+message StorageEnvTestResp { bool connected = 1; string msg = 2; }
+message StorageEnvPageResp { repeated StorageEnv records = 1; PageInfo page = 2; }
+message StorageEnvListResp { repeated StorageEnv records = 1; }
+
+message Attachment {
+  int64 attachment_id = 1;
+  int64 env_id = 2;
+  string file_name = 3;
+  string file_key = 4;
+  int64 file_size = 5;
+  string file_type = 6;
+  string file_ext = 7;
+  string business_type = 8;
+  string business_id = 9;
+  string business_field = 10;
+  bool is_public = 11;
+  string access_url = 12;
+  string metadata_json = 13;
+  int32 status = 14;
+  string expire_time = 15;
+  int64 create_by = 16;
+  string create_time = 17;
+  string update_time = 18;
+}
+
+message AttachmentPageReq {
+  int64 page_num = 1;
+  int64 page_size = 2;
+  string file_name = 3;
+  string file_type = 4;
+  string business_type = 5;
+}
+
+message AttachmentUploadReq {
+  string env_code = 1;
+  string file_name = 2;
+  string content_type = 3;
+  bytes content = 4;
+}
+
+message AttachmentBindReq {
+  int64 attachment_id = 1;
+  string business_type = 2;
+  string business_id = 3;
+  string business_field = 4;
+  bool is_public = 5;
+  string metadata_json = 6;
+  string expire_time = 7;
+}
+
+message AttachmentBusinessQueryReq { string business_type = 1; string business_id = 2; }
+message AttachmentUrlQueryReq { int64 attachment_id = 1; int64 expires = 2; }
+message AttachmentUrlResp { int64 attachment_id = 1; string url = 2; int64 expires = 3; }
+message AttachmentDownloadReq { int64 attachment_id = 1; }
+message AttachmentDownloadResp { string file_name = 1; string content_type = 2; bytes content = 3; }
+message AttachmentPageResp { repeated Attachment records = 1; PageInfo page = 2; }
+message AttachmentListResp { repeated Attachment records = 1; }
+
+service SysService {
+  rpc Ping(PingReq) returns (PingResp);
+
+  rpc AuthLogin(AuthLoginReq) returns (AuthLoginResp);
+  rpc UserProfile(IdReq) returns (User);
+
+  rpc UserCreate(UserCreateReq) returns (Ack);
+  rpc UserImport(UserImportReq) returns (Ack);
+  rpc UserPage(UserPageReq) returns (UserPageResp);
+  rpc UserBatchDelete(BatchIdsReq) returns (Ack);
+  rpc UserChangePassword(UserChangePasswordReq) returns (Ack);
+  rpc UserUpdate(UserUpdateReq) returns (Ack);
+  rpc UserResetPassword(UserPasswordReq) returns (Ack);
+  rpc UserDetail(IdReq) returns (User);
+  rpc UserDelete(IdReq) returns (Ack);
+
+  rpc RoleCreate(RoleCreateReq) returns (Ack);
+  rpc RolePage(RolePageReq) returns (RolePageResp);
+  rpc RoleAssign(AssignRoleReq) returns (Ack);
+  rpc RoleRemove(RemoveRoleReq) returns (Ack);
+  rpc RoleUser(UserRoleQueryReq) returns (RoleListResp);
+  rpc RolePermissionAdd(RolePermissionReq) returns (Ack);
+  rpc RolePermissionDelete(RolePermissionReq) returns (Ack);
+  rpc RolePermissions(RolePermissionsQueryReq) returns (RolePermissionsResp);
+  rpc RoleUpdate(RoleUpdateReq) returns (Ack);
+  rpc RoleDetail(IdReq) returns (Role);
+  rpc RoleDelete(IdReq) returns (Ack);
+
+  rpc OrgCreate(OrgCreateReq) returns (Ack);
+  rpc OrgPage(OrgPageReq) returns (OrgPageResp);
+  rpc OrgTree(Empty) returns (OrgTreeResp);
+  rpc OrgBatchDelete(BatchIdsReq) returns (Ack);
+  rpc OrgUpdate(OrgUpdateReq) returns (Ack);
+  rpc OrgDetail(IdReq) returns (Org);
+  rpc OrgDelete(IdReq) returns (Ack);
+
+  rpc MenuUserTree(IdReq) returns (MenuListResp);
+  rpc MenuTree(Empty) returns (MenuListResp);
+  rpc MenuList(Empty) returns (MenuListResp);
+  rpc MenuDetail(IdReq) returns (Menu);
+  rpc MenuCreate(MenuReq) returns (Ack);
+  rpc MenuUpdate(MenuReq) returns (Ack);
+  rpc MenuDelete(IdReq) returns (Ack);
+
+  rpc DictCreate(DictCreateReq) returns (Ack);
+  rpc DictPage(DictPageReq) returns (DictPageResp);
+  rpc DictBatchDelete(BatchIdsReq) returns (Ack);
+  rpc DictType(DictTypeQueryReq) returns (DictListResp);
+  rpc DictLabel(DictLabelQueryReq) returns (DictLabelResp);
+  rpc DictUpdate(DictUpdateReq) returns (Ack);
+  rpc DictDetail(StringIdReq) returns (Dict);
+  rpc DictDelete(StringIdReq) returns (Ack);
+
+  rpc ConfigCreate(ConfigCreateReq) returns (Ack);
+  rpc ConfigPage(ConfigPageReq) returns (ConfigPageResp);
+  rpc ConfigBatchDelete(BatchIdsReq) returns (Ack);
+  rpc ConfigCode(ConfigCodeQueryReq) returns (ConfigListResp);
+  rpc ConfigData(ConfigCodeQueryReq) returns (ConfigDataResp);
+  rpc ConfigUpdate(ConfigUpdateReq) returns (Ack);
+  rpc ConfigDetail(IdReq) returns (Config);
+  rpc ConfigDelete(IdReq) returns (Ack);
+
+  rpc LoginLogCreate(LoginLogReq) returns (Ack);
+  rpc LoginLogPage(LoginLogPageReq) returns (LoginLogPageResp);
+  rpc LoginLogBatchDelete(BatchIdsReq) returns (Ack);
+  rpc LoginLogClean(LogCleanReq) returns (Ack);
+  rpc LoginLogUpdate(LoginLogUpdateReq) returns (Ack);
+  rpc LoginLogDetail(IdReq) returns (LoginLog);
+  rpc LoginLogDelete(IdReq) returns (Ack);
+
+  rpc OperLogCreate(OperLogReq) returns (Ack);
+  rpc OperLogPage(OperLogPageReq) returns (OperLogPageResp);
+  rpc OperLogBatchDelete(BatchIdsReq) returns (Ack);
+  rpc OperLogClean(LogCleanReq) returns (Ack);
+  rpc OperLogUpdate(OperLogUpdateReq) returns (Ack);
+  rpc OperLogDetail(IdReq) returns (OperLog);
+  rpc OperLogDelete(IdReq) returns (Ack);
+
+  rpc StorageEnvCreate(StorageEnvReq) returns (Ack);
+  rpc StorageEnvPage(StorageEnvPageReq) returns (StorageEnvPageResp);
+  rpc StorageEnvDefault(Empty) returns (StorageEnv);
+  rpc StorageEnvSetDefault(StorageEnvDefaultReq) returns (Ack);
+  rpc StorageEnvUpdate(StorageEnvReq) returns (Ack);
+  rpc StorageEnvDetail(IdReq) returns (StorageEnv);
+  rpc StorageEnvTest(StorageEnvTestReq) returns (StorageEnvTestResp);
+  rpc StorageEnvDelete(IdReq) returns (Ack);
+
+  rpc AttachmentUploadFile(AttachmentUploadReq) returns (Attachment);
+  rpc AttachmentBind(AttachmentBindReq) returns (Ack);
+  rpc AttachmentDetail(IdReq) returns (Attachment);
+  rpc AttachmentBusiness(AttachmentBusinessQueryReq) returns (AttachmentListResp);
+  rpc AttachmentPage(AttachmentPageReq) returns (AttachmentPageResp);
+  rpc AttachmentDownload(AttachmentDownloadReq) returns (AttachmentDownloadResp);
+  rpc AttachmentUrl(AttachmentUrlQueryReq) returns (AttachmentUrlResp);
+  rpc AttachmentDelete(IdReq) returns (Ack);
+}
