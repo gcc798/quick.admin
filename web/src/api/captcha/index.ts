@@ -9,7 +9,7 @@ export const captchaApi = {
   generateImage: () => request.get<CaptchaData>('/captcha/image'),
 
   // 发送短信验证码
-  sendSms: (phone: string) => request.post<CaptchaData>('/captcha/sms', { phone }),
+  sendSms: (phonenumber: string) => request.post<CaptchaData>('/captcha/sms', { phonenumber }),
 
   // 发送邮箱验证码
   sendEmail: (email: string) => request.post<CaptchaData>('/captcha/email', { email }),

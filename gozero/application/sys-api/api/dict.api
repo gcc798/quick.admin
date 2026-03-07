@@ -12,9 +12,9 @@ type DictPageReq {
 
 type DictCreateReq {
 	parentId  int64  `json:"parentId,optional"`
-	dictType  string `json:"dictType,optional"`
-	dictLabel string `json:"dictLabel,optional"`
-	dictValue string `json:"dictValue,optional"`
+	dictType  string `json:"dictType"`
+	dictLabel string `json:"dictLabel"`
+	dictValue string `json:"dictValue"`
 	sort      int64  `json:"sort,optional"`
 	isDefault bool   `json:"isDefault,optional"`
 	status    int64  `json:"status,optional"`
@@ -24,11 +24,11 @@ type DictCreateReq {
 }
 
 type DictUpdateReq {
-	id        string `path:"id"`
+	id        int64  `path:"id"`
 	parentId  int64  `json:"parentId,optional"`
-	dictType  string `json:"dictType,optional"`
-	dictLabel string `json:"dictLabel,optional"`
-	dictValue string `json:"dictValue,optional"`
+	dictType  string `json:"dictType"`
+	dictLabel string `json:"dictLabel"`
+	dictValue string `json:"dictValue"`
 	sort      int64  `json:"sort,optional"`
 	isDefault bool   `json:"isDefault,optional"`
 	status    int64  `json:"status,optional"`
@@ -69,9 +69,8 @@ service sys-api {
 	put /api/v1/dict/:id (DictUpdateReq) returns (CommonResp)
 
 	@handler DictDetail
-	get /api/v1/dict/:id (StringIdPathReq) returns (CommonResp)
+	get /api/v1/dict/:id (IdPathReq) returns (CommonResp)
 
 	@handler DictDelete
-	delete /api/v1/dict/:id (StringIdPathReq) returns (CommonResp)
+	delete /api/v1/dict/:id (IdPathReq) returns (CommonResp)
 }
-

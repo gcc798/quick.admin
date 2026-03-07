@@ -9,14 +9,24 @@ type StorageEnvPageReq {
 	storageType string `json:"storageType,optional"`
 }
 
-type StorageEnvReq {
-	id          int64       `path:"id,optional"`
-	name        string      `json:"name,optional"`
-	code        string      `json:"code,optional"`
-	storageType string      `json:"storageType,optional"`
+type StorageEnvCreateReq {
+	name        string      `json:"name"`
+	code        string      `json:"code"`
+	storageType string      `json:"storageType"`
 	isDefault   bool        `json:"isDefault,optional"`
 	status      int64       `json:"status,optional"`
 	config      interface{} `json:"config,optional"`
+	remark      string      `json:"remark,optional"`
+}
+
+type StorageEnvUpdateReq {
+	id          int64       `path:"id"`
+	name        string      `json:"name"`
+	code        string      `json:"code"`
+	storageType string      `json:"storageType"`
+	isDefault   bool        `json:"isDefault,optional"`
+	status      int64       `json:"status,optional"`
+	config      interface{} `json:"config"`
 	remark      string      `json:"remark,optional"`
 }
 
@@ -33,7 +43,7 @@ type StorageEnvTestReq {
 )
 service sys-api {
 	@handler StorageEnvCreate
-	post /api/v1/storage-env (StorageEnvReq) returns (CommonResp)
+	post /api/v1/storage-env (StorageEnvCreateReq) returns (CommonResp)
 
 	@handler StorageEnvPage
 	post /api/v1/storage-env/page (StorageEnvPageReq) returns (CommonResp)
@@ -45,7 +55,7 @@ service sys-api {
 	post /api/v1/storage-env/default (StorageEnvDefaultReq) returns (CommonResp)
 
 	@handler StorageEnvUpdate
-	put /api/v1/storage-env/:id (StorageEnvReq) returns (CommonResp)
+	put /api/v1/storage-env/:id (StorageEnvUpdateReq) returns (CommonResp)
 
 	@handler StorageEnvDetail
 	get /api/v1/storage-env/:id (IdPathReq) returns (CommonResp)
@@ -56,4 +66,3 @@ service sys-api {
 	@handler StorageEnvDelete
 	delete /api/v1/storage-env/:id (IdPathReq) returns (CommonResp)
 }
-

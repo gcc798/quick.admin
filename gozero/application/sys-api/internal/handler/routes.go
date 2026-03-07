@@ -418,6 +418,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: role.RoleDeleteHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodGet,
+				Path:    "/api/v1/role/:roleId/menus",
+				Handler: role.RoleMenusHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/v1/role/:roleId/menus",
+				Handler: role.RoleAssignMenusHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPost,
 				Path:    "/api/v1/role/assign",
 				Handler: role.RoleAssignHandler(serverCtx),

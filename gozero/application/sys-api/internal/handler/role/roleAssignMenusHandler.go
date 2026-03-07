@@ -1,32 +1,27 @@
 // Code scaffolded by goctl. Safe to edit.
 // goctl 1.9.2
 
-package user
+package role
 
 import (
 	"net/http"
 
-	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/commonutil"
-	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/user"
+	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/role"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func UserChangePasswordHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func RoleAssignMenusHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UserChangePasswordReq
+		var req types.RoleMenusAssignReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		ctx := r.Context()
-		if userID, err := commonutil.UserIDFromRequest(svcCtx, r); err == nil {
-			ctx = commonutil.WithUserID(ctx, userID)
-		}
-		l := user.NewUserChangePasswordLogic(ctx, svcCtx)
-		resp, err := l.UserChangePassword(&req)
+		l := role.NewRoleAssignMenusLogic(r.Context(), svcCtx)
+		resp, err := l.RoleAssignMenus(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

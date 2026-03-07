@@ -1,7 +1,7 @@
 // Code scaffolded by goctl. Safe to edit.
 // goctl 1.9.2
 
-package captcha
+package role
 
 import (
 	"context"
@@ -13,24 +13,23 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type CaptchaEnabledTypesLogic struct {
+type RoleAssignMenusLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewCaptchaEnabledTypesLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CaptchaEnabledTypesLogic {
-	return &CaptchaEnabledTypesLogic{
+func NewRoleAssignMenusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RoleAssignMenusLogic {
+	return &RoleAssignMenusLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *CaptchaEnabledTypesLogic) CaptchaEnabledTypes() (resp *types.CommonResp, err error) {
-	data, err := l.svcCtx.SysRpcClient.CaptchaEnabledTypes(l.ctx, &sysservice.CaptchaReq{})
-	if err != nil {
+func (l *RoleAssignMenusLogic) RoleAssignMenus(req *types.RoleMenusAssignReq) (resp *types.CommonResp, err error) {
+	if _, err := l.svcCtx.SysRpcClient.RoleAssignMenus(l.ctx, &sysservice.RoleMenusAssignReq{RoleId: req.RoleId, MenuIds: req.MenuIds}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: data.Types}, nil
+	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
 }

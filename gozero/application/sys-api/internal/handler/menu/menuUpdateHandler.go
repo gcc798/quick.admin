@@ -6,6 +6,7 @@ package menu
 import (
 	"net/http"
 
+	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/commonutil"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/menu"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
@@ -14,13 +15,17 @@ import (
 
 func MenuUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.IdPathReq
+		var req types.MenuUpdateReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := menu.NewMenuUpdateLogic(r.Context(), svcCtx)
+		ctx := r.Context()
+		if userID, err := commonutil.UserIDFromRequest(svcCtx, r); err == nil {
+			ctx = commonutil.WithUserID(ctx, userID)
+		}
+		l := menu.NewMenuUpdateLogic(ctx, svcCtx)
 		resp, err := l.MenuUpdate(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)

@@ -27,6 +27,9 @@ func (l *AuthLoginLogic) AuthLogin(in *pb.AuthLoginReq) (*pb.AuthLoginResp, erro
 	if in.GrantType != "password" {
 		return nil, errUnsupportedGrantType()
 	}
+	if err := verifyImageCaptcha(l.ctx, l.svcCtx, in.Uuid, in.Code); err != nil {
+		return nil, err
+	}
 	user, err := authenticatePassword(l.ctx, l.svcCtx, in.Username, in.Password)
 	if err != nil {
 		return nil, err

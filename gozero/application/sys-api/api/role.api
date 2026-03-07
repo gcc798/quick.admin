@@ -10,8 +10,8 @@ type RolePageReq {
 }
 
 type RoleCreateReq {
-	roleKey   string `json:"roleKey,optional"`
-	roleName  string `json:"roleName,optional"`
+	roleKey   string `json:"roleKey"`
+	roleName  string `json:"roleName"`
 	sort      int64  `json:"sort,optional"`
 	status    int64  `json:"status,optional"`
 	dataScope int64  `json:"dataScope,optional"`
@@ -20,7 +20,7 @@ type RoleCreateReq {
 
 type RoleUpdateReq {
 	roleId    int64  `path:"roleId"`
-	roleName  string `json:"roleName,optional"`
+	roleName  string `json:"roleName"`
 	sort      int64  `json:"sort,optional"`
 	status    int64  `json:"status,optional"`
 	dataScope int64  `json:"dataScope,optional"`
@@ -57,6 +57,15 @@ type RolePermissionsQueryReq {
 	roleKey string `form:"roleKey"`
 }
 
+type RoleMenusPathReq {
+	roleId int64 `path:"roleId"`
+}
+
+type RoleMenusAssignReq {
+	roleId  int64   `path:"roleId"`
+	menuIds []int64 `json:"menuIds"`
+}
+
 @server (
 	group: role
 )
@@ -85,6 +94,12 @@ service sys-api {
 	@handler RolePermissions
 	get /api/v1/role/permissions (RolePermissionsQueryReq) returns (CommonResp)
 
+	@handler RoleMenus
+	get /api/v1/role/:roleId/menus (RoleMenusPathReq) returns (CommonResp)
+
+	@handler RoleAssignMenus
+	post /api/v1/role/:roleId/menus (RoleMenusAssignReq) returns (CommonResp)
+
 	@handler RoleUpdate
 	put /api/v1/role/:roleId (RoleUpdateReq) returns (CommonResp)
 
@@ -94,4 +109,3 @@ service sys-api {
 	@handler RoleDelete
 	delete /api/v1/role/:roleId (RoleIdPathReq) returns (CommonResp)
 }
-

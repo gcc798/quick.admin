@@ -4,7 +4,7 @@ import type { PageParams, PageResponse } from '@/types/api';
 
 export const roleApi = {
   // 获取角色列表（分页）
-  list: (params?: PageParams & { roleName?: string; status?: string }) =>
+  list: (params?: PageParams & { roleName?: string; status?: number }) =>
     request.post<PageResponse<Role>>('/api/v1/role/page', params),
 
   // 获取角色详情

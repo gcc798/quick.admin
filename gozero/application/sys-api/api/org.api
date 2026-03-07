@@ -13,8 +13,8 @@ type OrgPageReq {
 
 type OrgCreateReq {
 	parentId int64  `json:"parentId,optional"`
-	orgName  string `json:"orgName,optional"`
-	orgCode  string `json:"orgCode,optional"`
+	orgName  string `json:"orgName"`
+	orgCode  string `json:"orgCode"`
 	orgType  string `json:"orgType,optional"`
 	leader   string `json:"leader,optional"`
 	phone    string `json:"phone,optional"`
@@ -63,4 +63,3 @@ service sys-api {
 	@handler OrgDelete
 	delete /api/v1/org/:id (IdPathReq) returns (CommonResp)
 }
-

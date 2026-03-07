@@ -6,8 +6,10 @@ package user
 import (
 	"context"
 
+	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/commonutil"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
+	"github.com/force-c/nai-tizi/application/sys-rpc/client/sysservice"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,8 +29,21 @@ func NewUserUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserUp
 }
 
 func (l *UserUpdateLogic) UserUpdate(req *types.UserUpdateReq) (resp *types.CommonResp, err error) {
-	return &types.CommonResp{
-		Code: 500,
-		Msg:  "gozero logic not implemented yet",
-	}, nil
+	userID := commonutil.UserIDFromContext(l.ctx)
+	if _, err := l.svcCtx.SysRpcClient.UserUpdate(l.ctx, &sysservice.UserUpdateReq{
+		Id:          req.Id,
+		UserName:    req.UserName,
+		NickName:    req.NickName,
+		UserType:    int32(req.UserType),
+		Email:       req.Email,
+		Phonenumber: req.Phonenumber,
+		Sex:         int32(req.Sex),
+		Avatar:      req.Avatar,
+		Status:      int32(req.Status),
+		Remark:      req.Remark,
+		UpdateBy:    userID,
+	}); err != nil {
+		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
+	}
+	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
 }

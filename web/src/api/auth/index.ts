@@ -22,7 +22,7 @@ export const authApi = {
 
   // 发送短信验证码
   sendSmsCode: (phonenumber: string) =>
-    request.post('/captcha/sms', { phone: phonenumber }),
+    request.post('/captcha/sms', { phonenumber }),
 
   // 发送邮箱验证码
   sendEmailCode: (email: string) =>

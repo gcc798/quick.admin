@@ -6,6 +6,7 @@ package menu
 import (
 	"net/http"
 
+	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/commonutil"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/menu"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
@@ -20,7 +21,11 @@ func MenuCreateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := menu.NewMenuCreateLogic(r.Context(), svcCtx)
+		ctx := r.Context()
+		if userID, err := commonutil.UserIDFromRequest(svcCtx, r); err == nil {
+			ctx = commonutil.WithUserID(ctx, userID)
+		}
+		l := menu.NewMenuCreateLogic(ctx, svcCtx)
 		resp, err := l.MenuCreate(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)

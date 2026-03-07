@@ -227,7 +227,7 @@ const handleBatchDelete = async () => {
 // 重置密码
 const handleResetPassword = async (record: any) => {
   try {
-    await userApi.resetPassword(record.userId);
+    await userApi.resetPassword(record.userId, '123456');
     message.success('密码已重置为默认密码');
   } catch (error) {
     console.error('重置密码失败:', error);

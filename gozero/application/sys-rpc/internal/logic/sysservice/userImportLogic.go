@@ -24,7 +24,10 @@ func NewUserImportLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserIm
 }
 
 func (l *UserImportLogic) UserImport(in *pb.UserImportReq) (*pb.Ack, error) {
-	// todo: add your logic here and delete this line
-
-	return &pb.Ack{}, nil
+	for _, user := range in.Users {
+		if _, err := NewUserCreateLogic(l.ctx, l.svcCtx).UserCreate(user); err != nil {
+			return nil, err
+		}
+	}
+	return &pb.Ack{Msg: "ok"}, nil
 }

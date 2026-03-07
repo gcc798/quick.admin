@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"fmt"
 
 	"github.com/force-c/nai-tizi/application/sys-rpc/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-rpc/pb"
@@ -27,15 +26,11 @@ func NewDictUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictUp
 }
 
 func (l *DictUpdateLogic) DictUpdate(in *pb.DictUpdateReq) (*pb.Ack, error) {
-	id, err := parseDictID(in.Id)
-	if err != nil {
-		return nil, fmt.Errorf("无效的字典ID")
-	}
-	oldRow, err := getDictByID(l.ctx, l.svcCtx, id)
+	oldRow, err := getDictByID(l.ctx, l.svcCtx, in.Id)
 	if err != nil {
 		return nil, err
 	}
-	if in.ParentId == id {
+	if in.ParentId == in.Id {
 		return nil, errors.New("不能将自己设置为父字典")
 	}
 	if in.ParentId > 0 {
@@ -50,7 +45,7 @@ func (l *DictUpdateLogic) DictUpdate(in *pb.DictUpdateReq) (*pb.Ack, error) {
 		if parent.DictType.Valid && parent.DictType.String != dType {
 			return nil, errors.New("父字典类型不匹配")
 		}
-		isDesc, err := dictDescendantExists(l.ctx, l.svcCtx, id, in.ParentId)
+		isDesc, err := dictDescendantExists(l.ctx, l.svcCtx, in.Id, in.ParentId)
 		if err != nil {
 			return nil, err
 		}
@@ -66,7 +61,7 @@ func (l *DictUpdateLogic) DictUpdate(in *pb.DictUpdateReq) (*pb.Ack, error) {
 	if dictValue == "" {
 		dictValue = oldRow.DictValue.String
 	}
-	exists, err := dictValueExists(l.ctx, l.svcCtx, dictType, dictValue, id)
+	exists, err := dictValueExists(l.ctx, l.svcCtx, dictType, dictValue, in.Id)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +76,7 @@ func (l *DictUpdateLogic) DictUpdate(in *pb.DictUpdateReq) (*pb.Ack, error) {
 		update public.s_dict_data
 		set parent_id = $2, dict_type = $3, dict_label = $4, dict_value = $5, sort = $6, is_default = $7, status = $8, remark = $9, update_by = nullif($10, 0), updated_time = now()
 		where id = $1 and deleted_at is null
-	`, id, in.ParentId, dictType, dictLabel, dictValue, in.Sort, in.IsDefault, in.Status, sql.NullString{String: in.Remark, Valid: in.Remark != ""}, in.UpdateBy); err != nil {
+	`, in.Id, in.ParentId, dictType, dictLabel, dictValue, in.Sort, in.IsDefault, in.Status, sql.NullString{String: in.Remark, Valid: in.Remark != ""}, in.UpdateBy); err != nil {
 		return nil, err
 	}
 	return &pb.Ack{Msg: "ok"}, nil

@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v6.33.0
-// source: proto/sys.proto
+// source: sys.proto
 
 package pb
 
@@ -29,7 +29,7 @@ type Empty struct {
 
 func (x *Empty) Reset() {
 	*x = Empty{}
-	mi := &file_proto_sys_proto_msgTypes[0]
+	mi := &file_sys_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41,7 +41,7 @@ func (x *Empty) String() string {
 func (*Empty) ProtoMessage() {}
 
 func (x *Empty) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[0]
+	mi := &file_sys_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54,7 +54,7 @@ func (x *Empty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Empty.ProtoReflect.Descriptor instead.
 func (*Empty) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{0}
+	return file_sys_proto_rawDescGZIP(), []int{0}
 }
 
 type PingReq struct {
@@ -65,7 +65,7 @@ type PingReq struct {
 
 func (x *PingReq) Reset() {
 	*x = PingReq{}
-	mi := &file_proto_sys_proto_msgTypes[1]
+	mi := &file_sys_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -77,7 +77,7 @@ func (x *PingReq) String() string {
 func (*PingReq) ProtoMessage() {}
 
 func (x *PingReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[1]
+	mi := &file_sys_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -90,7 +90,7 @@ func (x *PingReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PingReq.ProtoReflect.Descriptor instead.
 func (*PingReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{1}
+	return file_sys_proto_rawDescGZIP(), []int{1}
 }
 
 type PingResp struct {
@@ -102,7 +102,7 @@ type PingResp struct {
 
 func (x *PingResp) Reset() {
 	*x = PingResp{}
-	mi := &file_proto_sys_proto_msgTypes[2]
+	mi := &file_sys_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -114,7 +114,7 @@ func (x *PingResp) String() string {
 func (*PingResp) ProtoMessage() {}
 
 func (x *PingResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[2]
+	mi := &file_sys_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -127,7 +127,7 @@ func (x *PingResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PingResp.ProtoReflect.Descriptor instead.
 func (*PingResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{2}
+	return file_sys_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *PingResp) GetMessage() string {
@@ -146,7 +146,7 @@ type Ack struct {
 
 func (x *Ack) Reset() {
 	*x = Ack{}
-	mi := &file_proto_sys_proto_msgTypes[3]
+	mi := &file_sys_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -158,7 +158,7 @@ func (x *Ack) String() string {
 func (*Ack) ProtoMessage() {}
 
 func (x *Ack) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[3]
+	mi := &file_sys_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -171,7 +171,7 @@ func (x *Ack) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Ack.ProtoReflect.Descriptor instead.
 func (*Ack) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{3}
+	return file_sys_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Ack) GetMsg() string {
@@ -190,7 +190,7 @@ type IdReq struct {
 
 func (x *IdReq) Reset() {
 	*x = IdReq{}
-	mi := &file_proto_sys_proto_msgTypes[4]
+	mi := &file_sys_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -202,7 +202,7 @@ func (x *IdReq) String() string {
 func (*IdReq) ProtoMessage() {}
 
 func (x *IdReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[4]
+	mi := &file_sys_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -215,7 +215,7 @@ func (x *IdReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdReq.ProtoReflect.Descriptor instead.
 func (*IdReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{4}
+	return file_sys_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *IdReq) GetId() int64 {
@@ -234,7 +234,7 @@ type StringIdReq struct {
 
 func (x *StringIdReq) Reset() {
 	*x = StringIdReq{}
-	mi := &file_proto_sys_proto_msgTypes[5]
+	mi := &file_sys_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -246,7 +246,7 @@ func (x *StringIdReq) String() string {
 func (*StringIdReq) ProtoMessage() {}
 
 func (x *StringIdReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[5]
+	mi := &file_sys_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -259,7 +259,7 @@ func (x *StringIdReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StringIdReq.ProtoReflect.Descriptor instead.
 func (*StringIdReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{5}
+	return file_sys_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *StringIdReq) GetId() string {
@@ -278,7 +278,7 @@ type BatchIdsReq struct {
 
 func (x *BatchIdsReq) Reset() {
 	*x = BatchIdsReq{}
-	mi := &file_proto_sys_proto_msgTypes[6]
+	mi := &file_sys_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -290,7 +290,7 @@ func (x *BatchIdsReq) String() string {
 func (*BatchIdsReq) ProtoMessage() {}
 
 func (x *BatchIdsReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[6]
+	mi := &file_sys_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -303,7 +303,7 @@ func (x *BatchIdsReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchIdsReq.ProtoReflect.Descriptor instead.
 func (*BatchIdsReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{6}
+	return file_sys_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *BatchIdsReq) GetIds() []int64 {
@@ -325,7 +325,7 @@ type PageInfo struct {
 
 func (x *PageInfo) Reset() {
 	*x = PageInfo{}
-	mi := &file_proto_sys_proto_msgTypes[7]
+	mi := &file_sys_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -337,7 +337,7 @@ func (x *PageInfo) String() string {
 func (*PageInfo) ProtoMessage() {}
 
 func (x *PageInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[7]
+	mi := &file_sys_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -350,7 +350,7 @@ func (x *PageInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageInfo.ProtoReflect.Descriptor instead.
 func (*PageInfo) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{7}
+	return file_sys_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *PageInfo) GetTotal() int64 {
@@ -396,7 +396,7 @@ type UserInfo struct {
 
 func (x *UserInfo) Reset() {
 	*x = UserInfo{}
-	mi := &file_proto_sys_proto_msgTypes[8]
+	mi := &file_sys_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -408,7 +408,7 @@ func (x *UserInfo) String() string {
 func (*UserInfo) ProtoMessage() {}
 
 func (x *UserInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[8]
+	mi := &file_sys_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -421,7 +421,7 @@ func (x *UserInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserInfo.ProtoReflect.Descriptor instead.
 func (*UserInfo) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{8}
+	return file_sys_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserInfo) GetUserId() int64 {
@@ -491,7 +491,7 @@ type AuthLoginReq struct {
 
 func (x *AuthLoginReq) Reset() {
 	*x = AuthLoginReq{}
-	mi := &file_proto_sys_proto_msgTypes[9]
+	mi := &file_sys_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -503,7 +503,7 @@ func (x *AuthLoginReq) String() string {
 func (*AuthLoginReq) ProtoMessage() {}
 
 func (x *AuthLoginReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[9]
+	mi := &file_sys_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -516,7 +516,7 @@ func (x *AuthLoginReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuthLoginReq.ProtoReflect.Descriptor instead.
 func (*AuthLoginReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{9}
+	return file_sys_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *AuthLoginReq) GetClientKey() string {
@@ -603,7 +603,7 @@ type AuthLoginResp struct {
 
 func (x *AuthLoginResp) Reset() {
 	*x = AuthLoginResp{}
-	mi := &file_proto_sys_proto_msgTypes[10]
+	mi := &file_sys_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -615,7 +615,7 @@ func (x *AuthLoginResp) String() string {
 func (*AuthLoginResp) ProtoMessage() {}
 
 func (x *AuthLoginResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[10]
+	mi := &file_sys_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -628,7 +628,7 @@ func (x *AuthLoginResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuthLoginResp.ProtoReflect.Descriptor instead.
 func (*AuthLoginResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{10}
+	return file_sys_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *AuthLoginResp) GetClientId() string {
@@ -700,7 +700,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_proto_sys_proto_msgTypes[11]
+	mi := &file_sys_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -712,7 +712,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[11]
+	mi := &file_sys_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -725,7 +725,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{11}
+	return file_sys_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *User) GetUserId() int64 {
@@ -874,7 +874,7 @@ type UserPageReq struct {
 
 func (x *UserPageReq) Reset() {
 	*x = UserPageReq{}
-	mi := &file_proto_sys_proto_msgTypes[12]
+	mi := &file_sys_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -886,7 +886,7 @@ func (x *UserPageReq) String() string {
 func (*UserPageReq) ProtoMessage() {}
 
 func (x *UserPageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[12]
+	mi := &file_sys_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -899,7 +899,7 @@ func (x *UserPageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserPageReq.ProtoReflect.Descriptor instead.
 func (*UserPageReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{12}
+	return file_sys_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UserPageReq) GetPageNum() int64 {
@@ -949,13 +949,15 @@ type UserCreateReq struct {
 	Avatar        string                 `protobuf:"bytes,8,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	Status        int32                  `protobuf:"varint,9,opt,name=status,proto3" json:"status,omitempty"`
 	Remark        string                 `protobuf:"bytes,10,opt,name=remark,proto3" json:"remark,omitempty"`
+	CreateBy      int64                  `protobuf:"varint,11,opt,name=create_by,json=createBy,proto3" json:"create_by,omitempty"`
+	UpdateBy      int64                  `protobuf:"varint,12,opt,name=update_by,json=updateBy,proto3" json:"update_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserCreateReq) Reset() {
 	*x = UserCreateReq{}
-	mi := &file_proto_sys_proto_msgTypes[13]
+	mi := &file_sys_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -967,7 +969,7 @@ func (x *UserCreateReq) String() string {
 func (*UserCreateReq) ProtoMessage() {}
 
 func (x *UserCreateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[13]
+	mi := &file_sys_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -980,7 +982,7 @@ func (x *UserCreateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserCreateReq.ProtoReflect.Descriptor instead.
 func (*UserCreateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{13}
+	return file_sys_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *UserCreateReq) GetUserName() string {
@@ -1053,6 +1055,20 @@ func (x *UserCreateReq) GetRemark() string {
 	return ""
 }
 
+func (x *UserCreateReq) GetCreateBy() int64 {
+	if x != nil {
+		return x.CreateBy
+	}
+	return 0
+}
+
+func (x *UserCreateReq) GetUpdateBy() int64 {
+	if x != nil {
+		return x.UpdateBy
+	}
+	return 0
+}
+
 type UserUpdateReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1065,13 +1081,14 @@ type UserUpdateReq struct {
 	Avatar        string                 `protobuf:"bytes,8,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	Status        int32                  `protobuf:"varint,9,opt,name=status,proto3" json:"status,omitempty"`
 	Remark        string                 `protobuf:"bytes,10,opt,name=remark,proto3" json:"remark,omitempty"`
+	UpdateBy      int64                  `protobuf:"varint,11,opt,name=update_by,json=updateBy,proto3" json:"update_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UserUpdateReq) Reset() {
 	*x = UserUpdateReq{}
-	mi := &file_proto_sys_proto_msgTypes[14]
+	mi := &file_sys_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1083,7 +1100,7 @@ func (x *UserUpdateReq) String() string {
 func (*UserUpdateReq) ProtoMessage() {}
 
 func (x *UserUpdateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[14]
+	mi := &file_sys_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1096,7 +1113,7 @@ func (x *UserUpdateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserUpdateReq.ProtoReflect.Descriptor instead.
 func (*UserUpdateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{14}
+	return file_sys_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *UserUpdateReq) GetId() int64 {
@@ -1169,6 +1186,13 @@ func (x *UserUpdateReq) GetRemark() string {
 	return ""
 }
 
+func (x *UserUpdateReq) GetUpdateBy() int64 {
+	if x != nil {
+		return x.UpdateBy
+	}
+	return 0
+}
+
 type UserImportReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Users         []*UserCreateReq       `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
@@ -1178,7 +1202,7 @@ type UserImportReq struct {
 
 func (x *UserImportReq) Reset() {
 	*x = UserImportReq{}
-	mi := &file_proto_sys_proto_msgTypes[15]
+	mi := &file_sys_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1190,7 +1214,7 @@ func (x *UserImportReq) String() string {
 func (*UserImportReq) ProtoMessage() {}
 
 func (x *UserImportReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[15]
+	mi := &file_sys_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1203,7 +1227,7 @@ func (x *UserImportReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserImportReq.ProtoReflect.Descriptor instead.
 func (*UserImportReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{15}
+	return file_sys_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *UserImportReq) GetUsers() []*UserCreateReq {
@@ -1223,7 +1247,7 @@ type UserPasswordReq struct {
 
 func (x *UserPasswordReq) Reset() {
 	*x = UserPasswordReq{}
-	mi := &file_proto_sys_proto_msgTypes[16]
+	mi := &file_sys_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1235,7 +1259,7 @@ func (x *UserPasswordReq) String() string {
 func (*UserPasswordReq) ProtoMessage() {}
 
 func (x *UserPasswordReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[16]
+	mi := &file_sys_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1248,7 +1272,7 @@ func (x *UserPasswordReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserPasswordReq.ProtoReflect.Descriptor instead.
 func (*UserPasswordReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{16}
+	return file_sys_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *UserPasswordReq) GetId() int64 {
@@ -1276,7 +1300,7 @@ type UserChangePasswordReq struct {
 
 func (x *UserChangePasswordReq) Reset() {
 	*x = UserChangePasswordReq{}
-	mi := &file_proto_sys_proto_msgTypes[17]
+	mi := &file_sys_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1288,7 +1312,7 @@ func (x *UserChangePasswordReq) String() string {
 func (*UserChangePasswordReq) ProtoMessage() {}
 
 func (x *UserChangePasswordReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[17]
+	mi := &file_sys_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1301,7 +1325,7 @@ func (x *UserChangePasswordReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserChangePasswordReq.ProtoReflect.Descriptor instead.
 func (*UserChangePasswordReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{17}
+	return file_sys_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UserChangePasswordReq) GetUserId() int64 {
@@ -1335,7 +1359,7 @@ type UserPageResp struct {
 
 func (x *UserPageResp) Reset() {
 	*x = UserPageResp{}
-	mi := &file_proto_sys_proto_msgTypes[18]
+	mi := &file_sys_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1347,7 +1371,7 @@ func (x *UserPageResp) String() string {
 func (*UserPageResp) ProtoMessage() {}
 
 func (x *UserPageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[18]
+	mi := &file_sys_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1360,7 +1384,7 @@ func (x *UserPageResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserPageResp.ProtoReflect.Descriptor instead.
 func (*UserPageResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{18}
+	return file_sys_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *UserPageResp) GetRecords() []*User {
@@ -1386,7 +1410,7 @@ type UserListResp struct {
 
 func (x *UserListResp) Reset() {
 	*x = UserListResp{}
-	mi := &file_proto_sys_proto_msgTypes[19]
+	mi := &file_sys_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1398,7 +1422,7 @@ func (x *UserListResp) String() string {
 func (*UserListResp) ProtoMessage() {}
 
 func (x *UserListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[19]
+	mi := &file_sys_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1411,7 +1435,7 @@ func (x *UserListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserListResp.ProtoReflect.Descriptor instead.
 func (*UserListResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{19}
+	return file_sys_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UserListResp) GetRecords() []*User {
@@ -1439,7 +1463,7 @@ type Role struct {
 
 func (x *Role) Reset() {
 	*x = Role{}
-	mi := &file_proto_sys_proto_msgTypes[20]
+	mi := &file_sys_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1451,7 +1475,7 @@ func (x *Role) String() string {
 func (*Role) ProtoMessage() {}
 
 func (x *Role) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[20]
+	mi := &file_sys_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1464,7 +1488,7 @@ func (x *Role) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Role.ProtoReflect.Descriptor instead.
 func (*Role) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{20}
+	return file_sys_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Role) GetRoleId() int64 {
@@ -1549,7 +1573,7 @@ type RolePageReq struct {
 
 func (x *RolePageReq) Reset() {
 	*x = RolePageReq{}
-	mi := &file_proto_sys_proto_msgTypes[21]
+	mi := &file_sys_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1561,7 +1585,7 @@ func (x *RolePageReq) String() string {
 func (*RolePageReq) ProtoMessage() {}
 
 func (x *RolePageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[21]
+	mi := &file_sys_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1574,7 +1598,7 @@ func (x *RolePageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RolePageReq.ProtoReflect.Descriptor instead.
 func (*RolePageReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{21}
+	return file_sys_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *RolePageReq) GetPageNum() int64 {
@@ -1619,7 +1643,7 @@ type RoleCreateReq struct {
 
 func (x *RoleCreateReq) Reset() {
 	*x = RoleCreateReq{}
-	mi := &file_proto_sys_proto_msgTypes[22]
+	mi := &file_sys_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1631,7 +1655,7 @@ func (x *RoleCreateReq) String() string {
 func (*RoleCreateReq) ProtoMessage() {}
 
 func (x *RoleCreateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[22]
+	mi := &file_sys_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1644,7 +1668,7 @@ func (x *RoleCreateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleCreateReq.ProtoReflect.Descriptor instead.
 func (*RoleCreateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{22}
+	return file_sys_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *RoleCreateReq) GetRoleKey() string {
@@ -1703,7 +1727,7 @@ type RoleUpdateReq struct {
 
 func (x *RoleUpdateReq) Reset() {
 	*x = RoleUpdateReq{}
-	mi := &file_proto_sys_proto_msgTypes[23]
+	mi := &file_sys_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1715,7 +1739,7 @@ func (x *RoleUpdateReq) String() string {
 func (*RoleUpdateReq) ProtoMessage() {}
 
 func (x *RoleUpdateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[23]
+	mi := &file_sys_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1728,7 +1752,7 @@ func (x *RoleUpdateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleUpdateReq.ProtoReflect.Descriptor instead.
 func (*RoleUpdateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{23}
+	return file_sys_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *RoleUpdateReq) GetRoleId() int64 {
@@ -1783,7 +1807,7 @@ type AssignRoleReq struct {
 
 func (x *AssignRoleReq) Reset() {
 	*x = AssignRoleReq{}
-	mi := &file_proto_sys_proto_msgTypes[24]
+	mi := &file_sys_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1795,7 +1819,7 @@ func (x *AssignRoleReq) String() string {
 func (*AssignRoleReq) ProtoMessage() {}
 
 func (x *AssignRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[24]
+	mi := &file_sys_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1808,7 +1832,7 @@ func (x *AssignRoleReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssignRoleReq.ProtoReflect.Descriptor instead.
 func (*AssignRoleReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{24}
+	return file_sys_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *AssignRoleReq) GetUserId() int64 {
@@ -1835,7 +1859,7 @@ type RemoveRoleReq struct {
 
 func (x *RemoveRoleReq) Reset() {
 	*x = RemoveRoleReq{}
-	mi := &file_proto_sys_proto_msgTypes[25]
+	mi := &file_sys_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1847,7 +1871,7 @@ func (x *RemoveRoleReq) String() string {
 func (*RemoveRoleReq) ProtoMessage() {}
 
 func (x *RemoveRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[25]
+	mi := &file_sys_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1860,7 +1884,7 @@ func (x *RemoveRoleReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveRoleReq.ProtoReflect.Descriptor instead.
 func (*RemoveRoleReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{25}
+	return file_sys_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *RemoveRoleReq) GetUserId() int64 {
@@ -1886,7 +1910,7 @@ type UserRoleQueryReq struct {
 
 func (x *UserRoleQueryReq) Reset() {
 	*x = UserRoleQueryReq{}
-	mi := &file_proto_sys_proto_msgTypes[26]
+	mi := &file_sys_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1898,7 +1922,7 @@ func (x *UserRoleQueryReq) String() string {
 func (*UserRoleQueryReq) ProtoMessage() {}
 
 func (x *UserRoleQueryReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[26]
+	mi := &file_sys_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1911,7 +1935,7 @@ func (x *UserRoleQueryReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserRoleQueryReq.ProtoReflect.Descriptor instead.
 func (*UserRoleQueryReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{26}
+	return file_sys_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *UserRoleQueryReq) GetUserId() int64 {
@@ -1932,7 +1956,7 @@ type RolePermissionReq struct {
 
 func (x *RolePermissionReq) Reset() {
 	*x = RolePermissionReq{}
-	mi := &file_proto_sys_proto_msgTypes[27]
+	mi := &file_sys_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1944,7 +1968,7 @@ func (x *RolePermissionReq) String() string {
 func (*RolePermissionReq) ProtoMessage() {}
 
 func (x *RolePermissionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[27]
+	mi := &file_sys_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1957,7 +1981,7 @@ func (x *RolePermissionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RolePermissionReq.ProtoReflect.Descriptor instead.
 func (*RolePermissionReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{27}
+	return file_sys_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *RolePermissionReq) GetRoleKey() string {
@@ -1990,7 +2014,7 @@ type RolePermissionsQueryReq struct {
 
 func (x *RolePermissionsQueryReq) Reset() {
 	*x = RolePermissionsQueryReq{}
-	mi := &file_proto_sys_proto_msgTypes[28]
+	mi := &file_sys_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2002,7 +2026,7 @@ func (x *RolePermissionsQueryReq) String() string {
 func (*RolePermissionsQueryReq) ProtoMessage() {}
 
 func (x *RolePermissionsQueryReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[28]
+	mi := &file_sys_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2015,7 +2039,7 @@ func (x *RolePermissionsQueryReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RolePermissionsQueryReq.ProtoReflect.Descriptor instead.
 func (*RolePermissionsQueryReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{28}
+	return file_sys_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *RolePermissionsQueryReq) GetRoleKey() string {
@@ -2036,7 +2060,7 @@ type RolePermission struct {
 
 func (x *RolePermission) Reset() {
 	*x = RolePermission{}
-	mi := &file_proto_sys_proto_msgTypes[29]
+	mi := &file_sys_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2048,7 +2072,7 @@ func (x *RolePermission) String() string {
 func (*RolePermission) ProtoMessage() {}
 
 func (x *RolePermission) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[29]
+	mi := &file_sys_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2061,7 +2085,7 @@ func (x *RolePermission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RolePermission.ProtoReflect.Descriptor instead.
 func (*RolePermission) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{29}
+	return file_sys_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *RolePermission) GetRoleKey() string {
@@ -2094,7 +2118,7 @@ type RolePermissionsResp struct {
 
 func (x *RolePermissionsResp) Reset() {
 	*x = RolePermissionsResp{}
-	mi := &file_proto_sys_proto_msgTypes[30]
+	mi := &file_sys_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2106,7 +2130,7 @@ func (x *RolePermissionsResp) String() string {
 func (*RolePermissionsResp) ProtoMessage() {}
 
 func (x *RolePermissionsResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[30]
+	mi := &file_sys_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2119,12 +2143,152 @@ func (x *RolePermissionsResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RolePermissionsResp.ProtoReflect.Descriptor instead.
 func (*RolePermissionsResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{30}
+	return file_sys_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *RolePermissionsResp) GetRecords() []*RolePermission {
 	if x != nil {
 		return x.Records
+	}
+	return nil
+}
+
+type RoleMenusReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RoleId        int64                  `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoleMenusReq) Reset() {
+	*x = RoleMenusReq{}
+	mi := &file_sys_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoleMenusReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoleMenusReq) ProtoMessage() {}
+
+func (x *RoleMenusReq) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoleMenusReq.ProtoReflect.Descriptor instead.
+func (*RoleMenusReq) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *RoleMenusReq) GetRoleId() int64 {
+	if x != nil {
+		return x.RoleId
+	}
+	return 0
+}
+
+type RoleMenusAssignReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RoleId        int64                  `protobuf:"varint,1,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	MenuIds       []int64                `protobuf:"varint,2,rep,packed,name=menu_ids,json=menuIds,proto3" json:"menu_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RoleMenusAssignReq) Reset() {
+	*x = RoleMenusAssignReq{}
+	mi := &file_sys_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RoleMenusAssignReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RoleMenusAssignReq) ProtoMessage() {}
+
+func (x *RoleMenusAssignReq) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RoleMenusAssignReq.ProtoReflect.Descriptor instead.
+func (*RoleMenusAssignReq) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *RoleMenusAssignReq) GetRoleId() int64 {
+	if x != nil {
+		return x.RoleId
+	}
+	return 0
+}
+
+func (x *RoleMenusAssignReq) GetMenuIds() []int64 {
+	if x != nil {
+		return x.MenuIds
+	}
+	return nil
+}
+
+type MenuIdsResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MenuIds       []int64                `protobuf:"varint,1,rep,packed,name=menu_ids,json=menuIds,proto3" json:"menu_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MenuIdsResp) Reset() {
+	*x = MenuIdsResp{}
+	mi := &file_sys_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MenuIdsResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MenuIdsResp) ProtoMessage() {}
+
+func (x *MenuIdsResp) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MenuIdsResp.ProtoReflect.Descriptor instead.
+func (*MenuIdsResp) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *MenuIdsResp) GetMenuIds() []int64 {
+	if x != nil {
+		return x.MenuIds
 	}
 	return nil
 }
@@ -2139,7 +2303,7 @@ type RolePageResp struct {
 
 func (x *RolePageResp) Reset() {
 	*x = RolePageResp{}
-	mi := &file_proto_sys_proto_msgTypes[31]
+	mi := &file_sys_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2151,7 +2315,7 @@ func (x *RolePageResp) String() string {
 func (*RolePageResp) ProtoMessage() {}
 
 func (x *RolePageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[31]
+	mi := &file_sys_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2164,7 +2328,7 @@ func (x *RolePageResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RolePageResp.ProtoReflect.Descriptor instead.
 func (*RolePageResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{31}
+	return file_sys_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *RolePageResp) GetRecords() []*Role {
@@ -2190,7 +2354,7 @@ type RoleListResp struct {
 
 func (x *RoleListResp) Reset() {
 	*x = RoleListResp{}
-	mi := &file_proto_sys_proto_msgTypes[32]
+	mi := &file_sys_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2202,7 +2366,7 @@ func (x *RoleListResp) String() string {
 func (*RoleListResp) ProtoMessage() {}
 
 func (x *RoleListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[32]
+	mi := &file_sys_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2215,7 +2379,7 @@ func (x *RoleListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleListResp.ProtoReflect.Descriptor instead.
 func (*RoleListResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{32}
+	return file_sys_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *RoleListResp) GetRecords() []*Role {
@@ -2248,7 +2412,7 @@ type Org struct {
 
 func (x *Org) Reset() {
 	*x = Org{}
-	mi := &file_proto_sys_proto_msgTypes[33]
+	mi := &file_sys_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2260,7 +2424,7 @@ func (x *Org) String() string {
 func (*Org) ProtoMessage() {}
 
 func (x *Org) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[33]
+	mi := &file_sys_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2273,7 +2437,7 @@ func (x *Org) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Org.ProtoReflect.Descriptor instead.
 func (*Org) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{33}
+	return file_sys_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *Org) GetId() int64 {
@@ -2395,7 +2559,7 @@ type OrgPageReq struct {
 
 func (x *OrgPageReq) Reset() {
 	*x = OrgPageReq{}
-	mi := &file_proto_sys_proto_msgTypes[34]
+	mi := &file_sys_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2407,7 +2571,7 @@ func (x *OrgPageReq) String() string {
 func (*OrgPageReq) ProtoMessage() {}
 
 func (x *OrgPageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[34]
+	mi := &file_sys_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2420,7 +2584,7 @@ func (x *OrgPageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgPageReq.ProtoReflect.Descriptor instead.
 func (*OrgPageReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{34}
+	return file_sys_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *OrgPageReq) GetPageNum() int64 {
@@ -2483,7 +2647,7 @@ type OrgCreateReq struct {
 
 func (x *OrgCreateReq) Reset() {
 	*x = OrgCreateReq{}
-	mi := &file_proto_sys_proto_msgTypes[35]
+	mi := &file_sys_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2495,7 +2659,7 @@ func (x *OrgCreateReq) String() string {
 func (*OrgCreateReq) ProtoMessage() {}
 
 func (x *OrgCreateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[35]
+	mi := &file_sys_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2508,7 +2672,7 @@ func (x *OrgCreateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgCreateReq.ProtoReflect.Descriptor instead.
 func (*OrgCreateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{35}
+	return file_sys_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *OrgCreateReq) GetParentId() int64 {
@@ -2600,7 +2764,7 @@ type OrgUpdateReq struct {
 
 func (x *OrgUpdateReq) Reset() {
 	*x = OrgUpdateReq{}
-	mi := &file_proto_sys_proto_msgTypes[36]
+	mi := &file_sys_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2612,7 +2776,7 @@ func (x *OrgUpdateReq) String() string {
 func (*OrgUpdateReq) ProtoMessage() {}
 
 func (x *OrgUpdateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[36]
+	mi := &file_sys_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2625,7 +2789,7 @@ func (x *OrgUpdateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgUpdateReq.ProtoReflect.Descriptor instead.
 func (*OrgUpdateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{36}
+	return file_sys_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *OrgUpdateReq) GetId() int64 {
@@ -2715,7 +2879,7 @@ type OrgPageResp struct {
 
 func (x *OrgPageResp) Reset() {
 	*x = OrgPageResp{}
-	mi := &file_proto_sys_proto_msgTypes[37]
+	mi := &file_sys_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2727,7 +2891,7 @@ func (x *OrgPageResp) String() string {
 func (*OrgPageResp) ProtoMessage() {}
 
 func (x *OrgPageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[37]
+	mi := &file_sys_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2740,7 +2904,7 @@ func (x *OrgPageResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgPageResp.ProtoReflect.Descriptor instead.
 func (*OrgPageResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{37}
+	return file_sys_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *OrgPageResp) GetRecords() []*Org {
@@ -2766,7 +2930,7 @@ type OrgTreeResp struct {
 
 func (x *OrgTreeResp) Reset() {
 	*x = OrgTreeResp{}
-	mi := &file_proto_sys_proto_msgTypes[38]
+	mi := &file_sys_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2778,7 +2942,7 @@ func (x *OrgTreeResp) String() string {
 func (*OrgTreeResp) ProtoMessage() {}
 
 func (x *OrgTreeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[38]
+	mi := &file_sys_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2791,7 +2955,7 @@ func (x *OrgTreeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgTreeResp.ProtoReflect.Descriptor instead.
 func (*OrgTreeResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{38}
+	return file_sys_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *OrgTreeResp) GetRecords() []*Org {
@@ -2828,7 +2992,7 @@ type Menu struct {
 
 func (x *Menu) Reset() {
 	*x = Menu{}
-	mi := &file_proto_sys_proto_msgTypes[39]
+	mi := &file_sys_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2840,7 +3004,7 @@ func (x *Menu) String() string {
 func (*Menu) ProtoMessage() {}
 
 func (x *Menu) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[39]
+	mi := &file_sys_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2853,7 +3017,7 @@ func (x *Menu) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Menu.ProtoReflect.Descriptor instead.
 func (*Menu) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{39}
+	return file_sys_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *Menu) GetId() int64 {
@@ -3006,13 +3170,15 @@ type MenuReq struct {
 	Perms         string                 `protobuf:"bytes,13,opt,name=perms,proto3" json:"perms,omitempty"`
 	Icon          string                 `protobuf:"bytes,14,opt,name=icon,proto3" json:"icon,omitempty"`
 	Remark        string                 `protobuf:"bytes,15,opt,name=remark,proto3" json:"remark,omitempty"`
+	CreateBy      int64                  `protobuf:"varint,16,opt,name=create_by,json=createBy,proto3" json:"create_by,omitempty"`
+	UpdateBy      int64                  `protobuf:"varint,17,opt,name=update_by,json=updateBy,proto3" json:"update_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *MenuReq) Reset() {
 	*x = MenuReq{}
-	mi := &file_proto_sys_proto_msgTypes[40]
+	mi := &file_sys_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3024,7 +3190,7 @@ func (x *MenuReq) String() string {
 func (*MenuReq) ProtoMessage() {}
 
 func (x *MenuReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[40]
+	mi := &file_sys_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3037,7 +3203,7 @@ func (x *MenuReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuReq.ProtoReflect.Descriptor instead.
 func (*MenuReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{40}
+	return file_sys_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *MenuReq) GetId() int64 {
@@ -3145,6 +3311,20 @@ func (x *MenuReq) GetRemark() string {
 	return ""
 }
 
+func (x *MenuReq) GetCreateBy() int64 {
+	if x != nil {
+		return x.CreateBy
+	}
+	return 0
+}
+
+func (x *MenuReq) GetUpdateBy() int64 {
+	if x != nil {
+		return x.UpdateBy
+	}
+	return 0
+}
+
 type MenuListResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Records       []*Menu                `protobuf:"bytes,1,rep,name=records,proto3" json:"records,omitempty"`
@@ -3154,7 +3334,7 @@ type MenuListResp struct {
 
 func (x *MenuListResp) Reset() {
 	*x = MenuListResp{}
-	mi := &file_proto_sys_proto_msgTypes[41]
+	mi := &file_sys_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3166,7 +3346,7 @@ func (x *MenuListResp) String() string {
 func (*MenuListResp) ProtoMessage() {}
 
 func (x *MenuListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[41]
+	mi := &file_sys_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3179,12 +3359,248 @@ func (x *MenuListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuListResp.ProtoReflect.Descriptor instead.
 func (*MenuListResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{41}
+	return file_sys_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *MenuListResp) GetRecords() []*Menu {
 	if x != nil {
 		return x.Records
+	}
+	return nil
+}
+
+type CaptchaReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CaptchaReq) Reset() {
+	*x = CaptchaReq{}
+	mi := &file_sys_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CaptchaReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CaptchaReq) ProtoMessage() {}
+
+func (x *CaptchaReq) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CaptchaReq.ProtoReflect.Descriptor instead.
+func (*CaptchaReq) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{45}
+}
+
+type CaptchaPhoneReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Phonenumber   string                 `protobuf:"bytes,1,opt,name=phonenumber,proto3" json:"phonenumber,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CaptchaPhoneReq) Reset() {
+	*x = CaptchaPhoneReq{}
+	mi := &file_sys_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CaptchaPhoneReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CaptchaPhoneReq) ProtoMessage() {}
+
+func (x *CaptchaPhoneReq) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CaptchaPhoneReq.ProtoReflect.Descriptor instead.
+func (*CaptchaPhoneReq) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *CaptchaPhoneReq) GetPhonenumber() string {
+	if x != nil {
+		return x.Phonenumber
+	}
+	return ""
+}
+
+type CaptchaEmailReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CaptchaEmailReq) Reset() {
+	*x = CaptchaEmailReq{}
+	mi := &file_sys_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CaptchaEmailReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CaptchaEmailReq) ProtoMessage() {}
+
+func (x *CaptchaEmailReq) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CaptchaEmailReq.ProtoReflect.Descriptor instead.
+func (*CaptchaEmailReq) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *CaptchaEmailReq) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type CaptchaDataResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	DataJson      string                 `protobuf:"bytes,3,opt,name=data_json,json=dataJson,proto3" json:"data_json,omitempty"`
+	ExpireAt      string                 `protobuf:"bytes,4,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CaptchaDataResp) Reset() {
+	*x = CaptchaDataResp{}
+	mi := &file_sys_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CaptchaDataResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CaptchaDataResp) ProtoMessage() {}
+
+func (x *CaptchaDataResp) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CaptchaDataResp.ProtoReflect.Descriptor instead.
+func (*CaptchaDataResp) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *CaptchaDataResp) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *CaptchaDataResp) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *CaptchaDataResp) GetDataJson() string {
+	if x != nil {
+		return x.DataJson
+	}
+	return ""
+}
+
+func (x *CaptchaDataResp) GetExpireAt() string {
+	if x != nil {
+		return x.ExpireAt
+	}
+	return ""
+}
+
+type CaptchaTypesResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Types         []string               `protobuf:"bytes,1,rep,name=types,proto3" json:"types,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CaptchaTypesResp) Reset() {
+	*x = CaptchaTypesResp{}
+	mi := &file_sys_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CaptchaTypesResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CaptchaTypesResp) ProtoMessage() {}
+
+func (x *CaptchaTypesResp) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CaptchaTypesResp.ProtoReflect.Descriptor instead.
+func (*CaptchaTypesResp) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *CaptchaTypesResp) GetTypes() []string {
+	if x != nil {
+		return x.Types
 	}
 	return nil
 }
@@ -3210,7 +3626,7 @@ type Dict struct {
 
 func (x *Dict) Reset() {
 	*x = Dict{}
-	mi := &file_proto_sys_proto_msgTypes[42]
+	mi := &file_sys_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3222,7 +3638,7 @@ func (x *Dict) String() string {
 func (*Dict) ProtoMessage() {}
 
 func (x *Dict) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[42]
+	mi := &file_sys_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3235,7 +3651,7 @@ func (x *Dict) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Dict.ProtoReflect.Descriptor instead.
 func (*Dict) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{42}
+	return file_sys_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *Dict) GetId() int64 {
@@ -3342,7 +3758,7 @@ type DictPageReq struct {
 
 func (x *DictPageReq) Reset() {
 	*x = DictPageReq{}
-	mi := &file_proto_sys_proto_msgTypes[43]
+	mi := &file_sys_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3354,7 +3770,7 @@ func (x *DictPageReq) String() string {
 func (*DictPageReq) ProtoMessage() {}
 
 func (x *DictPageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[43]
+	mi := &file_sys_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3367,7 +3783,7 @@ func (x *DictPageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictPageReq.ProtoReflect.Descriptor instead.
 func (*DictPageReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{43}
+	return file_sys_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *DictPageReq) GetPageNum() int64 {
@@ -3423,7 +3839,7 @@ type DictCreateReq struct {
 
 func (x *DictCreateReq) Reset() {
 	*x = DictCreateReq{}
-	mi := &file_proto_sys_proto_msgTypes[44]
+	mi := &file_sys_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3435,7 +3851,7 @@ func (x *DictCreateReq) String() string {
 func (*DictCreateReq) ProtoMessage() {}
 
 func (x *DictCreateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[44]
+	mi := &file_sys_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3448,7 +3864,7 @@ func (x *DictCreateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictCreateReq.ProtoReflect.Descriptor instead.
 func (*DictCreateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{44}
+	return file_sys_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *DictCreateReq) GetParentId() int64 {
@@ -3523,7 +3939,7 @@ func (x *DictCreateReq) GetUpdateBy() int64 {
 
 type DictUpdateReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	ParentId      int64                  `protobuf:"varint,2,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
 	DictType      string                 `protobuf:"bytes,3,opt,name=dict_type,json=dictType,proto3" json:"dict_type,omitempty"`
 	DictLabel     string                 `protobuf:"bytes,4,opt,name=dict_label,json=dictLabel,proto3" json:"dict_label,omitempty"`
@@ -3539,7 +3955,7 @@ type DictUpdateReq struct {
 
 func (x *DictUpdateReq) Reset() {
 	*x = DictUpdateReq{}
-	mi := &file_proto_sys_proto_msgTypes[45]
+	mi := &file_sys_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3551,7 +3967,7 @@ func (x *DictUpdateReq) String() string {
 func (*DictUpdateReq) ProtoMessage() {}
 
 func (x *DictUpdateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[45]
+	mi := &file_sys_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3564,14 +3980,14 @@ func (x *DictUpdateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictUpdateReq.ProtoReflect.Descriptor instead.
 func (*DictUpdateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{45}
+	return file_sys_proto_rawDescGZIP(), []int{53}
 }
 
-func (x *DictUpdateReq) GetId() string {
+func (x *DictUpdateReq) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
 func (x *DictUpdateReq) GetParentId() int64 {
@@ -3647,7 +4063,7 @@ type DictTypeQueryReq struct {
 
 func (x *DictTypeQueryReq) Reset() {
 	*x = DictTypeQueryReq{}
-	mi := &file_proto_sys_proto_msgTypes[46]
+	mi := &file_sys_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3659,7 +4075,7 @@ func (x *DictTypeQueryReq) String() string {
 func (*DictTypeQueryReq) ProtoMessage() {}
 
 func (x *DictTypeQueryReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[46]
+	mi := &file_sys_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3672,7 +4088,7 @@ func (x *DictTypeQueryReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictTypeQueryReq.ProtoReflect.Descriptor instead.
 func (*DictTypeQueryReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{46}
+	return file_sys_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *DictTypeQueryReq) GetDictType() string {
@@ -3699,7 +4115,7 @@ type DictLabelQueryReq struct {
 
 func (x *DictLabelQueryReq) Reset() {
 	*x = DictLabelQueryReq{}
-	mi := &file_proto_sys_proto_msgTypes[47]
+	mi := &file_sys_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3711,7 +4127,7 @@ func (x *DictLabelQueryReq) String() string {
 func (*DictLabelQueryReq) ProtoMessage() {}
 
 func (x *DictLabelQueryReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[47]
+	mi := &file_sys_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3724,7 +4140,7 @@ func (x *DictLabelQueryReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictLabelQueryReq.ProtoReflect.Descriptor instead.
 func (*DictLabelQueryReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{47}
+	return file_sys_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *DictLabelQueryReq) GetDictType() string {
@@ -3750,7 +4166,7 @@ type DictLabelResp struct {
 
 func (x *DictLabelResp) Reset() {
 	*x = DictLabelResp{}
-	mi := &file_proto_sys_proto_msgTypes[48]
+	mi := &file_sys_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3762,7 +4178,7 @@ func (x *DictLabelResp) String() string {
 func (*DictLabelResp) ProtoMessage() {}
 
 func (x *DictLabelResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[48]
+	mi := &file_sys_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3775,7 +4191,7 @@ func (x *DictLabelResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictLabelResp.ProtoReflect.Descriptor instead.
 func (*DictLabelResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{48}
+	return file_sys_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *DictLabelResp) GetLabel() string {
@@ -3795,7 +4211,7 @@ type DictPageResp struct {
 
 func (x *DictPageResp) Reset() {
 	*x = DictPageResp{}
-	mi := &file_proto_sys_proto_msgTypes[49]
+	mi := &file_sys_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3807,7 +4223,7 @@ func (x *DictPageResp) String() string {
 func (*DictPageResp) ProtoMessage() {}
 
 func (x *DictPageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[49]
+	mi := &file_sys_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3820,7 +4236,7 @@ func (x *DictPageResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictPageResp.ProtoReflect.Descriptor instead.
 func (*DictPageResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{49}
+	return file_sys_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *DictPageResp) GetRecords() []*Dict {
@@ -3846,7 +4262,7 @@ type DictListResp struct {
 
 func (x *DictListResp) Reset() {
 	*x = DictListResp{}
-	mi := &file_proto_sys_proto_msgTypes[50]
+	mi := &file_sys_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3858,7 +4274,7 @@ func (x *DictListResp) String() string {
 func (*DictListResp) ProtoMessage() {}
 
 func (x *DictListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[50]
+	mi := &file_sys_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3871,7 +4287,7 @@ func (x *DictListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DictListResp.ProtoReflect.Descriptor instead.
 func (*DictListResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{50}
+	return file_sys_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *DictListResp) GetRecords() []*Dict {
@@ -3898,7 +4314,7 @@ type Config struct {
 
 func (x *Config) Reset() {
 	*x = Config{}
-	mi := &file_proto_sys_proto_msgTypes[51]
+	mi := &file_sys_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3910,7 +4326,7 @@ func (x *Config) String() string {
 func (*Config) ProtoMessage() {}
 
 func (x *Config) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[51]
+	mi := &file_sys_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3923,7 +4339,7 @@ func (x *Config) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Config.ProtoReflect.Descriptor instead.
 func (*Config) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{51}
+	return file_sys_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *Config) GetId() int64 {
@@ -4001,7 +4417,7 @@ type ConfigPageReq struct {
 
 func (x *ConfigPageReq) Reset() {
 	*x = ConfigPageReq{}
-	mi := &file_proto_sys_proto_msgTypes[52]
+	mi := &file_sys_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4013,7 +4429,7 @@ func (x *ConfigPageReq) String() string {
 func (*ConfigPageReq) ProtoMessage() {}
 
 func (x *ConfigPageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[52]
+	mi := &file_sys_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4026,7 +4442,7 @@ func (x *ConfigPageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigPageReq.ProtoReflect.Descriptor instead.
 func (*ConfigPageReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{52}
+	return file_sys_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *ConfigPageReq) GetPageNum() int64 {
@@ -4071,7 +4487,7 @@ type ConfigCreateReq struct {
 
 func (x *ConfigCreateReq) Reset() {
 	*x = ConfigCreateReq{}
-	mi := &file_proto_sys_proto_msgTypes[53]
+	mi := &file_sys_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4083,7 +4499,7 @@ func (x *ConfigCreateReq) String() string {
 func (*ConfigCreateReq) ProtoMessage() {}
 
 func (x *ConfigCreateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[53]
+	mi := &file_sys_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4096,7 +4512,7 @@ func (x *ConfigCreateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigCreateReq.ProtoReflect.Descriptor instead.
 func (*ConfigCreateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{53}
+	return file_sys_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *ConfigCreateReq) GetName() string {
@@ -4155,7 +4571,7 @@ type ConfigUpdateReq struct {
 
 func (x *ConfigUpdateReq) Reset() {
 	*x = ConfigUpdateReq{}
-	mi := &file_proto_sys_proto_msgTypes[54]
+	mi := &file_sys_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4167,7 +4583,7 @@ func (x *ConfigUpdateReq) String() string {
 func (*ConfigUpdateReq) ProtoMessage() {}
 
 func (x *ConfigUpdateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[54]
+	mi := &file_sys_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4180,7 +4596,7 @@ func (x *ConfigUpdateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigUpdateReq.ProtoReflect.Descriptor instead.
 func (*ConfigUpdateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{54}
+	return file_sys_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *ConfigUpdateReq) GetId() int64 {
@@ -4234,7 +4650,7 @@ type ConfigCodeQueryReq struct {
 
 func (x *ConfigCodeQueryReq) Reset() {
 	*x = ConfigCodeQueryReq{}
-	mi := &file_proto_sys_proto_msgTypes[55]
+	mi := &file_sys_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4246,7 +4662,7 @@ func (x *ConfigCodeQueryReq) String() string {
 func (*ConfigCodeQueryReq) ProtoMessage() {}
 
 func (x *ConfigCodeQueryReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[55]
+	mi := &file_sys_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4259,7 +4675,7 @@ func (x *ConfigCodeQueryReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigCodeQueryReq.ProtoReflect.Descriptor instead.
 func (*ConfigCodeQueryReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{55}
+	return file_sys_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *ConfigCodeQueryReq) GetCode() string {
@@ -4279,7 +4695,7 @@ type ConfigDataResp struct {
 
 func (x *ConfigDataResp) Reset() {
 	*x = ConfigDataResp{}
-	mi := &file_proto_sys_proto_msgTypes[56]
+	mi := &file_sys_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4291,7 +4707,7 @@ func (x *ConfigDataResp) String() string {
 func (*ConfigDataResp) ProtoMessage() {}
 
 func (x *ConfigDataResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[56]
+	mi := &file_sys_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4304,7 +4720,7 @@ func (x *ConfigDataResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigDataResp.ProtoReflect.Descriptor instead.
 func (*ConfigDataResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{56}
+	return file_sys_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *ConfigDataResp) GetCode() string {
@@ -4331,7 +4747,7 @@ type ConfigPageResp struct {
 
 func (x *ConfigPageResp) Reset() {
 	*x = ConfigPageResp{}
-	mi := &file_proto_sys_proto_msgTypes[57]
+	mi := &file_sys_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4343,7 +4759,7 @@ func (x *ConfigPageResp) String() string {
 func (*ConfigPageResp) ProtoMessage() {}
 
 func (x *ConfigPageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[57]
+	mi := &file_sys_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4356,7 +4772,7 @@ func (x *ConfigPageResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigPageResp.ProtoReflect.Descriptor instead.
 func (*ConfigPageResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{57}
+	return file_sys_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *ConfigPageResp) GetRecords() []*Config {
@@ -4382,7 +4798,7 @@ type ConfigListResp struct {
 
 func (x *ConfigListResp) Reset() {
 	*x = ConfigListResp{}
-	mi := &file_proto_sys_proto_msgTypes[58]
+	mi := &file_sys_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4394,7 +4810,7 @@ func (x *ConfigListResp) String() string {
 func (*ConfigListResp) ProtoMessage() {}
 
 func (x *ConfigListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[58]
+	mi := &file_sys_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4407,7 +4823,7 @@ func (x *ConfigListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigListResp.ProtoReflect.Descriptor instead.
 func (*ConfigListResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{58}
+	return file_sys_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *ConfigListResp) GetRecords() []*Config {
@@ -4435,7 +4851,7 @@ type LoginLog struct {
 
 func (x *LoginLog) Reset() {
 	*x = LoginLog{}
-	mi := &file_proto_sys_proto_msgTypes[59]
+	mi := &file_sys_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4447,7 +4863,7 @@ func (x *LoginLog) String() string {
 func (*LoginLog) ProtoMessage() {}
 
 func (x *LoginLog) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[59]
+	mi := &file_sys_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4460,7 +4876,7 @@ func (x *LoginLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginLog.ProtoReflect.Descriptor instead.
 func (*LoginLog) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{59}
+	return file_sys_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *LoginLog) GetId() int64 {
@@ -4548,7 +4964,7 @@ type LoginLogPageReq struct {
 
 func (x *LoginLogPageReq) Reset() {
 	*x = LoginLogPageReq{}
-	mi := &file_proto_sys_proto_msgTypes[60]
+	mi := &file_sys_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4560,7 +4976,7 @@ func (x *LoginLogPageReq) String() string {
 func (*LoginLogPageReq) ProtoMessage() {}
 
 func (x *LoginLogPageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[60]
+	mi := &file_sys_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4573,7 +4989,7 @@ func (x *LoginLogPageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginLogPageReq.ProtoReflect.Descriptor instead.
 func (*LoginLogPageReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{60}
+	return file_sys_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *LoginLogPageReq) GetPageNum() int64 {
@@ -4641,7 +5057,7 @@ type LoginLogReq struct {
 
 func (x *LoginLogReq) Reset() {
 	*x = LoginLogReq{}
-	mi := &file_proto_sys_proto_msgTypes[61]
+	mi := &file_sys_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4653,7 +5069,7 @@ func (x *LoginLogReq) String() string {
 func (*LoginLogReq) ProtoMessage() {}
 
 func (x *LoginLogReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[61]
+	mi := &file_sys_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4666,7 +5082,7 @@ func (x *LoginLogReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginLogReq.ProtoReflect.Descriptor instead.
 func (*LoginLogReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{61}
+	return file_sys_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *LoginLogReq) GetUserName() string {
@@ -4742,7 +5158,7 @@ type LoginLogUpdateReq struct {
 
 func (x *LoginLogUpdateReq) Reset() {
 	*x = LoginLogUpdateReq{}
-	mi := &file_proto_sys_proto_msgTypes[62]
+	mi := &file_sys_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4754,7 +5170,7 @@ func (x *LoginLogUpdateReq) String() string {
 func (*LoginLogUpdateReq) ProtoMessage() {}
 
 func (x *LoginLogUpdateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[62]
+	mi := &file_sys_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4767,7 +5183,7 @@ func (x *LoginLogUpdateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginLogUpdateReq.ProtoReflect.Descriptor instead.
 func (*LoginLogUpdateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{62}
+	return file_sys_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *LoginLogUpdateReq) GetId() int64 {
@@ -4842,7 +5258,7 @@ type LogCleanReq struct {
 
 func (x *LogCleanReq) Reset() {
 	*x = LogCleanReq{}
-	mi := &file_proto_sys_proto_msgTypes[63]
+	mi := &file_sys_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4854,7 +5270,7 @@ func (x *LogCleanReq) String() string {
 func (*LogCleanReq) ProtoMessage() {}
 
 func (x *LogCleanReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[63]
+	mi := &file_sys_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4867,7 +5283,7 @@ func (x *LogCleanReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogCleanReq.ProtoReflect.Descriptor instead.
 func (*LogCleanReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{63}
+	return file_sys_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *LogCleanReq) GetDays() int64 {
@@ -4887,7 +5303,7 @@ type LoginLogPageResp struct {
 
 func (x *LoginLogPageResp) Reset() {
 	*x = LoginLogPageResp{}
-	mi := &file_proto_sys_proto_msgTypes[64]
+	mi := &file_sys_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4899,7 +5315,7 @@ func (x *LoginLogPageResp) String() string {
 func (*LoginLogPageResp) ProtoMessage() {}
 
 func (x *LoginLogPageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[64]
+	mi := &file_sys_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4912,7 +5328,7 @@ func (x *LoginLogPageResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginLogPageResp.ProtoReflect.Descriptor instead.
 func (*LoginLogPageResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{64}
+	return file_sys_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *LoginLogPageResp) GetRecords() []*LoginLog {
@@ -4954,7 +5370,7 @@ type OperLog struct {
 
 func (x *OperLog) Reset() {
 	*x = OperLog{}
-	mi := &file_proto_sys_proto_msgTypes[65]
+	mi := &file_sys_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4966,7 +5382,7 @@ func (x *OperLog) String() string {
 func (*OperLog) ProtoMessage() {}
 
 func (x *OperLog) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[65]
+	mi := &file_sys_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4979,7 +5395,7 @@ func (x *OperLog) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperLog.ProtoReflect.Descriptor instead.
 func (*OperLog) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{65}
+	return file_sys_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *OperLog) GetId() int64 {
@@ -5117,7 +5533,7 @@ type OperLogPageReq struct {
 
 func (x *OperLogPageReq) Reset() {
 	*x = OperLogPageReq{}
-	mi := &file_proto_sys_proto_msgTypes[66]
+	mi := &file_sys_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5129,7 +5545,7 @@ func (x *OperLogPageReq) String() string {
 func (*OperLogPageReq) ProtoMessage() {}
 
 func (x *OperLogPageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[66]
+	mi := &file_sys_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5142,7 +5558,7 @@ func (x *OperLogPageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperLogPageReq.ProtoReflect.Descriptor instead.
 func (*OperLogPageReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{66}
+	return file_sys_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *OperLogPageReq) GetPageNum() int64 {
@@ -5224,7 +5640,7 @@ type OperLogReq struct {
 
 func (x *OperLogReq) Reset() {
 	*x = OperLogReq{}
-	mi := &file_proto_sys_proto_msgTypes[67]
+	mi := &file_sys_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5236,7 +5652,7 @@ func (x *OperLogReq) String() string {
 func (*OperLogReq) ProtoMessage() {}
 
 func (x *OperLogReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[67]
+	mi := &file_sys_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5249,7 +5665,7 @@ func (x *OperLogReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperLogReq.ProtoReflect.Descriptor instead.
 func (*OperLogReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{67}
+	return file_sys_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *OperLogReq) GetTitle() string {
@@ -5381,7 +5797,7 @@ type OperLogUpdateReq struct {
 
 func (x *OperLogUpdateReq) Reset() {
 	*x = OperLogUpdateReq{}
-	mi := &file_proto_sys_proto_msgTypes[68]
+	mi := &file_sys_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5393,7 +5809,7 @@ func (x *OperLogUpdateReq) String() string {
 func (*OperLogUpdateReq) ProtoMessage() {}
 
 func (x *OperLogUpdateReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[68]
+	mi := &file_sys_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5406,7 +5822,7 @@ func (x *OperLogUpdateReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperLogUpdateReq.ProtoReflect.Descriptor instead.
 func (*OperLogUpdateReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{68}
+	return file_sys_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *OperLogUpdateReq) GetId() int64 {
@@ -5531,7 +5947,7 @@ type OperLogPageResp struct {
 
 func (x *OperLogPageResp) Reset() {
 	*x = OperLogPageResp{}
-	mi := &file_proto_sys_proto_msgTypes[69]
+	mi := &file_sys_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5543,7 +5959,7 @@ func (x *OperLogPageResp) String() string {
 func (*OperLogPageResp) ProtoMessage() {}
 
 func (x *OperLogPageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[69]
+	mi := &file_sys_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5556,7 +5972,7 @@ func (x *OperLogPageResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OperLogPageResp.ProtoReflect.Descriptor instead.
 func (*OperLogPageResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{69}
+	return file_sys_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *OperLogPageResp) GetRecords() []*OperLog {
@@ -5593,7 +6009,7 @@ type StorageEnv struct {
 
 func (x *StorageEnv) Reset() {
 	*x = StorageEnv{}
-	mi := &file_proto_sys_proto_msgTypes[70]
+	mi := &file_sys_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5605,7 +6021,7 @@ func (x *StorageEnv) String() string {
 func (*StorageEnv) ProtoMessage() {}
 
 func (x *StorageEnv) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[70]
+	mi := &file_sys_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5618,7 +6034,7 @@ func (x *StorageEnv) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEnv.ProtoReflect.Descriptor instead.
 func (*StorageEnv) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{70}
+	return file_sys_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *StorageEnv) GetId() int64 {
@@ -5717,7 +6133,7 @@ type StorageEnvPageReq struct {
 
 func (x *StorageEnvPageReq) Reset() {
 	*x = StorageEnvPageReq{}
-	mi := &file_proto_sys_proto_msgTypes[71]
+	mi := &file_sys_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5729,7 +6145,7 @@ func (x *StorageEnvPageReq) String() string {
 func (*StorageEnvPageReq) ProtoMessage() {}
 
 func (x *StorageEnvPageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[71]
+	mi := &file_sys_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5742,7 +6158,7 @@ func (x *StorageEnvPageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEnvPageReq.ProtoReflect.Descriptor instead.
 func (*StorageEnvPageReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{71}
+	return file_sys_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *StorageEnvPageReq) GetPageNum() int64 {
@@ -5789,7 +6205,7 @@ type StorageEnvReq struct {
 
 func (x *StorageEnvReq) Reset() {
 	*x = StorageEnvReq{}
-	mi := &file_proto_sys_proto_msgTypes[72]
+	mi := &file_sys_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5801,7 +6217,7 @@ func (x *StorageEnvReq) String() string {
 func (*StorageEnvReq) ProtoMessage() {}
 
 func (x *StorageEnvReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[72]
+	mi := &file_sys_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5814,7 +6230,7 @@ func (x *StorageEnvReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEnvReq.ProtoReflect.Descriptor instead.
 func (*StorageEnvReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{72}
+	return file_sys_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *StorageEnvReq) GetId() int64 {
@@ -5882,7 +6298,7 @@ type StorageEnvDefaultReq struct {
 
 func (x *StorageEnvDefaultReq) Reset() {
 	*x = StorageEnvDefaultReq{}
-	mi := &file_proto_sys_proto_msgTypes[73]
+	mi := &file_sys_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5894,7 +6310,7 @@ func (x *StorageEnvDefaultReq) String() string {
 func (*StorageEnvDefaultReq) ProtoMessage() {}
 
 func (x *StorageEnvDefaultReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[73]
+	mi := &file_sys_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5907,7 +6323,7 @@ func (x *StorageEnvDefaultReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEnvDefaultReq.ProtoReflect.Descriptor instead.
 func (*StorageEnvDefaultReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{73}
+	return file_sys_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *StorageEnvDefaultReq) GetId() int64 {
@@ -5926,7 +6342,7 @@ type StorageEnvTestReq struct {
 
 func (x *StorageEnvTestReq) Reset() {
 	*x = StorageEnvTestReq{}
-	mi := &file_proto_sys_proto_msgTypes[74]
+	mi := &file_sys_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5938,7 +6354,7 @@ func (x *StorageEnvTestReq) String() string {
 func (*StorageEnvTestReq) ProtoMessage() {}
 
 func (x *StorageEnvTestReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[74]
+	mi := &file_sys_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5951,7 +6367,7 @@ func (x *StorageEnvTestReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEnvTestReq.ProtoReflect.Descriptor instead.
 func (*StorageEnvTestReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{74}
+	return file_sys_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *StorageEnvTestReq) GetId() int64 {
@@ -5971,7 +6387,7 @@ type StorageEnvTestResp struct {
 
 func (x *StorageEnvTestResp) Reset() {
 	*x = StorageEnvTestResp{}
-	mi := &file_proto_sys_proto_msgTypes[75]
+	mi := &file_sys_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5983,7 +6399,7 @@ func (x *StorageEnvTestResp) String() string {
 func (*StorageEnvTestResp) ProtoMessage() {}
 
 func (x *StorageEnvTestResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[75]
+	mi := &file_sys_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5996,7 +6412,7 @@ func (x *StorageEnvTestResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEnvTestResp.ProtoReflect.Descriptor instead.
 func (*StorageEnvTestResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{75}
+	return file_sys_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *StorageEnvTestResp) GetConnected() bool {
@@ -6023,7 +6439,7 @@ type StorageEnvPageResp struct {
 
 func (x *StorageEnvPageResp) Reset() {
 	*x = StorageEnvPageResp{}
-	mi := &file_proto_sys_proto_msgTypes[76]
+	mi := &file_sys_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6035,7 +6451,7 @@ func (x *StorageEnvPageResp) String() string {
 func (*StorageEnvPageResp) ProtoMessage() {}
 
 func (x *StorageEnvPageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[76]
+	mi := &file_sys_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6048,7 +6464,7 @@ func (x *StorageEnvPageResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEnvPageResp.ProtoReflect.Descriptor instead.
 func (*StorageEnvPageResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{76}
+	return file_sys_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *StorageEnvPageResp) GetRecords() []*StorageEnv {
@@ -6074,7 +6490,7 @@ type StorageEnvListResp struct {
 
 func (x *StorageEnvListResp) Reset() {
 	*x = StorageEnvListResp{}
-	mi := &file_proto_sys_proto_msgTypes[77]
+	mi := &file_sys_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6086,7 +6502,7 @@ func (x *StorageEnvListResp) String() string {
 func (*StorageEnvListResp) ProtoMessage() {}
 
 func (x *StorageEnvListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[77]
+	mi := &file_sys_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6099,7 +6515,7 @@ func (x *StorageEnvListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEnvListResp.ProtoReflect.Descriptor instead.
 func (*StorageEnvListResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{77}
+	return file_sys_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *StorageEnvListResp) GetRecords() []*StorageEnv {
@@ -6135,7 +6551,7 @@ type Attachment struct {
 
 func (x *Attachment) Reset() {
 	*x = Attachment{}
-	mi := &file_proto_sys_proto_msgTypes[78]
+	mi := &file_sys_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6147,7 +6563,7 @@ func (x *Attachment) String() string {
 func (*Attachment) ProtoMessage() {}
 
 func (x *Attachment) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[78]
+	mi := &file_sys_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6160,7 +6576,7 @@ func (x *Attachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Attachment.ProtoReflect.Descriptor instead.
 func (*Attachment) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{78}
+	return file_sys_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *Attachment) GetAttachmentId() int64 {
@@ -6302,7 +6718,7 @@ type AttachmentPageReq struct {
 
 func (x *AttachmentPageReq) Reset() {
 	*x = AttachmentPageReq{}
-	mi := &file_proto_sys_proto_msgTypes[79]
+	mi := &file_sys_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6314,7 +6730,7 @@ func (x *AttachmentPageReq) String() string {
 func (*AttachmentPageReq) ProtoMessage() {}
 
 func (x *AttachmentPageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[79]
+	mi := &file_sys_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6327,7 +6743,7 @@ func (x *AttachmentPageReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentPageReq.ProtoReflect.Descriptor instead.
 func (*AttachmentPageReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{79}
+	return file_sys_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *AttachmentPageReq) GetPageNum() int64 {
@@ -6377,7 +6793,7 @@ type AttachmentUploadReq struct {
 
 func (x *AttachmentUploadReq) Reset() {
 	*x = AttachmentUploadReq{}
-	mi := &file_proto_sys_proto_msgTypes[80]
+	mi := &file_sys_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6389,7 +6805,7 @@ func (x *AttachmentUploadReq) String() string {
 func (*AttachmentUploadReq) ProtoMessage() {}
 
 func (x *AttachmentUploadReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[80]
+	mi := &file_sys_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6402,7 +6818,7 @@ func (x *AttachmentUploadReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentUploadReq.ProtoReflect.Descriptor instead.
 func (*AttachmentUploadReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{80}
+	return file_sys_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *AttachmentUploadReq) GetEnvCode() string {
@@ -6448,7 +6864,7 @@ type AttachmentBindReq struct {
 
 func (x *AttachmentBindReq) Reset() {
 	*x = AttachmentBindReq{}
-	mi := &file_proto_sys_proto_msgTypes[81]
+	mi := &file_sys_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6460,7 +6876,7 @@ func (x *AttachmentBindReq) String() string {
 func (*AttachmentBindReq) ProtoMessage() {}
 
 func (x *AttachmentBindReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[81]
+	mi := &file_sys_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6473,7 +6889,7 @@ func (x *AttachmentBindReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentBindReq.ProtoReflect.Descriptor instead.
 func (*AttachmentBindReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{81}
+	return file_sys_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *AttachmentBindReq) GetAttachmentId() int64 {
@@ -6535,7 +6951,7 @@ type AttachmentBusinessQueryReq struct {
 
 func (x *AttachmentBusinessQueryReq) Reset() {
 	*x = AttachmentBusinessQueryReq{}
-	mi := &file_proto_sys_proto_msgTypes[82]
+	mi := &file_sys_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6547,7 +6963,7 @@ func (x *AttachmentBusinessQueryReq) String() string {
 func (*AttachmentBusinessQueryReq) ProtoMessage() {}
 
 func (x *AttachmentBusinessQueryReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[82]
+	mi := &file_sys_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6560,7 +6976,7 @@ func (x *AttachmentBusinessQueryReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentBusinessQueryReq.ProtoReflect.Descriptor instead.
 func (*AttachmentBusinessQueryReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{82}
+	return file_sys_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *AttachmentBusinessQueryReq) GetBusinessType() string {
@@ -6587,7 +7003,7 @@ type AttachmentUrlQueryReq struct {
 
 func (x *AttachmentUrlQueryReq) Reset() {
 	*x = AttachmentUrlQueryReq{}
-	mi := &file_proto_sys_proto_msgTypes[83]
+	mi := &file_sys_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6599,7 +7015,7 @@ func (x *AttachmentUrlQueryReq) String() string {
 func (*AttachmentUrlQueryReq) ProtoMessage() {}
 
 func (x *AttachmentUrlQueryReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[83]
+	mi := &file_sys_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6612,7 +7028,7 @@ func (x *AttachmentUrlQueryReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentUrlQueryReq.ProtoReflect.Descriptor instead.
 func (*AttachmentUrlQueryReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{83}
+	return file_sys_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *AttachmentUrlQueryReq) GetAttachmentId() int64 {
@@ -6640,7 +7056,7 @@ type AttachmentUrlResp struct {
 
 func (x *AttachmentUrlResp) Reset() {
 	*x = AttachmentUrlResp{}
-	mi := &file_proto_sys_proto_msgTypes[84]
+	mi := &file_sys_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6652,7 +7068,7 @@ func (x *AttachmentUrlResp) String() string {
 func (*AttachmentUrlResp) ProtoMessage() {}
 
 func (x *AttachmentUrlResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[84]
+	mi := &file_sys_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6665,7 +7081,7 @@ func (x *AttachmentUrlResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentUrlResp.ProtoReflect.Descriptor instead.
 func (*AttachmentUrlResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{84}
+	return file_sys_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *AttachmentUrlResp) GetAttachmentId() int64 {
@@ -6698,7 +7114,7 @@ type AttachmentDownloadReq struct {
 
 func (x *AttachmentDownloadReq) Reset() {
 	*x = AttachmentDownloadReq{}
-	mi := &file_proto_sys_proto_msgTypes[85]
+	mi := &file_sys_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6710,7 +7126,7 @@ func (x *AttachmentDownloadReq) String() string {
 func (*AttachmentDownloadReq) ProtoMessage() {}
 
 func (x *AttachmentDownloadReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[85]
+	mi := &file_sys_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6723,7 +7139,7 @@ func (x *AttachmentDownloadReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentDownloadReq.ProtoReflect.Descriptor instead.
 func (*AttachmentDownloadReq) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{85}
+	return file_sys_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *AttachmentDownloadReq) GetAttachmentId() int64 {
@@ -6744,7 +7160,7 @@ type AttachmentDownloadResp struct {
 
 func (x *AttachmentDownloadResp) Reset() {
 	*x = AttachmentDownloadResp{}
-	mi := &file_proto_sys_proto_msgTypes[86]
+	mi := &file_sys_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6756,7 +7172,7 @@ func (x *AttachmentDownloadResp) String() string {
 func (*AttachmentDownloadResp) ProtoMessage() {}
 
 func (x *AttachmentDownloadResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[86]
+	mi := &file_sys_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6769,7 +7185,7 @@ func (x *AttachmentDownloadResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentDownloadResp.ProtoReflect.Descriptor instead.
 func (*AttachmentDownloadResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{86}
+	return file_sys_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *AttachmentDownloadResp) GetFileName() string {
@@ -6803,7 +7219,7 @@ type AttachmentPageResp struct {
 
 func (x *AttachmentPageResp) Reset() {
 	*x = AttachmentPageResp{}
-	mi := &file_proto_sys_proto_msgTypes[87]
+	mi := &file_sys_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6815,7 +7231,7 @@ func (x *AttachmentPageResp) String() string {
 func (*AttachmentPageResp) ProtoMessage() {}
 
 func (x *AttachmentPageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[87]
+	mi := &file_sys_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6828,7 +7244,7 @@ func (x *AttachmentPageResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentPageResp.ProtoReflect.Descriptor instead.
 func (*AttachmentPageResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{87}
+	return file_sys_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *AttachmentPageResp) GetRecords() []*Attachment {
@@ -6854,7 +7270,7 @@ type AttachmentListResp struct {
 
 func (x *AttachmentListResp) Reset() {
 	*x = AttachmentListResp{}
-	mi := &file_proto_sys_proto_msgTypes[88]
+	mi := &file_sys_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6866,7 +7282,7 @@ func (x *AttachmentListResp) String() string {
 func (*AttachmentListResp) ProtoMessage() {}
 
 func (x *AttachmentListResp) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_sys_proto_msgTypes[88]
+	mi := &file_sys_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6879,7 +7295,7 @@ func (x *AttachmentListResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentListResp.ProtoReflect.Descriptor instead.
 func (*AttachmentListResp) Descriptor() ([]byte, []int) {
-	return file_proto_sys_proto_rawDescGZIP(), []int{88}
+	return file_sys_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *AttachmentListResp) GetRecords() []*Attachment {
@@ -6889,11 +7305,11 @@ func (x *AttachmentListResp) GetRecords() []*Attachment {
 	return nil
 }
 
-var File_proto_sys_proto protoreflect.FileDescriptor
+var File_sys_proto protoreflect.FileDescriptor
 
-const file_proto_sys_proto_rawDesc = "" +
+const file_sys_proto_rawDesc = "" +
 	"\n" +
-	"\x0fproto/sys.proto\x12\x02pb\"\a\n" +
+	"\tsys.proto\x12\x02pb\"\a\n" +
 	"\x05Empty\"\t\n" +
 	"\aPingReq\"$\n" +
 	"\bPingResp\x12\x18\n" +
@@ -6971,7 +7387,7 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\tpage_size\x18\x02 \x01(\x03R\bpageSize\x12\x1a\n" +
 	"\busername\x18\x03 \x01(\tR\busername\x12 \n" +
 	"\vphonenumber\x18\x04 \x01(\tR\vphonenumber\x12\x16\n" +
-	"\x06status\x18\x05 \x01(\x05R\x06status\"\x94\x02\n" +
+	"\x06status\x18\x05 \x01(\x05R\x06status\"\xce\x02\n" +
 	"\rUserCreateReq\x12\x1b\n" +
 	"\tuser_name\x18\x01 \x01(\tR\buserName\x12\x1b\n" +
 	"\tnick_name\x18\x02 \x01(\tR\bnickName\x12\x1a\n" +
@@ -6983,7 +7399,9 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\x06avatar\x18\b \x01(\tR\x06avatar\x12\x16\n" +
 	"\x06status\x18\t \x01(\x05R\x06status\x12\x16\n" +
 	"\x06remark\x18\n" +
-	" \x01(\tR\x06remark\"\x88\x02\n" +
+	" \x01(\tR\x06remark\x12\x1b\n" +
+	"\tcreate_by\x18\v \x01(\x03R\bcreateBy\x12\x1b\n" +
+	"\tupdate_by\x18\f \x01(\x03R\bupdateBy\"\xa5\x02\n" +
 	"\rUserUpdateReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tuser_name\x18\x02 \x01(\tR\buserName\x12\x1b\n" +
@@ -6995,7 +7413,8 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\x06avatar\x18\b \x01(\tR\x06avatar\x12\x16\n" +
 	"\x06status\x18\t \x01(\x05R\x06status\x12\x16\n" +
 	"\x06remark\x18\n" +
-	" \x01(\tR\x06remark\"8\n" +
+	" \x01(\tR\x06remark\x12\x1b\n" +
+	"\tupdate_by\x18\v \x01(\x03R\bupdateBy\"8\n" +
 	"\rUserImportReq\x12'\n" +
 	"\x05users\x18\x01 \x03(\v2\x11.pb.UserCreateReqR\x05users\"D\n" +
 	"\x0fUserPasswordReq\x12\x0e\n" +
@@ -7064,7 +7483,14 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\bresource\x18\x02 \x01(\tR\bresource\x12\x16\n" +
 	"\x06action\x18\x03 \x01(\tR\x06action\"C\n" +
 	"\x13RolePermissionsResp\x12,\n" +
-	"\arecords\x18\x01 \x03(\v2\x12.pb.RolePermissionR\arecords\"T\n" +
+	"\arecords\x18\x01 \x03(\v2\x12.pb.RolePermissionR\arecords\"'\n" +
+	"\fRoleMenusReq\x12\x17\n" +
+	"\arole_id\x18\x01 \x01(\x03R\x06roleId\"H\n" +
+	"\x12RoleMenusAssignReq\x12\x17\n" +
+	"\arole_id\x18\x01 \x01(\x03R\x06roleId\x12\x19\n" +
+	"\bmenu_ids\x18\x02 \x03(\x03R\amenuIds\"(\n" +
+	"\vMenuIdsResp\x12\x19\n" +
+	"\bmenu_ids\x18\x01 \x03(\x03R\amenuIds\"T\n" +
 	"\fRolePageResp\x12\"\n" +
 	"\arecords\x18\x01 \x03(\v2\b.pb.RoleR\arecords\x12 \n" +
 	"\x04page\x18\x02 \x01(\v2\f.pb.PageInfoR\x04page\"2\n" +
@@ -7145,7 +7571,7 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\tcreate_by\x18\x10 \x01(\x03R\bcreateBy\x12!\n" +
 	"\fcreated_time\x18\x11 \x01(\tR\vcreatedTime\x12!\n" +
 	"\fupdated_time\x18\x12 \x01(\tR\vupdatedTime\x12$\n" +
-	"\bchildren\x18\x13 \x03(\v2\b.pb.MenuR\bchildren\"\xf6\x02\n" +
+	"\bchildren\x18\x13 \x03(\v2\b.pb.MenuR\bchildren\"\xb0\x03\n" +
 	"\aMenuReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tmenu_name\x18\x02 \x01(\tR\bmenuName\x12\x1b\n" +
@@ -7162,9 +7588,24 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\x06status\x18\f \x01(\x03R\x06status\x12\x14\n" +
 	"\x05perms\x18\r \x01(\tR\x05perms\x12\x12\n" +
 	"\x04icon\x18\x0e \x01(\tR\x04icon\x12\x16\n" +
-	"\x06remark\x18\x0f \x01(\tR\x06remark\"2\n" +
+	"\x06remark\x18\x0f \x01(\tR\x06remark\x12\x1b\n" +
+	"\tcreate_by\x18\x10 \x01(\x03R\bcreateBy\x12\x1b\n" +
+	"\tupdate_by\x18\x11 \x01(\x03R\bupdateBy\"2\n" +
 	"\fMenuListResp\x12\"\n" +
-	"\arecords\x18\x01 \x03(\v2\b.pb.MenuR\arecords\"\xf1\x02\n" +
+	"\arecords\x18\x01 \x03(\v2\b.pb.MenuR\arecords\"\f\n" +
+	"\n" +
+	"CaptchaReq\"3\n" +
+	"\x0fCaptchaPhoneReq\x12 \n" +
+	"\vphonenumber\x18\x01 \x01(\tR\vphonenumber\"'\n" +
+	"\x0fCaptchaEmailReq\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\"o\n" +
+	"\x0fCaptchaDataResp\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x1b\n" +
+	"\tdata_json\x18\x03 \x01(\tR\bdataJson\x12\x1b\n" +
+	"\texpire_at\x18\x04 \x01(\tR\bexpireAt\"(\n" +
+	"\x10CaptchaTypesResp\x12\x14\n" +
+	"\x05types\x18\x01 \x03(\tR\x05types\"\xf1\x02\n" +
 	"\x04Dict\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tparent_id\x18\x02 \x01(\x03R\bparentId\x12\x1b\n" +
@@ -7206,7 +7647,7 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\tupdate_by\x18\n" +
 	" \x01(\x03R\bupdateBy\"\x97\x02\n" +
 	"\rDictUpdateReq\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tparent_id\x18\x02 \x01(\x03R\bparentId\x12\x1b\n" +
 	"\tdict_type\x18\x03 \x01(\tR\bdictType\x12\x1d\n" +
 	"\n" +
@@ -7516,7 +7957,7 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\arecords\x18\x01 \x03(\v2\x0e.pb.AttachmentR\arecords\x12 \n" +
 	"\x04page\x18\x02 \x01(\v2\f.pb.PageInfoR\x04page\">\n" +
 	"\x12AttachmentListResp\x12(\n" +
-	"\arecords\x18\x01 \x03(\v2\x0e.pb.AttachmentR\arecords2\xac\x1e\n" +
+	"\arecords\x18\x01 \x03(\v2\x0e.pb.AttachmentR\arecords2\xe8 \n" +
 	"\n" +
 	"SysService\x12!\n" +
 	"\x04Ping\x12\v.pb.PingReq\x1a\f.pb.PingResp\x120\n" +
@@ -7546,7 +7987,9 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\bRoleUser\x12\x14.pb.UserRoleQueryReq\x1a\x10.pb.RoleListResp\x123\n" +
 	"\x11RolePermissionAdd\x12\x15.pb.RolePermissionReq\x1a\a.pb.Ack\x126\n" +
 	"\x14RolePermissionDelete\x12\x15.pb.RolePermissionReq\x1a\a.pb.Ack\x12G\n" +
-	"\x0fRolePermissions\x12\x1b.pb.RolePermissionsQueryReq\x1a\x17.pb.RolePermissionsResp\x12(\n" +
+	"\x0fRolePermissions\x12\x1b.pb.RolePermissionsQueryReq\x1a\x17.pb.RolePermissionsResp\x12.\n" +
+	"\tRoleMenus\x12\x10.pb.RoleMenusReq\x1a\x0f.pb.MenuIdsResp\x122\n" +
+	"\x0fRoleAssignMenus\x12\x16.pb.RoleMenusAssignReq\x1a\a.pb.Ack\x12(\n" +
 	"\n" +
 	"RoleUpdate\x12\x11.pb.RoleUpdateReq\x1a\a.pb.Ack\x12!\n" +
 	"\n" +
@@ -7578,11 +8021,11 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\bDictType\x12\x14.pb.DictTypeQueryReq\x1a\x10.pb.DictListResp\x125\n" +
 	"\tDictLabel\x12\x15.pb.DictLabelQueryReq\x1a\x11.pb.DictLabelResp\x12(\n" +
 	"\n" +
-	"DictUpdate\x12\x11.pb.DictUpdateReq\x1a\a.pb.Ack\x12'\n" +
+	"DictUpdate\x12\x11.pb.DictUpdateReq\x1a\a.pb.Ack\x12!\n" +
 	"\n" +
-	"DictDetail\x12\x0f.pb.StringIdReq\x1a\b.pb.Dict\x12&\n" +
+	"DictDetail\x12\t.pb.IdReq\x1a\b.pb.Dict\x12 \n" +
 	"\n" +
-	"DictDelete\x12\x0f.pb.StringIdReq\x1a\a.pb.Ack\x12,\n" +
+	"DictDelete\x12\t.pb.IdReq\x1a\a.pb.Ack\x12,\n" +
 	"\fConfigCreate\x12\x13.pb.ConfigCreateReq\x1a\a.pb.Ack\x123\n" +
 	"\n" +
 	"ConfigPage\x12\x11.pb.ConfigPageReq\x1a\x12.pb.ConfigPageResp\x12-\n" +
@@ -7624,22 +8067,27 @@ const file_proto_sys_proto_rawDesc = "" +
 	"\x0eAttachmentPage\x12\x15.pb.AttachmentPageReq\x1a\x16.pb.AttachmentPageResp\x12K\n" +
 	"\x12AttachmentDownload\x12\x19.pb.AttachmentDownloadReq\x1a\x1a.pb.AttachmentDownloadResp\x12A\n" +
 	"\rAttachmentUrl\x12\x19.pb.AttachmentUrlQueryReq\x1a\x15.pb.AttachmentUrlResp\x12&\n" +
-	"\x10AttachmentDelete\x12\t.pb.IdReq\x1a\a.pb.AckB4Z2github.com/force-c/nai-tizi/application/sys-rpc/pbb\x06proto3"
+	"\x10AttachmentDelete\x12\t.pb.IdReq\x1a\a.pb.Ack\x12;\n" +
+	"\x13CaptchaEnabledTypes\x12\x0e.pb.CaptchaReq\x1a\x14.pb.CaptchaTypesResp\x123\n" +
+	"\fCaptchaImage\x12\x0e.pb.CaptchaReq\x1a\x13.pb.CaptchaDataResp\x126\n" +
+	"\n" +
+	"CaptchaSms\x12\x13.pb.CaptchaPhoneReq\x1a\x13.pb.CaptchaDataResp\x128\n" +
+	"\fCaptchaEmail\x12\x13.pb.CaptchaEmailReq\x1a\x13.pb.CaptchaDataRespB4Z2github.com/force-c/nai-tizi/application/sys-rpc/pbb\x06proto3"
 
 var (
-	file_proto_sys_proto_rawDescOnce sync.Once
-	file_proto_sys_proto_rawDescData []byte
+	file_sys_proto_rawDescOnce sync.Once
+	file_sys_proto_rawDescData []byte
 )
 
-func file_proto_sys_proto_rawDescGZIP() []byte {
-	file_proto_sys_proto_rawDescOnce.Do(func() {
-		file_proto_sys_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_sys_proto_rawDesc), len(file_proto_sys_proto_rawDesc)))
+func file_sys_proto_rawDescGZIP() []byte {
+	file_sys_proto_rawDescOnce.Do(func() {
+		file_sys_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_sys_proto_rawDesc), len(file_sys_proto_rawDesc)))
 	})
-	return file_proto_sys_proto_rawDescData
+	return file_sys_proto_rawDescData
 }
 
-var file_proto_sys_proto_msgTypes = make([]protoimpl.MessageInfo, 89)
-var file_proto_sys_proto_goTypes = []any{
+var file_sys_proto_msgTypes = make([]protoimpl.MessageInfo, 97)
+var file_sys_proto_goTypes = []any{
 	(*Empty)(nil),                      // 0: pb.Empty
 	(*PingReq)(nil),                    // 1: pb.PingReq
 	(*PingResp)(nil),                   // 2: pb.PingResp
@@ -7671,66 +8119,74 @@ var file_proto_sys_proto_goTypes = []any{
 	(*RolePermissionsQueryReq)(nil),    // 28: pb.RolePermissionsQueryReq
 	(*RolePermission)(nil),             // 29: pb.RolePermission
 	(*RolePermissionsResp)(nil),        // 30: pb.RolePermissionsResp
-	(*RolePageResp)(nil),               // 31: pb.RolePageResp
-	(*RoleListResp)(nil),               // 32: pb.RoleListResp
-	(*Org)(nil),                        // 33: pb.Org
-	(*OrgPageReq)(nil),                 // 34: pb.OrgPageReq
-	(*OrgCreateReq)(nil),               // 35: pb.OrgCreateReq
-	(*OrgUpdateReq)(nil),               // 36: pb.OrgUpdateReq
-	(*OrgPageResp)(nil),                // 37: pb.OrgPageResp
-	(*OrgTreeResp)(nil),                // 38: pb.OrgTreeResp
-	(*Menu)(nil),                       // 39: pb.Menu
-	(*MenuReq)(nil),                    // 40: pb.MenuReq
-	(*MenuListResp)(nil),               // 41: pb.MenuListResp
-	(*Dict)(nil),                       // 42: pb.Dict
-	(*DictPageReq)(nil),                // 43: pb.DictPageReq
-	(*DictCreateReq)(nil),              // 44: pb.DictCreateReq
-	(*DictUpdateReq)(nil),              // 45: pb.DictUpdateReq
-	(*DictTypeQueryReq)(nil),           // 46: pb.DictTypeQueryReq
-	(*DictLabelQueryReq)(nil),          // 47: pb.DictLabelQueryReq
-	(*DictLabelResp)(nil),              // 48: pb.DictLabelResp
-	(*DictPageResp)(nil),               // 49: pb.DictPageResp
-	(*DictListResp)(nil),               // 50: pb.DictListResp
-	(*Config)(nil),                     // 51: pb.Config
-	(*ConfigPageReq)(nil),              // 52: pb.ConfigPageReq
-	(*ConfigCreateReq)(nil),            // 53: pb.ConfigCreateReq
-	(*ConfigUpdateReq)(nil),            // 54: pb.ConfigUpdateReq
-	(*ConfigCodeQueryReq)(nil),         // 55: pb.ConfigCodeQueryReq
-	(*ConfigDataResp)(nil),             // 56: pb.ConfigDataResp
-	(*ConfigPageResp)(nil),             // 57: pb.ConfigPageResp
-	(*ConfigListResp)(nil),             // 58: pb.ConfigListResp
-	(*LoginLog)(nil),                   // 59: pb.LoginLog
-	(*LoginLogPageReq)(nil),            // 60: pb.LoginLogPageReq
-	(*LoginLogReq)(nil),                // 61: pb.LoginLogReq
-	(*LoginLogUpdateReq)(nil),          // 62: pb.LoginLogUpdateReq
-	(*LogCleanReq)(nil),                // 63: pb.LogCleanReq
-	(*LoginLogPageResp)(nil),           // 64: pb.LoginLogPageResp
-	(*OperLog)(nil),                    // 65: pb.OperLog
-	(*OperLogPageReq)(nil),             // 66: pb.OperLogPageReq
-	(*OperLogReq)(nil),                 // 67: pb.OperLogReq
-	(*OperLogUpdateReq)(nil),           // 68: pb.OperLogUpdateReq
-	(*OperLogPageResp)(nil),            // 69: pb.OperLogPageResp
-	(*StorageEnv)(nil),                 // 70: pb.StorageEnv
-	(*StorageEnvPageReq)(nil),          // 71: pb.StorageEnvPageReq
-	(*StorageEnvReq)(nil),              // 72: pb.StorageEnvReq
-	(*StorageEnvDefaultReq)(nil),       // 73: pb.StorageEnvDefaultReq
-	(*StorageEnvTestReq)(nil),          // 74: pb.StorageEnvTestReq
-	(*StorageEnvTestResp)(nil),         // 75: pb.StorageEnvTestResp
-	(*StorageEnvPageResp)(nil),         // 76: pb.StorageEnvPageResp
-	(*StorageEnvListResp)(nil),         // 77: pb.StorageEnvListResp
-	(*Attachment)(nil),                 // 78: pb.Attachment
-	(*AttachmentPageReq)(nil),          // 79: pb.AttachmentPageReq
-	(*AttachmentUploadReq)(nil),        // 80: pb.AttachmentUploadReq
-	(*AttachmentBindReq)(nil),          // 81: pb.AttachmentBindReq
-	(*AttachmentBusinessQueryReq)(nil), // 82: pb.AttachmentBusinessQueryReq
-	(*AttachmentUrlQueryReq)(nil),      // 83: pb.AttachmentUrlQueryReq
-	(*AttachmentUrlResp)(nil),          // 84: pb.AttachmentUrlResp
-	(*AttachmentDownloadReq)(nil),      // 85: pb.AttachmentDownloadReq
-	(*AttachmentDownloadResp)(nil),     // 86: pb.AttachmentDownloadResp
-	(*AttachmentPageResp)(nil),         // 87: pb.AttachmentPageResp
-	(*AttachmentListResp)(nil),         // 88: pb.AttachmentListResp
+	(*RoleMenusReq)(nil),               // 31: pb.RoleMenusReq
+	(*RoleMenusAssignReq)(nil),         // 32: pb.RoleMenusAssignReq
+	(*MenuIdsResp)(nil),                // 33: pb.MenuIdsResp
+	(*RolePageResp)(nil),               // 34: pb.RolePageResp
+	(*RoleListResp)(nil),               // 35: pb.RoleListResp
+	(*Org)(nil),                        // 36: pb.Org
+	(*OrgPageReq)(nil),                 // 37: pb.OrgPageReq
+	(*OrgCreateReq)(nil),               // 38: pb.OrgCreateReq
+	(*OrgUpdateReq)(nil),               // 39: pb.OrgUpdateReq
+	(*OrgPageResp)(nil),                // 40: pb.OrgPageResp
+	(*OrgTreeResp)(nil),                // 41: pb.OrgTreeResp
+	(*Menu)(nil),                       // 42: pb.Menu
+	(*MenuReq)(nil),                    // 43: pb.MenuReq
+	(*MenuListResp)(nil),               // 44: pb.MenuListResp
+	(*CaptchaReq)(nil),                 // 45: pb.CaptchaReq
+	(*CaptchaPhoneReq)(nil),            // 46: pb.CaptchaPhoneReq
+	(*CaptchaEmailReq)(nil),            // 47: pb.CaptchaEmailReq
+	(*CaptchaDataResp)(nil),            // 48: pb.CaptchaDataResp
+	(*CaptchaTypesResp)(nil),           // 49: pb.CaptchaTypesResp
+	(*Dict)(nil),                       // 50: pb.Dict
+	(*DictPageReq)(nil),                // 51: pb.DictPageReq
+	(*DictCreateReq)(nil),              // 52: pb.DictCreateReq
+	(*DictUpdateReq)(nil),              // 53: pb.DictUpdateReq
+	(*DictTypeQueryReq)(nil),           // 54: pb.DictTypeQueryReq
+	(*DictLabelQueryReq)(nil),          // 55: pb.DictLabelQueryReq
+	(*DictLabelResp)(nil),              // 56: pb.DictLabelResp
+	(*DictPageResp)(nil),               // 57: pb.DictPageResp
+	(*DictListResp)(nil),               // 58: pb.DictListResp
+	(*Config)(nil),                     // 59: pb.Config
+	(*ConfigPageReq)(nil),              // 60: pb.ConfigPageReq
+	(*ConfigCreateReq)(nil),            // 61: pb.ConfigCreateReq
+	(*ConfigUpdateReq)(nil),            // 62: pb.ConfigUpdateReq
+	(*ConfigCodeQueryReq)(nil),         // 63: pb.ConfigCodeQueryReq
+	(*ConfigDataResp)(nil),             // 64: pb.ConfigDataResp
+	(*ConfigPageResp)(nil),             // 65: pb.ConfigPageResp
+	(*ConfigListResp)(nil),             // 66: pb.ConfigListResp
+	(*LoginLog)(nil),                   // 67: pb.LoginLog
+	(*LoginLogPageReq)(nil),            // 68: pb.LoginLogPageReq
+	(*LoginLogReq)(nil),                // 69: pb.LoginLogReq
+	(*LoginLogUpdateReq)(nil),          // 70: pb.LoginLogUpdateReq
+	(*LogCleanReq)(nil),                // 71: pb.LogCleanReq
+	(*LoginLogPageResp)(nil),           // 72: pb.LoginLogPageResp
+	(*OperLog)(nil),                    // 73: pb.OperLog
+	(*OperLogPageReq)(nil),             // 74: pb.OperLogPageReq
+	(*OperLogReq)(nil),                 // 75: pb.OperLogReq
+	(*OperLogUpdateReq)(nil),           // 76: pb.OperLogUpdateReq
+	(*OperLogPageResp)(nil),            // 77: pb.OperLogPageResp
+	(*StorageEnv)(nil),                 // 78: pb.StorageEnv
+	(*StorageEnvPageReq)(nil),          // 79: pb.StorageEnvPageReq
+	(*StorageEnvReq)(nil),              // 80: pb.StorageEnvReq
+	(*StorageEnvDefaultReq)(nil),       // 81: pb.StorageEnvDefaultReq
+	(*StorageEnvTestReq)(nil),          // 82: pb.StorageEnvTestReq
+	(*StorageEnvTestResp)(nil),         // 83: pb.StorageEnvTestResp
+	(*StorageEnvPageResp)(nil),         // 84: pb.StorageEnvPageResp
+	(*StorageEnvListResp)(nil),         // 85: pb.StorageEnvListResp
+	(*Attachment)(nil),                 // 86: pb.Attachment
+	(*AttachmentPageReq)(nil),          // 87: pb.AttachmentPageReq
+	(*AttachmentUploadReq)(nil),        // 88: pb.AttachmentUploadReq
+	(*AttachmentBindReq)(nil),          // 89: pb.AttachmentBindReq
+	(*AttachmentBusinessQueryReq)(nil), // 90: pb.AttachmentBusinessQueryReq
+	(*AttachmentUrlQueryReq)(nil),      // 91: pb.AttachmentUrlQueryReq
+	(*AttachmentUrlResp)(nil),          // 92: pb.AttachmentUrlResp
+	(*AttachmentDownloadReq)(nil),      // 93: pb.AttachmentDownloadReq
+	(*AttachmentDownloadResp)(nil),     // 94: pb.AttachmentDownloadResp
+	(*AttachmentPageResp)(nil),         // 95: pb.AttachmentPageResp
+	(*AttachmentListResp)(nil),         // 96: pb.AttachmentListResp
 }
-var file_proto_sys_proto_depIdxs = []int32{
+var file_sys_proto_depIdxs = []int32{
 	8,   // 0: pb.AuthLoginResp.user_info:type_name -> pb.UserInfo
 	13,  // 1: pb.UserImportReq.users:type_name -> pb.UserCreateReq
 	11,  // 2: pb.UserPageResp.records:type_name -> pb.User
@@ -7740,28 +8196,28 @@ var file_proto_sys_proto_depIdxs = []int32{
 	20,  // 6: pb.RolePageResp.records:type_name -> pb.Role
 	7,   // 7: pb.RolePageResp.page:type_name -> pb.PageInfo
 	20,  // 8: pb.RoleListResp.records:type_name -> pb.Role
-	33,  // 9: pb.Org.children:type_name -> pb.Org
-	33,  // 10: pb.OrgPageResp.records:type_name -> pb.Org
+	36,  // 9: pb.Org.children:type_name -> pb.Org
+	36,  // 10: pb.OrgPageResp.records:type_name -> pb.Org
 	7,   // 11: pb.OrgPageResp.page:type_name -> pb.PageInfo
-	33,  // 12: pb.OrgTreeResp.records:type_name -> pb.Org
-	39,  // 13: pb.Menu.children:type_name -> pb.Menu
-	39,  // 14: pb.MenuListResp.records:type_name -> pb.Menu
-	42,  // 15: pb.DictPageResp.records:type_name -> pb.Dict
+	36,  // 12: pb.OrgTreeResp.records:type_name -> pb.Org
+	42,  // 13: pb.Menu.children:type_name -> pb.Menu
+	42,  // 14: pb.MenuListResp.records:type_name -> pb.Menu
+	50,  // 15: pb.DictPageResp.records:type_name -> pb.Dict
 	7,   // 16: pb.DictPageResp.page:type_name -> pb.PageInfo
-	42,  // 17: pb.DictListResp.records:type_name -> pb.Dict
-	51,  // 18: pb.ConfigPageResp.records:type_name -> pb.Config
+	50,  // 17: pb.DictListResp.records:type_name -> pb.Dict
+	59,  // 18: pb.ConfigPageResp.records:type_name -> pb.Config
 	7,   // 19: pb.ConfigPageResp.page:type_name -> pb.PageInfo
-	51,  // 20: pb.ConfigListResp.records:type_name -> pb.Config
-	59,  // 21: pb.LoginLogPageResp.records:type_name -> pb.LoginLog
+	59,  // 20: pb.ConfigListResp.records:type_name -> pb.Config
+	67,  // 21: pb.LoginLogPageResp.records:type_name -> pb.LoginLog
 	7,   // 22: pb.LoginLogPageResp.page:type_name -> pb.PageInfo
-	65,  // 23: pb.OperLogPageResp.records:type_name -> pb.OperLog
+	73,  // 23: pb.OperLogPageResp.records:type_name -> pb.OperLog
 	7,   // 24: pb.OperLogPageResp.page:type_name -> pb.PageInfo
-	70,  // 25: pb.StorageEnvPageResp.records:type_name -> pb.StorageEnv
+	78,  // 25: pb.StorageEnvPageResp.records:type_name -> pb.StorageEnv
 	7,   // 26: pb.StorageEnvPageResp.page:type_name -> pb.PageInfo
-	70,  // 27: pb.StorageEnvListResp.records:type_name -> pb.StorageEnv
-	78,  // 28: pb.AttachmentPageResp.records:type_name -> pb.Attachment
+	78,  // 27: pb.StorageEnvListResp.records:type_name -> pb.StorageEnv
+	86,  // 28: pb.AttachmentPageResp.records:type_name -> pb.Attachment
 	7,   // 29: pb.AttachmentPageResp.page:type_name -> pb.PageInfo
-	78,  // 30: pb.AttachmentListResp.records:type_name -> pb.Attachment
+	86,  // 30: pb.AttachmentListResp.records:type_name -> pb.Attachment
 	1,   // 31: pb.SysService.Ping:input_type -> pb.PingReq
 	9,   // 32: pb.SysService.AuthLogin:input_type -> pb.AuthLoginReq
 	4,   // 33: pb.SysService.UserProfile:input_type -> pb.IdReq
@@ -7782,179 +8238,191 @@ var file_proto_sys_proto_depIdxs = []int32{
 	27,  // 48: pb.SysService.RolePermissionAdd:input_type -> pb.RolePermissionReq
 	27,  // 49: pb.SysService.RolePermissionDelete:input_type -> pb.RolePermissionReq
 	28,  // 50: pb.SysService.RolePermissions:input_type -> pb.RolePermissionsQueryReq
-	23,  // 51: pb.SysService.RoleUpdate:input_type -> pb.RoleUpdateReq
-	4,   // 52: pb.SysService.RoleDetail:input_type -> pb.IdReq
-	4,   // 53: pb.SysService.RoleDelete:input_type -> pb.IdReq
-	35,  // 54: pb.SysService.OrgCreate:input_type -> pb.OrgCreateReq
-	34,  // 55: pb.SysService.OrgPage:input_type -> pb.OrgPageReq
-	0,   // 56: pb.SysService.OrgTree:input_type -> pb.Empty
-	6,   // 57: pb.SysService.OrgBatchDelete:input_type -> pb.BatchIdsReq
-	36,  // 58: pb.SysService.OrgUpdate:input_type -> pb.OrgUpdateReq
-	4,   // 59: pb.SysService.OrgDetail:input_type -> pb.IdReq
-	4,   // 60: pb.SysService.OrgDelete:input_type -> pb.IdReq
-	4,   // 61: pb.SysService.MenuUserTree:input_type -> pb.IdReq
-	0,   // 62: pb.SysService.MenuTree:input_type -> pb.Empty
-	0,   // 63: pb.SysService.MenuList:input_type -> pb.Empty
-	4,   // 64: pb.SysService.MenuDetail:input_type -> pb.IdReq
-	40,  // 65: pb.SysService.MenuCreate:input_type -> pb.MenuReq
-	40,  // 66: pb.SysService.MenuUpdate:input_type -> pb.MenuReq
-	4,   // 67: pb.SysService.MenuDelete:input_type -> pb.IdReq
-	44,  // 68: pb.SysService.DictCreate:input_type -> pb.DictCreateReq
-	43,  // 69: pb.SysService.DictPage:input_type -> pb.DictPageReq
-	6,   // 70: pb.SysService.DictBatchDelete:input_type -> pb.BatchIdsReq
-	46,  // 71: pb.SysService.DictType:input_type -> pb.DictTypeQueryReq
-	47,  // 72: pb.SysService.DictLabel:input_type -> pb.DictLabelQueryReq
-	45,  // 73: pb.SysService.DictUpdate:input_type -> pb.DictUpdateReq
-	5,   // 74: pb.SysService.DictDetail:input_type -> pb.StringIdReq
-	5,   // 75: pb.SysService.DictDelete:input_type -> pb.StringIdReq
-	53,  // 76: pb.SysService.ConfigCreate:input_type -> pb.ConfigCreateReq
-	52,  // 77: pb.SysService.ConfigPage:input_type -> pb.ConfigPageReq
-	6,   // 78: pb.SysService.ConfigBatchDelete:input_type -> pb.BatchIdsReq
-	55,  // 79: pb.SysService.ConfigCode:input_type -> pb.ConfigCodeQueryReq
-	55,  // 80: pb.SysService.ConfigData:input_type -> pb.ConfigCodeQueryReq
-	54,  // 81: pb.SysService.ConfigUpdate:input_type -> pb.ConfigUpdateReq
-	4,   // 82: pb.SysService.ConfigDetail:input_type -> pb.IdReq
-	4,   // 83: pb.SysService.ConfigDelete:input_type -> pb.IdReq
-	61,  // 84: pb.SysService.LoginLogCreate:input_type -> pb.LoginLogReq
-	60,  // 85: pb.SysService.LoginLogPage:input_type -> pb.LoginLogPageReq
-	6,   // 86: pb.SysService.LoginLogBatchDelete:input_type -> pb.BatchIdsReq
-	63,  // 87: pb.SysService.LoginLogClean:input_type -> pb.LogCleanReq
-	62,  // 88: pb.SysService.LoginLogUpdate:input_type -> pb.LoginLogUpdateReq
-	4,   // 89: pb.SysService.LoginLogDetail:input_type -> pb.IdReq
-	4,   // 90: pb.SysService.LoginLogDelete:input_type -> pb.IdReq
-	67,  // 91: pb.SysService.OperLogCreate:input_type -> pb.OperLogReq
-	66,  // 92: pb.SysService.OperLogPage:input_type -> pb.OperLogPageReq
-	6,   // 93: pb.SysService.OperLogBatchDelete:input_type -> pb.BatchIdsReq
-	63,  // 94: pb.SysService.OperLogClean:input_type -> pb.LogCleanReq
-	68,  // 95: pb.SysService.OperLogUpdate:input_type -> pb.OperLogUpdateReq
-	4,   // 96: pb.SysService.OperLogDetail:input_type -> pb.IdReq
-	4,   // 97: pb.SysService.OperLogDelete:input_type -> pb.IdReq
-	72,  // 98: pb.SysService.StorageEnvCreate:input_type -> pb.StorageEnvReq
-	71,  // 99: pb.SysService.StorageEnvPage:input_type -> pb.StorageEnvPageReq
-	0,   // 100: pb.SysService.StorageEnvDefault:input_type -> pb.Empty
-	73,  // 101: pb.SysService.StorageEnvSetDefault:input_type -> pb.StorageEnvDefaultReq
-	72,  // 102: pb.SysService.StorageEnvUpdate:input_type -> pb.StorageEnvReq
-	4,   // 103: pb.SysService.StorageEnvDetail:input_type -> pb.IdReq
-	74,  // 104: pb.SysService.StorageEnvTest:input_type -> pb.StorageEnvTestReq
-	4,   // 105: pb.SysService.StorageEnvDelete:input_type -> pb.IdReq
-	80,  // 106: pb.SysService.AttachmentUploadFile:input_type -> pb.AttachmentUploadReq
-	81,  // 107: pb.SysService.AttachmentBind:input_type -> pb.AttachmentBindReq
-	4,   // 108: pb.SysService.AttachmentDetail:input_type -> pb.IdReq
-	82,  // 109: pb.SysService.AttachmentBusiness:input_type -> pb.AttachmentBusinessQueryReq
-	79,  // 110: pb.SysService.AttachmentPage:input_type -> pb.AttachmentPageReq
-	85,  // 111: pb.SysService.AttachmentDownload:input_type -> pb.AttachmentDownloadReq
-	83,  // 112: pb.SysService.AttachmentUrl:input_type -> pb.AttachmentUrlQueryReq
-	4,   // 113: pb.SysService.AttachmentDelete:input_type -> pb.IdReq
-	2,   // 114: pb.SysService.Ping:output_type -> pb.PingResp
-	10,  // 115: pb.SysService.AuthLogin:output_type -> pb.AuthLoginResp
-	11,  // 116: pb.SysService.UserProfile:output_type -> pb.User
-	3,   // 117: pb.SysService.UserCreate:output_type -> pb.Ack
-	3,   // 118: pb.SysService.UserImport:output_type -> pb.Ack
-	18,  // 119: pb.SysService.UserPage:output_type -> pb.UserPageResp
-	3,   // 120: pb.SysService.UserBatchDelete:output_type -> pb.Ack
-	3,   // 121: pb.SysService.UserChangePassword:output_type -> pb.Ack
-	3,   // 122: pb.SysService.UserUpdate:output_type -> pb.Ack
-	3,   // 123: pb.SysService.UserResetPassword:output_type -> pb.Ack
-	11,  // 124: pb.SysService.UserDetail:output_type -> pb.User
-	3,   // 125: pb.SysService.UserDelete:output_type -> pb.Ack
-	3,   // 126: pb.SysService.RoleCreate:output_type -> pb.Ack
-	31,  // 127: pb.SysService.RolePage:output_type -> pb.RolePageResp
-	3,   // 128: pb.SysService.RoleAssign:output_type -> pb.Ack
-	3,   // 129: pb.SysService.RoleRemove:output_type -> pb.Ack
-	32,  // 130: pb.SysService.RoleUser:output_type -> pb.RoleListResp
-	3,   // 131: pb.SysService.RolePermissionAdd:output_type -> pb.Ack
-	3,   // 132: pb.SysService.RolePermissionDelete:output_type -> pb.Ack
-	30,  // 133: pb.SysService.RolePermissions:output_type -> pb.RolePermissionsResp
-	3,   // 134: pb.SysService.RoleUpdate:output_type -> pb.Ack
-	20,  // 135: pb.SysService.RoleDetail:output_type -> pb.Role
-	3,   // 136: pb.SysService.RoleDelete:output_type -> pb.Ack
-	3,   // 137: pb.SysService.OrgCreate:output_type -> pb.Ack
-	37,  // 138: pb.SysService.OrgPage:output_type -> pb.OrgPageResp
-	38,  // 139: pb.SysService.OrgTree:output_type -> pb.OrgTreeResp
-	3,   // 140: pb.SysService.OrgBatchDelete:output_type -> pb.Ack
-	3,   // 141: pb.SysService.OrgUpdate:output_type -> pb.Ack
-	33,  // 142: pb.SysService.OrgDetail:output_type -> pb.Org
-	3,   // 143: pb.SysService.OrgDelete:output_type -> pb.Ack
-	41,  // 144: pb.SysService.MenuUserTree:output_type -> pb.MenuListResp
-	41,  // 145: pb.SysService.MenuTree:output_type -> pb.MenuListResp
-	41,  // 146: pb.SysService.MenuList:output_type -> pb.MenuListResp
-	39,  // 147: pb.SysService.MenuDetail:output_type -> pb.Menu
-	3,   // 148: pb.SysService.MenuCreate:output_type -> pb.Ack
-	3,   // 149: pb.SysService.MenuUpdate:output_type -> pb.Ack
-	3,   // 150: pb.SysService.MenuDelete:output_type -> pb.Ack
-	3,   // 151: pb.SysService.DictCreate:output_type -> pb.Ack
-	49,  // 152: pb.SysService.DictPage:output_type -> pb.DictPageResp
-	3,   // 153: pb.SysService.DictBatchDelete:output_type -> pb.Ack
-	50,  // 154: pb.SysService.DictType:output_type -> pb.DictListResp
-	48,  // 155: pb.SysService.DictLabel:output_type -> pb.DictLabelResp
-	3,   // 156: pb.SysService.DictUpdate:output_type -> pb.Ack
-	42,  // 157: pb.SysService.DictDetail:output_type -> pb.Dict
-	3,   // 158: pb.SysService.DictDelete:output_type -> pb.Ack
-	3,   // 159: pb.SysService.ConfigCreate:output_type -> pb.Ack
-	57,  // 160: pb.SysService.ConfigPage:output_type -> pb.ConfigPageResp
-	3,   // 161: pb.SysService.ConfigBatchDelete:output_type -> pb.Ack
-	58,  // 162: pb.SysService.ConfigCode:output_type -> pb.ConfigListResp
-	56,  // 163: pb.SysService.ConfigData:output_type -> pb.ConfigDataResp
-	3,   // 164: pb.SysService.ConfigUpdate:output_type -> pb.Ack
-	51,  // 165: pb.SysService.ConfigDetail:output_type -> pb.Config
-	3,   // 166: pb.SysService.ConfigDelete:output_type -> pb.Ack
-	3,   // 167: pb.SysService.LoginLogCreate:output_type -> pb.Ack
-	64,  // 168: pb.SysService.LoginLogPage:output_type -> pb.LoginLogPageResp
-	3,   // 169: pb.SysService.LoginLogBatchDelete:output_type -> pb.Ack
-	3,   // 170: pb.SysService.LoginLogClean:output_type -> pb.Ack
-	3,   // 171: pb.SysService.LoginLogUpdate:output_type -> pb.Ack
-	59,  // 172: pb.SysService.LoginLogDetail:output_type -> pb.LoginLog
-	3,   // 173: pb.SysService.LoginLogDelete:output_type -> pb.Ack
-	3,   // 174: pb.SysService.OperLogCreate:output_type -> pb.Ack
-	69,  // 175: pb.SysService.OperLogPage:output_type -> pb.OperLogPageResp
-	3,   // 176: pb.SysService.OperLogBatchDelete:output_type -> pb.Ack
-	3,   // 177: pb.SysService.OperLogClean:output_type -> pb.Ack
-	3,   // 178: pb.SysService.OperLogUpdate:output_type -> pb.Ack
-	65,  // 179: pb.SysService.OperLogDetail:output_type -> pb.OperLog
-	3,   // 180: pb.SysService.OperLogDelete:output_type -> pb.Ack
-	3,   // 181: pb.SysService.StorageEnvCreate:output_type -> pb.Ack
-	76,  // 182: pb.SysService.StorageEnvPage:output_type -> pb.StorageEnvPageResp
-	70,  // 183: pb.SysService.StorageEnvDefault:output_type -> pb.StorageEnv
-	3,   // 184: pb.SysService.StorageEnvSetDefault:output_type -> pb.Ack
-	3,   // 185: pb.SysService.StorageEnvUpdate:output_type -> pb.Ack
-	70,  // 186: pb.SysService.StorageEnvDetail:output_type -> pb.StorageEnv
-	75,  // 187: pb.SysService.StorageEnvTest:output_type -> pb.StorageEnvTestResp
-	3,   // 188: pb.SysService.StorageEnvDelete:output_type -> pb.Ack
-	78,  // 189: pb.SysService.AttachmentUploadFile:output_type -> pb.Attachment
-	3,   // 190: pb.SysService.AttachmentBind:output_type -> pb.Ack
-	78,  // 191: pb.SysService.AttachmentDetail:output_type -> pb.Attachment
-	88,  // 192: pb.SysService.AttachmentBusiness:output_type -> pb.AttachmentListResp
-	87,  // 193: pb.SysService.AttachmentPage:output_type -> pb.AttachmentPageResp
-	86,  // 194: pb.SysService.AttachmentDownload:output_type -> pb.AttachmentDownloadResp
-	84,  // 195: pb.SysService.AttachmentUrl:output_type -> pb.AttachmentUrlResp
-	3,   // 196: pb.SysService.AttachmentDelete:output_type -> pb.Ack
-	114, // [114:197] is the sub-list for method output_type
-	31,  // [31:114] is the sub-list for method input_type
+	31,  // 51: pb.SysService.RoleMenus:input_type -> pb.RoleMenusReq
+	32,  // 52: pb.SysService.RoleAssignMenus:input_type -> pb.RoleMenusAssignReq
+	23,  // 53: pb.SysService.RoleUpdate:input_type -> pb.RoleUpdateReq
+	4,   // 54: pb.SysService.RoleDetail:input_type -> pb.IdReq
+	4,   // 55: pb.SysService.RoleDelete:input_type -> pb.IdReq
+	38,  // 56: pb.SysService.OrgCreate:input_type -> pb.OrgCreateReq
+	37,  // 57: pb.SysService.OrgPage:input_type -> pb.OrgPageReq
+	0,   // 58: pb.SysService.OrgTree:input_type -> pb.Empty
+	6,   // 59: pb.SysService.OrgBatchDelete:input_type -> pb.BatchIdsReq
+	39,  // 60: pb.SysService.OrgUpdate:input_type -> pb.OrgUpdateReq
+	4,   // 61: pb.SysService.OrgDetail:input_type -> pb.IdReq
+	4,   // 62: pb.SysService.OrgDelete:input_type -> pb.IdReq
+	4,   // 63: pb.SysService.MenuUserTree:input_type -> pb.IdReq
+	0,   // 64: pb.SysService.MenuTree:input_type -> pb.Empty
+	0,   // 65: pb.SysService.MenuList:input_type -> pb.Empty
+	4,   // 66: pb.SysService.MenuDetail:input_type -> pb.IdReq
+	43,  // 67: pb.SysService.MenuCreate:input_type -> pb.MenuReq
+	43,  // 68: pb.SysService.MenuUpdate:input_type -> pb.MenuReq
+	4,   // 69: pb.SysService.MenuDelete:input_type -> pb.IdReq
+	52,  // 70: pb.SysService.DictCreate:input_type -> pb.DictCreateReq
+	51,  // 71: pb.SysService.DictPage:input_type -> pb.DictPageReq
+	6,   // 72: pb.SysService.DictBatchDelete:input_type -> pb.BatchIdsReq
+	54,  // 73: pb.SysService.DictType:input_type -> pb.DictTypeQueryReq
+	55,  // 74: pb.SysService.DictLabel:input_type -> pb.DictLabelQueryReq
+	53,  // 75: pb.SysService.DictUpdate:input_type -> pb.DictUpdateReq
+	4,   // 76: pb.SysService.DictDetail:input_type -> pb.IdReq
+	4,   // 77: pb.SysService.DictDelete:input_type -> pb.IdReq
+	61,  // 78: pb.SysService.ConfigCreate:input_type -> pb.ConfigCreateReq
+	60,  // 79: pb.SysService.ConfigPage:input_type -> pb.ConfigPageReq
+	6,   // 80: pb.SysService.ConfigBatchDelete:input_type -> pb.BatchIdsReq
+	63,  // 81: pb.SysService.ConfigCode:input_type -> pb.ConfigCodeQueryReq
+	63,  // 82: pb.SysService.ConfigData:input_type -> pb.ConfigCodeQueryReq
+	62,  // 83: pb.SysService.ConfigUpdate:input_type -> pb.ConfigUpdateReq
+	4,   // 84: pb.SysService.ConfigDetail:input_type -> pb.IdReq
+	4,   // 85: pb.SysService.ConfigDelete:input_type -> pb.IdReq
+	69,  // 86: pb.SysService.LoginLogCreate:input_type -> pb.LoginLogReq
+	68,  // 87: pb.SysService.LoginLogPage:input_type -> pb.LoginLogPageReq
+	6,   // 88: pb.SysService.LoginLogBatchDelete:input_type -> pb.BatchIdsReq
+	71,  // 89: pb.SysService.LoginLogClean:input_type -> pb.LogCleanReq
+	70,  // 90: pb.SysService.LoginLogUpdate:input_type -> pb.LoginLogUpdateReq
+	4,   // 91: pb.SysService.LoginLogDetail:input_type -> pb.IdReq
+	4,   // 92: pb.SysService.LoginLogDelete:input_type -> pb.IdReq
+	75,  // 93: pb.SysService.OperLogCreate:input_type -> pb.OperLogReq
+	74,  // 94: pb.SysService.OperLogPage:input_type -> pb.OperLogPageReq
+	6,   // 95: pb.SysService.OperLogBatchDelete:input_type -> pb.BatchIdsReq
+	71,  // 96: pb.SysService.OperLogClean:input_type -> pb.LogCleanReq
+	76,  // 97: pb.SysService.OperLogUpdate:input_type -> pb.OperLogUpdateReq
+	4,   // 98: pb.SysService.OperLogDetail:input_type -> pb.IdReq
+	4,   // 99: pb.SysService.OperLogDelete:input_type -> pb.IdReq
+	80,  // 100: pb.SysService.StorageEnvCreate:input_type -> pb.StorageEnvReq
+	79,  // 101: pb.SysService.StorageEnvPage:input_type -> pb.StorageEnvPageReq
+	0,   // 102: pb.SysService.StorageEnvDefault:input_type -> pb.Empty
+	81,  // 103: pb.SysService.StorageEnvSetDefault:input_type -> pb.StorageEnvDefaultReq
+	80,  // 104: pb.SysService.StorageEnvUpdate:input_type -> pb.StorageEnvReq
+	4,   // 105: pb.SysService.StorageEnvDetail:input_type -> pb.IdReq
+	82,  // 106: pb.SysService.StorageEnvTest:input_type -> pb.StorageEnvTestReq
+	4,   // 107: pb.SysService.StorageEnvDelete:input_type -> pb.IdReq
+	88,  // 108: pb.SysService.AttachmentUploadFile:input_type -> pb.AttachmentUploadReq
+	89,  // 109: pb.SysService.AttachmentBind:input_type -> pb.AttachmentBindReq
+	4,   // 110: pb.SysService.AttachmentDetail:input_type -> pb.IdReq
+	90,  // 111: pb.SysService.AttachmentBusiness:input_type -> pb.AttachmentBusinessQueryReq
+	87,  // 112: pb.SysService.AttachmentPage:input_type -> pb.AttachmentPageReq
+	93,  // 113: pb.SysService.AttachmentDownload:input_type -> pb.AttachmentDownloadReq
+	91,  // 114: pb.SysService.AttachmentUrl:input_type -> pb.AttachmentUrlQueryReq
+	4,   // 115: pb.SysService.AttachmentDelete:input_type -> pb.IdReq
+	45,  // 116: pb.SysService.CaptchaEnabledTypes:input_type -> pb.CaptchaReq
+	45,  // 117: pb.SysService.CaptchaImage:input_type -> pb.CaptchaReq
+	46,  // 118: pb.SysService.CaptchaSms:input_type -> pb.CaptchaPhoneReq
+	47,  // 119: pb.SysService.CaptchaEmail:input_type -> pb.CaptchaEmailReq
+	2,   // 120: pb.SysService.Ping:output_type -> pb.PingResp
+	10,  // 121: pb.SysService.AuthLogin:output_type -> pb.AuthLoginResp
+	11,  // 122: pb.SysService.UserProfile:output_type -> pb.User
+	3,   // 123: pb.SysService.UserCreate:output_type -> pb.Ack
+	3,   // 124: pb.SysService.UserImport:output_type -> pb.Ack
+	18,  // 125: pb.SysService.UserPage:output_type -> pb.UserPageResp
+	3,   // 126: pb.SysService.UserBatchDelete:output_type -> pb.Ack
+	3,   // 127: pb.SysService.UserChangePassword:output_type -> pb.Ack
+	3,   // 128: pb.SysService.UserUpdate:output_type -> pb.Ack
+	3,   // 129: pb.SysService.UserResetPassword:output_type -> pb.Ack
+	11,  // 130: pb.SysService.UserDetail:output_type -> pb.User
+	3,   // 131: pb.SysService.UserDelete:output_type -> pb.Ack
+	3,   // 132: pb.SysService.RoleCreate:output_type -> pb.Ack
+	34,  // 133: pb.SysService.RolePage:output_type -> pb.RolePageResp
+	3,   // 134: pb.SysService.RoleAssign:output_type -> pb.Ack
+	3,   // 135: pb.SysService.RoleRemove:output_type -> pb.Ack
+	35,  // 136: pb.SysService.RoleUser:output_type -> pb.RoleListResp
+	3,   // 137: pb.SysService.RolePermissionAdd:output_type -> pb.Ack
+	3,   // 138: pb.SysService.RolePermissionDelete:output_type -> pb.Ack
+	30,  // 139: pb.SysService.RolePermissions:output_type -> pb.RolePermissionsResp
+	33,  // 140: pb.SysService.RoleMenus:output_type -> pb.MenuIdsResp
+	3,   // 141: pb.SysService.RoleAssignMenus:output_type -> pb.Ack
+	3,   // 142: pb.SysService.RoleUpdate:output_type -> pb.Ack
+	20,  // 143: pb.SysService.RoleDetail:output_type -> pb.Role
+	3,   // 144: pb.SysService.RoleDelete:output_type -> pb.Ack
+	3,   // 145: pb.SysService.OrgCreate:output_type -> pb.Ack
+	40,  // 146: pb.SysService.OrgPage:output_type -> pb.OrgPageResp
+	41,  // 147: pb.SysService.OrgTree:output_type -> pb.OrgTreeResp
+	3,   // 148: pb.SysService.OrgBatchDelete:output_type -> pb.Ack
+	3,   // 149: pb.SysService.OrgUpdate:output_type -> pb.Ack
+	36,  // 150: pb.SysService.OrgDetail:output_type -> pb.Org
+	3,   // 151: pb.SysService.OrgDelete:output_type -> pb.Ack
+	44,  // 152: pb.SysService.MenuUserTree:output_type -> pb.MenuListResp
+	44,  // 153: pb.SysService.MenuTree:output_type -> pb.MenuListResp
+	44,  // 154: pb.SysService.MenuList:output_type -> pb.MenuListResp
+	42,  // 155: pb.SysService.MenuDetail:output_type -> pb.Menu
+	3,   // 156: pb.SysService.MenuCreate:output_type -> pb.Ack
+	3,   // 157: pb.SysService.MenuUpdate:output_type -> pb.Ack
+	3,   // 158: pb.SysService.MenuDelete:output_type -> pb.Ack
+	3,   // 159: pb.SysService.DictCreate:output_type -> pb.Ack
+	57,  // 160: pb.SysService.DictPage:output_type -> pb.DictPageResp
+	3,   // 161: pb.SysService.DictBatchDelete:output_type -> pb.Ack
+	58,  // 162: pb.SysService.DictType:output_type -> pb.DictListResp
+	56,  // 163: pb.SysService.DictLabel:output_type -> pb.DictLabelResp
+	3,   // 164: pb.SysService.DictUpdate:output_type -> pb.Ack
+	50,  // 165: pb.SysService.DictDetail:output_type -> pb.Dict
+	3,   // 166: pb.SysService.DictDelete:output_type -> pb.Ack
+	3,   // 167: pb.SysService.ConfigCreate:output_type -> pb.Ack
+	65,  // 168: pb.SysService.ConfigPage:output_type -> pb.ConfigPageResp
+	3,   // 169: pb.SysService.ConfigBatchDelete:output_type -> pb.Ack
+	66,  // 170: pb.SysService.ConfigCode:output_type -> pb.ConfigListResp
+	64,  // 171: pb.SysService.ConfigData:output_type -> pb.ConfigDataResp
+	3,   // 172: pb.SysService.ConfigUpdate:output_type -> pb.Ack
+	59,  // 173: pb.SysService.ConfigDetail:output_type -> pb.Config
+	3,   // 174: pb.SysService.ConfigDelete:output_type -> pb.Ack
+	3,   // 175: pb.SysService.LoginLogCreate:output_type -> pb.Ack
+	72,  // 176: pb.SysService.LoginLogPage:output_type -> pb.LoginLogPageResp
+	3,   // 177: pb.SysService.LoginLogBatchDelete:output_type -> pb.Ack
+	3,   // 178: pb.SysService.LoginLogClean:output_type -> pb.Ack
+	3,   // 179: pb.SysService.LoginLogUpdate:output_type -> pb.Ack
+	67,  // 180: pb.SysService.LoginLogDetail:output_type -> pb.LoginLog
+	3,   // 181: pb.SysService.LoginLogDelete:output_type -> pb.Ack
+	3,   // 182: pb.SysService.OperLogCreate:output_type -> pb.Ack
+	77,  // 183: pb.SysService.OperLogPage:output_type -> pb.OperLogPageResp
+	3,   // 184: pb.SysService.OperLogBatchDelete:output_type -> pb.Ack
+	3,   // 185: pb.SysService.OperLogClean:output_type -> pb.Ack
+	3,   // 186: pb.SysService.OperLogUpdate:output_type -> pb.Ack
+	73,  // 187: pb.SysService.OperLogDetail:output_type -> pb.OperLog
+	3,   // 188: pb.SysService.OperLogDelete:output_type -> pb.Ack
+	3,   // 189: pb.SysService.StorageEnvCreate:output_type -> pb.Ack
+	84,  // 190: pb.SysService.StorageEnvPage:output_type -> pb.StorageEnvPageResp
+	78,  // 191: pb.SysService.StorageEnvDefault:output_type -> pb.StorageEnv
+	3,   // 192: pb.SysService.StorageEnvSetDefault:output_type -> pb.Ack
+	3,   // 193: pb.SysService.StorageEnvUpdate:output_type -> pb.Ack
+	78,  // 194: pb.SysService.StorageEnvDetail:output_type -> pb.StorageEnv
+	83,  // 195: pb.SysService.StorageEnvTest:output_type -> pb.StorageEnvTestResp
+	3,   // 196: pb.SysService.StorageEnvDelete:output_type -> pb.Ack
+	86,  // 197: pb.SysService.AttachmentUploadFile:output_type -> pb.Attachment
+	3,   // 198: pb.SysService.AttachmentBind:output_type -> pb.Ack
+	86,  // 199: pb.SysService.AttachmentDetail:output_type -> pb.Attachment
+	96,  // 200: pb.SysService.AttachmentBusiness:output_type -> pb.AttachmentListResp
+	95,  // 201: pb.SysService.AttachmentPage:output_type -> pb.AttachmentPageResp
+	94,  // 202: pb.SysService.AttachmentDownload:output_type -> pb.AttachmentDownloadResp
+	92,  // 203: pb.SysService.AttachmentUrl:output_type -> pb.AttachmentUrlResp
+	3,   // 204: pb.SysService.AttachmentDelete:output_type -> pb.Ack
+	49,  // 205: pb.SysService.CaptchaEnabledTypes:output_type -> pb.CaptchaTypesResp
+	48,  // 206: pb.SysService.CaptchaImage:output_type -> pb.CaptchaDataResp
+	48,  // 207: pb.SysService.CaptchaSms:output_type -> pb.CaptchaDataResp
+	48,  // 208: pb.SysService.CaptchaEmail:output_type -> pb.CaptchaDataResp
+	120, // [120:209] is the sub-list for method output_type
+	31,  // [31:120] is the sub-list for method input_type
 	31,  // [31:31] is the sub-list for extension type_name
 	31,  // [31:31] is the sub-list for extension extendee
 	0,   // [0:31] is the sub-list for field type_name
 }
 
-func init() { file_proto_sys_proto_init() }
-func file_proto_sys_proto_init() {
-	if File_proto_sys_proto != nil {
+func init() { file_sys_proto_init() }
+func file_sys_proto_init() {
+	if File_sys_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_sys_proto_rawDesc), len(file_proto_sys_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sys_proto_rawDesc), len(file_sys_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   89,
+			NumMessages:   97,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_sys_proto_goTypes,
-		DependencyIndexes: file_proto_sys_proto_depIdxs,
-		MessageInfos:      file_proto_sys_proto_msgTypes,
+		GoTypes:           file_sys_proto_goTypes,
+		DependencyIndexes: file_sys_proto_depIdxs,
+		MessageInfos:      file_sys_proto_msgTypes,
 	}.Build()
-	File_proto_sys_proto = out.File
-	file_proto_sys_proto_goTypes = nil
-	file_proto_sys_proto_depIdxs = nil
+	File_sys_proto = out.File
+	file_sys_proto_goTypes = nil
+	file_sys_proto_depIdxs = nil
 }

@@ -3,8 +3,8 @@ syntax = "v1"
 import "common.api"
 
 type AttachmentPageReq {
-	pageNum      int64  `json:"pageNum,optional"`
-	pageSize     int64  `json:"pageSize,optional"`
+	pageNum      int64  `json:"pageNum"`
+	pageSize     int64  `json:"pageSize"`
 	fileName     string `json:"fileName,optional"`
 	fileType     string `json:"fileType,optional"`
 	businessType string `json:"businessType,optional"`
@@ -16,8 +16,8 @@ type AttachmentUploadReq {
 
 type AttachmentBindReq {
 	attachmentId  int64                  `path:"attachmentId"`
-	businessType  string                 `json:"businessType,optional"`
-	businessId    string                 `json:"businessId,optional"`
+	businessType  string                 `json:"businessType"`
+	businessId    string                 `json:"businessId"`
 	businessField string                 `json:"businessField,optional"`
 	isPublic      bool                   `json:"isPublic,optional"`
 	metadata      map[string]interface{} `json:"metadata,optional"`
@@ -62,4 +62,3 @@ service sys-api {
 	@handler AttachmentDelete
 	delete /api/v1/attachment/:attachmentId (AttachmentIdPathReq) returns (CommonResp)
 }
-

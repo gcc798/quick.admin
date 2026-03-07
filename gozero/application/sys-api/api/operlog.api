@@ -14,7 +14,7 @@ type OperLogPageReq {
 }
 
 type OperLogReq {
-	title         string `json:"title,optional"`
+	title         string `json:"title"`
 	businessType  string `json:"businessType,optional"`
 	method        string `json:"method,optional"`
 	requestMethod string `json:"requestMethod,optional"`
@@ -75,4 +75,3 @@ service sys-api {
 	@handler OperLogDelete
 	delete /api/v1/operLog/:id (IdPathReq) returns (CommonResp)
 }
-

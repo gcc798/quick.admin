@@ -18,8 +18,8 @@ type DictDetailLogic struct {
 func NewDictDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictDetailLogic {
 	return &DictDetailLogic{Logger: logx.WithContext(ctx), ctx: ctx, svcCtx: svcCtx}
 }
-func (l *DictDetailLogic) DictDetail(req *types.StringIdPathReq) (resp *types.CommonResp, err error) {
-	row, err := l.svcCtx.SysRpcClient.DictDetail(l.ctx, &sysservice.StringIdReq{Id: req.Id})
+func (l *DictDetailLogic) DictDetail(req *types.IdPathReq) (resp *types.CommonResp, err error) {
+	row, err := l.svcCtx.SysRpcClient.DictDetail(l.ctx, &sysservice.IdReq{Id: req.Id})
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}

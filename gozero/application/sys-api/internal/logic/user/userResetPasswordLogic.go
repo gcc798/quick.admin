@@ -8,6 +8,7 @@ import (
 
 	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
+	"github.com/force-c/nai-tizi/application/sys-rpc/client/sysservice"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,8 +28,8 @@ func NewUserResetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *UserResetPasswordLogic) UserResetPassword(req *types.UserPasswordPathReq) (resp *types.CommonResp, err error) {
-	return &types.CommonResp{
-		Code: 500,
-		Msg:  "gozero logic not implemented yet",
-	}, nil
+	if _, err := l.svcCtx.SysRpcClient.UserResetPassword(l.ctx, &sysservice.UserPasswordReq{Id: req.Id, NewPassword: req.NewPassword}); err != nil {
+		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
+	}
+	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
 }

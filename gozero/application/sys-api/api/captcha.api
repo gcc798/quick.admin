@@ -3,7 +3,7 @@ syntax = "v1"
 import "common.api"
 
 type CaptchaPhoneReq {
-	phone string `json:"phone"`
+	phonenumber string `json:"phonenumber"`
 }
 
 type CaptchaEmailReq {
@@ -26,4 +26,3 @@ service sys-api {
 	@handler CaptchaEmail
 	post /captcha/email (CaptchaEmailReq) returns (CommonResp)
 }
-

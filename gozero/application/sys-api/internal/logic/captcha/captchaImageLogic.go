@@ -6,8 +6,10 @@ package captcha
 import (
 	"context"
 
+	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/commonutil"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
+	"github.com/force-c/nai-tizi/application/sys-rpc/client/sysservice"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,8 +29,14 @@ func NewCaptchaImageLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Capt
 }
 
 func (l *CaptchaImageLogic) CaptchaImage() (resp *types.CommonResp, err error) {
-	return &types.CommonResp{
-		Code: 500,
-		Msg:  "gozero logic not implemented yet",
-	}, nil
+	data, err := l.svcCtx.SysRpcClient.CaptchaImage(l.ctx, &sysservice.CaptchaReq{})
+	if err != nil {
+		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
+	}
+	return &types.CommonResp{Code: 200, Msg: "success", Data: map[string]interface{}{
+		"id":       data.Id,
+		"type":     data.Type,
+		"data":     commonutil.JSONStringToValue(data.DataJson),
+		"expireAt": data.ExpireAt,
+	}}, nil
 }

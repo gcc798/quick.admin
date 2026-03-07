@@ -182,9 +182,9 @@ const loadData = async (params: any) => {
 
 // 弹窗状态
 const modalVisible = ref(false);
-const currentDictId = ref<string | number>();
+const currentDictId = ref<number>();
 const subItemsModalVisible = ref(false);
-const currentParentId = ref<string | number>();
+const currentParentId = ref<number>();
 
 // 新增字典
 const handleCreate = () => {

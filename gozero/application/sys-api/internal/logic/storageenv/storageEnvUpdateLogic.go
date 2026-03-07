@@ -19,7 +19,7 @@ type StorageEnvUpdateLogic struct {
 func NewStorageEnvUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *StorageEnvUpdateLogic {
 	return &StorageEnvUpdateLogic{Logger: logx.WithContext(ctx), ctx: ctx, svcCtx: svcCtx}
 }
-func (l *StorageEnvUpdateLogic) StorageEnvUpdate(req *types.StorageEnvReq) (resp *types.CommonResp, err error) {
+func (l *StorageEnvUpdateLogic) StorageEnvUpdate(req *types.StorageEnvUpdateReq) (resp *types.CommonResp, err error) {
 	config, err := commonutil.InterfaceToJSONString(req.Config)
 	if err != nil {
 		return &types.CommonResp{Code: 400, Msg: "config 格式错误"}, nil

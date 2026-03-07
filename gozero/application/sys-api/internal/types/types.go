@@ -10,8 +10,8 @@ type AssignRoleReq struct {
 
 type AttachmentBindReq struct {
 	AttachmentId  int64                  `path:"attachmentId"`
-	BusinessType  string                 `json:"businessType,optional"`
-	BusinessId    string                 `json:"businessId,optional"`
+	BusinessType  string                 `json:"businessType"`
+	BusinessId    string                 `json:"businessId"`
 	BusinessField string                 `json:"businessField,optional"`
 	IsPublic      bool                   `json:"isPublic,optional"`
 	Metadata      map[string]interface{} `json:"metadata,optional"`
@@ -28,8 +28,8 @@ type AttachmentIdPathReq struct {
 }
 
 type AttachmentPageReq struct {
-	PageNum      int64  `json:"pageNum,optional"`
-	PageSize     int64  `json:"pageSize,optional"`
+	PageNum      int64  `json:"pageNum"`
+	PageSize     int64  `json:"pageSize"`
 	FileName     string `json:"fileName,optional"`
 	FileType     string `json:"fileType,optional"`
 	BusinessType string `json:"businessType,optional"`
@@ -53,7 +53,7 @@ type CaptchaEmailReq struct {
 }
 
 type CaptchaPhoneReq struct {
-	Phone string `json:"phone"`
+	Phonenumber string `json:"phonenumber"`
 }
 
 type CommonResp struct {
@@ -67,12 +67,12 @@ type ConfigCodeQueryReq struct {
 }
 
 type ConfigCreateReq struct {
-	Name     string      `json:"name,optional"`
-	Code     string      `json:"code,optional"`
+	Name     string      `json:"name"`
+	Code     string      `json:"code"`
 	Data     interface{} `json:"data,optional"`
 	Remark   string      `json:"remark,optional"`
-	CreateBy int64       `json:"createBy,optional"`
-	UpdateBy int64       `json:"updateBy,optional"`
+	CreateBy int64       `json:"createBy"`
+	UpdateBy int64       `json:"updateBy"`
 }
 
 type ConfigPageReq struct {
@@ -84,18 +84,18 @@ type ConfigPageReq struct {
 
 type ConfigUpdateReq struct {
 	Id       int64       `path:"id"`
-	Name     string      `json:"name,optional"`
-	Code     string      `json:"code,optional"`
+	Name     string      `json:"name"`
+	Code     string      `json:"code"`
 	Data     interface{} `json:"data,optional"`
 	Remark   string      `json:"remark,optional"`
-	UpdateBy int64       `json:"updateBy,optional"`
+	UpdateBy int64       `json:"updateBy"`
 }
 
 type DictCreateReq struct {
 	ParentId  int64  `json:"parentId,optional"`
-	DictType  string `json:"dictType,optional"`
-	DictLabel string `json:"dictLabel,optional"`
-	DictValue string `json:"dictValue,optional"`
+	DictType  string `json:"dictType"`
+	DictLabel string `json:"dictLabel"`
+	DictValue string `json:"dictValue"`
 	Sort      int64  `json:"sort,optional"`
 	IsDefault bool   `json:"isDefault,optional"`
 	Status    int64  `json:"status,optional"`
@@ -123,11 +123,11 @@ type DictTypeQueryReq struct {
 }
 
 type DictUpdateReq struct {
-	Id        string `path:"id"`
+	Id        int64  `path:"id"`
 	ParentId  int64  `json:"parentId,optional"`
-	DictType  string `json:"dictType,optional"`
-	DictLabel string `json:"dictLabel,optional"`
-	DictValue string `json:"dictValue,optional"`
+	DictType  string `json:"dictType"`
+	DictLabel string `json:"dictLabel"`
+	DictValue string `json:"dictValue"`
 	Sort      int64  `json:"sort,optional"`
 	IsDefault bool   `json:"isDefault,optional"`
 	Status    int64  `json:"status,optional"`
@@ -140,7 +140,7 @@ type IdPathReq struct {
 }
 
 type LogCleanReq struct {
-	Days int64 `json:"days,optional"`
+	Days int64 `json:"days"`
 }
 
 type LoginLogPageReq struct {
@@ -154,7 +154,7 @@ type LoginLogPageReq struct {
 }
 
 type LoginLogReq struct {
-	UserName      string `json:"userName,optional"`
+	UserName      string `json:"userName"`
 	Ipaddr        string `json:"ipaddr,optional"`
 	LoginLocation string `json:"loginLocation,optional"`
 	Browser       string `json:"browser,optional"`
@@ -207,6 +207,24 @@ type MenuReq struct {
 	Remark    string `json:"remark,optional"`
 }
 
+type MenuUpdateReq struct {
+	Id        int64  `path:"id"`
+	MenuName  string `json:"menuName,optional"`
+	ParentId  int64  `json:"parentId,optional"`
+	Sort      int64  `json:"sort,optional"`
+	Path      string `json:"path,optional"`
+	Component string `json:"component,optional"`
+	Query     string `json:"query,optional"`
+	IsFrame   int64  `json:"isFrame,optional"`
+	IsCache   int64  `json:"isCache,optional"`
+	MenuType  int64  `json:"menuType,optional"`
+	Visible   int64  `json:"visible,optional"`
+	Status    int64  `json:"status,optional"`
+	Perms     string `json:"perms,optional"`
+	Icon      string `json:"icon,optional"`
+	Remark    string `json:"remark,optional"`
+}
+
 type OperLogPageReq struct {
 	PageNum      int64  `json:"pageNum,optional"`
 	PageSize     int64  `json:"pageSize,optional"`
@@ -219,7 +237,7 @@ type OperLogPageReq struct {
 }
 
 type OperLogReq struct {
-	Title         string `json:"title,optional"`
+	Title         string `json:"title"`
 	BusinessType  string `json:"businessType,optional"`
 	Method        string `json:"method,optional"`
 	RequestMethod string `json:"requestMethod,optional"`
@@ -257,8 +275,8 @@ type OperLogUpdateReq struct {
 
 type OrgCreateReq struct {
 	ParentId int64  `json:"parentId,optional"`
-	OrgName  string `json:"orgName,optional"`
-	OrgCode  string `json:"orgCode,optional"`
+	OrgName  string `json:"orgName"`
+	OrgCode  string `json:"orgCode"`
 	OrgType  string `json:"orgType,optional"`
 	Leader   string `json:"leader,optional"`
 	Phone    string `json:"phone,optional"`
@@ -303,8 +321,8 @@ type RemoveRoleReq struct {
 }
 
 type RoleCreateReq struct {
-	RoleKey   string `json:"roleKey,optional"`
-	RoleName  string `json:"roleName,optional"`
+	RoleKey   string `json:"roleKey"`
+	RoleName  string `json:"roleName"`
 	Sort      int64  `json:"sort,optional"`
 	Status    int64  `json:"status,optional"`
 	DataScope int64  `json:"dataScope,optional"`
@@ -312,6 +330,15 @@ type RoleCreateReq struct {
 }
 
 type RoleIdPathReq struct {
+	RoleId int64 `path:"roleId"`
+}
+
+type RoleMenusAssignReq struct {
+	RoleId  int64   `path:"roleId"`
+	MenuIds []int64 `json:"menuIds"`
+}
+
+type RoleMenusPathReq struct {
 	RoleId int64 `path:"roleId"`
 }
 
@@ -340,11 +367,21 @@ type RolePermissionsQueryReq struct {
 
 type RoleUpdateReq struct {
 	RoleId    int64  `path:"roleId"`
-	RoleName  string `json:"roleName,optional"`
+	RoleName  string `json:"roleName"`
 	Sort      int64  `json:"sort,optional"`
 	Status    int64  `json:"status,optional"`
 	DataScope int64  `json:"dataScope,optional"`
 	Remark    string `json:"remark,optional"`
+}
+
+type StorageEnvCreateReq struct {
+	Name        string      `json:"name"`
+	Code        string      `json:"code"`
+	StorageType string      `json:"storageType"`
+	IsDefault   bool        `json:"isDefault,optional"`
+	Status      int64       `json:"status,optional"`
+	Config      interface{} `json:"config,optional"`
+	Remark      string      `json:"remark,optional"`
 }
 
 type StorageEnvDefaultReq struct {
@@ -358,19 +395,19 @@ type StorageEnvPageReq struct {
 	StorageType string `json:"storageType,optional"`
 }
 
-type StorageEnvReq struct {
-	Id          int64       `path:"id,optional"`
-	Name        string      `json:"name,optional"`
-	Code        string      `json:"code,optional"`
-	StorageType string      `json:"storageType,optional"`
-	IsDefault   bool        `json:"isDefault,optional"`
-	Status      int64       `json:"status,optional"`
-	Config      interface{} `json:"config,optional"`
-	Remark      string      `json:"remark,optional"`
-}
-
 type StorageEnvTestReq struct {
 	Id int64 `path:"id"`
+}
+
+type StorageEnvUpdateReq struct {
+	Id          int64       `path:"id"`
+	Name        string      `json:"name"`
+	Code        string      `json:"code"`
+	StorageType string      `json:"storageType"`
+	IsDefault   bool        `json:"isDefault,optional"`
+	Status      int64       `json:"status,optional"`
+	Config      interface{} `json:"config"`
+	Remark      string      `json:"remark,optional"`
 }
 
 type StringIdPathReq struct {
@@ -383,9 +420,9 @@ type UserChangePasswordReq struct {
 }
 
 type UserCreateReq struct {
-	UserName    string `json:"userName,optional"`
-	NickName    string `json:"nickName,optional"`
-	Password    string `json:"password,optional"`
+	UserName    string `json:"userName"`
+	NickName    string `json:"nickName"`
+	Password    string `json:"password"`
 	UserType    int64  `json:"userType,optional"`
 	Email       string `json:"email,optional"`
 	Phonenumber string `json:"phonenumber,optional"`

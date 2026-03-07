@@ -2,6 +2,7 @@ package sysservicelogic
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/force-c/nai-tizi/application/sys-rpc/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-rpc/pb"
@@ -24,7 +25,11 @@ func NewRolePermissionDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *RolePermissionDeleteLogic) RolePermissionDelete(in *pb.RolePermissionReq) (*pb.Ack, error) {
-	// todo: add your logic here and delete this line
-
-	return &pb.Ack{}, nil
+	if in.RoleKey == "" || in.Resource == "" || in.Action == "" {
+		return nil, fmt.Errorf("参数不能为空")
+	}
+	if err := l.svcCtx.Redis.SRem(l.ctx, "casbin:role:"+in.RoleKey+":permissions", in.Resource+"::"+in.Action).Err(); err != nil {
+		return nil, err
+	}
+	return &pb.Ack{Msg: "ok"}, nil
 }

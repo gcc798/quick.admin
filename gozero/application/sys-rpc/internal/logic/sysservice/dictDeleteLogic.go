@@ -2,7 +2,6 @@ package sysservicelogic
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/force-c/nai-tizi/application/sys-rpc/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-rpc/pb"
@@ -24,22 +23,18 @@ func NewDictDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictDe
 	}
 }
 
-func (l *DictDeleteLogic) DictDelete(in *pb.StringIdReq) (*pb.Ack, error) {
-	id, err := parseDictID(in.Id)
-	if err != nil {
-		return nil, fmt.Errorf("无效的字典ID")
-	}
-	if _, err := getDictByID(l.ctx, l.svcCtx, id); err != nil {
+func (l *DictDeleteLogic) DictDelete(in *pb.IdReq) (*pb.Ack, error) {
+	if _, err := getDictByID(l.ctx, l.svcCtx, in.Id); err != nil {
 		return nil, err
 	}
-	_, err = l.svcCtx.DB.ExecCtx(l.ctx, `
+	_, err := l.svcCtx.DB.ExecCtx(l.ctx, `
 		with recursive dict_tree as (
 			select id from public.s_dict_data where id = $1 and deleted_at is null
 			union all
 			select d.id from public.s_dict_data d inner join dict_tree dt on d.parent_id = dt.id where d.deleted_at is null
 		)
 		update public.s_dict_data set deleted_at = now() where id in (select id from dict_tree)
-	`, id)
+	`, in.Id)
 	if err != nil {
 		return nil, err
 	}

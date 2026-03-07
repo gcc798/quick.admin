@@ -6,8 +6,10 @@ package user
 import (
 	"context"
 
+	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/commonutil"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
+	"github.com/force-c/nai-tizi/application/sys-rpc/client/sysservice"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,8 +29,26 @@ func NewUserImportLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserIm
 }
 
 func (l *UserImportLogic) UserImport(req *types.UserImportReq) (resp *types.CommonResp, err error) {
-	return &types.CommonResp{
-		Code: 500,
-		Msg:  "gozero logic not implemented yet",
-	}, nil
+	userID := commonutil.UserIDFromContext(l.ctx)
+	users := make([]*sysservice.UserCreateReq, 0, len(req.Users))
+	for _, user := range req.Users {
+		users = append(users, &sysservice.UserCreateReq{
+			UserName:    user.UserName,
+			NickName:    user.NickName,
+			Password:    user.Password,
+			UserType:    int32(user.UserType),
+			Email:       user.Email,
+			Phonenumber: user.Phonenumber,
+			Sex:         int32(user.Sex),
+			Avatar:      user.Avatar,
+			Status:      int32(user.Status),
+			Remark:      user.Remark,
+			CreateBy:    userID,
+			UpdateBy:    userID,
+		})
+	}
+	if _, err := l.svcCtx.SysRpcClient.UserImport(l.ctx, &sysservice.UserImportReq{Users: users}); err != nil {
+		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
+	}
+	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
 }

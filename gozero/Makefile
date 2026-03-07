@@ -21,7 +21,6 @@ init-tree: ## Initialize sys-api/sys-rpc directory tree
 	@mkdir -p $(SYS_API_DIR)/api
 	@mkdir -p $(SYS_API_DIR)/etc
 	@mkdir -p $(SYS_API_DIR)/internal/{config,handler,logic,middleware,svc,types}
-	@mkdir -p $(SYS_RPC_DIR)/proto
 	@mkdir -p $(SYS_RPC_DIR)/pb
 	@mkdir -p $(SYS_RPC_DIR)/client/sysservice
 	@mkdir -p $(SYS_RPC_DIR)/etc
@@ -36,7 +35,7 @@ gen-sys-api: ## Generate sys-api service code from sys.api
 		--dir=$(SYS_API_DIR) \
 		--style=$(STYLE)
 
-gen-sys-rpc: ## Generate sys-rpc service code from proto/sys.proto
+gen-sys-rpc: ## Generate sys-rpc service code from sys.proto
 	@echo "Generating sys-rpc..."
 	@rm -rf $(SYS_RPC_DIR)/pb/*
 	@goctl rpc protoc \
@@ -48,7 +47,7 @@ gen-sys-rpc: ## Generate sys-rpc service code from proto/sys.proto
 		--zrpc_out=$(SYS_RPC_DIR) \
 		--style=$(STYLE) \
 		-m \
-		$(SYS_RPC_DIR)/proto/sys.proto
+		$(SYS_RPC_DIR)/sys.proto
 
 gen-sys-model-pg: ## Generate sqlx models from PostgreSQL datasource (requires PG_URL)
 	@if [ -z "$(PG_URL)" ]; then \

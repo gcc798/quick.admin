@@ -30,6 +30,11 @@ type (
 	AuthLoginReq               = pb.AuthLoginReq
 	AuthLoginResp              = pb.AuthLoginResp
 	BatchIdsReq                = pb.BatchIdsReq
+	CaptchaDataResp            = pb.CaptchaDataResp
+	CaptchaEmailReq            = pb.CaptchaEmailReq
+	CaptchaPhoneReq            = pb.CaptchaPhoneReq
+	CaptchaReq                 = pb.CaptchaReq
+	CaptchaTypesResp           = pb.CaptchaTypesResp
 	Config                     = pb.Config
 	ConfigCodeQueryReq         = pb.ConfigCodeQueryReq
 	ConfigCreateReq            = pb.ConfigCreateReq
@@ -56,6 +61,7 @@ type (
 	LoginLogReq                = pb.LoginLogReq
 	LoginLogUpdateReq          = pb.LoginLogUpdateReq
 	Menu                       = pb.Menu
+	MenuIdsResp                = pb.MenuIdsResp
 	MenuListResp               = pb.MenuListResp
 	MenuReq                    = pb.MenuReq
 	OperLog                    = pb.OperLog
@@ -76,6 +82,8 @@ type (
 	Role                       = pb.Role
 	RoleCreateReq              = pb.RoleCreateReq
 	RoleListResp               = pb.RoleListResp
+	RoleMenusAssignReq         = pb.RoleMenusAssignReq
+	RoleMenusReq               = pb.RoleMenusReq
 	RolePageReq                = pb.RolePageReq
 	RolePageResp               = pb.RolePageResp
 	RolePermission             = pb.RolePermission
@@ -125,6 +133,8 @@ type (
 		RolePermissionAdd(ctx context.Context, in *RolePermissionReq, opts ...grpc.CallOption) (*Ack, error)
 		RolePermissionDelete(ctx context.Context, in *RolePermissionReq, opts ...grpc.CallOption) (*Ack, error)
 		RolePermissions(ctx context.Context, in *RolePermissionsQueryReq, opts ...grpc.CallOption) (*RolePermissionsResp, error)
+		RoleMenus(ctx context.Context, in *RoleMenusReq, opts ...grpc.CallOption) (*MenuIdsResp, error)
+		RoleAssignMenus(ctx context.Context, in *RoleMenusAssignReq, opts ...grpc.CallOption) (*Ack, error)
 		RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*Ack, error)
 		RoleDetail(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Role, error)
 		RoleDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error)
@@ -148,8 +158,8 @@ type (
 		DictType(ctx context.Context, in *DictTypeQueryReq, opts ...grpc.CallOption) (*DictListResp, error)
 		DictLabel(ctx context.Context, in *DictLabelQueryReq, opts ...grpc.CallOption) (*DictLabelResp, error)
 		DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*Ack, error)
-		DictDetail(ctx context.Context, in *StringIdReq, opts ...grpc.CallOption) (*Dict, error)
-		DictDelete(ctx context.Context, in *StringIdReq, opts ...grpc.CallOption) (*Ack, error)
+		DictDetail(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Dict, error)
+		DictDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error)
 		ConfigCreate(ctx context.Context, in *ConfigCreateReq, opts ...grpc.CallOption) (*Ack, error)
 		ConfigPage(ctx context.Context, in *ConfigPageReq, opts ...grpc.CallOption) (*ConfigPageResp, error)
 		ConfigBatchDelete(ctx context.Context, in *BatchIdsReq, opts ...grpc.CallOption) (*Ack, error)
@@ -188,6 +198,10 @@ type (
 		AttachmentDownload(ctx context.Context, in *AttachmentDownloadReq, opts ...grpc.CallOption) (*AttachmentDownloadResp, error)
 		AttachmentUrl(ctx context.Context, in *AttachmentUrlQueryReq, opts ...grpc.CallOption) (*AttachmentUrlResp, error)
 		AttachmentDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error)
+		CaptchaEnabledTypes(ctx context.Context, in *CaptchaReq, opts ...grpc.CallOption) (*CaptchaTypesResp, error)
+		CaptchaImage(ctx context.Context, in *CaptchaReq, opts ...grpc.CallOption) (*CaptchaDataResp, error)
+		CaptchaSms(ctx context.Context, in *CaptchaPhoneReq, opts ...grpc.CallOption) (*CaptchaDataResp, error)
+		CaptchaEmail(ctx context.Context, in *CaptchaEmailReq, opts ...grpc.CallOption) (*CaptchaDataResp, error)
 	}
 
 	defaultSysService struct {
@@ -299,6 +313,16 @@ func (m *defaultSysService) RolePermissionDelete(ctx context.Context, in *RolePe
 func (m *defaultSysService) RolePermissions(ctx context.Context, in *RolePermissionsQueryReq, opts ...grpc.CallOption) (*RolePermissionsResp, error) {
 	client := pb.NewSysServiceClient(m.cli.Conn())
 	return client.RolePermissions(ctx, in, opts...)
+}
+
+func (m *defaultSysService) RoleMenus(ctx context.Context, in *RoleMenusReq, opts ...grpc.CallOption) (*MenuIdsResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.RoleMenus(ctx, in, opts...)
+}
+
+func (m *defaultSysService) RoleAssignMenus(ctx context.Context, in *RoleMenusAssignReq, opts ...grpc.CallOption) (*Ack, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.RoleAssignMenus(ctx, in, opts...)
 }
 
 func (m *defaultSysService) RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*Ack, error) {
@@ -416,12 +440,12 @@ func (m *defaultSysService) DictUpdate(ctx context.Context, in *DictUpdateReq, o
 	return client.DictUpdate(ctx, in, opts...)
 }
 
-func (m *defaultSysService) DictDetail(ctx context.Context, in *StringIdReq, opts ...grpc.CallOption) (*Dict, error) {
+func (m *defaultSysService) DictDetail(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Dict, error) {
 	client := pb.NewSysServiceClient(m.cli.Conn())
 	return client.DictDetail(ctx, in, opts...)
 }
 
-func (m *defaultSysService) DictDelete(ctx context.Context, in *StringIdReq, opts ...grpc.CallOption) (*Ack, error) {
+func (m *defaultSysService) DictDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error) {
 	client := pb.NewSysServiceClient(m.cli.Conn())
 	return client.DictDelete(ctx, in, opts...)
 }
@@ -614,4 +638,24 @@ func (m *defaultSysService) AttachmentUrl(ctx context.Context, in *AttachmentUrl
 func (m *defaultSysService) AttachmentDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error) {
 	client := pb.NewSysServiceClient(m.cli.Conn())
 	return client.AttachmentDelete(ctx, in, opts...)
+}
+
+func (m *defaultSysService) CaptchaEnabledTypes(ctx context.Context, in *CaptchaReq, opts ...grpc.CallOption) (*CaptchaTypesResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.CaptchaEnabledTypes(ctx, in, opts...)
+}
+
+func (m *defaultSysService) CaptchaImage(ctx context.Context, in *CaptchaReq, opts ...grpc.CallOption) (*CaptchaDataResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.CaptchaImage(ctx, in, opts...)
+}
+
+func (m *defaultSysService) CaptchaSms(ctx context.Context, in *CaptchaPhoneReq, opts ...grpc.CallOption) (*CaptchaDataResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.CaptchaSms(ctx, in, opts...)
+}
+
+func (m *defaultSysService) CaptchaEmail(ctx context.Context, in *CaptchaEmailReq, opts ...grpc.CallOption) (*CaptchaDataResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.CaptchaEmail(ctx, in, opts...)
 }

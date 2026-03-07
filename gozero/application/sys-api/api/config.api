@@ -10,21 +10,21 @@ type ConfigPageReq {
 }
 
 type ConfigCreateReq {
-	name     string      `json:"name,optional"`
-	code     string      `json:"code,optional"`
+	name     string      `json:"name"`
+	code     string      `json:"code"`
 	data     interface{} `json:"data,optional"`
 	remark   string      `json:"remark,optional"`
-	createBy int64       `json:"createBy,optional"`
-	updateBy int64       `json:"updateBy,optional"`
+	createBy int64       `json:"createBy"`
+	updateBy int64       `json:"updateBy"`
 }
 
 type ConfigUpdateReq {
 	id       int64       `path:"id"`
-	name     string      `json:"name,optional"`
-	code     string      `json:"code,optional"`
+	name     string      `json:"name"`
+	code     string      `json:"code"`
 	data     interface{} `json:"data,optional"`
 	remark   string      `json:"remark,optional"`
-	updateBy int64       `json:"updateBy,optional"`
+	updateBy int64       `json:"updateBy"`
 }
 
 type ConfigCodeQueryReq {
@@ -59,4 +59,3 @@ service sys-api {
 	@handler ConfigDelete
 	delete /api/v1/config/:id (IdPathReq) returns (CommonResp)
 }
-

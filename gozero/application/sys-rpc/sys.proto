@@ -4,6 +4,9 @@ package pb;
 
 option go_package = "github.com/force-c/nai-tizi/application/sys-rpc/pb";
 
+
+
+
 message Empty {}
 message PingReq {}
 message PingResp { string message = 1; }
@@ -18,6 +21,9 @@ message PageInfo {
   int64 current = 3;
   int64 pages = 4;
 }
+
+
+
 
 message UserInfo {
   int64 user_id = 1;
@@ -50,6 +56,10 @@ message AuthLoginResp {
   int64 active_timeout = 5;
   UserInfo user_info = 6;
 }
+
+
+
+
 
 message User {
   int64 user_id = 1;
@@ -92,6 +102,8 @@ message UserCreateReq {
   string avatar = 8;
   int32 status = 9;
   string remark = 10;
+  int64 create_by = 11;
+  int64 update_by = 12;
 }
 
 message UserUpdateReq {
@@ -105,6 +117,7 @@ message UserUpdateReq {
   string avatar = 8;
   int32 status = 9;
   string remark = 10;
+  int64 update_by = 11;
 }
 
 message UserImportReq { repeated UserCreateReq users = 1; }
@@ -112,6 +125,10 @@ message UserPasswordReq { int64 id = 1; string new_password = 2; }
 message UserChangePasswordReq { int64 user_id = 1; string old_password = 2; string new_password = 3; }
 message UserPageResp { repeated User records = 1; PageInfo page = 2; }
 message UserListResp { repeated User records = 1; }
+
+
+
+
 
 message Role {
   int64 role_id = 1;
@@ -158,8 +175,15 @@ message RolePermissionReq { string role_key = 1; string resource = 2; string act
 message RolePermissionsQueryReq { string role_key = 1; }
 message RolePermission { string role_key = 1; string resource = 2; string action = 3; }
 message RolePermissionsResp { repeated RolePermission records = 1; }
+message RoleMenusReq { int64 role_id = 1; }
+message RoleMenusAssignReq { int64 role_id = 1; repeated int64 menu_ids = 2; }
+message MenuIdsResp { repeated int64 menu_ids = 1; }
 message RolePageResp { repeated Role records = 1; PageInfo page = 2; }
 message RoleListResp { repeated Role records = 1; }
+
+
+
+
 
 message Org {
   int64 id = 1;
@@ -218,6 +242,9 @@ message OrgUpdateReq {
 message OrgPageResp { repeated Org records = 1; PageInfo page = 2; }
 message OrgTreeResp { repeated Org records = 1; }
 
+
+
+
 message Menu {
   int64 id = 1;
   string menu_name = 2;
@@ -256,9 +283,29 @@ message MenuReq {
   string perms = 13;
   string icon = 14;
   string remark = 15;
+  int64 create_by = 16;
+  int64 update_by = 17;
 }
 
 message MenuListResp { repeated Menu records = 1; }
+
+
+
+
+message CaptchaReq {}
+message CaptchaPhoneReq { string phonenumber = 1; }
+message CaptchaEmailReq { string email = 1; }
+message CaptchaDataResp {
+  string id = 1;
+  string type = 2;
+  string data_json = 3;
+  string expire_at = 4;
+}
+message CaptchaTypesResp { repeated string types = 1; }
+
+
+
+
 
 message Dict {
   int64 id = 1;
@@ -298,7 +345,7 @@ message DictCreateReq {
 }
 
 message DictUpdateReq {
-  string id = 1;
+  int64 id = 1;
   int64 parent_id = 2;
   string dict_type = 3;
   string dict_label = 4;
@@ -315,6 +362,10 @@ message DictLabelQueryReq { string dict_type = 1; string dict_value = 2; }
 message DictLabelResp { string label = 1; }
 message DictPageResp { repeated Dict records = 1; PageInfo page = 2; }
 message DictListResp { repeated Dict records = 1; }
+
+
+
+
 
 message Config {
   int64 id = 1;
@@ -357,6 +408,10 @@ message ConfigCodeQueryReq { string code = 1; }
 message ConfigDataResp { string code = 1; string data_json = 2; }
 message ConfigPageResp { repeated Config records = 1; PageInfo page = 2; }
 message ConfigListResp { repeated Config records = 1; }
+
+
+
+
 
 message LoginLog {
   int64 id = 1;
@@ -477,6 +532,10 @@ message OperLogUpdateReq {
 
 message OperLogPageResp { repeated OperLog records = 1; PageInfo page = 2; }
 
+
+
+
+
 message StorageEnv {
   int64 id = 1;
   string name = 2;
@@ -515,6 +574,10 @@ message StorageEnvTestReq { int64 id = 1; }
 message StorageEnvTestResp { bool connected = 1; string msg = 2; }
 message StorageEnvPageResp { repeated StorageEnv records = 1; PageInfo page = 2; }
 message StorageEnvListResp { repeated StorageEnv records = 1; }
+
+
+
+
 
 message Attachment {
   int64 attachment_id = 1;
@@ -594,6 +657,8 @@ service SysService {
   rpc RolePermissionAdd(RolePermissionReq) returns (Ack);
   rpc RolePermissionDelete(RolePermissionReq) returns (Ack);
   rpc RolePermissions(RolePermissionsQueryReq) returns (RolePermissionsResp);
+  rpc RoleMenus(RoleMenusReq) returns (MenuIdsResp);
+  rpc RoleAssignMenus(RoleMenusAssignReq) returns (Ack);
   rpc RoleUpdate(RoleUpdateReq) returns (Ack);
   rpc RoleDetail(IdReq) returns (Role);
   rpc RoleDelete(IdReq) returns (Ack);
@@ -620,8 +685,8 @@ service SysService {
   rpc DictType(DictTypeQueryReq) returns (DictListResp);
   rpc DictLabel(DictLabelQueryReq) returns (DictLabelResp);
   rpc DictUpdate(DictUpdateReq) returns (Ack);
-  rpc DictDetail(StringIdReq) returns (Dict);
-  rpc DictDelete(StringIdReq) returns (Ack);
+  rpc DictDetail(IdReq) returns (Dict);
+  rpc DictDelete(IdReq) returns (Ack);
 
   rpc ConfigCreate(ConfigCreateReq) returns (Ack);
   rpc ConfigPage(ConfigPageReq) returns (ConfigPageResp);
@@ -665,4 +730,9 @@ service SysService {
   rpc AttachmentDownload(AttachmentDownloadReq) returns (AttachmentDownloadResp);
   rpc AttachmentUrl(AttachmentUrlQueryReq) returns (AttachmentUrlResp);
   rpc AttachmentDelete(IdReq) returns (Ack);
+
+  rpc CaptchaEnabledTypes(CaptchaReq) returns (CaptchaTypesResp);
+  rpc CaptchaImage(CaptchaReq) returns (CaptchaDataResp);
+  rpc CaptchaSms(CaptchaPhoneReq) returns (CaptchaDataResp);
+  rpc CaptchaEmail(CaptchaEmailReq) returns (CaptchaDataResp);
 }

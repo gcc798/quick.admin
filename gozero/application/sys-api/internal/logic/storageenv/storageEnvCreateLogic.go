@@ -19,7 +19,7 @@ type StorageEnvCreateLogic struct {
 func NewStorageEnvCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *StorageEnvCreateLogic {
 	return &StorageEnvCreateLogic{Logger: logx.WithContext(ctx), ctx: ctx, svcCtx: svcCtx}
 }
-func (l *StorageEnvCreateLogic) StorageEnvCreate(req *types.StorageEnvReq) (resp *types.CommonResp, err error) {
+func (l *StorageEnvCreateLogic) StorageEnvCreate(req *types.StorageEnvCreateReq) (resp *types.CommonResp, err error) {
 	if req.Name == "" || req.Code == "" || req.StorageType == "" {
 		return &types.CommonResp{Code: 400, Msg: "名称、编码和存储类型不能为空"}, nil
 	}

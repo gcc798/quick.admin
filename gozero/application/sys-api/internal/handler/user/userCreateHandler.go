@@ -6,6 +6,7 @@ package user
 import (
 	"net/http"
 
+	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/commonutil"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/user"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
 	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
@@ -20,7 +21,11 @@ func UserCreateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := user.NewUserCreateLogic(r.Context(), svcCtx)
+		ctx := r.Context()
+		if userID, err := commonutil.UserIDFromRequest(svcCtx, r); err == nil {
+			ctx = commonutil.WithUserID(ctx, userID)
+		}
+		l := user.NewUserCreateLogic(ctx, svcCtx)
 		resp, err := l.UserCreate(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.0
 // - protoc             v6.33.0
-// source: proto/sys.proto
+// source: sys.proto
 
 package pb
 
@@ -39,6 +39,8 @@ const (
 	SysService_RolePermissionAdd_FullMethodName    = "/pb.SysService/RolePermissionAdd"
 	SysService_RolePermissionDelete_FullMethodName = "/pb.SysService/RolePermissionDelete"
 	SysService_RolePermissions_FullMethodName      = "/pb.SysService/RolePermissions"
+	SysService_RoleMenus_FullMethodName            = "/pb.SysService/RoleMenus"
+	SysService_RoleAssignMenus_FullMethodName      = "/pb.SysService/RoleAssignMenus"
 	SysService_RoleUpdate_FullMethodName           = "/pb.SysService/RoleUpdate"
 	SysService_RoleDetail_FullMethodName           = "/pb.SysService/RoleDetail"
 	SysService_RoleDelete_FullMethodName           = "/pb.SysService/RoleDelete"
@@ -102,6 +104,10 @@ const (
 	SysService_AttachmentDownload_FullMethodName   = "/pb.SysService/AttachmentDownload"
 	SysService_AttachmentUrl_FullMethodName        = "/pb.SysService/AttachmentUrl"
 	SysService_AttachmentDelete_FullMethodName     = "/pb.SysService/AttachmentDelete"
+	SysService_CaptchaEnabledTypes_FullMethodName  = "/pb.SysService/CaptchaEnabledTypes"
+	SysService_CaptchaImage_FullMethodName         = "/pb.SysService/CaptchaImage"
+	SysService_CaptchaSms_FullMethodName           = "/pb.SysService/CaptchaSms"
+	SysService_CaptchaEmail_FullMethodName         = "/pb.SysService/CaptchaEmail"
 )
 
 // SysServiceClient is the client API for SysService service.
@@ -128,6 +134,8 @@ type SysServiceClient interface {
 	RolePermissionAdd(ctx context.Context, in *RolePermissionReq, opts ...grpc.CallOption) (*Ack, error)
 	RolePermissionDelete(ctx context.Context, in *RolePermissionReq, opts ...grpc.CallOption) (*Ack, error)
 	RolePermissions(ctx context.Context, in *RolePermissionsQueryReq, opts ...grpc.CallOption) (*RolePermissionsResp, error)
+	RoleMenus(ctx context.Context, in *RoleMenusReq, opts ...grpc.CallOption) (*MenuIdsResp, error)
+	RoleAssignMenus(ctx context.Context, in *RoleMenusAssignReq, opts ...grpc.CallOption) (*Ack, error)
 	RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*Ack, error)
 	RoleDetail(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Role, error)
 	RoleDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error)
@@ -151,8 +159,8 @@ type SysServiceClient interface {
 	DictType(ctx context.Context, in *DictTypeQueryReq, opts ...grpc.CallOption) (*DictListResp, error)
 	DictLabel(ctx context.Context, in *DictLabelQueryReq, opts ...grpc.CallOption) (*DictLabelResp, error)
 	DictUpdate(ctx context.Context, in *DictUpdateReq, opts ...grpc.CallOption) (*Ack, error)
-	DictDetail(ctx context.Context, in *StringIdReq, opts ...grpc.CallOption) (*Dict, error)
-	DictDelete(ctx context.Context, in *StringIdReq, opts ...grpc.CallOption) (*Ack, error)
+	DictDetail(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Dict, error)
+	DictDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error)
 	ConfigCreate(ctx context.Context, in *ConfigCreateReq, opts ...grpc.CallOption) (*Ack, error)
 	ConfigPage(ctx context.Context, in *ConfigPageReq, opts ...grpc.CallOption) (*ConfigPageResp, error)
 	ConfigBatchDelete(ctx context.Context, in *BatchIdsReq, opts ...grpc.CallOption) (*Ack, error)
@@ -191,6 +199,10 @@ type SysServiceClient interface {
 	AttachmentDownload(ctx context.Context, in *AttachmentDownloadReq, opts ...grpc.CallOption) (*AttachmentDownloadResp, error)
 	AttachmentUrl(ctx context.Context, in *AttachmentUrlQueryReq, opts ...grpc.CallOption) (*AttachmentUrlResp, error)
 	AttachmentDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error)
+	CaptchaEnabledTypes(ctx context.Context, in *CaptchaReq, opts ...grpc.CallOption) (*CaptchaTypesResp, error)
+	CaptchaImage(ctx context.Context, in *CaptchaReq, opts ...grpc.CallOption) (*CaptchaDataResp, error)
+	CaptchaSms(ctx context.Context, in *CaptchaPhoneReq, opts ...grpc.CallOption) (*CaptchaDataResp, error)
+	CaptchaEmail(ctx context.Context, in *CaptchaEmailReq, opts ...grpc.CallOption) (*CaptchaDataResp, error)
 }
 
 type sysServiceClient struct {
@@ -395,6 +407,26 @@ func (c *sysServiceClient) RolePermissions(ctx context.Context, in *RolePermissi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RolePermissionsResp)
 	err := c.cc.Invoke(ctx, SysService_RolePermissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysServiceClient) RoleMenus(ctx context.Context, in *RoleMenusReq, opts ...grpc.CallOption) (*MenuIdsResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MenuIdsResp)
+	err := c.cc.Invoke(ctx, SysService_RoleMenus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysServiceClient) RoleAssignMenus(ctx context.Context, in *RoleMenusAssignReq, opts ...grpc.CallOption) (*Ack, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Ack)
+	err := c.cc.Invoke(ctx, SysService_RoleAssignMenus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -631,7 +663,7 @@ func (c *sysServiceClient) DictUpdate(ctx context.Context, in *DictUpdateReq, op
 	return out, nil
 }
 
-func (c *sysServiceClient) DictDetail(ctx context.Context, in *StringIdReq, opts ...grpc.CallOption) (*Dict, error) {
+func (c *sysServiceClient) DictDetail(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Dict, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Dict)
 	err := c.cc.Invoke(ctx, SysService_DictDetail_FullMethodName, in, out, cOpts...)
@@ -641,7 +673,7 @@ func (c *sysServiceClient) DictDetail(ctx context.Context, in *StringIdReq, opts
 	return out, nil
 }
 
-func (c *sysServiceClient) DictDelete(ctx context.Context, in *StringIdReq, opts ...grpc.CallOption) (*Ack, error) {
+func (c *sysServiceClient) DictDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Ack)
 	err := c.cc.Invoke(ctx, SysService_DictDelete_FullMethodName, in, out, cOpts...)
@@ -1031,6 +1063,46 @@ func (c *sysServiceClient) AttachmentDelete(ctx context.Context, in *IdReq, opts
 	return out, nil
 }
 
+func (c *sysServiceClient) CaptchaEnabledTypes(ctx context.Context, in *CaptchaReq, opts ...grpc.CallOption) (*CaptchaTypesResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CaptchaTypesResp)
+	err := c.cc.Invoke(ctx, SysService_CaptchaEnabledTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysServiceClient) CaptchaImage(ctx context.Context, in *CaptchaReq, opts ...grpc.CallOption) (*CaptchaDataResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CaptchaDataResp)
+	err := c.cc.Invoke(ctx, SysService_CaptchaImage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysServiceClient) CaptchaSms(ctx context.Context, in *CaptchaPhoneReq, opts ...grpc.CallOption) (*CaptchaDataResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CaptchaDataResp)
+	err := c.cc.Invoke(ctx, SysService_CaptchaSms_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *sysServiceClient) CaptchaEmail(ctx context.Context, in *CaptchaEmailReq, opts ...grpc.CallOption) (*CaptchaDataResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CaptchaDataResp)
+	err := c.cc.Invoke(ctx, SysService_CaptchaEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SysServiceServer is the server API for SysService service.
 // All implementations must embed UnimplementedSysServiceServer
 // for forward compatibility.
@@ -1055,6 +1127,8 @@ type SysServiceServer interface {
 	RolePermissionAdd(context.Context, *RolePermissionReq) (*Ack, error)
 	RolePermissionDelete(context.Context, *RolePermissionReq) (*Ack, error)
 	RolePermissions(context.Context, *RolePermissionsQueryReq) (*RolePermissionsResp, error)
+	RoleMenus(context.Context, *RoleMenusReq) (*MenuIdsResp, error)
+	RoleAssignMenus(context.Context, *RoleMenusAssignReq) (*Ack, error)
 	RoleUpdate(context.Context, *RoleUpdateReq) (*Ack, error)
 	RoleDetail(context.Context, *IdReq) (*Role, error)
 	RoleDelete(context.Context, *IdReq) (*Ack, error)
@@ -1078,8 +1152,8 @@ type SysServiceServer interface {
 	DictType(context.Context, *DictTypeQueryReq) (*DictListResp, error)
 	DictLabel(context.Context, *DictLabelQueryReq) (*DictLabelResp, error)
 	DictUpdate(context.Context, *DictUpdateReq) (*Ack, error)
-	DictDetail(context.Context, *StringIdReq) (*Dict, error)
-	DictDelete(context.Context, *StringIdReq) (*Ack, error)
+	DictDetail(context.Context, *IdReq) (*Dict, error)
+	DictDelete(context.Context, *IdReq) (*Ack, error)
 	ConfigCreate(context.Context, *ConfigCreateReq) (*Ack, error)
 	ConfigPage(context.Context, *ConfigPageReq) (*ConfigPageResp, error)
 	ConfigBatchDelete(context.Context, *BatchIdsReq) (*Ack, error)
@@ -1118,6 +1192,10 @@ type SysServiceServer interface {
 	AttachmentDownload(context.Context, *AttachmentDownloadReq) (*AttachmentDownloadResp, error)
 	AttachmentUrl(context.Context, *AttachmentUrlQueryReq) (*AttachmentUrlResp, error)
 	AttachmentDelete(context.Context, *IdReq) (*Ack, error)
+	CaptchaEnabledTypes(context.Context, *CaptchaReq) (*CaptchaTypesResp, error)
+	CaptchaImage(context.Context, *CaptchaReq) (*CaptchaDataResp, error)
+	CaptchaSms(context.Context, *CaptchaPhoneReq) (*CaptchaDataResp, error)
+	CaptchaEmail(context.Context, *CaptchaEmailReq) (*CaptchaDataResp, error)
 	mustEmbedUnimplementedSysServiceServer()
 }
 
@@ -1188,6 +1266,12 @@ func (UnimplementedSysServiceServer) RolePermissionDelete(context.Context, *Role
 func (UnimplementedSysServiceServer) RolePermissions(context.Context, *RolePermissionsQueryReq) (*RolePermissionsResp, error) {
 	return nil, status.Error(codes.Unimplemented, "method RolePermissions not implemented")
 }
+func (UnimplementedSysServiceServer) RoleMenus(context.Context, *RoleMenusReq) (*MenuIdsResp, error) {
+	return nil, status.Error(codes.Unimplemented, "method RoleMenus not implemented")
+}
+func (UnimplementedSysServiceServer) RoleAssignMenus(context.Context, *RoleMenusAssignReq) (*Ack, error) {
+	return nil, status.Error(codes.Unimplemented, "method RoleAssignMenus not implemented")
+}
 func (UnimplementedSysServiceServer) RoleUpdate(context.Context, *RoleUpdateReq) (*Ack, error) {
 	return nil, status.Error(codes.Unimplemented, "method RoleUpdate not implemented")
 }
@@ -1257,10 +1341,10 @@ func (UnimplementedSysServiceServer) DictLabel(context.Context, *DictLabelQueryR
 func (UnimplementedSysServiceServer) DictUpdate(context.Context, *DictUpdateReq) (*Ack, error) {
 	return nil, status.Error(codes.Unimplemented, "method DictUpdate not implemented")
 }
-func (UnimplementedSysServiceServer) DictDetail(context.Context, *StringIdReq) (*Dict, error) {
+func (UnimplementedSysServiceServer) DictDetail(context.Context, *IdReq) (*Dict, error) {
 	return nil, status.Error(codes.Unimplemented, "method DictDetail not implemented")
 }
-func (UnimplementedSysServiceServer) DictDelete(context.Context, *StringIdReq) (*Ack, error) {
+func (UnimplementedSysServiceServer) DictDelete(context.Context, *IdReq) (*Ack, error) {
 	return nil, status.Error(codes.Unimplemented, "method DictDelete not implemented")
 }
 func (UnimplementedSysServiceServer) ConfigCreate(context.Context, *ConfigCreateReq) (*Ack, error) {
@@ -1376,6 +1460,18 @@ func (UnimplementedSysServiceServer) AttachmentUrl(context.Context, *AttachmentU
 }
 func (UnimplementedSysServiceServer) AttachmentDelete(context.Context, *IdReq) (*Ack, error) {
 	return nil, status.Error(codes.Unimplemented, "method AttachmentDelete not implemented")
+}
+func (UnimplementedSysServiceServer) CaptchaEnabledTypes(context.Context, *CaptchaReq) (*CaptchaTypesResp, error) {
+	return nil, status.Error(codes.Unimplemented, "method CaptchaEnabledTypes not implemented")
+}
+func (UnimplementedSysServiceServer) CaptchaImage(context.Context, *CaptchaReq) (*CaptchaDataResp, error) {
+	return nil, status.Error(codes.Unimplemented, "method CaptchaImage not implemented")
+}
+func (UnimplementedSysServiceServer) CaptchaSms(context.Context, *CaptchaPhoneReq) (*CaptchaDataResp, error) {
+	return nil, status.Error(codes.Unimplemented, "method CaptchaSms not implemented")
+}
+func (UnimplementedSysServiceServer) CaptchaEmail(context.Context, *CaptchaEmailReq) (*CaptchaDataResp, error) {
+	return nil, status.Error(codes.Unimplemented, "method CaptchaEmail not implemented")
 }
 func (UnimplementedSysServiceServer) mustEmbedUnimplementedSysServiceServer() {}
 func (UnimplementedSysServiceServer) testEmbeddedByValue()                    {}
@@ -1754,6 +1850,42 @@ func _SysService_RolePermissions_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SysServiceServer).RolePermissions(ctx, req.(*RolePermissionsQueryReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SysService_RoleMenus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoleMenusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServiceServer).RoleMenus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SysService_RoleMenus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServiceServer).RoleMenus(ctx, req.(*RoleMenusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SysService_RoleAssignMenus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RoleMenusAssignReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServiceServer).RoleAssignMenus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SysService_RoleAssignMenus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServiceServer).RoleAssignMenus(ctx, req.(*RoleMenusAssignReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2173,7 +2305,7 @@ func _SysService_DictUpdate_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _SysService_DictDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StringIdReq)
+	in := new(IdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2185,13 +2317,13 @@ func _SysService_DictDetail_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: SysService_DictDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServiceServer).DictDetail(ctx, req.(*StringIdReq))
+		return srv.(SysServiceServer).DictDetail(ctx, req.(*IdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _SysService_DictDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StringIdReq)
+	in := new(IdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2203,7 +2335,7 @@ func _SysService_DictDelete_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: SysService_DictDelete_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SysServiceServer).DictDelete(ctx, req.(*StringIdReq))
+		return srv.(SysServiceServer).DictDelete(ctx, req.(*IdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2892,6 +3024,78 @@ func _SysService_AttachmentDelete_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SysService_CaptchaEnabledTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CaptchaReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServiceServer).CaptchaEnabledTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SysService_CaptchaEnabledTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServiceServer).CaptchaEnabledTypes(ctx, req.(*CaptchaReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SysService_CaptchaImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CaptchaReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServiceServer).CaptchaImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SysService_CaptchaImage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServiceServer).CaptchaImage(ctx, req.(*CaptchaReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SysService_CaptchaSms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CaptchaPhoneReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServiceServer).CaptchaSms(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SysService_CaptchaSms_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServiceServer).CaptchaSms(ctx, req.(*CaptchaPhoneReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SysService_CaptchaEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CaptchaEmailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServiceServer).CaptchaEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SysService_CaptchaEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServiceServer).CaptchaEmail(ctx, req.(*CaptchaEmailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SysService_ServiceDesc is the grpc.ServiceDesc for SysService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2978,6 +3182,14 @@ var SysService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RolePermissions",
 			Handler:    _SysService_RolePermissions_Handler,
+		},
+		{
+			MethodName: "RoleMenus",
+			Handler:    _SysService_RoleMenus_Handler,
+		},
+		{
+			MethodName: "RoleAssignMenus",
+			Handler:    _SysService_RoleAssignMenus_Handler,
 		},
 		{
 			MethodName: "RoleUpdate",
@@ -3231,7 +3443,23 @@ var SysService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "AttachmentDelete",
 			Handler:    _SysService_AttachmentDelete_Handler,
 		},
+		{
+			MethodName: "CaptchaEnabledTypes",
+			Handler:    _SysService_CaptchaEnabledTypes_Handler,
+		},
+		{
+			MethodName: "CaptchaImage",
+			Handler:    _SysService_CaptchaImage_Handler,
+		},
+		{
+			MethodName: "CaptchaSms",
+			Handler:    _SysService_CaptchaSms_Handler,
+		},
+		{
+			MethodName: "CaptchaEmail",
+			Handler:    _SysService_CaptchaEmail_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/sys.proto",
+	Metadata: "sys.proto",
 }

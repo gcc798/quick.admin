@@ -11,9 +11,9 @@ type UserPageReq {
 }
 
 type UserCreateReq {
-	userName    string `json:"userName,optional"`
-	nickName    string `json:"nickName,optional"`
-	password    string `json:"password,optional"`
+	userName    string `json:"userName"`
+	nickName    string `json:"nickName"`
+	password    string `json:"password"`
 	userType    int64  `json:"userType,optional"`
 	email       string `json:"email,optional"`
 	phonenumber string `json:"phonenumber,optional"`
@@ -81,4 +81,3 @@ service sys-api {
 	@handler UserDelete
 	delete /api/v1/user/:id (IdPathReq) returns (CommonResp)
 }
-

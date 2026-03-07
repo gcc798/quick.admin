@@ -9,24 +9,20 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type DictDetailLogic struct {
+type CaptchaImageLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewDictDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictDetailLogic {
-	return &DictDetailLogic{
+func NewCaptchaImageLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CaptchaImageLogic {
+	return &CaptchaImageLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *DictDetailLogic) DictDetail(in *pb.IdReq) (*pb.Dict, error) {
-	row, err := getDictByID(l.ctx, l.svcCtx, in.Id)
-	if err != nil {
-		return nil, err
-	}
-	return toDictPB(*row), nil
+func (l *CaptchaImageLogic) CaptchaImage(in *pb.CaptchaReq) (*pb.CaptchaDataResp, error) {
+	return generateImageCaptcha(l.ctx, l.svcCtx)
 }

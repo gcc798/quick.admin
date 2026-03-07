@@ -123,6 +123,16 @@ func (s *SysServiceServer) RolePermissions(ctx context.Context, in *pb.RolePermi
 	return l.RolePermissions(in)
 }
 
+func (s *SysServiceServer) RoleMenus(ctx context.Context, in *pb.RoleMenusReq) (*pb.MenuIdsResp, error) {
+	l := sysservicelogic.NewRoleMenusLogic(ctx, s.svcCtx)
+	return l.RoleMenus(in)
+}
+
+func (s *SysServiceServer) RoleAssignMenus(ctx context.Context, in *pb.RoleMenusAssignReq) (*pb.Ack, error) {
+	l := sysservicelogic.NewRoleAssignMenusLogic(ctx, s.svcCtx)
+	return l.RoleAssignMenus(in)
+}
+
 func (s *SysServiceServer) RoleUpdate(ctx context.Context, in *pb.RoleUpdateReq) (*pb.Ack, error) {
 	l := sysservicelogic.NewRoleUpdateLogic(ctx, s.svcCtx)
 	return l.RoleUpdate(in)
@@ -238,12 +248,12 @@ func (s *SysServiceServer) DictUpdate(ctx context.Context, in *pb.DictUpdateReq)
 	return l.DictUpdate(in)
 }
 
-func (s *SysServiceServer) DictDetail(ctx context.Context, in *pb.StringIdReq) (*pb.Dict, error) {
+func (s *SysServiceServer) DictDetail(ctx context.Context, in *pb.IdReq) (*pb.Dict, error) {
 	l := sysservicelogic.NewDictDetailLogic(ctx, s.svcCtx)
 	return l.DictDetail(in)
 }
 
-func (s *SysServiceServer) DictDelete(ctx context.Context, in *pb.StringIdReq) (*pb.Ack, error) {
+func (s *SysServiceServer) DictDelete(ctx context.Context, in *pb.IdReq) (*pb.Ack, error) {
 	l := sysservicelogic.NewDictDeleteLogic(ctx, s.svcCtx)
 	return l.DictDelete(in)
 }
@@ -436,4 +446,24 @@ func (s *SysServiceServer) AttachmentUrl(ctx context.Context, in *pb.AttachmentU
 func (s *SysServiceServer) AttachmentDelete(ctx context.Context, in *pb.IdReq) (*pb.Ack, error) {
 	l := sysservicelogic.NewAttachmentDeleteLogic(ctx, s.svcCtx)
 	return l.AttachmentDelete(in)
+}
+
+func (s *SysServiceServer) CaptchaEnabledTypes(ctx context.Context, in *pb.CaptchaReq) (*pb.CaptchaTypesResp, error) {
+	l := sysservicelogic.NewCaptchaEnabledTypesLogic(ctx, s.svcCtx)
+	return l.CaptchaEnabledTypes(in)
+}
+
+func (s *SysServiceServer) CaptchaImage(ctx context.Context, in *pb.CaptchaReq) (*pb.CaptchaDataResp, error) {
+	l := sysservicelogic.NewCaptchaImageLogic(ctx, s.svcCtx)
+	return l.CaptchaImage(in)
+}
+
+func (s *SysServiceServer) CaptchaSms(ctx context.Context, in *pb.CaptchaPhoneReq) (*pb.CaptchaDataResp, error) {
+	l := sysservicelogic.NewCaptchaSmsLogic(ctx, s.svcCtx)
+	return l.CaptchaSms(in)
+}
+
+func (s *SysServiceServer) CaptchaEmail(ctx context.Context, in *pb.CaptchaEmailReq) (*pb.CaptchaDataResp, error) {
+	l := sysservicelogic.NewCaptchaEmailLogic(ctx, s.svcCtx)
+	return l.CaptchaEmail(in)
 }

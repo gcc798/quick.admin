@@ -3,7 +3,7 @@ syntax = "v1"
 import "common.api"
 
 type LogCleanReq {
-	days int64 `json:"days,optional"`
+	days int64 `json:"days"`
 }
 
 type LoginLogPageReq {
@@ -17,7 +17,7 @@ type LoginLogPageReq {
 }
 
 type LoginLogReq {
-	userName      string `json:"userName,optional"`
+	userName      string `json:"userName"`
 	ipaddr        string `json:"ipaddr,optional"`
 	loginLocation string `json:"loginLocation,optional"`
 	browser       string `json:"browser,optional"`
@@ -64,4 +64,3 @@ service sys-api {
 	@handler LoginLogDelete
 	delete /api/v1/loginLog/:id (IdPathReq) returns (CommonResp)
 }
-
