@@ -17,9 +17,9 @@ type ServiceContext struct {
 func NewServiceContext(c config.Config) *ServiceContext {
 	db := sqlx.NewSqlConn("postgres", c.Postgres.Dsn)
 	rdb := redis.NewClient(&redis.Options{
-		Addr:     c.Redis.Addr,
-		Password: c.Redis.Password,
-		DB:       c.Redis.Db,
+		Addr:     c.CacheRedis.Addr,
+		Password: c.CacheRedis.Password,
+		DB:       c.CacheRedis.Db,
 	})
 
 	return &ServiceContext{

@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package api.system.v1;
+
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+
+import "google/api/annotations.proto";
+import "api/system/v1/auth.proto";
+
+service RoleService {
+  rpc CreateRole (CreateRoleRequest) returns (RoleItem) {
+    option (google.api.http) = { post: "/api/v1/role" body: "*" };
+  }
+  rpc UpdateRole (UpdateRoleRequest) returns (MessageReply) {
+    option (google.api.http) = { put: "/api/v1/role/{roleId}" body: "*" };
+  }
+  rpc DeleteRole (RoleIdRequest) returns (MessageReply) {
+    option (google.api.http) = { delete: "/api/v1/role/{roleId}" };
+  }
+  rpc GetRole (RoleIdRequest) returns (RoleItem) {
+    option (google.api.http) = { get: "/api/v1/role/{roleId}" };
+  }
+  rpc PageRole (PageRoleRequest) returns (PageRoleReply) {
+    option (google.api.http) = { post: "/api/v1/role/page" body: "*" };
+  }
+  rpc AssignRoleToUser (AssignRoleToUserRequest) returns (MessageReply) {
+    option (google.api.http) = { post: "/api/v1/role/assign" body: "*" };
+  }
+  rpc RemoveRoleFromUser (AssignRoleToUserRequest) returns (MessageReply) {
+    option (google.api.http) = { delete: "/api/v1/role/remove" body: "*" };
+  }
+  rpc GetUserRoles (GetUserRolesRequest) returns (GetUserRolesReply) {
+    option (google.api.http) = { get: "/api/v1/role/user" };
+  }
+  rpc AddRolePermission (RolePermissionRequest) returns (MessageReply) {
+    option (google.api.http) = { post: "/api/v1/role/permission" body: "*" };
+  }
+  rpc DeleteRolePermission (RolePermissionRequest) returns (MessageReply) {
+    option (google.api.http) = { delete: "/api/v1/role/permission" body: "*" };
+  }
+  rpc GetRolePermissions (GetRolePermissionsRequest) returns (GetRolePermissionsReply) {
+    option (google.api.http) = { get: "/api/v1/role/permissions" };
+  }
+}
+
+message RoleIdRequest { int64 roleId = 1; }
+message GetUserRolesRequest { int64 userId = 1; }
+message GetRolePermissionsRequest { string roleKey = 1; }
+
+message PageRoleRequest {
+  int64 pageNum = 1;
+  int64 pageSize = 2;
+  string roleName = 3;
+  optional int32 status = 4;
+}
+
+message CreateRoleRequest {
+  string roleKey = 1;
+  string roleName = 2;
+  int64 sort = 3;
+  int32 status = 4;
+  int32 dataScope = 5;
+  string remark = 6;
+}
+
+message UpdateRoleRequest {
+  int64 roleId = 1;
+  string roleName = 2;
+  int64 sort = 3;
+  int32 status = 4;
+  int32 dataScope = 5;
+  string remark = 6;
+}
+
+message AssignRoleToUserRequest {
+  int64 userId = 1;
+  int64 roleId = 2;
+}
+
+message RolePermissionRequest {
+  string roleKey = 1;
+  string resource = 2;
+  string action = 3;
+}
+
+message RoleItem {
+  int64 roleId = 1;
+  string roleKey = 2;
+  string roleName = 3;
+  int64 sort = 4;
+  int32 status = 5;
+  int32 dataScope = 6;
+  string remark = 7;
+  string createdTime = 8;
+  string updatedTime = 9;
+  bool isSystem = 10;
+  int64 createBy = 11;
+}
+
+message PageRoleReply {
+  repeated RoleItem list = 1;
+  int64 total = 2;
+  int64 pageNum = 3;
+  int64 pageSize = 4;
+}
+
+message GetUserRolesReply { repeated RoleItem items = 1; }
+message GetRolePermissionsReply { repeated string items = 1; }

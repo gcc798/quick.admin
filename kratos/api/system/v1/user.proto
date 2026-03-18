@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package api.system.v1;
+
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+
+import "google/api/annotations.proto";
+import "api/system/v1/auth.proto";
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (MessageReply) {
+    option (google.api.http) = { post: "/api/v1/user" body: "*" };
+  }
+  rpc UpdateUser (UpdateUserRequest) returns (MessageReply) {
+    option (google.api.http) = { put: "/api/v1/user/{userId}" body: "*" };
+  }
+  rpc DeleteUser (UserIdRequest) returns (MessageReply) {
+    option (google.api.http) = { delete: "/api/v1/user/{id}" };
+  }
+  rpc BatchDeleteUser (BatchDeleteUsersRequest) returns (MessageReply) {
+    option (google.api.http) = { delete: "/api/v1/user/batch" body: "*" };
+  }
+  rpc GetUserById (UserIdRequest) returns (UserItem) {
+    option (google.api.http) = { get: "/api/v1/user/{id}" };
+  }
+  rpc ImportUsers (BatchImportUsersRequest) returns (ImportUsersReply) {
+    option (google.api.http) = { post: "/api/v1/user/import" body: "*" };
+  }
+  rpc ResetPassword (ResetPasswordRequest) returns (MessageReply) {
+    option (google.api.http) = { put: "/api/v1/user/{userId}/password" body: "*" };
+  }
+  rpc PageUser (PageUsersRequest) returns (PageUsersReply) {
+    option (google.api.http) = { post: "/api/v1/user/page" body: "*" };
+  }
+  rpc ChangePassword (ChangePasswordRequest) returns (MessageReply) {
+    option (google.api.http) = { post: "/api/v1/user/password/change" body: "*" };
+  }
+}
+
+message UserIdRequest { int64 id = 1; }
+
+message CreateUserRequest {
+  string userName = 1;
+  string nickName = 2;
+  string password = 3;
+  int32 userType = 4;
+  string email = 5;
+  string phonenumber = 6;
+  int32 sex = 7;
+  string avatar = 8;
+  int32 status = 9;
+  string remark = 10;
+}
+
+message UpdateUserRequest {
+  int64 userId = 1;
+  string userName = 2;
+  string nickName = 3;
+  int32 userType = 4;
+  string email = 5;
+  string phonenumber = 6;
+  int32 sex = 7;
+  string avatar = 8;
+  int32 status = 9;
+  string remark = 10;
+}
+
+message BatchDeleteUsersRequest { repeated int64 ids = 1; }
+message BatchImportUsersRequest { repeated CreateUserRequest users = 1; }
+message ResetPasswordRequest { int64 userId = 1; string newPassword = 2; }
+message ChangePasswordRequest { string oldPassword = 1; string newPassword = 2; }
+
+message PageUsersRequest {
+  int64 pageNum = 1;
+  int64 pageSize = 2;
+  string username = 3;
+  string phonenumber = 4;
+  optional int32 status = 5;
+}
+
+message UserItem {
+  int64 userId = 1;
+  string userName = 2;
+  string nickName = 3;
+  int32 userType = 4;
+  string email = 5;
+  string phonenumber = 6;
+  int32 sex = 7;
+  string avatar = 8;
+  int32 status = 9;
+  string remark = 10;
+  string createdTime = 11;
+  string updatedTime = 12;
+  int64 sort = 13;
+  string loginIp = 14;
+  int64 loginDate = 15;
+  string openId = 16;
+  string unionId = 17;
+  int64 createBy = 18;
+  int64 updateBy = 19;
+}
+
+message PageUsersReply {
+  repeated UserItem list = 1;
+  int64 total = 2;
+  int64 pageNum = 3;
+  int64 pageSize = 4;
+}
+
+message ImportUsersReply {
+  int64 successCount = 1;
+  int64 failCount = 2;
+  repeated string errors = 3;
+}

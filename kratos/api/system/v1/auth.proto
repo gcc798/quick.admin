@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+package api.system.v1;
+
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+
+import "google/api/annotations.proto";
+
+service AuthService {
+  rpc Login (LoginRequest) returns (LoginReply) {
+    option (google.api.http) = {
+      post: "/login"
+      body: "*"
+    };
+  }
+
+  rpc Logout (LogoutRequest) returns (MessageReply) {
+    option (google.api.http) = {
+      post: "/logout"
+    };
+  }
+
+  rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenReply) {
+    option (google.api.http) = {
+      post: "/auth/refresh"
+      body: "*"
+    };
+  }
+
+  rpc Me (MeRequest) returns (MeReply) {
+    option (google.api.http) = {
+      get: "/me"
+    };
+  }
+
+  rpc ValidateAccessToken (ValidateAccessTokenRequest) returns (ValidateAccessTokenReply);
+  rpc CheckPermission (CheckPermissionRequest) returns (CheckPermissionReply);
+}
+
+message LoginRequest {
+  string clientKey = 1;
+  string clientSecret = 2;
+  string grantType = 3;
+  string username = 4;
+  string password = 5;
+  string code = 6;
+  string phonenumber = 7;
+  string email = 8;
+  string wxCode = 9;
+  string uuid = 10;
+}
+
+message UserInfo {
+  int64 userId = 1;
+  string username = 2;
+  string nickname = 3;
+  string phonenumber = 4;
+  string email = 5;
+  string avatar = 6;
+  int32 userType = 7;
+}
+
+message LoginReply {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 expires_in = 3;
+  int64 refresh_expires_in = 4;
+  UserInfo user_info = 5;
+}
+
+message LogoutRequest {}
+
+message MessageReply {
+  string message = 1;
+}
+
+message RefreshTokenRequest {
+  string refreshToken = 1;
+  string clientKey = 2;
+  string clientSecret = 3;
+}
+
+message RefreshTokenReply {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 expires_in = 3;
+  int64 refresh_expires_in = 4;
+}
+
+message MeRequest {}
+
+message MeReply {
+  int64 userId = 1;
+}
+
+message ValidateAccessTokenRequest {
+  string accessToken = 1;
+}
+
+message ValidateAccessTokenReply {
+  bool valid = 1;
+  int64 userId = 2;
+  string userName = 3;
+  string clientId = 4;
+}
+
+message CheckPermissionRequest {
+  int64 userId = 1;
+  string resource = 2;
+  string action = 3;
+}
+
+message CheckPermissionReply {
+  bool allowed = 1;
+}

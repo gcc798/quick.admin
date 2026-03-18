@@ -8,6 +8,24 @@ import type { ApiResponse } from '@/types/api';
 // 创建 JSONbig 实例，将大数转换为字符串
 const JSONbigString = JSONbig({ storeAsString: true });
 
+function readRequestPayload(config: AxiosRequestConfig): Record<string, any> {
+  const raw = config.data;
+  if (!raw) {
+    return {};
+  }
+  if (typeof raw === 'string') {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return {};
+    }
+  }
+  if (typeof raw === 'object') {
+    return raw as Record<string, any>;
+  }
+  return {};
+}
+
 // 创建 axios 实例
 const service: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -51,10 +69,29 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   async (response: AxiosResponse<ApiResponse>) => {
-    const { code, data, msg } = (response.data || {}) as any;
+    if (response.config.responseType === 'blob' || response.config.responseType === 'arraybuffer') {
+      return response.data as any;
+    }
+
+    const { code, data, msg, rows, total } = (response.data || {}) as any;
     
     // 成功响应
     if (code === 200) {
+      if (typeof rows !== 'undefined' || typeof total !== 'undefined') {
+        const payload = readRequestPayload(response.config);
+        const pageSize = Number(payload.pageSize) || 0;
+        const current = Number(payload.pageNum) || 1;
+        const totalCount = Number(total) || 0;
+        const size = pageSize > 0 ? pageSize : Array.isArray(rows) ? rows.length : 0;
+        const pages = size > 0 ? Math.ceil(totalCount / size) : 0;
+        return {
+          records: rows || [],
+          total: totalCount,
+          size,
+          current,
+          pages,
+        };
+      }
       return data;
     }
     

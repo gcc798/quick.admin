@@ -1,0 +1,20 @@
+server:
+  grpc:
+    network: tcp
+    addr: 0.0.0.0:9000
+    timeout: 1s
+auth:
+  allowConcurrent: false
+  shareToken: false
+data:
+  database:
+    driver: postgres
+    dsn: host=127.0.0.1 user=postgres password=post123 dbname=nai-tizi port=5433 sslmode=disable TimeZone=Asia/Shanghai
+  redis:
+    addr: 127.0.0.1:6379
+    password: ""
+    db: 0
+  wechat:
+    appId: ""
+    secret: ""
+    timeout: 10s

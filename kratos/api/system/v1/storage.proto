@@ -1,0 +1,23 @@
+syntax = "proto3";
+package api.system.v1;
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "api/system/v1/auth.proto";
+service StorageEnvService {
+  rpc CreateStorageEnv (StorageEnvItem) returns (StorageEnvItem) { option (google.api.http) = { post: "/api/v1/storage-env" body: "*" }; }
+  rpc PageStorageEnv (PageStorageEnvRequest) returns (PageStorageEnvReply) { option (google.api.http) = { post: "/api/v1/storage-env/page" body: "*" }; }
+  rpc GetDefaultStorageEnv (StorageEmpty) returns (StorageEnvItem) { option (google.api.http) = { get: "/api/v1/storage-env/default" }; }
+  rpc SetDefaultStorageEnv (SetDefaultStorageEnvRequest) returns (MessageReply) { option (google.api.http) = { post: "/api/v1/storage-env/default" body: "*" }; }
+  rpc UpdateStorageEnv (UpdateStorageEnvRequest) returns (MessageReply) { option (google.api.http) = { put: "/api/v1/storage-env/{id}" body: "*" }; }
+  rpc GetStorageEnv (StorageIdRequest) returns (StorageEnvItem) { option (google.api.http) = { get: "/api/v1/storage-env/{id}" }; }
+  rpc TestStorageEnvConnection (StorageIdRequest) returns (MessageReply) { option (google.api.http) = { post: "/api/v1/storage-env/{id}/test" body: "*" }; }
+  rpc DeleteStorageEnv (StorageIdRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/storage-env/{id}" }; }
+}
+message StorageEmpty {}
+message StorageIdRequest { int64 id = 1; }
+message StorageEnvItem { int64 id = 1; string name = 2; string code = 3; string storageType = 4; bool isDefault = 5; int32 status = 6; string createdTime = 7; string updatedTime = 8; google.protobuf.Struct config = 9; string remark = 10; int64 createBy = 11; int64 updateBy = 12; }
+message PageStorageEnvRequest { int64 pageNum = 1; int64 pageSize = 2; string name = 3; string storageType = 4; }
+message SetDefaultStorageEnvRequest { int64 id = 1; }
+message UpdateStorageEnvRequest { int64 id = 1; string name = 2; string code = 3; string storageType = 4; bool isDefault = 5; int32 status = 6; google.protobuf.Struct config = 7; string remark = 8; int64 updateBy = 9; }
+message PageStorageEnvReply { repeated StorageEnvItem list = 1; int64 total = 2; int64 pageNum = 3; int64 pageSize = 4; }

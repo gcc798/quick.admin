@@ -5,7 +5,7 @@ Mode: dev
 Postgres:
   Dsn: "host=127.0.0.1 user=postgres password=post123 dbname=nai-tizi port=5433 sslmode=disable TimeZone=Asia/Shanghai"
 
-Redis:
+CacheRedis:
   Addr: "127.0.0.1:6379"
   Password: "123456"
   Db: 0

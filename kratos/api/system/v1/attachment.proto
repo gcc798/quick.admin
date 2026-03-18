@@ -1,0 +1,27 @@
+syntax = "proto3";
+package api.system.v1;
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "api/system/v1/auth.proto";
+service AttachmentService {
+  rpc UploadFile (UploadFileRequest) returns (AttachmentItem) { option (google.api.http) = { post: "/api/v1/attachment/upload-file" body: "*" }; }
+  rpc BindAttachmentToBusiness (BindAttachmentRequest) returns (MessageReply) { option (google.api.http) = { post: "/api/v1/attachment/{attachmentId}/bind" body: "*" }; }
+  rpc GetAttachment (AttachmentIdRequest) returns (AttachmentItem) { option (google.api.http) = { get: "/api/v1/attachment/{attachmentId}" }; }
+  rpc ListAttachmentsByBusiness (ListAttachmentsByBusinessRequest) returns (AttachmentListReply) { option (google.api.http) = { get: "/api/v1/attachment/business" }; }
+  rpc PageAttachments (PageAttachmentsRequest) returns (PageAttachmentsReply) { option (google.api.http) = { post: "/api/v1/attachment/page" body: "*" }; }
+  rpc DownloadAttachment (AttachmentIdRequest) returns (AttachmentDownloadReply) { option (google.api.http) = { get: "/api/v1/attachment/{attachmentId}/download" }; }
+  rpc GetAttachmentURL (AttachmentURLRequest) returns (AttachmentURLReply) { option (google.api.http) = { get: "/api/v1/attachment/{attachmentId}/url" }; }
+  rpc DeleteAttachment (AttachmentIdRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/attachment/{attachmentId}" }; }
+}
+message AttachmentIdRequest { int64 attachmentId = 1; }
+message UploadFileRequest { string fileName = 1; string fileType = 2; bytes content = 3; string envCode = 4; }
+message BindAttachmentRequest { int64 attachmentId = 1; string businessType = 2; string businessId = 3; string businessField = 4; bool isPublic = 5; google.protobuf.Struct metadata = 6; string expireTime = 7; }
+message ListAttachmentsByBusinessRequest { string businessType = 1; string businessId = 2; }
+message PageAttachmentsRequest { int64 pageNum = 1; int64 pageSize = 2; string fileName = 3; string fileType = 4; string businessType = 5; }
+message AttachmentURLRequest { int64 attachmentId = 1; int64 expires = 2; }
+message AttachmentItem { int64 attachmentId = 1; int64 envId = 2; string fileName = 3; string fileKey = 4; int64 fileSize = 5; string fileType = 6; string fileExt = 7; string businessType = 8; string businessId = 9; string businessField = 10; bool isPublic = 11; string accessUrl = 12; string metadata = 13; int32 status = 14; string expireTime = 15; int64 createBy = 16; string createTime = 17; string updateTime = 18; }
+message AttachmentListReply { repeated AttachmentItem items = 1; }
+message PageAttachmentsReply { repeated AttachmentItem list = 1; int64 total = 2; int64 pageNum = 3; int64 pageSize = 4; }
+message AttachmentURLReply { int64 attachmentId = 1; string url = 2; int64 expires = 3; }
+message AttachmentDownloadReply { string fileName = 1; bytes content = 2; }

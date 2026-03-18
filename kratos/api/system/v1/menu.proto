@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package api.system.v1;
+
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+
+import "google/api/annotations.proto";
+import "api/system/v1/auth.proto";
+
+service MenuService {
+  rpc GetUserMenuTree (GetUserMenuTreeRequest) returns (MenuTreeReply) {
+    option (google.api.http) = {
+      get: "/api/v1/menu/user/tree"
+    };
+  }
+
+  rpc GetMenuTree (GetMenuTreeRequest) returns (MenuTreeReply) {
+    option (google.api.http) = {
+      get: "/api/v1/menu/tree"
+    };
+  }
+
+  rpc GetMenuList (GetMenuListRequest) returns (MenuListReply) {
+    option (google.api.http) = {
+      get: "/api/v1/menu"
+    };
+  }
+
+  rpc GetMenuById (MenuIdRequest) returns (MenuItem) {
+    option (google.api.http) = {
+      get: "/api/v1/menu/{id}"
+    };
+  }
+
+  rpc CreateMenu (MenuItem) returns (MessageReply) {
+    option (google.api.http) = {
+      post: "/api/v1/menu"
+      body: "*"
+    };
+  }
+
+  rpc UpdateMenu (UpdateMenuRequest) returns (MessageReply) {
+    option (google.api.http) = {
+      put: "/api/v1/menu/{id}"
+      body: "*"
+    };
+  }
+
+  rpc DeleteMenu (MenuIdRequest) returns (MessageReply) {
+    option (google.api.http) = {
+      delete: "/api/v1/menu/{id}"
+    };
+  }
+}
+
+message GetUserMenuTreeRequest {}
+message GetMenuTreeRequest {}
+message GetMenuListRequest {}
+
+message MenuIdRequest {
+  int64 id = 1;
+}
+
+message MenuItem {
+  int64 id = 1;
+  string menuName = 2;
+  int64 parentId = 3;
+  int64 sort = 4;
+  string path = 5;
+  string component = 6;
+  string query = 7;
+  int32 isFrame = 8;
+  int32 isCache = 9;
+  int32 menuType = 10;
+  int32 visible = 11;
+  int32 status = 12;
+  string perms = 13;
+  string icon = 14;
+  string remark = 15;
+  int64 createBy = 16;
+  int64 updateBy = 17;
+  string createdTime = 18;
+  string updatedTime = 19;
+  repeated MenuItem children = 20;
+}
+
+message MenuTreeReply {
+  repeated MenuItem items = 1;
+}
+
+message MenuListReply {
+  repeated MenuItem items = 1;
+}
+
+message UpdateMenuRequest {
+  int64 id = 1;
+  string menuName = 2;
+  int64 parentId = 3;
+  int64 sort = 4;
+  string path = 5;
+  string component = 6;
+  string query = 7;
+  int32 isFrame = 8;
+  int32 isCache = 9;
+  int32 menuType = 10;
+  int32 visible = 11;
+  int32 status = 12;
+  string perms = 13;
+  string icon = 14;
+  string remark = 15;
+  int64 createBy = 16;
+  int64 updateBy = 17;
+}

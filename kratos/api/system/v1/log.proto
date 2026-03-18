@@ -1,0 +1,35 @@
+syntax = "proto3";
+package api.system.v1;
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+import "google/api/annotations.proto";
+import "api/system/v1/auth.proto";
+service LoginLogService {
+  rpc CreateLoginLog (CreateLoginLogRequest) returns (MessageReply) { option (google.api.http) = { post: "/api/v1/loginLog" body: "*" }; }
+  rpc PageLoginLog (PageLoginLogRequest) returns (PageLogReply) { option (google.api.http) = { post: "/api/v1/loginLog/page" body: "*" }; }
+  rpc BatchDeleteLoginLog (LogBatchIdsRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/loginLog/batch" body: "*" }; }
+  rpc CleanLoginLog (CleanLogRequest) returns (LogCleanReply) { option (google.api.http) = { post: "/api/v1/loginLog/clean" body: "*" }; }
+  rpc UpdateLoginLog (UpdateLoginLogRequest) returns (MessageReply) { option (google.api.http) = { put: "/api/v1/loginLog/{id}" body: "*" }; }
+  rpc GetLoginLogById (LogIdRequest) returns (LogItem) { option (google.api.http) = { get: "/api/v1/loginLog/{id}" }; }
+  rpc DeleteLoginLog (LogIdRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/loginLog/{id}" }; }
+}
+service OperLogService {
+  rpc CreateOperLog (CreateOperLogRequest) returns (MessageReply) { option (google.api.http) = { post: "/api/v1/operLog" body: "*" }; }
+  rpc PageOperLog (PageOperLogRequest) returns (PageLogReply) { option (google.api.http) = { post: "/api/v1/operLog/page" body: "*" }; }
+  rpc BatchDeleteOperLog (LogBatchIdsRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/operLog/batch" body: "*" }; }
+  rpc CleanOperLog (CleanLogRequest) returns (LogCleanReply) { option (google.api.http) = { post: "/api/v1/operLog/clean" body: "*" }; }
+  rpc UpdateOperLog (UpdateOperLogRequest) returns (MessageReply) { option (google.api.http) = { put: "/api/v1/operLog/{id}" body: "*" }; }
+  rpc GetOperLogById (LogIdRequest) returns (LogItem) { option (google.api.http) = { get: "/api/v1/operLog/{id}" }; }
+  rpc DeleteOperLog (LogIdRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/operLog/{id}" }; }
+}
+message LogIdRequest { int64 id = 1; }
+message LogBatchIdsRequest { repeated int64 ids = 1; }
+message CleanLogRequest { int32 days = 1; }
+message LogCleanReply { string message = 1; int64 count = 2; int32 days = 3; }
+message PageLoginLogRequest { int64 pageNum = 1; int64 pageSize = 2; string userName = 3; string ipaddr = 4; optional int32 status = 5; string startTime = 6; string endTime = 7; }
+message PageOperLogRequest { int64 pageNum = 1; int64 pageSize = 2; string title = 3; string operName = 4; string businessType = 5; optional string status = 6; string startTime = 7; string endTime = 8; }
+message CreateLoginLogRequest { string userName = 1; string ipaddr = 2; string loginLocation = 3; string browser = 4; string os = 5; int32 status = 6; string msg = 7; string clientId = 8; }
+message UpdateLoginLogRequest { int64 id = 1; string userName = 2; string ipaddr = 3; string loginLocation = 4; string browser = 5; string os = 6; int32 status = 7; string msg = 8; string clientId = 9; }
+message CreateOperLogRequest { string title = 1; string businessType = 2; string method = 3; string requestMethod = 4; string deviceType = 5; string operName = 6; string operUrl = 7; string operIp = 8; string operLocation = 9; string operParam = 10; string jsonResult = 11; string status = 12; string errorMsg = 13; int64 costTime = 14; string userAgent = 15; }
+message UpdateOperLogRequest { int64 id = 1; string title = 2; string businessType = 3; string method = 4; string requestMethod = 5; string deviceType = 6; string operName = 7; string operUrl = 8; string operIp = 9; string operLocation = 10; string operParam = 11; string jsonResult = 12; string status = 13; string errorMsg = 14; int64 costTime = 15; string userAgent = 16; }
+message LogItem { int64 id = 1; string title = 2; string userName = 3; string ipaddr = 4; string status = 5; string msg = 6; string createdTime = 7; string loginLocation = 8; string browser = 9; string os = 10; string clientId = 11; string businessType = 12; string method = 13; string requestMethod = 14; string deviceType = 15; string operUrl = 16; string operLocation = 17; string operParam = 18; string jsonResult = 19; int64 costTime = 20; string userAgent = 21; }
+message PageLogReply { repeated LogItem list = 1; int64 total = 2; int64 pageNum = 3; int64 pageSize = 4; }

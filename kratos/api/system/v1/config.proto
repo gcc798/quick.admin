@@ -1,0 +1,25 @@
+syntax = "proto3";
+package api.system.v1;
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "api/system/v1/auth.proto";
+service ConfigService {
+  rpc CreateConfig (ConfigItem) returns (MessageReply) { option (google.api.http) = { post: "/api/v1/config" body: "*" }; }
+  rpc PageConfig (PageConfigRequest) returns (PageConfigReply) { option (google.api.http) = { post: "/api/v1/config/page" body: "*" }; }
+  rpc BatchDeleteConfig (BatchIdsRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/config/batch" body: "*" }; }
+  rpc GetConfigByCode (GetConfigByCodeRequest) returns (ConfigListReply) { option (google.api.http) = { get: "/api/v1/config/code" }; }
+  rpc GetConfigDataByCode (GetConfigByCodeRequest) returns (ConfigDataReply) { option (google.api.http) = { get: "/api/v1/config/data" }; }
+  rpc UpdateConfig (UpdateConfigRequest) returns (MessageReply) { option (google.api.http) = { put: "/api/v1/config/{id}" body: "*" }; }
+  rpc GetConfigById (IdRequest) returns (ConfigItem) { option (google.api.http) = { get: "/api/v1/config/{id}" }; }
+  rpc DeleteConfig (IdRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/config/{id}" }; }
+}
+message IdRequest { int64 id = 1; }
+message BatchIdsRequest { repeated int64 ids = 1; }
+message GetConfigByCodeRequest { string code = 1; }
+message PageConfigRequest { int64 pageNum = 1; int64 pageSize = 2; string name = 3; string code = 4; int32 status = 5; }
+message ConfigItem { int64 id = 1; string name = 2; string code = 3; google.protobuf.Value data = 4; int32 status = 5; string remark = 6; string createdTime = 7; string updatedTime = 8; int64 createBy = 9; int64 updateBy = 10; }
+message UpdateConfigRequest { int64 id = 1; string name = 2; string code = 3; google.protobuf.Value data = 4; int32 status = 5; string remark = 6; }
+message PageConfigReply { repeated ConfigItem list = 1; int64 total = 2; int64 pageNum = 3; int64 pageSize = 4; }
+message ConfigListReply { repeated ConfigItem items = 1; }
+message ConfigDataReply { google.protobuf.Value data = 1; }

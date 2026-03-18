@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package api.system.v1;
+
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+
+import "google/api/annotations.proto";
+import "api/system/v1/auth.proto";
+
+service OrgService {
+  rpc CreateOrg (CreateOrgRequest) returns (OrgIdReply) {
+    option (google.api.http) = { post: "/api/v1/org" body: "*" };
+  }
+  rpc UpdateOrg (UpdateOrgRequest) returns (MessageReply) {
+    option (google.api.http) = { put: "/api/v1/org/{orgId}" body: "*" };
+  }
+  rpc DeleteOrg (OrgIdRequest) returns (MessageReply) {
+    option (google.api.http) = { delete: "/api/v1/org/{id}" };
+  }
+  rpc BatchDeleteOrg (BatchDeleteOrgsRequest) returns (MessageReply) {
+    option (google.api.http) = { delete: "/api/v1/org/batch" body: "*" };
+  }
+  rpc GetOrgById (OrgIdRequest) returns (OrgItem) {
+    option (google.api.http) = { get: "/api/v1/org/{id}" };
+  }
+  rpc GetOrgTree (GetOrgTreeRequest) returns (OrgTreeReply) {
+    option (google.api.http) = { get: "/api/v1/org/tree" };
+  }
+  rpc PageOrg (PageOrgsRequest) returns (PageOrgsReply) {
+    option (google.api.http) = { post: "/api/v1/org/page" body: "*" };
+  }
+}
+
+message OrgIdRequest { int64 id = 1; }
+message GetOrgTreeRequest {}
+message OrgIdReply { int64 id = 1; }
+
+message CreateOrgRequest {
+  int64 parentId = 1;
+  string orgName = 2;
+  string orgCode = 3;
+  string orgType = 4;
+  string leader = 5;
+  string phone = 6;
+  string email = 7;
+  int32 status = 8;
+  int64 sort = 9;
+  string remark = 10;
+}
+
+message UpdateOrgRequest {
+  int64 orgId = 1;
+  int64 parentId = 2;
+  string orgName = 3;
+  string orgCode = 4;
+  string orgType = 5;
+  string leader = 6;
+  string phone = 7;
+  string email = 8;
+  int32 status = 9;
+  int64 sort = 10;
+  string remark = 11;
+}
+
+message BatchDeleteOrgsRequest { repeated int64 ids = 1; }
+
+message PageOrgsRequest {
+  int64 pageNum = 1;
+  int64 pageSize = 2;
+  string orgName = 3;
+  string orgCode = 4;
+  optional int32 status = 5;
+  optional int64 parentId = 6;
+}
+
+message OrgItem {
+  int64 orgId = 1;
+  int64 parentId = 2;
+  string orgName = 3;
+  string orgCode = 4;
+  string orgType = 5;
+  string leader = 6;
+  string phone = 7;
+  string email = 8;
+  int32 status = 9;
+  int64 sort = 10;
+  string remark = 11;
+  string createdTime = 12;
+  string updatedTime = 13;
+  repeated OrgItem children = 14;
+  int64 createBy = 15;
+  int64 updateBy = 16;
+}
+
+message OrgTreeReply { repeated OrgItem items = 1; }
+message PageOrgsReply {
+  repeated OrgItem list = 1;
+  int64 total = 2;
+  int64 pageNum = 3;
+  int64 pageSize = 4;
+}

@@ -32,7 +32,7 @@ type CaptchaConf struct {
 
 type Config struct {
 	zrpc.RpcServerConf
-	Postgres PostgresConf
-	Redis    RedisConf
-	Captcha  CaptchaConf
+	Postgres   PostgresConf
+	CacheRedis RedisConf
+	Captcha    CaptchaConf
 }
