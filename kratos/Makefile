@@ -1,7 +1,7 @@
 KRATOS_ROOT := $(CURDIR)
 THIRD_PARTY_DIR := $(KRATOS_ROOT)/third_party
-SYS_API_DIR := $(KRATOS_ROOT)/app/sys-api
-SYS_RPC_DIR := $(KRATOS_ROOT)/app/sys-rpc
+SYS_API_DIR := $(KRATOS_ROOT)/application/sys-api
+SYS_RPC_DIR := $(KRATOS_ROOT)/application/sys-rpc
 SYS_API_SERVICE_GEN_DIR := $(SYS_API_DIR)/internal/servicegen
 SYS_RPC_SERVICE_GEN_DIR := $(SYS_RPC_DIR)/internal/servicegen
 PROTO_FILES := $(shell cd $(KRATOS_ROOT) && find api -name '*.proto' | sort)
@@ -10,10 +10,10 @@ PROTOBUF_INCLUDE := /opt/homebrew/include/google/protobuf
 export PATH := /Users/guoc/dev/code_go/bin:$(PATH)
 export GOCACHE := /tmp/nai-tizi-kratos-go-build
 
-.PHONY: help init prepare-third-party clean-proto proto openapi proto-all proto-add-health proto-client proto-server-sys-api proto-server-sys-rpc ent fmt build-sys-api build-sys-rpc build-all test
+.PHONY: help init prepare-third-party clean-proto proto openapi proto-all proto-add-health proto-client proto-server-sys-api proto-server-sys-rpc ent wire fmt build-sys-api build-sys-rpc build-all test
 
 help:
-	@echo "targets: init prepare-third-party clean-proto proto openapi proto-all proto-add-health proto-client proto-server-sys-api proto-server-sys-rpc ent fmt build-sys-api build-sys-rpc build-all test"
+	@echo "targets: init prepare-third-party clean-proto proto openapi proto-all proto-add-health proto-client proto-server-sys-api proto-server-sys-rpc ent wire fmt build-sys-api build-sys-rpc build-all test"
 
 init: prepare-third-party
 	go mod tidy
@@ -72,16 +72,19 @@ proto-server-sys-rpc:
 	done
 
 ent:
-	ent generate ./app/sys-rpc/ent/schema
+	ent generate ./application/sys-rpc/ent/schema
+
+wire:
+	GOSUMDB=off go run github.com/google/wire/cmd/wire ./application/sys-api/cmd/server ./application/sys-rpc/cmd/server
 
 fmt:
 	go fmt ./...
 
 build-sys-api:
-	go build -o $(KRATOS_ROOT)/bin/sys-api ./app/sys-api/cmd/server
+	go build -o $(KRATOS_ROOT)/bin/sys-api ./application/sys-api/cmd/server
 
 build-sys-rpc:
-	go build -o $(KRATOS_ROOT)/bin/sys-rpc ./app/sys-rpc/cmd/server
+	go build -o $(KRATOS_ROOT)/bin/sys-rpc ./application/sys-rpc/cmd/server
 
 build-all: build-sys-api build-sys-rpc
 

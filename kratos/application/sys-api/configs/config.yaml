@@ -1,0 +1,22 @@
+server:
+  http:
+    network: tcp
+    addr: 0.0.0.0:8000
+    timeout: 1s
+  rpc:
+    mode: direct
+    endpoint: 127.0.0.1:9900
+    timeout: 3s
+    discovery:
+      driver: etcd
+      service: sys-rpc
+      etcd:
+        endpoints:
+          - 127.0.0.1:2379
+        username: ""
+        password: ""
+        namespace: /kratos
+        timeout: 5s
+data:
+  redis:
+    addr: 127.0.0.1:6379

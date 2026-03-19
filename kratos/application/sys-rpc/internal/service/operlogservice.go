@@ -1,0 +1,38 @@
+package service
+
+import (
+	"context"
+
+	v1 "github.com/force-c/nai-tizi/kratos/api/system/v1"
+	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/biz"
+)
+
+type OperLogServiceService struct {
+	v1.UnimplementedOperLogServiceServer
+	uc *biz.LogUsecase
+}
+
+func NewOperLogServiceService(uc *biz.LogUsecase) *OperLogServiceService {
+	return &OperLogServiceService{uc: uc}
+}
+func (s *OperLogServiceService) CreateOperLog(ctx context.Context, req *v1.CreateOperLogRequest) (*v1.MessageReply, error) {
+	return s.uc.CreateOper(ctx, req)
+}
+func (s *OperLogServiceService) PageOperLog(ctx context.Context, req *v1.PageOperLogRequest) (*v1.PageLogReply, error) {
+	return s.uc.PageOper(ctx, req)
+}
+func (s *OperLogServiceService) BatchDeleteOperLog(ctx context.Context, req *v1.LogBatchIdsRequest) (*v1.MessageReply, error) {
+	return s.uc.BatchDelete(ctx, req.GetIds())
+}
+func (s *OperLogServiceService) CleanOperLog(ctx context.Context, req *v1.CleanLogRequest) (*v1.LogCleanReply, error) {
+	return s.uc.Clean(ctx, req.GetDays())
+}
+func (s *OperLogServiceService) UpdateOperLog(ctx context.Context, req *v1.UpdateOperLogRequest) (*v1.MessageReply, error) {
+	return s.uc.UpdateOper(ctx, req)
+}
+func (s *OperLogServiceService) GetOperLogById(ctx context.Context, req *v1.LogIdRequest) (*v1.LogItem, error) {
+	return s.uc.Get(ctx, req.GetId())
+}
+func (s *OperLogServiceService) DeleteOperLog(ctx context.Context, req *v1.LogIdRequest) (*v1.MessageReply, error) {
+	return s.uc.Delete(ctx, req.GetId())
+}

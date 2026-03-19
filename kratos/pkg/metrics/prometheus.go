@@ -29,7 +29,15 @@ var (
 			Help:    "Database query latency in seconds",
 			Buckets: prometheus.DefBuckets,
 		},
-		[]string{"operation"},
+		[]string{"operation", "status"},
+	)
+
+	DBQueryTotal = promauto.NewCounterVec(
+		prometheus.CounterOpts{
+			Name: "db_query_total",
+			Help: "Total number of database operations",
+		},
+		[]string{"operation", "status"},
 	)
 
 	RedisOpDuration = promauto.NewHistogramVec(
@@ -38,6 +46,49 @@ var (
 			Help:    "Redis operation latency in seconds",
 			Buckets: prometheus.DefBuckets,
 		},
-		[]string{"operation"},
+		[]string{"operation", "status"},
+	)
+
+	RedisOpTotal = promauto.NewCounterVec(
+		prometheus.CounterOpts{
+			Name: "redis_operation_total",
+			Help: "Total number of Redis operations",
+		},
+		[]string{"operation", "status"},
+	)
+
+	DBPoolOpenConnections = promauto.NewGauge(
+		prometheus.GaugeOpts{
+			Name: "db_pool_open_connections",
+			Help: "Current number of open database connections",
+		},
+	)
+
+	DBPoolInUseConnections = promauto.NewGauge(
+		prometheus.GaugeOpts{
+			Name: "db_pool_in_use_connections",
+			Help: "Current number of in-use database connections",
+		},
+	)
+
+	DBPoolIdleConnections = promauto.NewGauge(
+		prometheus.GaugeOpts{
+			Name: "db_pool_idle_connections",
+			Help: "Current number of idle database connections",
+		},
+	)
+
+	DBPoolWaitCount = promauto.NewGauge(
+		prometheus.GaugeOpts{
+			Name: "db_pool_wait_count",
+			Help: "Total wait count for a database connection",
+		},
+	)
+
+	DBPoolWaitDurationSeconds = promauto.NewGauge(
+		prometheus.GaugeOpts{
+			Name: "db_pool_wait_duration_seconds",
+			Help: "Total time blocked waiting for a new database connection",
+		},
 	)
 )

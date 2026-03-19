@@ -70,9 +70,9 @@ Use proto as the single source of truth.
 
 Use `ent` with PostgreSQL.
 
-- Ent schema lives under `app/sys-rpc/ent/schema`
-- Data access repositories live under `app/sys-rpc/internal/data`
-- Business orchestration lives under `app/sys-rpc/internal/biz`
+- Ent schema lives under `application/sys-rpc/ent/schema`
+- Data access repositories live under `application/sys-rpc/internal/data`
+- Business orchestration lives under `application/sys-rpc/internal/biz`
 
 ## Initial Development Scope
 
@@ -122,7 +122,7 @@ The repository now contains a minimal compilable Kratos skeleton with:
 - `sys-api` exposing `GET /health`
 - `sys-api` calling `sys-rpc` through gRPC for the health check
 - `sys-rpc` serving the corresponding `Ping` RPC
-- `ent` generation bootstrapped in `app/sys-rpc/ent/schema`
+- `ent` generation bootstrapped in `application/sys-rpc/ent/schema`
 
 ## Make Targets
 
@@ -134,3 +134,94 @@ Common commands:
 - `make fmt`
 - `make build-all`
 - `make test`
+
+## Reusable Package Plan
+
+The following infrastructure has already been extracted into `pkg/` and can be reused by future microservices:
+
+- `pkg/configx`
+  - shared YAML config loading
+  - shared duration parsing helpers
+- `pkg/grpcx`
+  - shared gRPC client dial logic
+  - support for both direct endpoint mode and discovery mode
+- `pkg/registryx`
+  - shared etcd client creation
+  - shared service registrar creation
+  - shared service discovery creation
+- `pkg/metrics`
+  - shared Prometheus metric definitions and helpers
+
+The following items are good candidates for future extraction into `pkg/`, but should remain in service-local code for now. They are intentionally documented here first instead of being extracted immediately.
+
+### Priority 1
+
+- `pkg/httpx`
+  - purpose:
+    - shared HTTP response encoder
+    - shared HTTP error encoder
+    - shared native-compatible page/data response shaping
+  - current source locations:
+    - `application/sys-api/internal/server/codec.go`
+
+- `pkg/authx`
+  - purpose:
+    - current-user context helpers
+    - token/header extraction
+    - client IP and user-agent extraction
+    - reusable auth metadata propagation helpers
+  - current source locations:
+    - `application/sys-api/internal/data/context.go`
+
+### Priority 2
+
+- `pkg/observabilityx`
+  - purpose:
+    - shared HTTP metrics middleware
+    - shared slow SQL / slow Redis logging helpers
+    - shared observability bootstrap utilities
+  - current source locations:
+    - `application/sys-api/internal/server/metrics_handler.go`
+    - `application/sys-rpc/internal/data/db_observability.go`
+    - `application/sys-rpc/internal/data/redis_observability.go`
+
+- `pkg/wsx`
+  - purpose:
+    - reusable websocket hub
+    - reusable connection registry
+    - reusable heartbeat and broadcast primitives
+  - current source locations:
+    - `application/sys-api/internal/server/websocket_hub.go`
+    - `application/sys-api/internal/server/websocket_handler.go`
+
+### Priority 3
+
+- `pkg/permx`
+  - purpose:
+    - reusable operation-to-permission mapping helpers
+    - reusable permission middleware scaffolding
+  - note:
+    - only worth extracting after permission naming is stable across services
+  - current source locations:
+    - `application/sys-api/internal/server/middleware.go`
+    - `application/sys-api/internal/server/permissions.go`
+
+- `pkg/operlogx`
+  - purpose:
+    - reusable operation-log middleware
+    - reusable request/response truncation and normalization helpers
+  - note:
+    - only worth extracting after log DTO and auditing conventions are stable across services
+  - current source locations:
+    - `application/sys-api/internal/server/operlog_middleware.go`
+
+## Extraction Rules For Future Work
+
+Only move code into `pkg/` when all of the following are true:
+
+1. The logic is not tied to one service's business semantics
+2. At least two services can reasonably reuse it
+3. The abstraction is already stable enough to avoid repeated churn
+4. The extracted package does not need to import service-local `biz` or `data` code
+
+Keep service-local code in place when the logic still carries system-specific assumptions, permission naming assumptions, or DTO coupling that may not generalize well to future microservices.
