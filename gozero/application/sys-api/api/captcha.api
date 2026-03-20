@@ -1,0 +1,28 @@
+syntax = "v1"
+
+import "common.api"
+
+type CaptchaPhoneReq {
+	phonenumber string `json:"phonenumber"`
+}
+
+type CaptchaEmailReq {
+	email string `json:"email"`
+}
+
+@server (
+	group: captcha
+)
+service sys-api {
+	@handler CaptchaEnabledTypes
+	get /captcha/enabled-types returns (CommonResp)
+
+	@handler CaptchaImage
+	get /captcha/image returns (CommonResp)
+
+	@handler CaptchaSms
+	post /captcha/sms (CaptchaPhoneReq) returns (CommonResp)
+
+	@handler CaptchaEmail
+	post /captcha/email (CaptchaEmailReq) returns (CommonResp)
+}

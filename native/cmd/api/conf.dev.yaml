@@ -1,0 +1,86 @@
+env: "dev"
+server:
+  port: 9009
+
+database:
+  dsn: "host=127.0.0.1 user=postgres password=post123 dbname=nai-tizi port=5433 sslmode=disable TimeZone=Asia/Shanghai"
+  maxOpenConns: 100
+  maxIdleConns: 10
+  connMaxLifetimeMinutes: 60
+  autoMigrate: true
+  enableSoftDelete: false
+
+redis:
+  addr: "127.0.0.1:6379"
+  password: "123456"
+  db: 0
+
+jwt:
+  secret: "4c5c11d458c01e96ae7e122eeeb0936ff2973a2cd38e97fdd942609671c89c6a"
+  expire: 7200
+
+auth:
+  tokenHeader: "Authorization"
+  allowConcurrent: false
+  shareToken: false
+
+captcha:
+  image:
+    enabled: false
+    length: 4
+    width: 120
+    height: 40
+    expire: 300
+  sms:
+    enabled: true
+    length: 6
+    expire: 300
+    template: "SMS_CODE_TEMPLATE"
+    provider: "aliyun"
+  email:
+    enabled: true
+    length: 6
+    expire: 300
+    template: "EMAIL_CODE_TEMPLATE"
+
+wechat:
+  enabled: true
+  appId: ""
+  secret: ""
+  templateId: ""
+
+mqtt:
+  enabled: false
+  broker: "tcp://127.0.0.1:1883"
+  clientId: "NTZ-server"
+  username: "server"
+  password: "pwd"
+  qos: 1
+
+rabbitmq:
+  enabled: false
+  url: "amqp://username:pwd@ip:port/"
+  exchange: "NTZ.topic"
+
+sms:
+  enabled: true
+  accessKeyId: ""
+  accessKeySecret: ""
+  signName: ""
+  templateCode: "SMS_CODE_TEMPLATE"
+
+s3:
+  enabled: true
+  endpoint: "localhost:9000"
+  accessKeyId: "your-access-key-id"
+  secretAccessKey: "your-secret-access-key"
+  region: "auto"
+  bucket: "nati-tizi"
+  useSSL: false
+  forcePathStyle: true
+
+scheduler:
+  enabled: true
+
+websocket:
+  enabled: true

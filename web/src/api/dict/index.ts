@@ -2,7 +2,7 @@ import { request } from '@/utils/request';
 import type { PageParams, PageResponse } from '@/types/api';
 
 export interface Dict {
-  id: string | number;
+  id: number;
   dictType: string;
   dictLabel: string;
   dictValue: string;
@@ -20,7 +20,7 @@ export interface Dict {
 export const dictApi = {
   // 获取字典列表（分页）
   page: (params: PageParams & { dictType?: string; dictLabel?: string; status?: number }) =>
-    request.post<PageResponse<Dict>>('/api/v1/dict/page', { params }),
+    request.post<PageResponse<Dict>>('/api/v1/dict/page', params),
 
   // 根据字典类型获取字典数据
   getByType: (dictType: string, parentId?: number) =>
@@ -31,7 +31,7 @@ export const dictApi = {
     request.get<string>('/api/v1/dict/label', { params: { dictType, dictValue } }),
 
   // 获取字典详情
-  detail: (id: string | number) =>
+  detail: (id: number) =>
     request.get<Dict>(`/api/v1/dict/${id}`),
 
   // 创建字典
@@ -43,10 +43,10 @@ export const dictApi = {
     request.put(`/api/v1/dict/${data.id}`, data),
 
   // 删除字典
-  delete: (id: string | number) =>
+  delete: (id: number) =>
     request.delete(`/api/v1/dict/${id}`),
 
   // 批量删除字典
-  batchDelete: (ids: (string | number)[]) =>
+  batchDelete: (ids: number[]) =>
     request.delete('/api/v1/dict/batch', { data: { ids } }),
 };

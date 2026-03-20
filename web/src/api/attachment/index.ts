@@ -25,11 +25,11 @@ export interface UploadResponse {
 
 export const attachmentApi = {
   // 上传文件
-  uploadFile: (file: File, storageEnvId?: number) => {
+  uploadFile: (file: File, envCode?: string) => {
     const formData = new FormData();
     formData.append('file', file);
-    if (storageEnvId) {
-      formData.append('storageEnvId', String(storageEnvId));
+    if (envCode) {
+      formData.append('envCode', envCode);
     }
     return request.post<UploadResponse>('/api/v1/attachment/upload-file', formData, {
       headers: {
@@ -55,8 +55,8 @@ export const attachmentApi = {
     request.get<Attachment>(`/api/v1/attachment/${attachmentId}`),
 
   // 获取文件访问URL
-  getUrl: (attachmentId: number, expireSeconds?: number) =>
-    request.get<{ url: string }>(`/api/v1/attachment/${attachmentId}/url`, { params: { expireSeconds } }),
+  getUrl: (attachmentId: number, expires?: number) =>
+    request.get<{ url: string }>(`/api/v1/attachment/${attachmentId}/url`, { params: { expires } }),
 
   // 下载文件
   download: (attachmentId: number) =>

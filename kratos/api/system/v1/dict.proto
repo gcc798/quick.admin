@@ -1,0 +1,25 @@
+syntax = "proto3";
+package api.system.v1;
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+import "google/api/annotations.proto";
+import "system/v1/auth.proto";
+service DictService {
+  rpc CreateDict (DictItem) returns (MessageReply) { option (google.api.http) = { post: "/api/v1/dict" body: "*" }; }
+  rpc PageDict (PageDictRequest) returns (PageDictReply) { option (google.api.http) = { post: "/api/v1/dict/page" body: "*" }; }
+  rpc BatchDeleteDict (DictBatchIdsRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/dict/batch" body: "*" }; }
+  rpc GetDictByType (GetDictByTypeRequest) returns (DictListReply) { option (google.api.http) = { get: "/api/v1/dict/type" }; }
+  rpc GetDictLabel (GetDictLabelRequest) returns (DictLabelReply) { option (google.api.http) = { get: "/api/v1/dict/label" }; }
+  rpc UpdateDict (UpdateDictRequest) returns (MessageReply) { option (google.api.http) = { put: "/api/v1/dict/{id}" body: "*" }; }
+  rpc GetDictById (DictIdRequest) returns (DictItem) { option (google.api.http) = { get: "/api/v1/dict/{id}" }; }
+  rpc DeleteDict (DictIdRequest) returns (MessageReply) { option (google.api.http) = { delete: "/api/v1/dict/{id}" }; }
+}
+message DictIdRequest { int64 id = 1; }
+message DictBatchIdsRequest { repeated int64 ids = 1; }
+message PageDictRequest { int64 pageNum = 1; int64 pageSize = 2; string dictType = 3; string dictLabel = 4; optional int32 status = 5; }
+message GetDictByTypeRequest { string dictType = 1; optional int64 parentId = 2; }
+message GetDictLabelRequest { string dictType = 1; string dictValue = 2; }
+message DictItem { int64 id = 1; int64 parentId = 2; string dictType = 3; string dictLabel = 4; string dictValue = 5; int32 status = 6; int64 sort = 7; string remark = 8; string createdTime = 9; string updatedTime = 10; bool isDefault = 11; int64 createBy = 12; int64 updateBy = 13; }
+message UpdateDictRequest { int64 id = 1; int64 parentId = 2; string dictType = 3; string dictLabel = 4; string dictValue = 5; int32 status = 6; int64 sort = 7; string remark = 8; bool isDefault = 9; }
+message PageDictReply { repeated DictItem list = 1; int64 total = 2; int64 pageNum = 3; int64 pageSize = 4; }
+message DictListReply { repeated DictItem items = 1; }
+message DictLabelReply { string label = 1; }

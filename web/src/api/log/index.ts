@@ -53,11 +53,11 @@ export const logApi = {
     request.get<OperLog>(`/api/v1/operLog/${id}`),
 
   // 清空登录日志
-  cleanLoginLog: (params: { days: number }) =>
+  cleanLoginLog: (params: { days: number } = { days: 30 }) =>
     request.post('/api/v1/loginLog/clean', params),
 
   // 清空操作日志
-  cleanOperLog: (params: { days: number }) =>
+  cleanOperLog: (params: { days: number } = { days: 30 }) =>
     request.post('/api/v1/operLog/clean', params),
 
   // 删除登录日志

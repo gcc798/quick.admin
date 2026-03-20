@@ -1,7 +1,7 @@
 // API 响应基础类型
 export interface ApiResponse<T = any> {
   code: number;
-  message: string;
+  msg: string;
   data: T;
 }
 
@@ -43,9 +43,6 @@ export interface LoginParams {
   phonenumber?: string;
   clientKey: string;
   clientSecret: string;
-  captchaType?: string;
-  captchaId?: string;
-  captchaCode?: string;
 }
 
 // 登录响应

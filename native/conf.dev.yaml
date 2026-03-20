@@ -1,0 +1,71 @@
+env: "development"
+server:
+  port: 9009
+
+database:
+  dsn: "host=127.0.0.1 user=postgres password=post123 dbname=nai-tizi port=5433 sslmode=disable TimeZone=Asia/Shanghai"
+  maxOpenConns: 100           # 最大打开连接数
+  maxIdleConns: 10            # 最大空闲连接数
+  connMaxLifetimeMinutes: 60  # 连接最大生命周期（分钟）
+  slowThreshold: 100          # 慢 SQL 阈值（毫秒），默认 100ms
+  enableSoftDelete: false      # 是否启用软删除，默认 true（true=软删除，false=物理删除）
+
+redis:
+  addr: "127.0.0.1:6379"
+  password: "123456"
+  db: 0
+
+jwt:
+  secret: "your-256-bit-secret"
+  expire: 7200
+
+# 认证配置
+auth:
+  tokenHeader: "Authorization"  # Token 请求头名称，默认 "Authorization"
+  allowConcurrent: false         # 是否允许同一用户并发登录，默认 false
+  shareToken: false              # 并发登录时是否共享 Token，默认 false（仅在 allowConcurrent=true 时生效）
+  captchaEnabled: false          # 是否启用图形验证码（密码登录时），默认 false
+  smsCodeEnabled: true           # 是否启用短信验证码，默认 true
+  emailCodeEnabled: true         # 是否启用邮箱验证码，默认 true
+
+wechat:
+  enabled: true
+  appId: "wxaa7706c5732cbb05"
+  secret: "your-wechat-secret"
+  templateId: ""  # 设备控制通知模板ID（可选）
+
+mqtt:
+  enabled: true
+  broker: "tcp://127.0.0.1:1883"
+  clientId: "NTZ-server"
+  username: "server"
+  password: "your-mqtt-password"
+  qos: 1
+
+rabbitmq:
+  enabled: true
+  url: "amqp://username:password@127.0.0.1:5672/"
+  exchange: "NTZ.topic"
+
+sms:
+  enabled: true
+  accessKeyId: "your-access-key-id"
+  accessKeySecret: "your-access-key-secret"
+  signName: "智控猫"
+  templateCode: "SMS_CODE_TEMPLATE" # 需要从sys_dict_data表查询获取
+
+s3:
+  enabled: true                                      # 是否启用S3存储
+  endpoint: "localhost:9000"                         # RustFS服务器地址
+  accessKeyId: "your-access-key-id"               # 访问密钥ID
+  secretAccessKey: "your-secret-access-key"  # 访问密钥
+  region: "auto"                                     # 区域（RustFS可任意设置）
+  bucket: "nati-tizi"                                # 默认存储桶名称
+  useSSL: false                                      # 是否使用SSL
+  forcePathStyle: true                               # 强制路径样式（RustFS需要）
+
+scheduler:
+  enabled: true
+
+websocket:
+  enabled: true

@@ -4,7 +4,6 @@ import type {
   LoginResponse,
   RefreshTokenParams,
   RefreshTokenResponse,
-  UserInfo,
 } from '@/types/api';
 
 export const authApi = {
@@ -19,13 +18,13 @@ export const authApi = {
     request.post<RefreshTokenResponse>('/auth/refresh', params),
 
   // 获取当前用户信息
-  me: () => request.get<UserInfo>('/me'),
+  me: () => request.get<{ userId: number }>('/me'),
 
   // 发送短信验证码
   sendSmsCode: (phonenumber: string) =>
-    request.post('/auth/sms', { phonenumber }),
+    request.post('/captcha/sms', { phonenumber }),
 
   // 发送邮箱验证码
   sendEmailCode: (email: string) =>
-    request.post('/auth/email', { email }),
+    request.post('/captcha/email', { email }),
 };
