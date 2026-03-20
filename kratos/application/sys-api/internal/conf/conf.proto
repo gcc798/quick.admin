@@ -47,4 +47,6 @@ message Data {
 
 message Redis {
   string addr = 1;
+  string password = 2;
+  int64 db = 3;
 }

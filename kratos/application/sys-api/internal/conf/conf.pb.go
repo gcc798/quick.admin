@@ -436,6 +436,8 @@ func (x *Data) GetRedis() *Redis {
 type Redis struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Addr          string                 `protobuf:"bytes,1,opt,name=addr,proto3" json:"addr,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Db            int64                  `protobuf:"varint,3,opt,name=db,proto3" json:"db,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -477,6 +479,20 @@ func (x *Redis) GetAddr() string {
 	return ""
 }
 
+func (x *Redis) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *Redis) GetDb() int64 {
+	if x != nil {
+		return x.Db
+	}
+	return 0
+}
+
 var File_application_sys_api_internal_conf_conf_proto protoreflect.FileDescriptor
 
 const file_application_sys_api_internal_conf_conf_proto_rawDesc = "" +
@@ -508,9 +524,11 @@ const file_application_sys_api_internal_conf_conf_proto_rawDesc = "" +
 	"\tnamespace\x18\x04 \x01(\tR\tnamespace\x12\x18\n" +
 	"\atimeout\x18\x05 \x01(\tR\atimeout\"7\n" +
 	"\x04Data\x12/\n" +
-	"\x05redis\x18\x01 \x01(\v2\x19.kratos.conf.sysapi.RedisR\x05redis\"\x1b\n" +
+	"\x05redis\x18\x01 \x01(\v2\x19.kratos.conf.sysapi.RedisR\x05redis\"G\n" +
 	"\x05Redis\x12\x12\n" +
-	"\x04addr\x18\x01 \x01(\tR\x04addrBKZIgithub.com/force-c/nai-tizi/kratos/application/sys-api/internal/conf;confb\x06proto3"
+	"\x04addr\x18\x01 \x01(\tR\x04addr\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x0e\n" +
+	"\x02db\x18\x03 \x01(\x03R\x02dbBKZIgithub.com/force-c/nai-tizi/kratos/application/sys-api/internal/conf;confb\x06proto3"
 
 var (
 	file_application_sys_api_internal_conf_conf_proto_rawDescOnce sync.Once
