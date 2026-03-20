@@ -1,73 +1,128 @@
-# Nai-Tizi - 极简 Go Web 脚手架
+# nai-tizi
 
-[![Go Version](https://img.shields.io/badge/Go-1.25.6+-00ADD8?style=flat&logo=go)](https://golang.org)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-336791?style=flat&logo=postgresql)](https://www.postgresql.org)
-[![Vue 3](https://img.shields.io/badge/Vue-3.x-4FC08D?style=flat&logo=vue.js)](https://vuejs.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+## 项目说明
 
-**Nai-Tizi** 是一款专注于**开发体验**的极简 Go Web 脚手架。它拒绝过度封装，保留了 Gin 的原生体验，同时集成了企业级开发必备的核心组件（JWT、Casbin、GORM、Zap）。
+这是一个极简脚手架仓库，用来并行放置 `nai-tizi` 的多套后端实现和前端工程，便于保留业务基线、承载不同框架版本以及统一开展开发与联调。
 
-**核心理念：** 简单、透明
+当前仓库更偏向工程骨架与实现对照集合，重点是：
 
-## ✨ 核心特性
+- 保留 `native` 作为业务基线
+- 提供 `gozero`、`kratos` 两套重写实现
+- 提供 `web` 前端工程作为脚手架组成部分
 
-- **极简架构**：标准的 Controller-Service-Model 分层，依赖注入清晰明了。
-- **完备认证**：开箱即用的双 Token (Access/Refresh) 认证 + Casbin RBAC 权限控制。
-- **企业级基建**：集成 GORM(PostgreSQL)、Redis、Zap 日志、Prometheus 监控。
-- **现代化前端**：配套 Vue 3 + TypeScript + Ant Design Vue 管理后台，支持动态路由。
-- **云原生就绪**：提供 Dockerfile、Docker Compose 及 K8s 部署清单。
+当前主要目录：
 
-## 🚀 30秒快速开始
+- `native/`
+  - 原始后端实现
+  - 作为业务基线和对照参考
+- `gozero/`
+  - 基于 go-zero 的后端重写版本
+- `kratos/`
+  - 基于 Kratos 的后端重写版本
+- `web/`
+  - 前端工程
 
-1. **克隆项目**
-   ```bash
-   git clone git@github.com:force-c/nai-tizi.git
-   ```
+## 仓库结构
 
-2. **配置运行**
-   ```bash
-   cd nai-tizi
-   go mod download
-   cp cmd/api/conf.dev.yaml cmd/api/conf.prod.yaml
-   
-   # 运行服务
-   make run
-   ```
-   > 默认监听端口: 9009 | Swagger 文档: http://localhost:9009/swagger/index.html
-
-3. **启动前端**
-   ```bash
-   cd web && pnpm install && pnpm dev
-   ```
-   > 访问地址: http://localhost:3000 (admin / admin123)
-
-## 📖 项目结构
-
-```
+```text
 nai-tizi/
-├── cmd/api/                # 入口与配置
-├── internal/
-│   ├── controller/         # 接口层 (参数解析/响应)
-│   ├── service/            # 业务层 (核心逻辑/事务)
-│   ├── domain/             # 领域层 (Model/DO/DTO)
-│   ├── infrastructure/     # 基础层 (DB/Redis/MQ/S3)
-│   └── router/             # 路由注册
-├── web/                    # 前端源码 (Vue 3)
-├── dockerfile/             # 容器化构建
-└── k8s/                    # Kubernetes 部署
+├── native/
+├── gozero/
+├── kratos/
+├── web/
+├── LICENSE
+└── README.md
 ```
 
-## � 文档支持
+## 各子工程职责
 
-详细文档请查阅 `docs/` 目录：
-- [开发规范](docs/01-规范/开发规范指南.md)
-- [API 文档](docs/04-API文档/Swagger文档使用指南.md)
-- [部署说明](docs/05-部署运维/部署说明.md)
+### `native/`
 
-## 🤝 参与贡献
+原始业务后端。
 
-欢迎提交 PR 或 Issue。
-仓库地址：[github.com/force-c/nai-tizi](https://github.com/force-c/nai-tizi)
+特点：
 
----
-**License**: MIT
+- 作为业务语义基线
+- 路由、参数、返回结构、错误语义都以它为重要参考
+
+### `gozero/`
+
+基于 go-zero 的重写版本。
+
+特点：
+
+- 保留了 `sys-api` / `sys-rpc` 分层
+- 主要用于和原始实现做框架迁移对照
+
+### `kratos/`
+
+基于 Kratos 的重写版本。
+
+特点：
+
+- 当前采用 monorepo 结构
+- 主要服务位于：
+  - `kratos/application/sys-api`
+  - `kratos/application/sys-rpc`
+- 共享 proto 位于：
+  - `kratos/api/system/v1`
+- 共享基础能力位于：
+  - `kratos/pkg`
+- 详细文档位于：
+  - `kratos/docs`
+
+### `web/`
+
+前端工程。
+
+特点：
+
+- 对接后端接口
+- 在重写过程中，尽量保持零改动或最小改动适配后端
+
+## 当前约定
+
+- `native/` 作为业务基线
+- `gozero/` 和 `kratos/` 是两套独立重写实现
+- 前端联调时，需要明确当前对接的是哪一套后端
+- 如果对比接口契约、行为或返回结构，优先参考 `native/`
+
+## 常见入口
+
+### 启动或开发 Kratos 版本
+
+目录：
+
+- [/Users/guoc/dev/code_go/src/nai-tizi/kratos](/Users/guoc/dev/code_go/src/nai-tizi/kratos)
+
+常用命令：
+
+```bash
+cd kratos
+make conf
+make proto-all
+make wire
+make ent
+make test
+make build-all
+```
+
+### 启动或开发 go-zero 版本
+
+目录：
+
+- [/Users/guoc/dev/code_go/src/nai-tizi/gozero](/Users/guoc/dev/code_go/src/nai-tizi/gozero)
+
+### 开发前端
+
+目录：
+
+- [/Users/guoc/dev/code_go/src/nai-tizi/web](/Users/guoc/dev/code_go/src/nai-tizi/web)
+
+## 说明
+
+如果后续继续扩展新的后端实现或新的微服务，建议继续保持：
+
+- 仓库根目录按实现或子系统分目录
+- 各实现内部再按自身框架规范组织
+- 公共契约、文档和基础设施说明尽量写在对应子工程内
