@@ -13,7 +13,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const openAPISpecPath = "api/openapi.yaml"
+const openAPISpecPath = "api/system/v1.openapi.yaml"
 
 func registerSwaggerEndpoints(srv *khttp.Server) {
 	if srv == nil {

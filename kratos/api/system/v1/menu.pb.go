@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.19.4
-// source: api/system/v1/menu.proto
+// source: system/v1/menu.proto
 
 package v1
 
@@ -30,7 +30,7 @@ type GetUserMenuTreeRequest struct {
 
 func (x *GetUserMenuTreeRequest) Reset() {
 	*x = GetUserMenuTreeRequest{}
-	mi := &file_api_system_v1_menu_proto_msgTypes[0]
+	mi := &file_system_v1_menu_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +42,7 @@ func (x *GetUserMenuTreeRequest) String() string {
 func (*GetUserMenuTreeRequest) ProtoMessage() {}
 
 func (x *GetUserMenuTreeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_menu_proto_msgTypes[0]
+	mi := &file_system_v1_menu_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +55,7 @@ func (x *GetUserMenuTreeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserMenuTreeRequest.ProtoReflect.Descriptor instead.
 func (*GetUserMenuTreeRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_menu_proto_rawDescGZIP(), []int{0}
+	return file_system_v1_menu_proto_rawDescGZIP(), []int{0}
 }
 
 type GetMenuTreeRequest struct {
@@ -66,7 +66,7 @@ type GetMenuTreeRequest struct {
 
 func (x *GetMenuTreeRequest) Reset() {
 	*x = GetMenuTreeRequest{}
-	mi := &file_api_system_v1_menu_proto_msgTypes[1]
+	mi := &file_system_v1_menu_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -78,7 +78,7 @@ func (x *GetMenuTreeRequest) String() string {
 func (*GetMenuTreeRequest) ProtoMessage() {}
 
 func (x *GetMenuTreeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_menu_proto_msgTypes[1]
+	mi := &file_system_v1_menu_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -91,7 +91,7 @@ func (x *GetMenuTreeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMenuTreeRequest.ProtoReflect.Descriptor instead.
 func (*GetMenuTreeRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_menu_proto_rawDescGZIP(), []int{1}
+	return file_system_v1_menu_proto_rawDescGZIP(), []int{1}
 }
 
 type GetMenuListRequest struct {
@@ -102,7 +102,7 @@ type GetMenuListRequest struct {
 
 func (x *GetMenuListRequest) Reset() {
 	*x = GetMenuListRequest{}
-	mi := &file_api_system_v1_menu_proto_msgTypes[2]
+	mi := &file_system_v1_menu_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -114,7 +114,7 @@ func (x *GetMenuListRequest) String() string {
 func (*GetMenuListRequest) ProtoMessage() {}
 
 func (x *GetMenuListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_menu_proto_msgTypes[2]
+	mi := &file_system_v1_menu_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -127,7 +127,7 @@ func (x *GetMenuListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMenuListRequest.ProtoReflect.Descriptor instead.
 func (*GetMenuListRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_menu_proto_rawDescGZIP(), []int{2}
+	return file_system_v1_menu_proto_rawDescGZIP(), []int{2}
 }
 
 type MenuIdRequest struct {
@@ -139,7 +139,7 @@ type MenuIdRequest struct {
 
 func (x *MenuIdRequest) Reset() {
 	*x = MenuIdRequest{}
-	mi := &file_api_system_v1_menu_proto_msgTypes[3]
+	mi := &file_system_v1_menu_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -151,7 +151,7 @@ func (x *MenuIdRequest) String() string {
 func (*MenuIdRequest) ProtoMessage() {}
 
 func (x *MenuIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_menu_proto_msgTypes[3]
+	mi := &file_system_v1_menu_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -164,7 +164,7 @@ func (x *MenuIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuIdRequest.ProtoReflect.Descriptor instead.
 func (*MenuIdRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_menu_proto_rawDescGZIP(), []int{3}
+	return file_system_v1_menu_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *MenuIdRequest) GetId() int64 {
@@ -202,7 +202,7 @@ type MenuItem struct {
 
 func (x *MenuItem) Reset() {
 	*x = MenuItem{}
-	mi := &file_api_system_v1_menu_proto_msgTypes[4]
+	mi := &file_system_v1_menu_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -214,7 +214,7 @@ func (x *MenuItem) String() string {
 func (*MenuItem) ProtoMessage() {}
 
 func (x *MenuItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_menu_proto_msgTypes[4]
+	mi := &file_system_v1_menu_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -227,7 +227,7 @@ func (x *MenuItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuItem.ProtoReflect.Descriptor instead.
 func (*MenuItem) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_menu_proto_rawDescGZIP(), []int{4}
+	return file_system_v1_menu_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *MenuItem) GetId() int64 {
@@ -379,7 +379,7 @@ type MenuTreeReply struct {
 
 func (x *MenuTreeReply) Reset() {
 	*x = MenuTreeReply{}
-	mi := &file_api_system_v1_menu_proto_msgTypes[5]
+	mi := &file_system_v1_menu_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -391,7 +391,7 @@ func (x *MenuTreeReply) String() string {
 func (*MenuTreeReply) ProtoMessage() {}
 
 func (x *MenuTreeReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_menu_proto_msgTypes[5]
+	mi := &file_system_v1_menu_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -404,7 +404,7 @@ func (x *MenuTreeReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuTreeReply.ProtoReflect.Descriptor instead.
 func (*MenuTreeReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_menu_proto_rawDescGZIP(), []int{5}
+	return file_system_v1_menu_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *MenuTreeReply) GetItems() []*MenuItem {
@@ -423,7 +423,7 @@ type MenuListReply struct {
 
 func (x *MenuListReply) Reset() {
 	*x = MenuListReply{}
-	mi := &file_api_system_v1_menu_proto_msgTypes[6]
+	mi := &file_system_v1_menu_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -435,7 +435,7 @@ func (x *MenuListReply) String() string {
 func (*MenuListReply) ProtoMessage() {}
 
 func (x *MenuListReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_menu_proto_msgTypes[6]
+	mi := &file_system_v1_menu_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -448,7 +448,7 @@ func (x *MenuListReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MenuListReply.ProtoReflect.Descriptor instead.
 func (*MenuListReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_menu_proto_rawDescGZIP(), []int{6}
+	return file_system_v1_menu_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *MenuListReply) GetItems() []*MenuItem {
@@ -483,7 +483,7 @@ type UpdateMenuRequest struct {
 
 func (x *UpdateMenuRequest) Reset() {
 	*x = UpdateMenuRequest{}
-	mi := &file_api_system_v1_menu_proto_msgTypes[7]
+	mi := &file_system_v1_menu_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -495,7 +495,7 @@ func (x *UpdateMenuRequest) String() string {
 func (*UpdateMenuRequest) ProtoMessage() {}
 
 func (x *UpdateMenuRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_menu_proto_msgTypes[7]
+	mi := &file_system_v1_menu_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -508,7 +508,7 @@ func (x *UpdateMenuRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMenuRequest.ProtoReflect.Descriptor instead.
 func (*UpdateMenuRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_menu_proto_rawDescGZIP(), []int{7}
+	return file_system_v1_menu_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateMenuRequest) GetId() int64 {
@@ -630,11 +630,11 @@ func (x *UpdateMenuRequest) GetUpdateBy() int64 {
 	return 0
 }
 
-var File_api_system_v1_menu_proto protoreflect.FileDescriptor
+var File_system_v1_menu_proto protoreflect.FileDescriptor
 
-const file_api_system_v1_menu_proto_rawDesc = "" +
+const file_system_v1_menu_proto_rawDesc = "" +
 	"\n" +
-	"\x18api/system/v1/menu.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x18api/system/v1/auth.proto\"\x18\n" +
+	"\x14system/v1/menu.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x14system/v1/auth.proto\"\x18\n" +
 	"\x16GetUserMenuTreeRequest\"\x14\n" +
 	"\x12GetMenuTreeRequest\"\x14\n" +
 	"\x12GetMenuListRequest\"\x1f\n" +
@@ -698,19 +698,19 @@ const file_api_system_v1_menu_proto_rawDesc = "" +
 	"DeleteMenu\x12\x1c.api.system.v1.MenuIdRequest\x1a\x1b.api.system.v1.MessageReply\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/api/v1/menu/{id}B5Z3github.com/force-c/nai-tizi/kratos/api/system/v1;v1b\x06proto3"
 
 var (
-	file_api_system_v1_menu_proto_rawDescOnce sync.Once
-	file_api_system_v1_menu_proto_rawDescData []byte
+	file_system_v1_menu_proto_rawDescOnce sync.Once
+	file_system_v1_menu_proto_rawDescData []byte
 )
 
-func file_api_system_v1_menu_proto_rawDescGZIP() []byte {
-	file_api_system_v1_menu_proto_rawDescOnce.Do(func() {
-		file_api_system_v1_menu_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_system_v1_menu_proto_rawDesc), len(file_api_system_v1_menu_proto_rawDesc)))
+func file_system_v1_menu_proto_rawDescGZIP() []byte {
+	file_system_v1_menu_proto_rawDescOnce.Do(func() {
+		file_system_v1_menu_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_system_v1_menu_proto_rawDesc), len(file_system_v1_menu_proto_rawDesc)))
 	})
-	return file_api_system_v1_menu_proto_rawDescData
+	return file_system_v1_menu_proto_rawDescData
 }
 
-var file_api_system_v1_menu_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
-var file_api_system_v1_menu_proto_goTypes = []any{
+var file_system_v1_menu_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_system_v1_menu_proto_goTypes = []any{
 	(*GetUserMenuTreeRequest)(nil), // 0: api.system.v1.GetUserMenuTreeRequest
 	(*GetMenuTreeRequest)(nil),     // 1: api.system.v1.GetMenuTreeRequest
 	(*GetMenuListRequest)(nil),     // 2: api.system.v1.GetMenuListRequest
@@ -721,7 +721,7 @@ var file_api_system_v1_menu_proto_goTypes = []any{
 	(*UpdateMenuRequest)(nil),      // 7: api.system.v1.UpdateMenuRequest
 	(*MessageReply)(nil),           // 8: api.system.v1.MessageReply
 }
-var file_api_system_v1_menu_proto_depIdxs = []int32{
+var file_system_v1_menu_proto_depIdxs = []int32{
 	4,  // 0: api.system.v1.MenuItem.children:type_name -> api.system.v1.MenuItem
 	4,  // 1: api.system.v1.MenuTreeReply.items:type_name -> api.system.v1.MenuItem
 	4,  // 2: api.system.v1.MenuListReply.items:type_name -> api.system.v1.MenuItem
@@ -746,27 +746,27 @@ var file_api_system_v1_menu_proto_depIdxs = []int32{
 	0,  // [0:3] is the sub-list for field type_name
 }
 
-func init() { file_api_system_v1_menu_proto_init() }
-func file_api_system_v1_menu_proto_init() {
-	if File_api_system_v1_menu_proto != nil {
+func init() { file_system_v1_menu_proto_init() }
+func file_system_v1_menu_proto_init() {
+	if File_system_v1_menu_proto != nil {
 		return
 	}
-	file_api_system_v1_auth_proto_init()
+	file_system_v1_auth_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_system_v1_menu_proto_rawDesc), len(file_api_system_v1_menu_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_v1_menu_proto_rawDesc), len(file_system_v1_menu_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_system_v1_menu_proto_goTypes,
-		DependencyIndexes: file_api_system_v1_menu_proto_depIdxs,
-		MessageInfos:      file_api_system_v1_menu_proto_msgTypes,
+		GoTypes:           file_system_v1_menu_proto_goTypes,
+		DependencyIndexes: file_system_v1_menu_proto_depIdxs,
+		MessageInfos:      file_system_v1_menu_proto_msgTypes,
 	}.Build()
-	File_api_system_v1_menu_proto = out.File
-	file_api_system_v1_menu_proto_goTypes = nil
-	file_api_system_v1_menu_proto_depIdxs = nil
+	File_system_v1_menu_proto = out.File
+	file_system_v1_menu_proto_goTypes = nil
+	file_system_v1_menu_proto_depIdxs = nil
 }

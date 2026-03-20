@@ -9,7 +9,7 @@ import (
 	kgrpc "github.com/go-kratos/kratos/v2/transport/grpc"
 )
 
-func NewGRPCServer(c conf.GRPC,
+func NewGRPCServer(c *conf.GRPC,
 	healthSvc *service.HealthServiceService,
 	authSvc *service.AuthServiceService,
 	captchaSvc *service.CaptchaServiceService,
@@ -25,12 +25,12 @@ func NewGRPCServer(c conf.GRPC,
 	attachmentSvc *service.AttachmentServiceService,
 ) *kgrpc.Server {
 	timeout := time.Second
-	if c.Timeout != "" {
-		if parsed, err := time.ParseDuration(c.Timeout); err == nil {
+	if c.GetTimeout() != "" {
+		if parsed, err := time.ParseDuration(c.GetTimeout()); err == nil {
 			timeout = parsed
 		}
 	}
-	srv := kgrpc.NewServer(kgrpc.Network(c.Network), kgrpc.Address(c.Addr), kgrpc.Timeout(timeout))
+	srv := kgrpc.NewServer(kgrpc.Network(c.GetNetwork()), kgrpc.Address(c.GetAddr()), kgrpc.Timeout(timeout))
 	v1.RegisterHealthServiceServer(srv, healthSvc)
 	v1.RegisterAuthServiceServer(srv, authSvc)
 	v1.RegisterCaptchaServiceServer(srv, captchaSvc)

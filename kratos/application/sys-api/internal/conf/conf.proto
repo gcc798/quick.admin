@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package kratos.conf.sysapi;
+
+option go_package = "github.com/force-c/nai-tizi/kratos/application/sys-api/internal/conf;conf";
+
+message Bootstrap {
+  Server server = 1;
+  Data data = 2;
+}
+
+message Server {
+  HTTP http = 1;
+  RPC rpc = 2;
+}
+
+message HTTP {
+  string network = 1;
+  string addr = 2;
+  string timeout = 3;
+}
+
+message RPC {
+  string mode = 1;
+  string endpoint = 2;
+  string timeout = 3;
+  RPCDiscovery discovery = 4;
+}
+
+message RPCDiscovery {
+  string driver = 1;
+  string service = 2;
+  RegistryEtcd etcd = 3;
+}
+
+message RegistryEtcd {
+  repeated string endpoints = 1;
+  string username = 2;
+  string password = 3;
+  string namespace = 4;
+  string timeout = 5;
+}
+
+message Data {
+  Redis redis = 1;
+}
+
+message Redis {
+  string addr = 1;
+}

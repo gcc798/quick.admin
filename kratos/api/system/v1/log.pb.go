@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.19.4
-// source: api/system/v1/log.proto
+// source: system/v1/log.proto
 
 package v1
 
@@ -31,7 +31,7 @@ type LogIdRequest struct {
 
 func (x *LogIdRequest) Reset() {
 	*x = LogIdRequest{}
-	mi := &file_api_system_v1_log_proto_msgTypes[0]
+	mi := &file_system_v1_log_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *LogIdRequest) String() string {
 func (*LogIdRequest) ProtoMessage() {}
 
 func (x *LogIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[0]
+	mi := &file_system_v1_log_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *LogIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogIdRequest.ProtoReflect.Descriptor instead.
 func (*LogIdRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{0}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *LogIdRequest) GetId() int64 {
@@ -75,7 +75,7 @@ type LogBatchIdsRequest struct {
 
 func (x *LogBatchIdsRequest) Reset() {
 	*x = LogBatchIdsRequest{}
-	mi := &file_api_system_v1_log_proto_msgTypes[1]
+	mi := &file_system_v1_log_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +87,7 @@ func (x *LogBatchIdsRequest) String() string {
 func (*LogBatchIdsRequest) ProtoMessage() {}
 
 func (x *LogBatchIdsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[1]
+	mi := &file_system_v1_log_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +100,7 @@ func (x *LogBatchIdsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogBatchIdsRequest.ProtoReflect.Descriptor instead.
 func (*LogBatchIdsRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{1}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *LogBatchIdsRequest) GetIds() []int64 {
@@ -119,7 +119,7 @@ type CleanLogRequest struct {
 
 func (x *CleanLogRequest) Reset() {
 	*x = CleanLogRequest{}
-	mi := &file_api_system_v1_log_proto_msgTypes[2]
+	mi := &file_system_v1_log_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -131,7 +131,7 @@ func (x *CleanLogRequest) String() string {
 func (*CleanLogRequest) ProtoMessage() {}
 
 func (x *CleanLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[2]
+	mi := &file_system_v1_log_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -144,7 +144,7 @@ func (x *CleanLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CleanLogRequest.ProtoReflect.Descriptor instead.
 func (*CleanLogRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{2}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CleanLogRequest) GetDays() int32 {
@@ -165,7 +165,7 @@ type LogCleanReply struct {
 
 func (x *LogCleanReply) Reset() {
 	*x = LogCleanReply{}
-	mi := &file_api_system_v1_log_proto_msgTypes[3]
+	mi := &file_system_v1_log_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -177,7 +177,7 @@ func (x *LogCleanReply) String() string {
 func (*LogCleanReply) ProtoMessage() {}
 
 func (x *LogCleanReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[3]
+	mi := &file_system_v1_log_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -190,7 +190,7 @@ func (x *LogCleanReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogCleanReply.ProtoReflect.Descriptor instead.
 func (*LogCleanReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{3}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *LogCleanReply) GetMessage() string {
@@ -229,7 +229,7 @@ type PageLoginLogRequest struct {
 
 func (x *PageLoginLogRequest) Reset() {
 	*x = PageLoginLogRequest{}
-	mi := &file_api_system_v1_log_proto_msgTypes[4]
+	mi := &file_system_v1_log_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -241,7 +241,7 @@ func (x *PageLoginLogRequest) String() string {
 func (*PageLoginLogRequest) ProtoMessage() {}
 
 func (x *PageLoginLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[4]
+	mi := &file_system_v1_log_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -254,7 +254,7 @@ func (x *PageLoginLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageLoginLogRequest.ProtoReflect.Descriptor instead.
 func (*PageLoginLogRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{4}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *PageLoginLogRequest) GetPageNum() int64 {
@@ -322,7 +322,7 @@ type PageOperLogRequest struct {
 
 func (x *PageOperLogRequest) Reset() {
 	*x = PageOperLogRequest{}
-	mi := &file_api_system_v1_log_proto_msgTypes[5]
+	mi := &file_system_v1_log_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -334,7 +334,7 @@ func (x *PageOperLogRequest) String() string {
 func (*PageOperLogRequest) ProtoMessage() {}
 
 func (x *PageOperLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[5]
+	mi := &file_system_v1_log_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -347,7 +347,7 @@ func (x *PageOperLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageOperLogRequest.ProtoReflect.Descriptor instead.
 func (*PageOperLogRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{5}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *PageOperLogRequest) GetPageNum() int64 {
@@ -422,7 +422,7 @@ type CreateLoginLogRequest struct {
 
 func (x *CreateLoginLogRequest) Reset() {
 	*x = CreateLoginLogRequest{}
-	mi := &file_api_system_v1_log_proto_msgTypes[6]
+	mi := &file_system_v1_log_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -434,7 +434,7 @@ func (x *CreateLoginLogRequest) String() string {
 func (*CreateLoginLogRequest) ProtoMessage() {}
 
 func (x *CreateLoginLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[6]
+	mi := &file_system_v1_log_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -447,7 +447,7 @@ func (x *CreateLoginLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateLoginLogRequest.ProtoReflect.Descriptor instead.
 func (*CreateLoginLogRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{6}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateLoginLogRequest) GetUserName() string {
@@ -523,7 +523,7 @@ type UpdateLoginLogRequest struct {
 
 func (x *UpdateLoginLogRequest) Reset() {
 	*x = UpdateLoginLogRequest{}
-	mi := &file_api_system_v1_log_proto_msgTypes[7]
+	mi := &file_system_v1_log_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -535,7 +535,7 @@ func (x *UpdateLoginLogRequest) String() string {
 func (*UpdateLoginLogRequest) ProtoMessage() {}
 
 func (x *UpdateLoginLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[7]
+	mi := &file_system_v1_log_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -548,7 +548,7 @@ func (x *UpdateLoginLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateLoginLogRequest.ProtoReflect.Descriptor instead.
 func (*UpdateLoginLogRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{7}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateLoginLogRequest) GetId() int64 {
@@ -637,7 +637,7 @@ type CreateOperLogRequest struct {
 
 func (x *CreateOperLogRequest) Reset() {
 	*x = CreateOperLogRequest{}
-	mi := &file_api_system_v1_log_proto_msgTypes[8]
+	mi := &file_system_v1_log_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -649,7 +649,7 @@ func (x *CreateOperLogRequest) String() string {
 func (*CreateOperLogRequest) ProtoMessage() {}
 
 func (x *CreateOperLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[8]
+	mi := &file_system_v1_log_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -662,7 +662,7 @@ func (x *CreateOperLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOperLogRequest.ProtoReflect.Descriptor instead.
 func (*CreateOperLogRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{8}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CreateOperLogRequest) GetTitle() string {
@@ -794,7 +794,7 @@ type UpdateOperLogRequest struct {
 
 func (x *UpdateOperLogRequest) Reset() {
 	*x = UpdateOperLogRequest{}
-	mi := &file_api_system_v1_log_proto_msgTypes[9]
+	mi := &file_system_v1_log_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -806,7 +806,7 @@ func (x *UpdateOperLogRequest) String() string {
 func (*UpdateOperLogRequest) ProtoMessage() {}
 
 func (x *UpdateOperLogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[9]
+	mi := &file_system_v1_log_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -819,7 +819,7 @@ func (x *UpdateOperLogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOperLogRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOperLogRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{9}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateOperLogRequest) GetId() int64 {
@@ -963,7 +963,7 @@ type LogItem struct {
 
 func (x *LogItem) Reset() {
 	*x = LogItem{}
-	mi := &file_api_system_v1_log_proto_msgTypes[10]
+	mi := &file_system_v1_log_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -975,7 +975,7 @@ func (x *LogItem) String() string {
 func (*LogItem) ProtoMessage() {}
 
 func (x *LogItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[10]
+	mi := &file_system_v1_log_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -988,7 +988,7 @@ func (x *LogItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LogItem.ProtoReflect.Descriptor instead.
 func (*LogItem) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{10}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *LogItem) GetId() int64 {
@@ -1150,7 +1150,7 @@ type PageLogReply struct {
 
 func (x *PageLogReply) Reset() {
 	*x = PageLogReply{}
-	mi := &file_api_system_v1_log_proto_msgTypes[11]
+	mi := &file_system_v1_log_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1162,7 +1162,7 @@ func (x *PageLogReply) String() string {
 func (*PageLogReply) ProtoMessage() {}
 
 func (x *PageLogReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_log_proto_msgTypes[11]
+	mi := &file_system_v1_log_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1175,7 +1175,7 @@ func (x *PageLogReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageLogReply.ProtoReflect.Descriptor instead.
 func (*PageLogReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_log_proto_rawDescGZIP(), []int{11}
+	return file_system_v1_log_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *PageLogReply) GetList() []*LogItem {
@@ -1206,11 +1206,11 @@ func (x *PageLogReply) GetPageSize() int64 {
 	return 0
 }
 
-var File_api_system_v1_log_proto protoreflect.FileDescriptor
+var File_system_v1_log_proto protoreflect.FileDescriptor
 
-const file_api_system_v1_log_proto_rawDesc = "" +
+const file_system_v1_log_proto_rawDesc = "" +
 	"\n" +
-	"\x17api/system/v1/log.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x18api/system/v1/auth.proto\"\x1e\n" +
+	"\x13system/v1/log.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x14system/v1/auth.proto\"\x1e\n" +
 	"\fLogIdRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"&\n" +
 	"\x12LogBatchIdsRequest\x12\x10\n" +
@@ -1352,19 +1352,19 @@ const file_api_system_v1_log_proto_rawDesc = "" +
 	"\rDeleteOperLog\x12\x1b.api.system.v1.LogIdRequest\x1a\x1b.api.system.v1.MessageReply\"\x1c\x82\xd3\xe4\x93\x02\x16*\x14/api/v1/operLog/{id}B5Z3github.com/force-c/nai-tizi/kratos/api/system/v1;v1b\x06proto3"
 
 var (
-	file_api_system_v1_log_proto_rawDescOnce sync.Once
-	file_api_system_v1_log_proto_rawDescData []byte
+	file_system_v1_log_proto_rawDescOnce sync.Once
+	file_system_v1_log_proto_rawDescData []byte
 )
 
-func file_api_system_v1_log_proto_rawDescGZIP() []byte {
-	file_api_system_v1_log_proto_rawDescOnce.Do(func() {
-		file_api_system_v1_log_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_system_v1_log_proto_rawDesc), len(file_api_system_v1_log_proto_rawDesc)))
+func file_system_v1_log_proto_rawDescGZIP() []byte {
+	file_system_v1_log_proto_rawDescOnce.Do(func() {
+		file_system_v1_log_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_system_v1_log_proto_rawDesc), len(file_system_v1_log_proto_rawDesc)))
 	})
-	return file_api_system_v1_log_proto_rawDescData
+	return file_system_v1_log_proto_rawDescData
 }
 
-var file_api_system_v1_log_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
-var file_api_system_v1_log_proto_goTypes = []any{
+var file_system_v1_log_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_system_v1_log_proto_goTypes = []any{
 	(*LogIdRequest)(nil),          // 0: api.system.v1.LogIdRequest
 	(*LogBatchIdsRequest)(nil),    // 1: api.system.v1.LogBatchIdsRequest
 	(*CleanLogRequest)(nil),       // 2: api.system.v1.CleanLogRequest
@@ -1379,7 +1379,7 @@ var file_api_system_v1_log_proto_goTypes = []any{
 	(*PageLogReply)(nil),          // 11: api.system.v1.PageLogReply
 	(*MessageReply)(nil),          // 12: api.system.v1.MessageReply
 }
-var file_api_system_v1_log_proto_depIdxs = []int32{
+var file_system_v1_log_proto_depIdxs = []int32{
 	10, // 0: api.system.v1.PageLogReply.list:type_name -> api.system.v1.LogItem
 	6,  // 1: api.system.v1.LoginLogService.CreateLoginLog:input_type -> api.system.v1.CreateLoginLogRequest
 	4,  // 2: api.system.v1.LoginLogService.PageLoginLog:input_type -> api.system.v1.PageLoginLogRequest
@@ -1416,29 +1416,29 @@ var file_api_system_v1_log_proto_depIdxs = []int32{
 	0,  // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_api_system_v1_log_proto_init() }
-func file_api_system_v1_log_proto_init() {
-	if File_api_system_v1_log_proto != nil {
+func init() { file_system_v1_log_proto_init() }
+func file_system_v1_log_proto_init() {
+	if File_system_v1_log_proto != nil {
 		return
 	}
-	file_api_system_v1_auth_proto_init()
-	file_api_system_v1_log_proto_msgTypes[4].OneofWrappers = []any{}
-	file_api_system_v1_log_proto_msgTypes[5].OneofWrappers = []any{}
+	file_system_v1_auth_proto_init()
+	file_system_v1_log_proto_msgTypes[4].OneofWrappers = []any{}
+	file_system_v1_log_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_system_v1_log_proto_rawDesc), len(file_api_system_v1_log_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_v1_log_proto_rawDesc), len(file_system_v1_log_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   2,
 		},
-		GoTypes:           file_api_system_v1_log_proto_goTypes,
-		DependencyIndexes: file_api_system_v1_log_proto_depIdxs,
-		MessageInfos:      file_api_system_v1_log_proto_msgTypes,
+		GoTypes:           file_system_v1_log_proto_goTypes,
+		DependencyIndexes: file_system_v1_log_proto_depIdxs,
+		MessageInfos:      file_system_v1_log_proto_msgTypes,
 	}.Build()
-	File_api_system_v1_log_proto = out.File
-	file_api_system_v1_log_proto_goTypes = nil
-	file_api_system_v1_log_proto_depIdxs = nil
+	File_system_v1_log_proto = out.File
+	file_system_v1_log_proto_goTypes = nil
+	file_system_v1_log_proto_depIdxs = nil
 }

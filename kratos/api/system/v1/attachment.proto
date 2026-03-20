@@ -3,7 +3,7 @@ package api.system.v1;
 option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
 import "google/api/annotations.proto";
 import "google/protobuf/struct.proto";
-import "api/system/v1/auth.proto";
+import "system/v1/auth.proto";
 service AttachmentService {
   rpc UploadFile (UploadFileRequest) returns (AttachmentItem) { option (google.api.http) = { post: "/api/v1/attachment/upload-file" body: "*" }; }
   rpc BindAttachmentToBusiness (BindAttachmentRequest) returns (MessageReply) { option (google.api.http) = { post: "/api/v1/attachment/{attachmentId}/bind" body: "*" }; }

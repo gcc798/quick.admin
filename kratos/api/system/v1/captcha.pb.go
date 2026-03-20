@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.19.4
-// source: api/system/v1/captcha.proto
+// source: system/v1/captcha.proto
 
 package v1
 
@@ -31,7 +31,7 @@ type GenerateImageCaptchaRequest struct {
 
 func (x *GenerateImageCaptchaRequest) Reset() {
 	*x = GenerateImageCaptchaRequest{}
-	mi := &file_api_system_v1_captcha_proto_msgTypes[0]
+	mi := &file_system_v1_captcha_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *GenerateImageCaptchaRequest) String() string {
 func (*GenerateImageCaptchaRequest) ProtoMessage() {}
 
 func (x *GenerateImageCaptchaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_captcha_proto_msgTypes[0]
+	mi := &file_system_v1_captcha_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *GenerateImageCaptchaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateImageCaptchaRequest.ProtoReflect.Descriptor instead.
 func (*GenerateImageCaptchaRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_captcha_proto_rawDescGZIP(), []int{0}
+	return file_system_v1_captcha_proto_rawDescGZIP(), []int{0}
 }
 
 type CaptchaReply struct {
@@ -71,7 +71,7 @@ type CaptchaReply struct {
 
 func (x *CaptchaReply) Reset() {
 	*x = CaptchaReply{}
-	mi := &file_api_system_v1_captcha_proto_msgTypes[1]
+	mi := &file_system_v1_captcha_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -83,7 +83,7 @@ func (x *CaptchaReply) String() string {
 func (*CaptchaReply) ProtoMessage() {}
 
 func (x *CaptchaReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_captcha_proto_msgTypes[1]
+	mi := &file_system_v1_captcha_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -96,7 +96,7 @@ func (x *CaptchaReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CaptchaReply.ProtoReflect.Descriptor instead.
 func (*CaptchaReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_captcha_proto_rawDescGZIP(), []int{1}
+	return file_system_v1_captcha_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CaptchaReply) GetId() string {
@@ -137,7 +137,7 @@ type SendSMSCaptchaRequest struct {
 
 func (x *SendSMSCaptchaRequest) Reset() {
 	*x = SendSMSCaptchaRequest{}
-	mi := &file_api_system_v1_captcha_proto_msgTypes[2]
+	mi := &file_system_v1_captcha_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -149,7 +149,7 @@ func (x *SendSMSCaptchaRequest) String() string {
 func (*SendSMSCaptchaRequest) ProtoMessage() {}
 
 func (x *SendSMSCaptchaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_captcha_proto_msgTypes[2]
+	mi := &file_system_v1_captcha_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -162,7 +162,7 @@ func (x *SendSMSCaptchaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendSMSCaptchaRequest.ProtoReflect.Descriptor instead.
 func (*SendSMSCaptchaRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_captcha_proto_rawDescGZIP(), []int{2}
+	return file_system_v1_captcha_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SendSMSCaptchaRequest) GetPhonenumber() string {
@@ -188,7 +188,7 @@ type SendEmailCaptchaRequest struct {
 
 func (x *SendEmailCaptchaRequest) Reset() {
 	*x = SendEmailCaptchaRequest{}
-	mi := &file_api_system_v1_captcha_proto_msgTypes[3]
+	mi := &file_system_v1_captcha_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -200,7 +200,7 @@ func (x *SendEmailCaptchaRequest) String() string {
 func (*SendEmailCaptchaRequest) ProtoMessage() {}
 
 func (x *SendEmailCaptchaRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_captcha_proto_msgTypes[3]
+	mi := &file_system_v1_captcha_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -213,7 +213,7 @@ func (x *SendEmailCaptchaRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendEmailCaptchaRequest.ProtoReflect.Descriptor instead.
 func (*SendEmailCaptchaRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_captcha_proto_rawDescGZIP(), []int{3}
+	return file_system_v1_captcha_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SendEmailCaptchaRequest) GetEmail() string {
@@ -231,7 +231,7 @@ type GetEnabledTypesRequest struct {
 
 func (x *GetEnabledTypesRequest) Reset() {
 	*x = GetEnabledTypesRequest{}
-	mi := &file_api_system_v1_captcha_proto_msgTypes[4]
+	mi := &file_system_v1_captcha_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -243,7 +243,7 @@ func (x *GetEnabledTypesRequest) String() string {
 func (*GetEnabledTypesRequest) ProtoMessage() {}
 
 func (x *GetEnabledTypesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_captcha_proto_msgTypes[4]
+	mi := &file_system_v1_captcha_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -256,7 +256,7 @@ func (x *GetEnabledTypesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEnabledTypesRequest.ProtoReflect.Descriptor instead.
 func (*GetEnabledTypesRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_captcha_proto_rawDescGZIP(), []int{4}
+	return file_system_v1_captcha_proto_rawDescGZIP(), []int{4}
 }
 
 type GetEnabledTypesReply struct {
@@ -268,7 +268,7 @@ type GetEnabledTypesReply struct {
 
 func (x *GetEnabledTypesReply) Reset() {
 	*x = GetEnabledTypesReply{}
-	mi := &file_api_system_v1_captcha_proto_msgTypes[5]
+	mi := &file_system_v1_captcha_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -280,7 +280,7 @@ func (x *GetEnabledTypesReply) String() string {
 func (*GetEnabledTypesReply) ProtoMessage() {}
 
 func (x *GetEnabledTypesReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_captcha_proto_msgTypes[5]
+	mi := &file_system_v1_captcha_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -293,7 +293,7 @@ func (x *GetEnabledTypesReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEnabledTypesReply.ProtoReflect.Descriptor instead.
 func (*GetEnabledTypesReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_captcha_proto_rawDescGZIP(), []int{5}
+	return file_system_v1_captcha_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetEnabledTypesReply) GetItems() []string {
@@ -303,11 +303,11 @@ func (x *GetEnabledTypesReply) GetItems() []string {
 	return nil
 }
 
-var File_api_system_v1_captcha_proto protoreflect.FileDescriptor
+var File_system_v1_captcha_proto protoreflect.FileDescriptor
 
-const file_api_system_v1_captcha_proto_rawDesc = "" +
+const file_system_v1_captcha_proto_rawDesc = "" +
 	"\n" +
-	"\x1bapi/system/v1/captcha.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x1d\n" +
+	"\x17system/v1/captcha.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x1d\n" +
 	"\x1bGenerateImageCaptchaRequest\"{\n" +
 	"\fCaptchaReply\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
@@ -329,19 +329,19 @@ const file_api_system_v1_captcha_proto_rawDesc = "" +
 	"\x0fGetEnabledTypes\x12%.api.system.v1.GetEnabledTypesRequest\x1a#.api.system.v1.GetEnabledTypesReply\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/captcha/enabled-typesB5Z3github.com/force-c/nai-tizi/kratos/api/system/v1;v1b\x06proto3"
 
 var (
-	file_api_system_v1_captcha_proto_rawDescOnce sync.Once
-	file_api_system_v1_captcha_proto_rawDescData []byte
+	file_system_v1_captcha_proto_rawDescOnce sync.Once
+	file_system_v1_captcha_proto_rawDescData []byte
 )
 
-func file_api_system_v1_captcha_proto_rawDescGZIP() []byte {
-	file_api_system_v1_captcha_proto_rawDescOnce.Do(func() {
-		file_api_system_v1_captcha_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_system_v1_captcha_proto_rawDesc), len(file_api_system_v1_captcha_proto_rawDesc)))
+func file_system_v1_captcha_proto_rawDescGZIP() []byte {
+	file_system_v1_captcha_proto_rawDescOnce.Do(func() {
+		file_system_v1_captcha_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_system_v1_captcha_proto_rawDesc), len(file_system_v1_captcha_proto_rawDesc)))
 	})
-	return file_api_system_v1_captcha_proto_rawDescData
+	return file_system_v1_captcha_proto_rawDescData
 }
 
-var file_api_system_v1_captcha_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_api_system_v1_captcha_proto_goTypes = []any{
+var file_system_v1_captcha_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_system_v1_captcha_proto_goTypes = []any{
 	(*GenerateImageCaptchaRequest)(nil), // 0: api.system.v1.GenerateImageCaptchaRequest
 	(*CaptchaReply)(nil),                // 1: api.system.v1.CaptchaReply
 	(*SendSMSCaptchaRequest)(nil),       // 2: api.system.v1.SendSMSCaptchaRequest
@@ -350,7 +350,7 @@ var file_api_system_v1_captcha_proto_goTypes = []any{
 	(*GetEnabledTypesReply)(nil),        // 5: api.system.v1.GetEnabledTypesReply
 	(*structpb.Struct)(nil),             // 6: google.protobuf.Struct
 }
-var file_api_system_v1_captcha_proto_depIdxs = []int32{
+var file_system_v1_captcha_proto_depIdxs = []int32{
 	6, // 0: api.system.v1.CaptchaReply.data:type_name -> google.protobuf.Struct
 	0, // 1: api.system.v1.CaptchaService.GenerateImageCaptcha:input_type -> api.system.v1.GenerateImageCaptchaRequest
 	2, // 2: api.system.v1.CaptchaService.SendSMSCaptcha:input_type -> api.system.v1.SendSMSCaptchaRequest
@@ -367,26 +367,26 @@ var file_api_system_v1_captcha_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_api_system_v1_captcha_proto_init() }
-func file_api_system_v1_captcha_proto_init() {
-	if File_api_system_v1_captcha_proto != nil {
+func init() { file_system_v1_captcha_proto_init() }
+func file_system_v1_captcha_proto_init() {
+	if File_system_v1_captcha_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_system_v1_captcha_proto_rawDesc), len(file_api_system_v1_captcha_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_v1_captcha_proto_rawDesc), len(file_system_v1_captcha_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_system_v1_captcha_proto_goTypes,
-		DependencyIndexes: file_api_system_v1_captcha_proto_depIdxs,
-		MessageInfos:      file_api_system_v1_captcha_proto_msgTypes,
+		GoTypes:           file_system_v1_captcha_proto_goTypes,
+		DependencyIndexes: file_system_v1_captcha_proto_depIdxs,
+		MessageInfos:      file_system_v1_captcha_proto_msgTypes,
 	}.Build()
-	File_api_system_v1_captcha_proto = out.File
-	file_api_system_v1_captcha_proto_goTypes = nil
-	file_api_system_v1_captcha_proto_depIdxs = nil
+	File_system_v1_captcha_proto = out.File
+	file_system_v1_captcha_proto_goTypes = nil
+	file_system_v1_captcha_proto_depIdxs = nil
 }

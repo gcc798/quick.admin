@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.0
 // - protoc             v3.19.4
-// source: api/system/v1/dict.proto
+// source: system/v1/dict.proto
 
 package v1
 
@@ -383,5 +383,5 @@ var DictService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/system/v1/dict.proto",
+	Metadata: "system/v1/dict.proto",
 }

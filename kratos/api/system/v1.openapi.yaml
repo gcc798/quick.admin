@@ -1,0 +1,2885 @@
+components:
+    schemas:
+        api.system.v1.AssignRoleToUserRequest:
+            properties:
+                roleId:
+                    type: string
+                userId:
+                    type: string
+            type: object
+        api.system.v1.AttachmentDownloadReply:
+            properties:
+                content:
+                    format: bytes
+                    type: string
+                fileName:
+                    type: string
+            type: object
+        api.system.v1.AttachmentItem:
+            properties:
+                accessUrl:
+                    type: string
+                attachmentId:
+                    type: string
+                businessField:
+                    type: string
+                businessId:
+                    type: string
+                businessType:
+                    type: string
+                createBy:
+                    type: string
+                createTime:
+                    type: string
+                envId:
+                    type: string
+                expireTime:
+                    type: string
+                fileExt:
+                    type: string
+                fileKey:
+                    type: string
+                fileName:
+                    type: string
+                fileSize:
+                    type: string
+                fileType:
+                    type: string
+                isPublic:
+                    type: boolean
+                metadata:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                updateTime:
+                    type: string
+            type: object
+        api.system.v1.AttachmentListReply:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.AttachmentItem'
+                    type: array
+            type: object
+        api.system.v1.AttachmentURLReply:
+            properties:
+                attachmentId:
+                    type: string
+                expires:
+                    type: string
+                url:
+                    type: string
+            type: object
+        api.system.v1.BatchDeleteOrgsRequest:
+            properties:
+                ids:
+                    items:
+                        type: string
+                    type: array
+            type: object
+        api.system.v1.BatchDeleteUsersRequest:
+            properties:
+                ids:
+                    items:
+                        type: string
+                    type: array
+            type: object
+        api.system.v1.BatchIdsRequest:
+            properties:
+                ids:
+                    items:
+                        type: string
+                    type: array
+            type: object
+        api.system.v1.BatchImportUsersRequest:
+            properties:
+                users:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.CreateUserRequest'
+                    type: array
+            type: object
+        api.system.v1.BindAttachmentRequest:
+            properties:
+                attachmentId:
+                    type: string
+                businessField:
+                    type: string
+                businessId:
+                    type: string
+                businessType:
+                    type: string
+                expireTime:
+                    type: string
+                isPublic:
+                    type: boolean
+                metadata:
+                    type: object
+            type: object
+        api.system.v1.CaptchaReply:
+            properties:
+                data:
+                    type: object
+                expireAt:
+                    type: string
+                id:
+                    type: string
+                type:
+                    type: string
+            type: object
+        api.system.v1.ChangePasswordRequest:
+            properties:
+                newPassword:
+                    type: string
+                oldPassword:
+                    type: string
+            type: object
+        api.system.v1.CleanLogRequest:
+            properties:
+                days:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.ConfigDataReply:
+            properties:
+                data:
+                    $ref: '#/components/schemas/google.protobuf.Value'
+            type: object
+        api.system.v1.ConfigItem:
+            properties:
+                code:
+                    type: string
+                createBy:
+                    type: string
+                createdTime:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/google.protobuf.Value'
+                id:
+                    type: string
+                name:
+                    type: string
+                remark:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                updateBy:
+                    type: string
+                updatedTime:
+                    type: string
+            type: object
+        api.system.v1.ConfigListReply:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.ConfigItem'
+                    type: array
+            type: object
+        api.system.v1.CreateLoginLogRequest:
+            properties:
+                browser:
+                    type: string
+                clientId:
+                    type: string
+                ipaddr:
+                    type: string
+                loginLocation:
+                    type: string
+                msg:
+                    type: string
+                os:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                userName:
+                    type: string
+            type: object
+        api.system.v1.CreateOperLogRequest:
+            properties:
+                businessType:
+                    type: string
+                costTime:
+                    type: string
+                deviceType:
+                    type: string
+                errorMsg:
+                    type: string
+                jsonResult:
+                    type: string
+                method:
+                    type: string
+                operIp:
+                    type: string
+                operLocation:
+                    type: string
+                operName:
+                    type: string
+                operParam:
+                    type: string
+                operUrl:
+                    type: string
+                requestMethod:
+                    type: string
+                status:
+                    type: string
+                title:
+                    type: string
+                userAgent:
+                    type: string
+            type: object
+        api.system.v1.CreateOrgRequest:
+            properties:
+                email:
+                    type: string
+                leader:
+                    type: string
+                orgCode:
+                    type: string
+                orgName:
+                    type: string
+                orgType:
+                    type: string
+                parentId:
+                    type: string
+                phone:
+                    type: string
+                remark:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.CreateRoleRequest:
+            properties:
+                dataScope:
+                    format: int32
+                    type: integer
+                remark:
+                    type: string
+                roleKey:
+                    type: string
+                roleName:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.CreateUserRequest:
+            properties:
+                avatar:
+                    type: string
+                email:
+                    type: string
+                nickName:
+                    type: string
+                password:
+                    type: string
+                phonenumber:
+                    type: string
+                remark:
+                    type: string
+                sex:
+                    format: int32
+                    type: integer
+                status:
+                    format: int32
+                    type: integer
+                userName:
+                    type: string
+                userType:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.DictBatchIdsRequest:
+            properties:
+                ids:
+                    items:
+                        type: string
+                    type: array
+            type: object
+        api.system.v1.DictItem:
+            properties:
+                createBy:
+                    type: string
+                createdTime:
+                    type: string
+                dictLabel:
+                    type: string
+                dictType:
+                    type: string
+                dictValue:
+                    type: string
+                id:
+                    type: string
+                isDefault:
+                    type: boolean
+                parentId:
+                    type: string
+                remark:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                updateBy:
+                    type: string
+                updatedTime:
+                    type: string
+            type: object
+        api.system.v1.DictLabelReply:
+            properties:
+                label:
+                    type: string
+            type: object
+        api.system.v1.DictListReply:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.DictItem'
+                    type: array
+            type: object
+        api.system.v1.GetEnabledTypesReply:
+            properties:
+                items:
+                    items:
+                        type: string
+                    type: array
+            type: object
+        api.system.v1.GetRolePermissionsReply:
+            properties:
+                items:
+                    items:
+                        type: string
+                    type: array
+            type: object
+        api.system.v1.GetUserRolesReply:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.RoleItem'
+                    type: array
+            type: object
+        api.system.v1.ImportUsersReply:
+            properties:
+                errors:
+                    items:
+                        type: string
+                    type: array
+                failCount:
+                    type: string
+                successCount:
+                    type: string
+            type: object
+        api.system.v1.LogBatchIdsRequest:
+            properties:
+                ids:
+                    items:
+                        type: string
+                    type: array
+            type: object
+        api.system.v1.LogCleanReply:
+            properties:
+                count:
+                    type: string
+                days:
+                    format: int32
+                    type: integer
+                message:
+                    type: string
+            type: object
+        api.system.v1.LogItem:
+            properties:
+                browser:
+                    type: string
+                businessType:
+                    type: string
+                clientId:
+                    type: string
+                costTime:
+                    type: string
+                createdTime:
+                    type: string
+                deviceType:
+                    type: string
+                id:
+                    type: string
+                ipaddr:
+                    type: string
+                jsonResult:
+                    type: string
+                loginLocation:
+                    type: string
+                method:
+                    type: string
+                msg:
+                    type: string
+                operLocation:
+                    type: string
+                operParam:
+                    type: string
+                operUrl:
+                    type: string
+                os:
+                    type: string
+                requestMethod:
+                    type: string
+                status:
+                    type: string
+                title:
+                    type: string
+                userAgent:
+                    type: string
+                userName:
+                    type: string
+            type: object
+        api.system.v1.LoginReply:
+            properties:
+                accessToken:
+                    type: string
+                expiresIn:
+                    type: string
+                refreshExpiresIn:
+                    type: string
+                refreshToken:
+                    type: string
+                userInfo:
+                    $ref: '#/components/schemas/api.system.v1.UserInfo'
+            type: object
+        api.system.v1.LoginRequest:
+            properties:
+                clientKey:
+                    type: string
+                clientSecret:
+                    type: string
+                code:
+                    type: string
+                email:
+                    type: string
+                grantType:
+                    type: string
+                password:
+                    type: string
+                phonenumber:
+                    type: string
+                username:
+                    type: string
+                uuid:
+                    type: string
+                wxCode:
+                    type: string
+            type: object
+        api.system.v1.MeReply:
+            properties:
+                userId:
+                    type: string
+            type: object
+        api.system.v1.MenuItem:
+            properties:
+                children:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.MenuItem'
+                    type: array
+                component:
+                    type: string
+                createBy:
+                    type: string
+                createdTime:
+                    type: string
+                icon:
+                    type: string
+                id:
+                    type: string
+                isCache:
+                    format: int32
+                    type: integer
+                isFrame:
+                    format: int32
+                    type: integer
+                menuName:
+                    type: string
+                menuType:
+                    format: int32
+                    type: integer
+                parentId:
+                    type: string
+                path:
+                    type: string
+                perms:
+                    type: string
+                query:
+                    type: string
+                remark:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                updateBy:
+                    type: string
+                updatedTime:
+                    type: string
+                visible:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.MenuListReply:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.MenuItem'
+                    type: array
+            type: object
+        api.system.v1.MenuTreeReply:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.MenuItem'
+                    type: array
+            type: object
+        api.system.v1.MessageReply:
+            properties:
+                message:
+                    type: string
+            type: object
+        api.system.v1.OrgIdReply:
+            properties:
+                id:
+                    type: string
+            type: object
+        api.system.v1.OrgItem:
+            properties:
+                children:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.OrgItem'
+                    type: array
+                createBy:
+                    type: string
+                createdTime:
+                    type: string
+                email:
+                    type: string
+                leader:
+                    type: string
+                orgCode:
+                    type: string
+                orgId:
+                    type: string
+                orgName:
+                    type: string
+                orgType:
+                    type: string
+                parentId:
+                    type: string
+                phone:
+                    type: string
+                remark:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                updateBy:
+                    type: string
+                updatedTime:
+                    type: string
+            type: object
+        api.system.v1.OrgTreeReply:
+            properties:
+                items:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.OrgItem'
+                    type: array
+            type: object
+        api.system.v1.PageAttachmentsReply:
+            properties:
+                list:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.AttachmentItem'
+                    type: array
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+            type: object
+        api.system.v1.PageAttachmentsRequest:
+            properties:
+                businessType:
+                    type: string
+                fileName:
+                    type: string
+                fileType:
+                    type: string
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+            type: object
+        api.system.v1.PageConfigReply:
+            properties:
+                list:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.ConfigItem'
+                    type: array
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+            type: object
+        api.system.v1.PageConfigRequest:
+            properties:
+                code:
+                    type: string
+                name:
+                    type: string
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.PageDictReply:
+            properties:
+                list:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.DictItem'
+                    type: array
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+            type: object
+        api.system.v1.PageDictRequest:
+            properties:
+                dictLabel:
+                    type: string
+                dictType:
+                    type: string
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.PageLogReply:
+            properties:
+                list:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.LogItem'
+                    type: array
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+            type: object
+        api.system.v1.PageLoginLogRequest:
+            properties:
+                endTime:
+                    type: string
+                ipaddr:
+                    type: string
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                startTime:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                userName:
+                    type: string
+            type: object
+        api.system.v1.PageOperLogRequest:
+            properties:
+                businessType:
+                    type: string
+                endTime:
+                    type: string
+                operName:
+                    type: string
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                startTime:
+                    type: string
+                status:
+                    type: string
+                title:
+                    type: string
+            type: object
+        api.system.v1.PageOrgsReply:
+            properties:
+                list:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.OrgItem'
+                    type: array
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+            type: object
+        api.system.v1.PageOrgsRequest:
+            properties:
+                orgCode:
+                    type: string
+                orgName:
+                    type: string
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                parentId:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.PageRoleReply:
+            properties:
+                list:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.RoleItem'
+                    type: array
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+            type: object
+        api.system.v1.PageRoleRequest:
+            properties:
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                roleName:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.PageStorageEnvReply:
+            properties:
+                list:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.StorageEnvItem'
+                    type: array
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+            type: object
+        api.system.v1.PageStorageEnvRequest:
+            properties:
+                name:
+                    type: string
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                storageType:
+                    type: string
+            type: object
+        api.system.v1.PageUsersReply:
+            properties:
+                list:
+                    items:
+                        $ref: '#/components/schemas/api.system.v1.UserItem'
+                    type: array
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                total:
+                    type: string
+            type: object
+        api.system.v1.PageUsersRequest:
+            properties:
+                pageNum:
+                    type: string
+                pageSize:
+                    type: string
+                phonenumber:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                username:
+                    type: string
+            type: object
+        api.system.v1.PingReply:
+            properties:
+                message:
+                    type: string
+            type: object
+        api.system.v1.RefreshTokenReply:
+            properties:
+                accessToken:
+                    type: string
+                expiresIn:
+                    type: string
+                refreshExpiresIn:
+                    type: string
+                refreshToken:
+                    type: string
+            type: object
+        api.system.v1.RefreshTokenRequest:
+            properties:
+                clientKey:
+                    type: string
+                clientSecret:
+                    type: string
+                refreshToken:
+                    type: string
+            type: object
+        api.system.v1.ResetPasswordRequest:
+            properties:
+                newPassword:
+                    type: string
+                userId:
+                    type: string
+            type: object
+        api.system.v1.RoleItem:
+            properties:
+                createBy:
+                    type: string
+                createdTime:
+                    type: string
+                dataScope:
+                    format: int32
+                    type: integer
+                isSystem:
+                    type: boolean
+                remark:
+                    type: string
+                roleId:
+                    type: string
+                roleKey:
+                    type: string
+                roleName:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                updatedTime:
+                    type: string
+            type: object
+        api.system.v1.RolePermissionRequest:
+            properties:
+                action:
+                    type: string
+                resource:
+                    type: string
+                roleKey:
+                    type: string
+            type: object
+        api.system.v1.SendEmailCaptchaRequest:
+            properties:
+                email:
+                    type: string
+            type: object
+        api.system.v1.SendSMSCaptchaRequest:
+            properties:
+                phone:
+                    type: string
+                phonenumber:
+                    type: string
+            type: object
+        api.system.v1.SetDefaultStorageEnvRequest:
+            properties:
+                id:
+                    type: string
+            type: object
+        api.system.v1.StorageEnvItem:
+            properties:
+                code:
+                    type: string
+                config:
+                    type: object
+                createBy:
+                    type: string
+                createdTime:
+                    type: string
+                id:
+                    type: string
+                isDefault:
+                    type: boolean
+                name:
+                    type: string
+                remark:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                storageType:
+                    type: string
+                updateBy:
+                    type: string
+                updatedTime:
+                    type: string
+            type: object
+        api.system.v1.StorageIdRequest:
+            properties:
+                id:
+                    type: string
+            type: object
+        api.system.v1.UpdateConfigRequest:
+            properties:
+                code:
+                    type: string
+                data:
+                    $ref: '#/components/schemas/google.protobuf.Value'
+                id:
+                    type: string
+                name:
+                    type: string
+                remark:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.UpdateDictRequest:
+            properties:
+                dictLabel:
+                    type: string
+                dictType:
+                    type: string
+                dictValue:
+                    type: string
+                id:
+                    type: string
+                isDefault:
+                    type: boolean
+                parentId:
+                    type: string
+                remark:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.UpdateLoginLogRequest:
+            properties:
+                browser:
+                    type: string
+                clientId:
+                    type: string
+                id:
+                    type: string
+                ipaddr:
+                    type: string
+                loginLocation:
+                    type: string
+                msg:
+                    type: string
+                os:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                userName:
+                    type: string
+            type: object
+        api.system.v1.UpdateMenuRequest:
+            properties:
+                component:
+                    type: string
+                createBy:
+                    type: string
+                icon:
+                    type: string
+                id:
+                    type: string
+                isCache:
+                    format: int32
+                    type: integer
+                isFrame:
+                    format: int32
+                    type: integer
+                menuName:
+                    type: string
+                menuType:
+                    format: int32
+                    type: integer
+                parentId:
+                    type: string
+                path:
+                    type: string
+                perms:
+                    type: string
+                query:
+                    type: string
+                remark:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                updateBy:
+                    type: string
+                visible:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.UpdateOperLogRequest:
+            properties:
+                businessType:
+                    type: string
+                costTime:
+                    type: string
+                deviceType:
+                    type: string
+                errorMsg:
+                    type: string
+                id:
+                    type: string
+                jsonResult:
+                    type: string
+                method:
+                    type: string
+                operIp:
+                    type: string
+                operLocation:
+                    type: string
+                operName:
+                    type: string
+                operParam:
+                    type: string
+                operUrl:
+                    type: string
+                requestMethod:
+                    type: string
+                status:
+                    type: string
+                title:
+                    type: string
+                userAgent:
+                    type: string
+            type: object
+        api.system.v1.UpdateOrgRequest:
+            properties:
+                email:
+                    type: string
+                leader:
+                    type: string
+                orgCode:
+                    type: string
+                orgId:
+                    type: string
+                orgName:
+                    type: string
+                orgType:
+                    type: string
+                parentId:
+                    type: string
+                phone:
+                    type: string
+                remark:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.UpdateRoleRequest:
+            properties:
+                dataScope:
+                    format: int32
+                    type: integer
+                remark:
+                    type: string
+                roleId:
+                    type: string
+                roleName:
+                    type: string
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.UpdateStorageEnvRequest:
+            properties:
+                code:
+                    type: string
+                config:
+                    type: object
+                id:
+                    type: string
+                isDefault:
+                    type: boolean
+                name:
+                    type: string
+                remark:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                storageType:
+                    type: string
+                updateBy:
+                    type: string
+            type: object
+        api.system.v1.UpdateUserRequest:
+            properties:
+                avatar:
+                    type: string
+                email:
+                    type: string
+                nickName:
+                    type: string
+                phonenumber:
+                    type: string
+                remark:
+                    type: string
+                sex:
+                    format: int32
+                    type: integer
+                status:
+                    format: int32
+                    type: integer
+                userId:
+                    type: string
+                userName:
+                    type: string
+                userType:
+                    format: int32
+                    type: integer
+            type: object
+        api.system.v1.UploadFileRequest:
+            properties:
+                content:
+                    format: bytes
+                    type: string
+                envCode:
+                    type: string
+                fileName:
+                    type: string
+                fileType:
+                    type: string
+            type: object
+        api.system.v1.UserInfo:
+            properties:
+                avatar:
+                    type: string
+                email:
+                    type: string
+                nickname:
+                    type: string
+                phonenumber:
+                    type: string
+                userId:
+                    type: string
+                userType:
+                    format: int32
+                    type: integer
+                username:
+                    type: string
+            type: object
+        api.system.v1.UserItem:
+            properties:
+                avatar:
+                    type: string
+                createBy:
+                    type: string
+                createdTime:
+                    type: string
+                email:
+                    type: string
+                loginDate:
+                    type: string
+                loginIp:
+                    type: string
+                nickName:
+                    type: string
+                openId:
+                    type: string
+                phonenumber:
+                    type: string
+                remark:
+                    type: string
+                sex:
+                    format: int32
+                    type: integer
+                sort:
+                    type: string
+                status:
+                    format: int32
+                    type: integer
+                unionId:
+                    type: string
+                updateBy:
+                    type: string
+                updatedTime:
+                    type: string
+                userId:
+                    type: string
+                userName:
+                    type: string
+                userType:
+                    format: int32
+                    type: integer
+            type: object
+        google.protobuf.Value:
+            description: Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
+info:
+    title: System API
+    version: 0.0.1
+openapi: 3.0.3
+paths:
+    /api/v1/attachment/{attachmentId}:
+        delete:
+            operationId: AttachmentService_DeleteAttachment
+            parameters:
+                - in: path
+                  name: attachmentId
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - AttachmentService
+        get:
+            operationId: AttachmentService_GetAttachment
+            parameters:
+                - in: path
+                  name: attachmentId
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.AttachmentItem'
+                    description: OK
+            tags:
+                - AttachmentService
+    /api/v1/attachment/{attachmentId}/bind:
+        post:
+            operationId: AttachmentService_BindAttachmentToBusiness
+            parameters:
+                - in: path
+                  name: attachmentId
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.BindAttachmentRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - AttachmentService
+    /api/v1/attachment/{attachmentId}/download:
+        get:
+            operationId: AttachmentService_DownloadAttachment
+            parameters:
+                - in: path
+                  name: attachmentId
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.AttachmentDownloadReply'
+                    description: OK
+            tags:
+                - AttachmentService
+    /api/v1/attachment/{attachmentId}/url:
+        get:
+            operationId: AttachmentService_GetAttachmentURL
+            parameters:
+                - in: path
+                  name: attachmentId
+                  required: true
+                  schema:
+                    type: string
+                - in: query
+                  name: expires
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.AttachmentURLReply'
+                    description: OK
+            tags:
+                - AttachmentService
+    /api/v1/attachment/business:
+        get:
+            operationId: AttachmentService_ListAttachmentsByBusiness
+            parameters:
+                - in: query
+                  name: businessType
+                  schema:
+                    type: string
+                - in: query
+                  name: businessId
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.AttachmentListReply'
+                    description: OK
+            tags:
+                - AttachmentService
+    /api/v1/attachment/page:
+        post:
+            operationId: AttachmentService_PageAttachments
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.PageAttachmentsRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PageAttachmentsReply'
+                    description: OK
+            tags:
+                - AttachmentService
+    /api/v1/attachment/upload-file:
+        post:
+            operationId: AttachmentService_UploadFile
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UploadFileRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.AttachmentItem'
+                    description: OK
+            tags:
+                - AttachmentService
+    /api/v1/config:
+        post:
+            operationId: ConfigService_CreateConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.ConfigItem'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - ConfigService
+    /api/v1/config/{id}:
+        delete:
+            operationId: ConfigService_DeleteConfig
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - ConfigService
+        get:
+            operationId: ConfigService_GetConfigById
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.ConfigItem'
+                    description: OK
+            tags:
+                - ConfigService
+        put:
+            operationId: ConfigService_UpdateConfig
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UpdateConfigRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - ConfigService
+    /api/v1/config/batch:
+        delete:
+            operationId: ConfigService_BatchDeleteConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.BatchIdsRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - ConfigService
+    /api/v1/config/code:
+        get:
+            operationId: ConfigService_GetConfigByCode
+            parameters:
+                - in: query
+                  name: code
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.ConfigListReply'
+                    description: OK
+            tags:
+                - ConfigService
+    /api/v1/config/data:
+        get:
+            operationId: ConfigService_GetConfigDataByCode
+            parameters:
+                - in: query
+                  name: code
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.ConfigDataReply'
+                    description: OK
+            tags:
+                - ConfigService
+    /api/v1/config/page:
+        post:
+            operationId: ConfigService_PageConfig
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.PageConfigRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PageConfigReply'
+                    description: OK
+            tags:
+                - ConfigService
+    /api/v1/dict:
+        post:
+            operationId: DictService_CreateDict
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.DictItem'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - DictService
+    /api/v1/dict/{id}:
+        delete:
+            operationId: DictService_DeleteDict
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - DictService
+        get:
+            operationId: DictService_GetDictById
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.DictItem'
+                    description: OK
+            tags:
+                - DictService
+        put:
+            operationId: DictService_UpdateDict
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UpdateDictRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - DictService
+    /api/v1/dict/batch:
+        delete:
+            operationId: DictService_BatchDeleteDict
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.DictBatchIdsRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - DictService
+    /api/v1/dict/label:
+        get:
+            operationId: DictService_GetDictLabel
+            parameters:
+                - in: query
+                  name: dictType
+                  schema:
+                    type: string
+                - in: query
+                  name: dictValue
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.DictLabelReply'
+                    description: OK
+            tags:
+                - DictService
+    /api/v1/dict/page:
+        post:
+            operationId: DictService_PageDict
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.PageDictRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PageDictReply'
+                    description: OK
+            tags:
+                - DictService
+    /api/v1/dict/type:
+        get:
+            operationId: DictService_GetDictByType
+            parameters:
+                - in: query
+                  name: dictType
+                  schema:
+                    type: string
+                - in: query
+                  name: parentId
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.DictListReply'
+                    description: OK
+            tags:
+                - DictService
+    /api/v1/loginLog:
+        post:
+            operationId: LoginLogService_CreateLoginLog
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.CreateLoginLogRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - LoginLogService
+    /api/v1/loginLog/{id}:
+        delete:
+            operationId: LoginLogService_DeleteLoginLog
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - LoginLogService
+        get:
+            operationId: LoginLogService_GetLoginLogById
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.LogItem'
+                    description: OK
+            tags:
+                - LoginLogService
+        put:
+            operationId: LoginLogService_UpdateLoginLog
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UpdateLoginLogRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - LoginLogService
+    /api/v1/loginLog/batch:
+        delete:
+            operationId: LoginLogService_BatchDeleteLoginLog
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.LogBatchIdsRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - LoginLogService
+    /api/v1/loginLog/clean:
+        post:
+            operationId: LoginLogService_CleanLoginLog
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.CleanLogRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.LogCleanReply'
+                    description: OK
+            tags:
+                - LoginLogService
+    /api/v1/loginLog/page:
+        post:
+            operationId: LoginLogService_PageLoginLog
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.PageLoginLogRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PageLogReply'
+                    description: OK
+            tags:
+                - LoginLogService
+    /api/v1/menu:
+        get:
+            operationId: MenuService_GetMenuList
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MenuListReply'
+                    description: OK
+            tags:
+                - MenuService
+        post:
+            operationId: MenuService_CreateMenu
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.MenuItem'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - MenuService
+    /api/v1/menu/{id}:
+        delete:
+            operationId: MenuService_DeleteMenu
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - MenuService
+        get:
+            operationId: MenuService_GetMenuById
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MenuItem'
+                    description: OK
+            tags:
+                - MenuService
+        put:
+            operationId: MenuService_UpdateMenu
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UpdateMenuRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - MenuService
+    /api/v1/menu/tree:
+        get:
+            operationId: MenuService_GetMenuTree
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MenuTreeReply'
+                    description: OK
+            tags:
+                - MenuService
+    /api/v1/menu/user/tree:
+        get:
+            operationId: MenuService_GetUserMenuTree
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MenuTreeReply'
+                    description: OK
+            tags:
+                - MenuService
+    /api/v1/operLog:
+        post:
+            operationId: OperLogService_CreateOperLog
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.CreateOperLogRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - OperLogService
+    /api/v1/operLog/{id}:
+        delete:
+            operationId: OperLogService_DeleteOperLog
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - OperLogService
+        get:
+            operationId: OperLogService_GetOperLogById
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.LogItem'
+                    description: OK
+            tags:
+                - OperLogService
+        put:
+            operationId: OperLogService_UpdateOperLog
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UpdateOperLogRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - OperLogService
+    /api/v1/operLog/batch:
+        delete:
+            operationId: OperLogService_BatchDeleteOperLog
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.LogBatchIdsRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - OperLogService
+    /api/v1/operLog/clean:
+        post:
+            operationId: OperLogService_CleanOperLog
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.CleanLogRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.LogCleanReply'
+                    description: OK
+            tags:
+                - OperLogService
+    /api/v1/operLog/page:
+        post:
+            operationId: OperLogService_PageOperLog
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.PageOperLogRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PageLogReply'
+                    description: OK
+            tags:
+                - OperLogService
+    /api/v1/org:
+        post:
+            operationId: OrgService_CreateOrg
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.CreateOrgRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.OrgIdReply'
+                    description: OK
+            tags:
+                - OrgService
+    /api/v1/org/{id}:
+        delete:
+            operationId: OrgService_DeleteOrg
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - OrgService
+        get:
+            operationId: OrgService_GetOrgById
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.OrgItem'
+                    description: OK
+            tags:
+                - OrgService
+    /api/v1/org/{orgId}:
+        put:
+            operationId: OrgService_UpdateOrg
+            parameters:
+                - in: path
+                  name: orgId
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UpdateOrgRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - OrgService
+    /api/v1/org/batch:
+        delete:
+            operationId: OrgService_BatchDeleteOrg
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.BatchDeleteOrgsRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - OrgService
+    /api/v1/org/page:
+        post:
+            operationId: OrgService_PageOrg
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.PageOrgsRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PageOrgsReply'
+                    description: OK
+            tags:
+                - OrgService
+    /api/v1/org/tree:
+        get:
+            operationId: OrgService_GetOrgTree
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.OrgTreeReply'
+                    description: OK
+            tags:
+                - OrgService
+    /api/v1/role:
+        post:
+            operationId: RoleService_CreateRole
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.CreateRoleRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.RoleItem'
+                    description: OK
+            tags:
+                - RoleService
+    /api/v1/role/{roleId}:
+        delete:
+            operationId: RoleService_DeleteRole
+            parameters:
+                - in: path
+                  name: roleId
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - RoleService
+        get:
+            operationId: RoleService_GetRole
+            parameters:
+                - in: path
+                  name: roleId
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.RoleItem'
+                    description: OK
+            tags:
+                - RoleService
+        put:
+            operationId: RoleService_UpdateRole
+            parameters:
+                - in: path
+                  name: roleId
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UpdateRoleRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - RoleService
+    /api/v1/role/assign:
+        post:
+            operationId: RoleService_AssignRoleToUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.AssignRoleToUserRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - RoleService
+    /api/v1/role/page:
+        post:
+            operationId: RoleService_PageRole
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.PageRoleRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PageRoleReply'
+                    description: OK
+            tags:
+                - RoleService
+    /api/v1/role/permission:
+        delete:
+            operationId: RoleService_DeleteRolePermission
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.RolePermissionRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - RoleService
+        post:
+            operationId: RoleService_AddRolePermission
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.RolePermissionRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - RoleService
+    /api/v1/role/permissions:
+        get:
+            operationId: RoleService_GetRolePermissions
+            parameters:
+                - in: query
+                  name: roleKey
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.GetRolePermissionsReply'
+                    description: OK
+            tags:
+                - RoleService
+    /api/v1/role/remove:
+        delete:
+            operationId: RoleService_RemoveRoleFromUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.AssignRoleToUserRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - RoleService
+    /api/v1/role/user:
+        get:
+            operationId: RoleService_GetUserRoles
+            parameters:
+                - in: query
+                  name: userId
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.GetUserRolesReply'
+                    description: OK
+            tags:
+                - RoleService
+    /api/v1/storage-env:
+        post:
+            operationId: StorageEnvService_CreateStorageEnv
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.StorageEnvItem'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.StorageEnvItem'
+                    description: OK
+            tags:
+                - StorageEnvService
+    /api/v1/storage-env/{id}:
+        delete:
+            operationId: StorageEnvService_DeleteStorageEnv
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - StorageEnvService
+        get:
+            operationId: StorageEnvService_GetStorageEnv
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.StorageEnvItem'
+                    description: OK
+            tags:
+                - StorageEnvService
+        put:
+            operationId: StorageEnvService_UpdateStorageEnv
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UpdateStorageEnvRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - StorageEnvService
+    /api/v1/storage-env/{id}/test:
+        post:
+            operationId: StorageEnvService_TestStorageEnvConnection
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.StorageIdRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - StorageEnvService
+    /api/v1/storage-env/default:
+        get:
+            operationId: StorageEnvService_GetDefaultStorageEnv
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.StorageEnvItem'
+                    description: OK
+            tags:
+                - StorageEnvService
+        post:
+            operationId: StorageEnvService_SetDefaultStorageEnv
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.SetDefaultStorageEnvRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - StorageEnvService
+    /api/v1/storage-env/page:
+        post:
+            operationId: StorageEnvService_PageStorageEnv
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.PageStorageEnvRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PageStorageEnvReply'
+                    description: OK
+            tags:
+                - StorageEnvService
+    /api/v1/user:
+        post:
+            operationId: UserService_CreateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.CreateUserRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - UserService
+    /api/v1/user/{id}:
+        delete:
+            operationId: UserService_DeleteUser
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - UserService
+        get:
+            operationId: UserService_GetUserById
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.UserItem'
+                    description: OK
+            tags:
+                - UserService
+    /api/v1/user/{userId}:
+        put:
+            operationId: UserService_UpdateUser
+            parameters:
+                - in: path
+                  name: userId
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.UpdateUserRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - UserService
+    /api/v1/user/{userId}/password:
+        put:
+            operationId: UserService_ResetPassword
+            parameters:
+                - in: path
+                  name: userId
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.ResetPasswordRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - UserService
+    /api/v1/user/batch:
+        delete:
+            operationId: UserService_BatchDeleteUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.BatchDeleteUsersRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - UserService
+    /api/v1/user/import:
+        post:
+            operationId: UserService_ImportUsers
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.BatchImportUsersRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.ImportUsersReply'
+                    description: OK
+            tags:
+                - UserService
+    /api/v1/user/page:
+        post:
+            operationId: UserService_PageUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.PageUsersRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PageUsersReply'
+                    description: OK
+            tags:
+                - UserService
+    /api/v1/user/password/change:
+        post:
+            operationId: UserService_ChangePassword
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.ChangePasswordRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - UserService
+    /auth/refresh:
+        post:
+            operationId: AuthService_RefreshToken
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.RefreshTokenRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.RefreshTokenReply'
+                    description: OK
+            tags:
+                - AuthService
+    /captcha/email:
+        post:
+            operationId: CaptchaService_SendEmailCaptcha
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.SendEmailCaptchaRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.CaptchaReply'
+                    description: OK
+            tags:
+                - CaptchaService
+    /captcha/enabled-types:
+        get:
+            operationId: CaptchaService_GetEnabledTypes
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.GetEnabledTypesReply'
+                    description: OK
+            tags:
+                - CaptchaService
+    /captcha/image:
+        get:
+            operationId: CaptchaService_GenerateImageCaptcha
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.CaptchaReply'
+                    description: OK
+            tags:
+                - CaptchaService
+    /captcha/sms:
+        post:
+            operationId: CaptchaService_SendSMSCaptcha
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.SendSMSCaptchaRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.CaptchaReply'
+                    description: OK
+            tags:
+                - CaptchaService
+    /health:
+        get:
+            operationId: HealthService_Ping
+            parameters:
+                - in: query
+                  name: name
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.PingReply'
+                    description: OK
+            tags:
+                - HealthService
+    /login:
+        post:
+            operationId: AuthService_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.system.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.LoginReply'
+                    description: OK
+            tags:
+                - AuthService
+    /logout:
+        post:
+            operationId: AuthService_Logout
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MessageReply'
+                    description: OK
+            tags:
+                - AuthService
+    /me:
+        get:
+            operationId: AuthService_Me
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.system.v1.MeReply'
+                    description: OK
+            tags:
+                - AuthService
+tags:
+    - name: AttachmentService
+    - name: AuthService
+    - name: CaptchaService
+    - name: ConfigService
+    - name: DictService
+    - name: HealthService
+    - name: LoginLogService
+    - name: MenuService
+    - name: OperLogService
+    - name: OrgService
+    - name: RoleService
+    - name: StorageEnvService
+    - name: UserService

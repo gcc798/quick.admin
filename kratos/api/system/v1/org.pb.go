@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.19.4
-// source: api/system/v1/org.proto
+// source: system/v1/org.proto
 
 package v1
 
@@ -31,7 +31,7 @@ type OrgIdRequest struct {
 
 func (x *OrgIdRequest) Reset() {
 	*x = OrgIdRequest{}
-	mi := &file_api_system_v1_org_proto_msgTypes[0]
+	mi := &file_system_v1_org_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *OrgIdRequest) String() string {
 func (*OrgIdRequest) ProtoMessage() {}
 
 func (x *OrgIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[0]
+	mi := &file_system_v1_org_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *OrgIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgIdRequest.ProtoReflect.Descriptor instead.
 func (*OrgIdRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{0}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *OrgIdRequest) GetId() int64 {
@@ -74,7 +74,7 @@ type GetOrgTreeRequest struct {
 
 func (x *GetOrgTreeRequest) Reset() {
 	*x = GetOrgTreeRequest{}
-	mi := &file_api_system_v1_org_proto_msgTypes[1]
+	mi := &file_system_v1_org_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -86,7 +86,7 @@ func (x *GetOrgTreeRequest) String() string {
 func (*GetOrgTreeRequest) ProtoMessage() {}
 
 func (x *GetOrgTreeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[1]
+	mi := &file_system_v1_org_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -99,7 +99,7 @@ func (x *GetOrgTreeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrgTreeRequest.ProtoReflect.Descriptor instead.
 func (*GetOrgTreeRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{1}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{1}
 }
 
 type OrgIdReply struct {
@@ -111,7 +111,7 @@ type OrgIdReply struct {
 
 func (x *OrgIdReply) Reset() {
 	*x = OrgIdReply{}
-	mi := &file_api_system_v1_org_proto_msgTypes[2]
+	mi := &file_system_v1_org_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -123,7 +123,7 @@ func (x *OrgIdReply) String() string {
 func (*OrgIdReply) ProtoMessage() {}
 
 func (x *OrgIdReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[2]
+	mi := &file_system_v1_org_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -136,7 +136,7 @@ func (x *OrgIdReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgIdReply.ProtoReflect.Descriptor instead.
 func (*OrgIdReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{2}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *OrgIdReply) GetId() int64 {
@@ -164,7 +164,7 @@ type CreateOrgRequest struct {
 
 func (x *CreateOrgRequest) Reset() {
 	*x = CreateOrgRequest{}
-	mi := &file_api_system_v1_org_proto_msgTypes[3]
+	mi := &file_system_v1_org_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -176,7 +176,7 @@ func (x *CreateOrgRequest) String() string {
 func (*CreateOrgRequest) ProtoMessage() {}
 
 func (x *CreateOrgRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[3]
+	mi := &file_system_v1_org_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -189,7 +189,7 @@ func (x *CreateOrgRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOrgRequest.ProtoReflect.Descriptor instead.
 func (*CreateOrgRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{3}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CreateOrgRequest) GetParentId() int64 {
@@ -281,7 +281,7 @@ type UpdateOrgRequest struct {
 
 func (x *UpdateOrgRequest) Reset() {
 	*x = UpdateOrgRequest{}
-	mi := &file_api_system_v1_org_proto_msgTypes[4]
+	mi := &file_system_v1_org_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -293,7 +293,7 @@ func (x *UpdateOrgRequest) String() string {
 func (*UpdateOrgRequest) ProtoMessage() {}
 
 func (x *UpdateOrgRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[4]
+	mi := &file_system_v1_org_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -306,7 +306,7 @@ func (x *UpdateOrgRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateOrgRequest.ProtoReflect.Descriptor instead.
 func (*UpdateOrgRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{4}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UpdateOrgRequest) GetOrgId() int64 {
@@ -395,7 +395,7 @@ type BatchDeleteOrgsRequest struct {
 
 func (x *BatchDeleteOrgsRequest) Reset() {
 	*x = BatchDeleteOrgsRequest{}
-	mi := &file_api_system_v1_org_proto_msgTypes[5]
+	mi := &file_system_v1_org_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -407,7 +407,7 @@ func (x *BatchDeleteOrgsRequest) String() string {
 func (*BatchDeleteOrgsRequest) ProtoMessage() {}
 
 func (x *BatchDeleteOrgsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[5]
+	mi := &file_system_v1_org_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -420,7 +420,7 @@ func (x *BatchDeleteOrgsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchDeleteOrgsRequest.ProtoReflect.Descriptor instead.
 func (*BatchDeleteOrgsRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{5}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *BatchDeleteOrgsRequest) GetIds() []int64 {
@@ -444,7 +444,7 @@ type PageOrgsRequest struct {
 
 func (x *PageOrgsRequest) Reset() {
 	*x = PageOrgsRequest{}
-	mi := &file_api_system_v1_org_proto_msgTypes[6]
+	mi := &file_system_v1_org_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -456,7 +456,7 @@ func (x *PageOrgsRequest) String() string {
 func (*PageOrgsRequest) ProtoMessage() {}
 
 func (x *PageOrgsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[6]
+	mi := &file_system_v1_org_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -469,7 +469,7 @@ func (x *PageOrgsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageOrgsRequest.ProtoReflect.Descriptor instead.
 func (*PageOrgsRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{6}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *PageOrgsRequest) GetPageNum() int64 {
@@ -538,7 +538,7 @@ type OrgItem struct {
 
 func (x *OrgItem) Reset() {
 	*x = OrgItem{}
-	mi := &file_api_system_v1_org_proto_msgTypes[7]
+	mi := &file_system_v1_org_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -550,7 +550,7 @@ func (x *OrgItem) String() string {
 func (*OrgItem) ProtoMessage() {}
 
 func (x *OrgItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[7]
+	mi := &file_system_v1_org_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -563,7 +563,7 @@ func (x *OrgItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgItem.ProtoReflect.Descriptor instead.
 func (*OrgItem) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{7}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *OrgItem) GetOrgId() int64 {
@@ -687,7 +687,7 @@ type OrgTreeReply struct {
 
 func (x *OrgTreeReply) Reset() {
 	*x = OrgTreeReply{}
-	mi := &file_api_system_v1_org_proto_msgTypes[8]
+	mi := &file_system_v1_org_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -699,7 +699,7 @@ func (x *OrgTreeReply) String() string {
 func (*OrgTreeReply) ProtoMessage() {}
 
 func (x *OrgTreeReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[8]
+	mi := &file_system_v1_org_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -712,7 +712,7 @@ func (x *OrgTreeReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgTreeReply.ProtoReflect.Descriptor instead.
 func (*OrgTreeReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{8}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *OrgTreeReply) GetItems() []*OrgItem {
@@ -734,7 +734,7 @@ type PageOrgsReply struct {
 
 func (x *PageOrgsReply) Reset() {
 	*x = PageOrgsReply{}
-	mi := &file_api_system_v1_org_proto_msgTypes[9]
+	mi := &file_system_v1_org_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -746,7 +746,7 @@ func (x *PageOrgsReply) String() string {
 func (*PageOrgsReply) ProtoMessage() {}
 
 func (x *PageOrgsReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_org_proto_msgTypes[9]
+	mi := &file_system_v1_org_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -759,7 +759,7 @@ func (x *PageOrgsReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageOrgsReply.ProtoReflect.Descriptor instead.
 func (*PageOrgsReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_org_proto_rawDescGZIP(), []int{9}
+	return file_system_v1_org_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *PageOrgsReply) GetList() []*OrgItem {
@@ -790,11 +790,11 @@ func (x *PageOrgsReply) GetPageSize() int64 {
 	return 0
 }
 
-var File_api_system_v1_org_proto protoreflect.FileDescriptor
+var File_system_v1_org_proto protoreflect.FileDescriptor
 
-const file_api_system_v1_org_proto_rawDesc = "" +
+const file_system_v1_org_proto_rawDesc = "" +
 	"\n" +
-	"\x17api/system/v1/org.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x18api/system/v1/auth.proto\"\x1e\n" +
+	"\x13system/v1/org.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x14system/v1/auth.proto\"\x1e\n" +
 	"\fOrgIdRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\x13\n" +
 	"\x11GetOrgTreeRequest\"\x1c\n" +
@@ -875,19 +875,19 @@ const file_api_system_v1_org_proto_rawDesc = "" +
 	"\aPageOrg\x12\x1e.api.system.v1.PageOrgsRequest\x1a\x1c.api.system.v1.PageOrgsReply\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/api/v1/org/pageB5Z3github.com/force-c/nai-tizi/kratos/api/system/v1;v1b\x06proto3"
 
 var (
-	file_api_system_v1_org_proto_rawDescOnce sync.Once
-	file_api_system_v1_org_proto_rawDescData []byte
+	file_system_v1_org_proto_rawDescOnce sync.Once
+	file_system_v1_org_proto_rawDescData []byte
 )
 
-func file_api_system_v1_org_proto_rawDescGZIP() []byte {
-	file_api_system_v1_org_proto_rawDescOnce.Do(func() {
-		file_api_system_v1_org_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_system_v1_org_proto_rawDesc), len(file_api_system_v1_org_proto_rawDesc)))
+func file_system_v1_org_proto_rawDescGZIP() []byte {
+	file_system_v1_org_proto_rawDescOnce.Do(func() {
+		file_system_v1_org_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_system_v1_org_proto_rawDesc), len(file_system_v1_org_proto_rawDesc)))
 	})
-	return file_api_system_v1_org_proto_rawDescData
+	return file_system_v1_org_proto_rawDescData
 }
 
-var file_api_system_v1_org_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
-var file_api_system_v1_org_proto_goTypes = []any{
+var file_system_v1_org_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_system_v1_org_proto_goTypes = []any{
 	(*OrgIdRequest)(nil),           // 0: api.system.v1.OrgIdRequest
 	(*GetOrgTreeRequest)(nil),      // 1: api.system.v1.GetOrgTreeRequest
 	(*OrgIdReply)(nil),             // 2: api.system.v1.OrgIdReply
@@ -900,7 +900,7 @@ var file_api_system_v1_org_proto_goTypes = []any{
 	(*PageOrgsReply)(nil),          // 9: api.system.v1.PageOrgsReply
 	(*MessageReply)(nil),           // 10: api.system.v1.MessageReply
 }
-var file_api_system_v1_org_proto_depIdxs = []int32{
+var file_system_v1_org_proto_depIdxs = []int32{
 	7,  // 0: api.system.v1.OrgItem.children:type_name -> api.system.v1.OrgItem
 	7,  // 1: api.system.v1.OrgTreeReply.items:type_name -> api.system.v1.OrgItem
 	7,  // 2: api.system.v1.PageOrgsReply.list:type_name -> api.system.v1.OrgItem
@@ -925,28 +925,28 @@ var file_api_system_v1_org_proto_depIdxs = []int32{
 	0,  // [0:3] is the sub-list for field type_name
 }
 
-func init() { file_api_system_v1_org_proto_init() }
-func file_api_system_v1_org_proto_init() {
-	if File_api_system_v1_org_proto != nil {
+func init() { file_system_v1_org_proto_init() }
+func file_system_v1_org_proto_init() {
+	if File_system_v1_org_proto != nil {
 		return
 	}
-	file_api_system_v1_auth_proto_init()
-	file_api_system_v1_org_proto_msgTypes[6].OneofWrappers = []any{}
+	file_system_v1_auth_proto_init()
+	file_system_v1_org_proto_msgTypes[6].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_system_v1_org_proto_rawDesc), len(file_api_system_v1_org_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_v1_org_proto_rawDesc), len(file_system_v1_org_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_system_v1_org_proto_goTypes,
-		DependencyIndexes: file_api_system_v1_org_proto_depIdxs,
-		MessageInfos:      file_api_system_v1_org_proto_msgTypes,
+		GoTypes:           file_system_v1_org_proto_goTypes,
+		DependencyIndexes: file_system_v1_org_proto_depIdxs,
+		MessageInfos:      file_system_v1_org_proto_msgTypes,
 	}.Build()
-	File_api_system_v1_org_proto = out.File
-	file_api_system_v1_org_proto_goTypes = nil
-	file_api_system_v1_org_proto_depIdxs = nil
+	File_system_v1_org_proto = out.File
+	file_system_v1_org_proto_goTypes = nil
+	file_system_v1_org_proto_depIdxs = nil
 }

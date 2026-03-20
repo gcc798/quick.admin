@@ -1,21 +1,30 @@
 package configx
 
 import (
-	"os"
 	"strings"
 	"time"
 
-	"gopkg.in/yaml.v3"
+	"github.com/go-kratos/kratos/v2/config"
+	"github.com/go-kratos/kratos/v2/config/file"
+	_ "github.com/go-kratos/kratos/v2/encoding/yaml"
 )
 
-func MustLoadYAML(path string, out any) {
-	content, err := os.ReadFile(path)
-	if err != nil {
+func MustLoad(path string, out any) {
+	if err := Load(path, out); err != nil {
 		panic(err)
 	}
-	if err := yaml.Unmarshal(content, out); err != nil {
-		panic(err)
+}
+
+func Load(path string, out any) error {
+	reader := config.New(config.WithSource(file.NewSource(path)))
+	defer reader.Close()
+	if err := reader.Load(); err != nil {
+		return err
 	}
+	if err := reader.Scan(out); err != nil {
+		return err
+	}
+	return nil
 }
 
 func ParseDurationOrDefault(value string, defaultValue time.Duration) time.Duration {

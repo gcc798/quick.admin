@@ -2,7 +2,7 @@ syntax = "proto3";
 package api.system.v1;
 option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
 import "google/api/annotations.proto";
-import "api/system/v1/auth.proto";
+import "system/v1/auth.proto";
 service DictService {
   rpc CreateDict (DictItem) returns (MessageReply) { option (google.api.http) = { post: "/api/v1/dict" body: "*" }; }
   rpc PageDict (PageDictRequest) returns (PageDictReply) { option (google.api.http) = { post: "/api/v1/dict/page" body: "*" }; }

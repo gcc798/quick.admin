@@ -31,6 +31,6 @@ func main() {
 
 func mustLoadConfig(path string) *conf.Bootstrap {
 	var cfg conf.Bootstrap
-	configx.MustLoadYAML(path, &cfg)
+	configx.MustLoad(path, &cfg)
 	return &cfg
 }

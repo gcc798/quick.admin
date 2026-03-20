@@ -16,24 +16,54 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
+	"strings"
 )
 
 // Injectors from wire.go:
 
 func wireApp(cfg *conf.Bootstrap, logger log.Logger) (*kratos.App, func(), error) {
-	resources, cleanup, err := newResources(cfg)
+	grpc := server.ProvideGRPCConfig(cfg)
+	healthUsecase := biz.NewHealthUsecase()
+	healthServiceService := service.NewHealthServiceService(healthUsecase)
+	confData := data.ProvideDataConfig(cfg)
+	auth := data.ProvideAuthConfig(cfg)
+	jwt := data.ProvideJWTConfig(cfg)
+	observability := data.ProvideObservabilityConfig(cfg)
+	resources, cleanup, err := data.NewData(confData, auth, jwt, observability)
 	if err != nil {
 		return nil, nil, err
 	}
-	usecases := biz.NewUsecases(resources)
-	services := service.NewServices(usecases)
-	server := newGRPCServer(cfg, services)
-	registrar, cleanup2, err := newRegistrar(cfg)
+	authUsecase := biz.NewAuthUsecase(resources)
+	authServiceService := service.NewAuthServiceService(authUsecase)
+	captchaUsecase := biz.NewCaptchaUsecase(resources)
+	captchaServiceService := service.NewCaptchaServiceService(captchaUsecase)
+	menuUsecase := biz.NewMenuUsecase(resources)
+	menuServiceService := service.NewMenuServiceService(menuUsecase)
+	userUsecase := biz.NewUserUsecase(resources)
+	userServiceService := service.NewUserServiceService(userUsecase)
+	roleUsecase := biz.NewRoleUsecase(resources)
+	roleServiceService := service.NewRoleServiceService(roleUsecase)
+	orgUsecase := biz.NewOrgUsecase(resources)
+	orgServiceService := service.NewOrgServiceService(orgUsecase)
+	configUsecase := biz.NewConfigUsecase(resources)
+	configServiceService := service.NewConfigServiceService(configUsecase)
+	dictUsecase := biz.NewDictUsecase(resources)
+	dictServiceService := service.NewDictServiceService(dictUsecase)
+	loginLogUsecase := biz.NewLoginLogUsecase(resources)
+	loginLogServiceService := service.NewLoginLogServiceService(loginLogUsecase)
+	operLogUsecase := biz.NewOperLogUsecase(resources)
+	operLogServiceService := service.NewOperLogServiceService(operLogUsecase)
+	storageEnvUsecase := biz.NewStorageEnvUsecase(resources)
+	storageEnvServiceService := service.NewStorageEnvServiceService(storageEnvUsecase)
+	attachmentUsecase := biz.NewAttachmentUsecase(resources)
+	attachmentServiceService := service.NewAttachmentServiceService(attachmentUsecase)
+	grpcServer := server.NewGRPCServer(grpc, healthServiceService, authServiceService, captchaServiceService, menuServiceService, userServiceService, roleServiceService, orgServiceService, configServiceService, dictServiceService, loginLogServiceService, operLogServiceService, storageEnvServiceService, attachmentServiceService)
+	registrar, cleanup2, err := server.NewRegistrar(cfg)
 	if err != nil {
 		cleanup()
 		return nil, nil, err
 	}
-	app := newApp(cfg, logger, server, registrar)
+	app := newApp(cfg, logger, grpcServer, registrar)
 	return app, func() {
 		cleanup2()
 		cleanup()
@@ -42,37 +72,12 @@ func wireApp(cfg *conf.Bootstrap, logger log.Logger) (*kratos.App, func(), error
 
 // wire.go:
 
-func newResources(cfg *conf.Bootstrap) (*data.Resources, func(), error) {
-	resources, err := data.NewResources(cfg.Data, cfg.Auth, cfg.JWT, cfg.Observability)
-	if err != nil {
-		return nil, nil, err
-	}
-	return resources, func() {
-		_ = resources.Close()
-	}, nil
-}
-
-func newGRPCServer(cfg *conf.Bootstrap, services *service.Services) *grpc.Server {
-	return server.NewGRPCServer(
-		cfg.Server.GRPC,
-		services.Health,
-		services.Auth,
-		services.Captcha,
-		services.Menu,
-		services.User,
-		services.Role,
-		services.Org,
-		services.Config,
-		services.Dict,
-		services.LoginLog,
-		services.OperLog,
-		services.StorageEnv,
-		services.Attachment,
-	)
-}
-
 func newApp(cfg *conf.Bootstrap, logger log.Logger, grpcSrv *grpc.Server, registrar registry.Registrar) *kratos.App {
-	options := []kratos.Option{kratos.Name(serviceName(cfg)), kratos.Logger(logger), kratos.Server(grpcSrv)}
+	serviceName := strings.TrimSpace(cfg.GetRegistry().GetService())
+	if serviceName == "" {
+		serviceName = "sys-rpc"
+	}
+	options := []kratos.Option{kratos.Name(serviceName), kratos.Logger(logger), kratos.Server(grpcSrv)}
 	if registrar != nil {
 		options = append(options, kratos.Registrar(registrar))
 	}

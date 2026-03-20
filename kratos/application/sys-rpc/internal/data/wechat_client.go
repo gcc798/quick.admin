@@ -30,14 +30,14 @@ type WeChatCode2SessionResponse struct {
 	ErrMsg     string `json:"errmsg"`
 }
 
-func NewWeChatManager(cfg conf.WeChat) *WeChatManager {
-	appID := strings.TrimSpace(cfg.AppID)
-	secret := strings.TrimSpace(cfg.Secret)
+func NewWeChatManager(cfg *conf.WeChat) *WeChatManager {
+	appID := strings.TrimSpace(cfg.GetAppId())
+	secret := strings.TrimSpace(cfg.GetSecret())
 	if appID == "" || secret == "" {
 		return nil
 	}
 	timeout := 10 * time.Second
-	if parsed, err := time.ParseDuration(strings.TrimSpace(cfg.Timeout)); err == nil && parsed > 0 {
+	if parsed, err := time.ParseDuration(strings.TrimSpace(cfg.GetTimeout())); err == nil && parsed > 0 {
 		timeout = parsed
 	}
 	return &WeChatManager{

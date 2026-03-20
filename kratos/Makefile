@@ -1,19 +1,21 @@
 KRATOS_ROOT := $(CURDIR)
+API_DIR := $(KRATOS_ROOT)/api
 THIRD_PARTY_DIR := $(KRATOS_ROOT)/third_party
 SYS_API_DIR := $(KRATOS_ROOT)/application/sys-api
 SYS_RPC_DIR := $(KRATOS_ROOT)/application/sys-rpc
 SYS_API_SERVICE_GEN_DIR := $(SYS_API_DIR)/internal/servicegen
 SYS_RPC_SERVICE_GEN_DIR := $(SYS_RPC_DIR)/internal/servicegen
-PROTO_FILES := $(shell cd $(KRATOS_ROOT) && find api -name '*.proto' | sort)
+PROTO_FILES := $(shell cd $(API_DIR) && find . -name '*.proto' | sed 's|^\./||' | sort)
+CONF_PROTO_FILES := application/sys-api/internal/conf/conf.proto application/sys-rpc/internal/conf/conf.proto
 PROTOBUF_INCLUDE := /opt/homebrew/include/google/protobuf
 
 export PATH := /Users/guoc/dev/code_go/bin:$(PATH)
 export GOCACHE := /tmp/nai-tizi-kratos-go-build
 
-.PHONY: help init prepare-third-party clean-proto proto openapi proto-all proto-add-health proto-client proto-server-sys-api proto-server-sys-rpc ent wire fmt build-sys-api build-sys-rpc build-all test
+.PHONY: help init prepare-third-party clean-proto clean-conf conf proto openapi proto-all proto-add-health proto-client proto-server-sys-api proto-server-sys-rpc ent wire fmt build-sys-api build-sys-rpc build-all test
 
 help:
-	@echo "targets: init prepare-third-party clean-proto proto openapi proto-all proto-add-health proto-client proto-server-sys-api proto-server-sys-rpc ent wire fmt build-sys-api build-sys-rpc build-all test"
+	@echo "targets: init prepare-third-party clean-proto clean-conf conf proto openapi proto-all proto-add-health proto-client proto-server-sys-api proto-server-sys-rpc ent wire fmt build-sys-api build-sys-rpc build-all test"
 
 init: prepare-third-party
 	go mod tidy
@@ -29,13 +31,25 @@ prepare-third-party:
 	cp /Users/guoc/dev/code_go/pkg/mod/github.com/envoyproxy/protoc-gen-validate@v1.0.4/validate/validate.proto $(THIRD_PARTY_DIR)/validate/
 
 clean-proto:
-	rm -rf $(KRATOS_ROOT)/api/system/v1/*.pb.go $(KRATOS_ROOT)/api/system/v1/*_grpc.pb.go $(KRATOS_ROOT)/api/system/v1/*_http.pb.go $(KRATOS_ROOT)/api/system/v1/*_pb.validate.go $(KRATOS_ROOT)/api/system/v1/*_client.go $(KRATOS_ROOT)/system $(KRATOS_ROOT)/api/openapi.yaml
+	rm -rf $(KRATOS_ROOT)/api/system/v1/*.pb.go $(KRATOS_ROOT)/api/system/v1/*_grpc.pb.go $(KRATOS_ROOT)/api/system/v1/*_http.pb.go $(KRATOS_ROOT)/api/system/v1/*_pb.validate.go $(KRATOS_ROOT)/api/system/v1/*_client.go $(KRATOS_ROOT)/system
+	find $(API_DIR) -name 'openapi.yaml' -delete
+	find $(API_DIR) -name '*.openapi.yaml' -delete
+	rm -f $(KRATOS_ROOT)/openapi.yaml
+
+clean-conf:
+	rm -f $(SYS_API_DIR)/internal/conf/conf.pb.go $(SYS_RPC_DIR)/internal/conf/conf.pb.go
+
+conf: clean-conf
+	protoc \
+		-I . \
+		--go_out=paths=source_relative:. \
+		$(CONF_PROTO_FILES)
 
 proto-add-health:
-	kratos proto add api/system/v1/health.proto
+	cd $(API_DIR) && kratos proto add system/v1/health.proto
 
 proto:
-	protoc \
+	cd $(API_DIR) && protoc \
 		-I . \
 		-I $(THIRD_PARTY_DIR) \
 		--go_out=paths=source_relative:. \
@@ -46,27 +60,46 @@ proto:
 		$(PROTO_FILES)
 
 openapi:
-	protoc \
-		-I . \
-		-I $(THIRD_PARTY_DIR) \
-		--openapi_out=fq_schema_naming=true,default_response=false:$(KRATOS_ROOT)/api \
-		$(PROTO_FILES)
+	tmp_root=$$(mktemp -d /tmp/nai-tizi-openapi.XXXXXX); \
+	rm -f $(KRATOS_ROOT)/openapi.yaml; \
+	find $(API_DIR) -name 'openapi.yaml' -delete; \
+	find $(API_DIR) -name '*.openapi.yaml' -delete; \
+	for dir in $$(printf '%s\n' $(PROTO_FILES) | xargs -n1 dirname | sort -u); do \
+		inputs=""; \
+		index=0; \
+		cd $(API_DIR) && for file in $$(find $$dir -maxdepth 1 -name '*.proto' | sort); do \
+			index=$$((index + 1)); \
+			outdir=$$tmp_root/$$dir/$$index; \
+			mkdir -p $$outdir; \
+			protoc -I . -I $(THIRD_PARTY_DIR) --openapi_out=fq_schema_naming=true,default_response=false:$$outdir $$file; \
+			inputs="$$inputs $$outdir/openapi.yaml"; \
+		done; \
+		service=$${dir%%/*}; \
+		first=$$(printf '%s' "$$service" | cut -c1 | tr '[:lower:]' '[:upper:]'); \
+		rest=$$(printf '%s' "$$service" | cut -c2-); \
+		title="$$first$$rest API"; \
+		version=$$(printf '%s' "$$dir" | awk -F/ '{print $$2}'); \
+		if [ -n "$$inputs" ]; then \
+			cd $(KRATOS_ROOT) && GOCACHE=$(GOCACHE) go run ./cmd/openapi-merge -title "$$title" -out "$(API_DIR)/$$service/$$version.openapi.yaml" $$inputs; \
+		fi; \
+	done; \
+	rm -rf $$tmp_root
 
-proto-all: clean-proto prepare-third-party proto openapi proto-client proto-server-sys-api proto-server-sys-rpc
+proto-all: conf clean-proto prepare-third-party proto openapi proto-client proto-server-sys-api proto-server-sys-rpc
 
 proto-client:
-	for file in $(PROTO_FILES); do \
+	cd $(API_DIR) && for file in $(PROTO_FILES); do \
 		kratos proto client $$file -p $(THIRD_PARTY_DIR); \
 	done
 
 proto-server-sys-api:
-	for file in $(PROTO_FILES); do \
+	cd $(API_DIR) && for file in $(PROTO_FILES); do \
 		mkdir -p $(SYS_API_SERVICE_GEN_DIR); \
 		kratos proto server $$file -t $(SYS_API_SERVICE_GEN_DIR); \
 	done
 
 proto-server-sys-rpc:
-	for file in $(PROTO_FILES); do \
+	cd $(API_DIR) && for file in $(PROTO_FILES); do \
 		mkdir -p $(SYS_RPC_SERVICE_GEN_DIR); \
 		kratos proto server $$file -t $(SYS_RPC_SERVICE_GEN_DIR); \
 	done

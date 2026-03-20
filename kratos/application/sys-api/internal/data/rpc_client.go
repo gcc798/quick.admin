@@ -32,7 +32,7 @@ type RPCClientSet struct {
 	Attachment v1.AttachmentServiceClient
 }
 
-func NewRPCClientSet(cfg conf.RPC) (*RPCClientSet, error) {
+func NewRPCClientSet(cfg *conf.RPC) (*RPCClientSet, error) {
 	conn, cleanup, err := newRPCConn(cfg)
 	if err != nil {
 		return nil, err
@@ -69,10 +69,10 @@ func (c *RPCClientSet) Close() error {
 	return c.conn.Close()
 }
 
-func newRPCConn(cfg conf.RPC) (*grpc.ClientConn, func(), error) {
+func newRPCConn(cfg *conf.RPC) (*grpc.ClientConn, func(), error) {
 	timeout := 2 * time.Second
-	if strings.TrimSpace(cfg.Timeout) != "" {
-		parsed, err := time.ParseDuration(strings.TrimSpace(cfg.Timeout))
+	if strings.TrimSpace(cfg.GetTimeout()) != "" {
+		parsed, err := time.ParseDuration(strings.TrimSpace(cfg.GetTimeout()))
 		if err != nil {
 			return nil, nil, fmt.Errorf("parse rpc timeout: %w", err)
 		}
@@ -81,18 +81,18 @@ func newRPCConn(cfg conf.RPC) (*grpc.ClientConn, func(), error) {
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 	return grpcx.DialInsecure(ctx, grpcx.ClientConfig{
-		Mode:     cfg.Mode,
-		Endpoint: cfg.Endpoint,
+		Mode:     cfg.GetMode(),
+		Endpoint: cfg.GetEndpoint(),
 		Timeout:  timeout,
 		Discovery: registryx.DiscoveryConfig{
-			Driver:    cfg.Discovery.Driver,
-			Service:   cfg.Discovery.Service,
-			Namespace: cfg.Discovery.Etcd.Namespace,
+			Driver:    cfg.GetDiscovery().GetDriver(),
+			Service:   cfg.GetDiscovery().GetService(),
+			Namespace: cfg.GetDiscovery().GetEtcd().GetNamespace(),
 			Etcd: registryx.EtcdConfig{
-				Endpoints: cfg.Discovery.Etcd.Endpoints,
-				Username:  cfg.Discovery.Etcd.Username,
-				Password:  cfg.Discovery.Etcd.Password,
-				Timeout:   configx.ParseDurationOrDefault(cfg.Discovery.Etcd.Timeout, 5*time.Second),
+				Endpoints: cfg.GetDiscovery().GetEtcd().GetEndpoints(),
+				Username:  cfg.GetDiscovery().GetEtcd().GetUsername(),
+				Password:  cfg.GetDiscovery().GetEtcd().GetPassword(),
+				Timeout:   configx.ParseDurationOrDefault(cfg.GetDiscovery().GetEtcd().GetTimeout(), 5*time.Second),
 			},
 		},
 	}, outgoingUserInterceptor)

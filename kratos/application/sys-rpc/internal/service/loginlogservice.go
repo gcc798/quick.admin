@@ -9,10 +9,10 @@ import (
 
 type LoginLogServiceService struct {
 	v1.UnimplementedLoginLogServiceServer
-	uc *biz.LogUsecase
+	uc *biz.LoginLogUsecase
 }
 
-func NewLoginLogServiceService(uc *biz.LogUsecase) *LoginLogServiceService {
+func NewLoginLogServiceService(uc *biz.LoginLogUsecase) *LoginLogServiceService {
 	return &LoginLogServiceService{uc: uc}
 }
 func (s *LoginLogServiceService) CreateLoginLog(ctx context.Context, req *v1.CreateLoginLogRequest) (*v1.MessageReply, error) {

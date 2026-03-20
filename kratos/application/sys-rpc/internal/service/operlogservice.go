@@ -9,10 +9,10 @@ import (
 
 type OperLogServiceService struct {
 	v1.UnimplementedOperLogServiceServer
-	uc *biz.LogUsecase
+	uc *biz.OperLogUsecase
 }
 
-func NewOperLogServiceService(uc *biz.LogUsecase) *OperLogServiceService {
+func NewOperLogServiceService(uc *biz.OperLogUsecase) *OperLogServiceService {
 	return &OperLogServiceService{uc: uc}
 }
 func (s *OperLogServiceService) CreateOperLog(ctx context.Context, req *v1.CreateOperLogRequest) (*v1.MessageReply, error) {

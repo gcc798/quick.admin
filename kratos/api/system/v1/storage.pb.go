@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.19.4
-// source: api/system/v1/storage.proto
+// source: system/v1/storage.proto
 
 package v1
 
@@ -31,7 +31,7 @@ type StorageEmpty struct {
 
 func (x *StorageEmpty) Reset() {
 	*x = StorageEmpty{}
-	mi := &file_api_system_v1_storage_proto_msgTypes[0]
+	mi := &file_system_v1_storage_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *StorageEmpty) String() string {
 func (*StorageEmpty) ProtoMessage() {}
 
 func (x *StorageEmpty) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_storage_proto_msgTypes[0]
+	mi := &file_system_v1_storage_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *StorageEmpty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEmpty.ProtoReflect.Descriptor instead.
 func (*StorageEmpty) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_storage_proto_rawDescGZIP(), []int{0}
+	return file_system_v1_storage_proto_rawDescGZIP(), []int{0}
 }
 
 type StorageIdRequest struct {
@@ -68,7 +68,7 @@ type StorageIdRequest struct {
 
 func (x *StorageIdRequest) Reset() {
 	*x = StorageIdRequest{}
-	mi := &file_api_system_v1_storage_proto_msgTypes[1]
+	mi := &file_system_v1_storage_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -80,7 +80,7 @@ func (x *StorageIdRequest) String() string {
 func (*StorageIdRequest) ProtoMessage() {}
 
 func (x *StorageIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_storage_proto_msgTypes[1]
+	mi := &file_system_v1_storage_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -93,7 +93,7 @@ func (x *StorageIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageIdRequest.ProtoReflect.Descriptor instead.
 func (*StorageIdRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_storage_proto_rawDescGZIP(), []int{1}
+	return file_system_v1_storage_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *StorageIdRequest) GetId() int64 {
@@ -123,7 +123,7 @@ type StorageEnvItem struct {
 
 func (x *StorageEnvItem) Reset() {
 	*x = StorageEnvItem{}
-	mi := &file_api_system_v1_storage_proto_msgTypes[2]
+	mi := &file_system_v1_storage_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -135,7 +135,7 @@ func (x *StorageEnvItem) String() string {
 func (*StorageEnvItem) ProtoMessage() {}
 
 func (x *StorageEnvItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_storage_proto_msgTypes[2]
+	mi := &file_system_v1_storage_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -148,7 +148,7 @@ func (x *StorageEnvItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageEnvItem.ProtoReflect.Descriptor instead.
 func (*StorageEnvItem) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_storage_proto_rawDescGZIP(), []int{2}
+	return file_system_v1_storage_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *StorageEnvItem) GetId() int64 {
@@ -247,7 +247,7 @@ type PageStorageEnvRequest struct {
 
 func (x *PageStorageEnvRequest) Reset() {
 	*x = PageStorageEnvRequest{}
-	mi := &file_api_system_v1_storage_proto_msgTypes[3]
+	mi := &file_system_v1_storage_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -259,7 +259,7 @@ func (x *PageStorageEnvRequest) String() string {
 func (*PageStorageEnvRequest) ProtoMessage() {}
 
 func (x *PageStorageEnvRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_storage_proto_msgTypes[3]
+	mi := &file_system_v1_storage_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -272,7 +272,7 @@ func (x *PageStorageEnvRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageStorageEnvRequest.ProtoReflect.Descriptor instead.
 func (*PageStorageEnvRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_storage_proto_rawDescGZIP(), []int{3}
+	return file_system_v1_storage_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *PageStorageEnvRequest) GetPageNum() int64 {
@@ -312,7 +312,7 @@ type SetDefaultStorageEnvRequest struct {
 
 func (x *SetDefaultStorageEnvRequest) Reset() {
 	*x = SetDefaultStorageEnvRequest{}
-	mi := &file_api_system_v1_storage_proto_msgTypes[4]
+	mi := &file_system_v1_storage_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -324,7 +324,7 @@ func (x *SetDefaultStorageEnvRequest) String() string {
 func (*SetDefaultStorageEnvRequest) ProtoMessage() {}
 
 func (x *SetDefaultStorageEnvRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_storage_proto_msgTypes[4]
+	mi := &file_system_v1_storage_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +337,7 @@ func (x *SetDefaultStorageEnvRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetDefaultStorageEnvRequest.ProtoReflect.Descriptor instead.
 func (*SetDefaultStorageEnvRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_storage_proto_rawDescGZIP(), []int{4}
+	return file_system_v1_storage_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SetDefaultStorageEnvRequest) GetId() int64 {
@@ -364,7 +364,7 @@ type UpdateStorageEnvRequest struct {
 
 func (x *UpdateStorageEnvRequest) Reset() {
 	*x = UpdateStorageEnvRequest{}
-	mi := &file_api_system_v1_storage_proto_msgTypes[5]
+	mi := &file_system_v1_storage_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -376,7 +376,7 @@ func (x *UpdateStorageEnvRequest) String() string {
 func (*UpdateStorageEnvRequest) ProtoMessage() {}
 
 func (x *UpdateStorageEnvRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_storage_proto_msgTypes[5]
+	mi := &file_system_v1_storage_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -389,7 +389,7 @@ func (x *UpdateStorageEnvRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateStorageEnvRequest.ProtoReflect.Descriptor instead.
 func (*UpdateStorageEnvRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_storage_proto_rawDescGZIP(), []int{5}
+	return file_system_v1_storage_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateStorageEnvRequest) GetId() int64 {
@@ -467,7 +467,7 @@ type PageStorageEnvReply struct {
 
 func (x *PageStorageEnvReply) Reset() {
 	*x = PageStorageEnvReply{}
-	mi := &file_api_system_v1_storage_proto_msgTypes[6]
+	mi := &file_system_v1_storage_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -479,7 +479,7 @@ func (x *PageStorageEnvReply) String() string {
 func (*PageStorageEnvReply) ProtoMessage() {}
 
 func (x *PageStorageEnvReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_storage_proto_msgTypes[6]
+	mi := &file_system_v1_storage_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -492,7 +492,7 @@ func (x *PageStorageEnvReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageStorageEnvReply.ProtoReflect.Descriptor instead.
 func (*PageStorageEnvReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_storage_proto_rawDescGZIP(), []int{6}
+	return file_system_v1_storage_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *PageStorageEnvReply) GetList() []*StorageEnvItem {
@@ -523,11 +523,11 @@ func (x *PageStorageEnvReply) GetPageSize() int64 {
 	return 0
 }
 
-var File_api_system_v1_storage_proto protoreflect.FileDescriptor
+var File_system_v1_storage_proto protoreflect.FileDescriptor
 
-const file_api_system_v1_storage_proto_rawDesc = "" +
+const file_system_v1_storage_proto_rawDesc = "" +
 	"\n" +
-	"\x1bapi/system/v1/storage.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x18api/system/v1/auth.proto\"\x0e\n" +
+	"\x17system/v1/storage.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x14system/v1/auth.proto\"\x0e\n" +
 	"\fStorageEmpty\"\"\n" +
 	"\x10StorageIdRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"\xe5\x02\n" +
@@ -578,19 +578,19 @@ const file_api_system_v1_storage_proto_rawDesc = "" +
 	"\x10DeleteStorageEnv\x12\x1f.api.system.v1.StorageIdRequest\x1a\x1b.api.system.v1.MessageReply\" \x82\xd3\xe4\x93\x02\x1a*\x18/api/v1/storage-env/{id}B5Z3github.com/force-c/nai-tizi/kratos/api/system/v1;v1b\x06proto3"
 
 var (
-	file_api_system_v1_storage_proto_rawDescOnce sync.Once
-	file_api_system_v1_storage_proto_rawDescData []byte
+	file_system_v1_storage_proto_rawDescOnce sync.Once
+	file_system_v1_storage_proto_rawDescData []byte
 )
 
-func file_api_system_v1_storage_proto_rawDescGZIP() []byte {
-	file_api_system_v1_storage_proto_rawDescOnce.Do(func() {
-		file_api_system_v1_storage_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_system_v1_storage_proto_rawDesc), len(file_api_system_v1_storage_proto_rawDesc)))
+func file_system_v1_storage_proto_rawDescGZIP() []byte {
+	file_system_v1_storage_proto_rawDescOnce.Do(func() {
+		file_system_v1_storage_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_system_v1_storage_proto_rawDesc), len(file_system_v1_storage_proto_rawDesc)))
 	})
-	return file_api_system_v1_storage_proto_rawDescData
+	return file_system_v1_storage_proto_rawDescData
 }
 
-var file_api_system_v1_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
-var file_api_system_v1_storage_proto_goTypes = []any{
+var file_system_v1_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_system_v1_storage_proto_goTypes = []any{
 	(*StorageEmpty)(nil),                // 0: api.system.v1.StorageEmpty
 	(*StorageIdRequest)(nil),            // 1: api.system.v1.StorageIdRequest
 	(*StorageEnvItem)(nil),              // 2: api.system.v1.StorageEnvItem
@@ -601,7 +601,7 @@ var file_api_system_v1_storage_proto_goTypes = []any{
 	(*structpb.Struct)(nil),             // 7: google.protobuf.Struct
 	(*MessageReply)(nil),                // 8: api.system.v1.MessageReply
 }
-var file_api_system_v1_storage_proto_depIdxs = []int32{
+var file_system_v1_storage_proto_depIdxs = []int32{
 	7,  // 0: api.system.v1.StorageEnvItem.config:type_name -> google.protobuf.Struct
 	7,  // 1: api.system.v1.UpdateStorageEnvRequest.config:type_name -> google.protobuf.Struct
 	2,  // 2: api.system.v1.PageStorageEnvReply.list:type_name -> api.system.v1.StorageEnvItem
@@ -628,27 +628,27 @@ var file_api_system_v1_storage_proto_depIdxs = []int32{
 	0,  // [0:3] is the sub-list for field type_name
 }
 
-func init() { file_api_system_v1_storage_proto_init() }
-func file_api_system_v1_storage_proto_init() {
-	if File_api_system_v1_storage_proto != nil {
+func init() { file_system_v1_storage_proto_init() }
+func file_system_v1_storage_proto_init() {
+	if File_system_v1_storage_proto != nil {
 		return
 	}
-	file_api_system_v1_auth_proto_init()
+	file_system_v1_auth_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_system_v1_storage_proto_rawDesc), len(file_api_system_v1_storage_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_v1_storage_proto_rawDesc), len(file_system_v1_storage_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_system_v1_storage_proto_goTypes,
-		DependencyIndexes: file_api_system_v1_storage_proto_depIdxs,
-		MessageInfos:      file_api_system_v1_storage_proto_msgTypes,
+		GoTypes:           file_system_v1_storage_proto_goTypes,
+		DependencyIndexes: file_system_v1_storage_proto_depIdxs,
+		MessageInfos:      file_system_v1_storage_proto_msgTypes,
 	}.Build()
-	File_api_system_v1_storage_proto = out.File
-	file_api_system_v1_storage_proto_goTypes = nil
-	file_api_system_v1_storage_proto_depIdxs = nil
+	File_system_v1_storage_proto = out.File
+	file_system_v1_storage_proto_goTypes = nil
+	file_system_v1_storage_proto_depIdxs = nil
 }

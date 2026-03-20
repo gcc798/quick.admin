@@ -1,23 +1,23 @@
-# Kratos Rewrite Plan
+# Kratos 工程说明
 
-## Goal
+## 目标
 
-Build a brand-new backend under `kratos/` using the Kratos framework, while keeping:
+在 `kratos/` 目录下基于 Kratos 框架实现一套全新的后端，同时保持以下原则：
 
-- `native/` as the business baseline and read-only reference.
-- `web/` working without frontend API changes.
-- `sys-api` as the external HTTP service.
-- `sys-rpc` as the internal gRPC service owning business logic and database access.
+- `native/` 作为业务基线和只读参考，不直接修改。
+- `web/` 尽量保持零改动可用。
+- `sys-api` 作为对外 HTTP 服务。
+- `sys-rpc` 作为对内 gRPC 服务，承接核心业务逻辑和数据库访问。
 
-## Architecture
+## 工程结构
 
-This rewrite uses a monorepo layout, while each service keeps the standard Kratos internal layering.
+当前重写方案采用 monorepo 结构，但每个服务内部仍保持标准 Kratos 分层。
 
 ```text
 kratos/
 ├── api/
 │   └── system/v1/
-├── app/
+├── application/
 │   ├── sys-api/
 │   │   ├── cmd/server
 │   │   ├── configs
@@ -26,202 +26,218 @@ kratos/
 │       ├── cmd/server
 │       ├── configs
 │       └── internal/{biz,data,server,service,conf}
+├── cmd/
+├── docs/
 ├── pkg/
 ├── third_party/
 ├── Makefile
 └── go.mod
 ```
 
-## Service Boundaries
+## 服务边界
 
 ### sys-api
 
-Responsibilities:
+职责：
 
-- Expose HTTP endpoints to `web/`
-- Parse request parameters
-- Adapt responses to native-compatible HTTP shape
-- Handle JWT/token/cache related concerns
-- Call `sys-rpc` through gRPC
+- 向 `web/` 暴露 HTTP 接口。
+- 解析请求参数。
+- 把响应包装成兼容 `native` 的 HTTP 返回结构。
+- 处理 token、鉴权、缓存、HTTP 中间件等外层能力。
+- 通过 gRPC 调用 `sys-rpc`。
 
-Non-responsibilities:
+非职责：
 
-- No direct database access
-- No core system business logic persistence
+- 不直接访问数据库。
+- 不承担 system 域的核心持久化业务逻辑。
 
 ### sys-rpc
 
-Responsibilities:
+职责：
 
-- Expose internal gRPC APIs
-- Own all system domain business logic
-- Own PostgreSQL access
-- Own Ent schema, repositories, and transactions
+- 对内暴露 gRPC 接口。
+- 承担 system 域核心业务逻辑。
+- 承担 PostgreSQL 访问。
+- 维护 Ent schema、repo、事务和底层资源。
 
-## API Contract Strategy
+## 契约策略
 
-Use proto as the single source of truth.
+使用 proto 作为单一事实来源。
 
-- `api/system/v1/*.proto` defines both HTTP and gRPC contracts.
-- HTTP paths, methods, request fields, and response fields must align with `native/`.
-- `web/` should not require adjustments unless `web/` itself deviates from `native/`.
+- `api/system/v1/*.proto` 同时定义 HTTP 和 gRPC 契约。
+- HTTP 路径、方法、请求字段、返回字段都要尽量与 `native/` 对齐。
+- 除非 `web/` 本身偏离 `native/`，否则不应要求前端为 Kratos 版本单独适配。
 
-## ORM Strategy
+## ORM 策略
 
-Use `ent` with PostgreSQL.
+当前使用 `ent + PostgreSQL`。
 
-- Ent schema lives under `application/sys-rpc/ent/schema`
-- Data access repositories live under `application/sys-rpc/internal/data`
-- Business orchestration lives under `application/sys-rpc/internal/biz`
+- Ent schema 位于 `application/sys-rpc/ent/schema`
+- 数据访问 repo 位于 `application/sys-rpc/internal/data`
+- 业务编排位于 `application/sys-rpc/internal/biz`
 
-## Initial Development Scope
+## 开发阶段
 
-Phase 1:
+### 第一阶段
 
-- Create `kratos/` base project structure
-- Create `sys-api` and `sys-rpc` services in Kratos style
-- Create shared proto layout
-- Create Makefile and generation/build commands
-- Ensure the whole project compiles
+- 创建 `kratos/` 基础工程结构。
+- 创建 `sys-api` 与 `sys-rpc` 两个服务。
+- 建立共享 proto 目录结构。
+- 建立 `Makefile` 和生成/构建命令。
+- 先保证整个工程可编译。
 
-Phase 2:
+### 第二阶段
 
-- Add first proto contracts for health/auth
-- Generate HTTP/gRPC code
-- Keep a minimal runnable skeleton
+- 增加第一批 proto 契约，例如 `health / auth`。
+- 生成 HTTP / gRPC 代码。
+- 先形成可运行的最小骨架。
 
-Later phases:
+### 后续阶段
 
-- Auth / captcha / me / menu
-- User / role / org
-- Dict / config
-- Login log / oper log / storage env / attachment
-- Full compatibility pass against `native/` and `web/`
+- `auth / captcha / me / menu`
+- `user / role / org`
+- `dict / config`
+- `loginlog / operlog / storage-env / attachment`
+- 最后对照 `native/` 与 `web/` 做完整兼容性回归。
 
-## Implementation Rules
+## 当前实现约束
 
-1. Do not modify `native/`
-2. Keep Kratos conventions inside each service
-3. Prefer generated code where Kratos supports generation
-4. Keep `sys-api` free of direct DB access
-5. Keep contracts strong-typed, no generic JSON RPC envelope
+1. 不修改 `native/`
+2. 每个服务内部遵守 Kratos 推荐分层
+3. Kratos 支持生成的部分尽量通过生成完成
+4. `sys-api` 不直接查库
+5. 契约保持强类型，不做泛化 JSON RPC 包装
 
-## Current Target
+## 当前工程状态
 
-The current target for this iteration is:
+当前仓库已经具备一套可编译的 Kratos 工程骨架，并完成了主要基础设施：
 
-- write this plan into the repository
-- scaffold the Kratos project and service skeleton
-- add the minimal shared proto/config/build setup
-- make the project compile successfully
+- `sys-api` 对外提供 HTTP 能力
+- `sys-api` 通过 gRPC 调 `sys-rpc`
+- `sys-rpc` 承担数据库访问、Redis、JWT、注册发现、存储、指标等底层能力
+- `application/sys-rpc/ent/schema` 已完成 Ent 生成链路
+- `Wire` 已规范为标准 `ProviderSet` 风格
+- OpenAPI 已按服务/版本输出到 `api/system/v1.openapi.yaml`
 
-## Current Scaffold Status
+## 常用 Make 命令
 
-The repository now contains a minimal compilable Kratos skeleton with:
-
-- `sys-api` exposing `GET /health`
-- `sys-api` calling `sys-rpc` through gRPC for the health check
-- `sys-rpc` serving the corresponding `Ping` RPC
-- `ent` generation bootstrapped in `application/sys-rpc/ent/schema`
-
-## Make Targets
-
-Common commands:
+常用命令包括：
 
 - `make init`
+- `make conf`
 - `make proto-all`
 - `make ent`
+- `make wire`
 - `make fmt`
 - `make build-all`
 - `make test`
 
-## Reusable Package Plan
+更详细的变量和目标说明见：
 
-The following infrastructure has already been extracted into `pkg/` and can be reused by future microservices:
+- [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/makefile-reference.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/makefile-reference.md)
+
+## 已抽取到 pkg 的通用能力
+
+当前已经沉淀到 `pkg/`，后续可复用于其他微服务的能力有：
 
 - `pkg/configx`
-  - shared YAML config loading
-  - shared duration parsing helpers
+  - 共享配置加载能力
+  - 共享时长解析辅助函数
 - `pkg/grpcx`
-  - shared gRPC client dial logic
-  - support for both direct endpoint mode and discovery mode
+  - 共享 gRPC client 建连逻辑
+  - 同时支持 `direct` 与 `discovery` 两种模式
 - `pkg/registryx`
-  - shared etcd client creation
-  - shared service registrar creation
-  - shared service discovery creation
+  - 共享 etcd client 创建
+  - 共享服务注册创建
+  - 共享服务发现创建
 - `pkg/metrics`
-  - shared Prometheus metric definitions and helpers
+  - 共享 Prometheus 指标定义与辅助函数
 
-The following items are good candidates for future extraction into `pkg/`, but should remain in service-local code for now. They are intentionally documented here first instead of being extracted immediately.
+## 后续适合继续抽取到 pkg 的候选能力
 
-### Priority 1
+下面这些能力已经有较明显的复用价值，但目前先记录在文档中，不立即抽取。
+
+### 优先级 1
 
 - `pkg/httpx`
-  - purpose:
-    - shared HTTP response encoder
-    - shared HTTP error encoder
-    - shared native-compatible page/data response shaping
-  - current source locations:
+  - 目标：
+    - 统一 HTTP 响应编码
+    - 统一 HTTP 错误编码
+    - 统一分页/数据包装方式
+  - 当前来源：
     - `application/sys-api/internal/server/codec.go`
 
 - `pkg/authx`
-  - purpose:
-    - current-user context helpers
-    - token/header extraction
-    - client IP and user-agent extraction
-    - reusable auth metadata propagation helpers
-  - current source locations:
+  - 目标：
+    - 当前用户上下文辅助函数
+    - token/header 提取
+    - client IP 和 user-agent 提取
+    - 可复用的认证元信息透传能力
+  - 当前来源：
     - `application/sys-api/internal/data/context.go`
 
-### Priority 2
+### 优先级 2
 
 - `pkg/observabilityx`
-  - purpose:
-    - shared HTTP metrics middleware
-    - shared slow SQL / slow Redis logging helpers
-    - shared observability bootstrap utilities
-  - current source locations:
+  - 目标：
+    - 统一 HTTP metrics 中间件
+    - 统一慢 SQL / 慢 Redis 日志辅助能力
+    - 统一可观测性初始化入口
+  - 当前来源：
     - `application/sys-api/internal/server/metrics_handler.go`
     - `application/sys-rpc/internal/data/db_observability.go`
     - `application/sys-rpc/internal/data/redis_observability.go`
 
 - `pkg/wsx`
-  - purpose:
-    - reusable websocket hub
-    - reusable connection registry
-    - reusable heartbeat and broadcast primitives
-  - current source locations:
+  - 目标：
+    - 可复用的 websocket hub
+    - 可复用的连接注册表
+    - 可复用的心跳与广播原语
+  - 当前来源：
     - `application/sys-api/internal/server/websocket_hub.go`
     - `application/sys-api/internal/server/websocket_handler.go`
 
-### Priority 3
+### 优先级 3
 
 - `pkg/permx`
-  - purpose:
-    - reusable operation-to-permission mapping helpers
-    - reusable permission middleware scaffolding
-  - note:
-    - only worth extracting after permission naming is stable across services
-  - current source locations:
+  - 目标：
+    - 可复用的 operation 到 permission 映射辅助能力
+    - 可复用的权限中间件骨架
+  - 说明：
+    - 只有在多个服务的权限命名约定稳定后，才值得抽取
+  - 当前来源：
     - `application/sys-api/internal/server/middleware.go`
     - `application/sys-api/internal/server/permissions.go`
 
 - `pkg/operlogx`
-  - purpose:
-    - reusable operation-log middleware
-    - reusable request/response truncation and normalization helpers
-  - note:
-    - only worth extracting after log DTO and auditing conventions are stable across services
-  - current source locations:
+  - 目标：
+    - 可复用的操作日志中间件
+    - 可复用的请求/响应裁剪和归一化辅助能力
+  - 说明：
+    - 只有在日志 DTO 与审计约定稳定后，才值得抽取
+  - 当前来源：
     - `application/sys-api/internal/server/operlog_middleware.go`
 
-## Extraction Rules For Future Work
+## 未来抽取到 pkg 的判断规则
 
-Only move code into `pkg/` when all of the following are true:
+只有同时满足以下条件，才建议把代码从服务内部抽取到 `pkg/`：
 
-1. The logic is not tied to one service's business semantics
-2. At least two services can reasonably reuse it
-3. The abstraction is already stable enough to avoid repeated churn
-4. The extracted package does not need to import service-local `biz` or `data` code
+1. 这段逻辑不依赖某个服务的业务语义。
+2. 至少有两个服务可以合理复用。
+3. 抽象已经足够稳定，不会频繁返工。
+4. 抽出的包不需要反向依赖服务内部的 `biz` 或 `data` 代码。
 
-Keep service-local code in place when the logic still carries system-specific assumptions, permission naming assumptions, or DTO coupling that may not generalize well to future microservices.
+如果逻辑仍然带有明显的 system 业务假设、权限命名假设、DTO 耦合，应该先继续留在服务内部。
+
+## 文档索引
+
+如果你要继续了解这套工程，建议按下面顺序阅读：
+
+1. proto 到 HTTP / gRPC 串联流程：
+   - [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/proto-http-grpc-flow.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/proto-http-grpc-flow.md)
+2. Wire 使用说明：
+   - [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/wire-usage.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/wire-usage.md)
+3. HTTP 手工路由与 proto 路由边界：
+   - [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/http-routing-boundary.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/http-routing-boundary.md)
+4. Makefile 详细说明：
+   - [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/makefile-reference.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/makefile-reference.md)

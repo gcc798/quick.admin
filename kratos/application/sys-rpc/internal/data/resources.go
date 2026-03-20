@@ -37,8 +37,8 @@ func init() {
 	idCounter.Store(time.Now().UnixNano())
 }
 
-func NewResources(dataCfg conf.Data, authCfg conf.Auth, jwtCfg conf.JWT, obsCfg conf.Observability) (*Resources, error) {
-	if dataCfg.Database.Driver == "" || dataCfg.Database.DSN == "" {
+func NewResources(dataCfg *conf.Data, authCfg *conf.Auth, jwtCfg *conf.JWT, obsCfg *conf.Observability) (*Resources, error) {
+	if dataCfg.GetDatabase().GetDriver() == "" || dataCfg.GetDatabase().GetDsn() == "" {
 		return nil, errors.New("database config is required")
 	}
 	var (
@@ -46,22 +46,22 @@ func NewResources(dataCfg conf.Data, authCfg conf.Auth, jwtCfg conf.JWT, obsCfg 
 		sqlDB  *sql.DB
 		err    error
 	)
-	switch dataCfg.Database.Driver {
+	switch dataCfg.GetDatabase().GetDriver() {
 	case "postgres":
-		sqlDB, err = openObservedPostgresDB(dataCfg.Database.DSN, dbObservability{
-			slowThreshold: time.Duration(obsCfg.DBSlowThresholdMs) * time.Millisecond,
+		sqlDB, err = openObservedPostgresDB(dataCfg.GetDatabase().GetDsn(), dbObservability{
+			slowThreshold: time.Duration(obsCfg.GetDbSlowThresholdMs()) * time.Millisecond,
 		})
 		if err != nil {
 			return nil, err
 		}
-		client = ent.NewClient(ent.Driver(entsql.OpenDB(dataCfg.Database.Driver, sqlDB)))
+		client = ent.NewClient(ent.Driver(entsql.OpenDB(dataCfg.GetDatabase().GetDriver(), sqlDB)))
 	default:
-		client, err = ent.Open(dataCfg.Database.Driver, dataCfg.Database.DSN)
+		client, err = ent.Open(dataCfg.GetDatabase().GetDriver(), dataCfg.GetDatabase().GetDsn())
 		if err != nil {
 			return nil, err
 		}
 	}
-	if dataCfg.Redis.Addr == "" {
+	if dataCfg.GetRedis().GetAddr() == "" {
 		if client != nil {
 			_ = client.Close()
 		}
@@ -71,12 +71,12 @@ func NewResources(dataCfg conf.Data, authCfg conf.Auth, jwtCfg conf.JWT, obsCfg 
 		return nil, errors.New("redis config is required")
 	}
 	redisClient := redis.NewClient(&redis.Options{
-		Addr:     dataCfg.Redis.Addr,
-		Password: dataCfg.Redis.Password,
-		DB:       dataCfg.Redis.DB,
+		Addr:     dataCfg.GetRedis().GetAddr(),
+		Password: dataCfg.GetRedis().GetPassword(),
+		DB:       int(dataCfg.GetRedis().GetDb()),
 	})
 	redisClient.AddHook(newRedisMetricsHook(redisObservability{
-		slowThreshold: time.Duration(obsCfg.RedisSlowThresholdMs) * time.Millisecond,
+		slowThreshold: time.Duration(obsCfg.GetRedisSlowThresholdMs()) * time.Millisecond,
 	}))
 	if err := redisClient.Ping(context.Background()).Err(); err != nil {
 		_ = client.Close()
@@ -90,16 +90,16 @@ func NewResources(dataCfg conf.Data, authCfg conf.Auth, jwtCfg conf.JWT, obsCfg 
 		SQLDB:   sqlDB,
 		Redis:   redisClient,
 		Storage: NewStorageManager(client),
-		WeChat:  NewWeChatManager(dataCfg.WeChat),
-		JWT:     NewJWTManager(jwtCfg.Secret, jwtCfg.Expire, jwtCfg.Issuer),
+		WeChat:  NewWeChatManager(dataCfg.GetWechat()),
+		JWT:     NewJWTManager(jwtCfg.GetSecret(), jwtCfg.GetExpire(), jwtCfg.GetIssuer()),
 		Auth: AuthPolicy{
-			AllowConcurrent: authCfg.AllowConcurrent,
-			ShareToken:      authCfg.ShareToken,
+			AllowConcurrent: authCfg.GetAllowConcurrent(),
+			ShareToken:      authCfg.GetShareToken(),
 		},
 		stopCh: make(chan struct{}),
 	}
 	if sqlDB != nil {
-		startDBPoolMetricsSampler(sqlDB, configx.ParseDurationOrDefault(obsCfg.DBPoolSampleInterval, 15*time.Second), res.stopCh)
+		startDBPoolMetricsSampler(sqlDB, configx.ParseDurationOrDefault(obsCfg.GetDbPoolSampleInterval(), 15*time.Second), res.stopCh)
 	}
 	return res, nil
 }

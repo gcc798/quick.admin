@@ -20,20 +20,62 @@ import (
 // Injectors from wire.go:
 
 func wireApp(cfg *conf.Bootstrap, logger log.Logger) (*kratos.App, func(), error) {
-	repositories, cleanup, err := newRepositories(cfg)
+	http := server.ProvideHTTPConfig(cfg)
+	rpc := data.ProvideRPCConfig(cfg)
+	rpcClientSet, cleanup, err := data.NewData(rpc)
 	if err != nil {
 		return nil, nil, err
 	}
-	usecases := biz.NewUsecases(repositories)
-	webSocketHub, cleanup2, err := newWebSocketHub()
+	authRepo := data.NewAuthRepo(rpcClientSet)
+	authGateway := server.ProvideAuthGateway(authRepo)
+	attachmentRepo := data.NewAttachmentRepo(rpcClientSet)
+	attachmentUsecase := biz.NewAttachmentUsecase(attachmentRepo)
+	attachmentGateway := server.ProvideAttachmentGateway(attachmentUsecase)
+	operLogRepo := data.NewOperLogRepo(rpcClientSet)
+	operLogUsecase := biz.NewOperLogUsecase(operLogRepo)
+	operLogGateway := server.ProvideOperLogGateway(operLogUsecase)
+	webSocketHub, cleanup2, err := server.NewWebSocketHubProvider()
 	if err != nil {
 		cleanup()
 		return nil, nil, err
 	}
-	gatewayDeps := newGatewayDeps(repositories, usecases, webSocketHub)
-	services := service.NewServices(usecases)
-	server := newHTTPServer(cfg, gatewayDeps, services)
-	app := newApp(logger, server)
+	gatewayDeps := server.NewGatewayDeps(authGateway, attachmentGateway, operLogGateway, webSocketHub)
+	healthRepo := data.NewHealthRepo(rpcClientSet)
+	healthUsecase := biz.NewHealthUsecase(healthRepo)
+	healthServiceService := service.NewHealthServiceService(healthUsecase)
+	authUsecase := biz.NewAuthUsecase(authRepo)
+	authServiceService := service.NewAuthServiceService(authUsecase)
+	captchaRepo := data.NewCaptchaRepo(rpcClientSet)
+	captchaUsecase := biz.NewCaptchaUsecase(captchaRepo)
+	captchaServiceService := service.NewCaptchaServiceService(captchaUsecase)
+	menuRepo := data.NewMenuRepo(rpcClientSet)
+	menuUsecase := biz.NewMenuUsecase(menuRepo)
+	menuServiceService := service.NewMenuServiceService(menuUsecase)
+	userRepo := data.NewUserRepo(rpcClientSet)
+	userUsecase := biz.NewUserUsecase(userRepo)
+	userServiceService := service.NewUserServiceService(userUsecase)
+	roleRepo := data.NewRoleRepo(rpcClientSet)
+	roleUsecase := biz.NewRoleUsecase(roleRepo)
+	roleServiceService := service.NewRoleServiceService(roleUsecase)
+	orgRepo := data.NewOrgRepo(rpcClientSet)
+	orgUsecase := biz.NewOrgUsecase(orgRepo)
+	orgServiceService := service.NewOrgServiceService(orgUsecase)
+	configRepo := data.NewConfigRepo(rpcClientSet)
+	configUsecase := biz.NewConfigUsecase(configRepo)
+	configServiceService := service.NewConfigServiceService(configUsecase)
+	dictRepo := data.NewDictRepo(rpcClientSet)
+	dictUsecase := biz.NewDictUsecase(dictRepo)
+	dictServiceService := service.NewDictServiceService(dictUsecase)
+	loginLogRepo := data.NewLoginLogRepo(rpcClientSet)
+	loginLogUsecase := biz.NewLoginLogUsecase(loginLogRepo)
+	loginLogServiceService := service.NewLoginLogServiceService(loginLogUsecase)
+	operLogServiceService := service.NewOperLogServiceService(operLogUsecase)
+	storageEnvRepo := data.NewStorageEnvRepo(rpcClientSet)
+	storageEnvUsecase := biz.NewStorageEnvUsecase(storageEnvRepo)
+	storageEnvServiceService := service.NewStorageEnvServiceService(storageEnvUsecase)
+	attachmentServiceService := service.NewAttachmentServiceService(attachmentUsecase)
+	httpServer := server.NewHTTPServer(http, gatewayDeps, healthServiceService, authServiceService, captchaServiceService, menuServiceService, userServiceService, roleServiceService, orgServiceService, configServiceService, dictServiceService, loginLogServiceService, operLogServiceService, storageEnvServiceService, attachmentServiceService)
+	app := newApp(logger, httpServer)
 	return app, func() {
 		cleanup2()
 		cleanup()
@@ -41,47 +83,6 @@ func wireApp(cfg *conf.Bootstrap, logger log.Logger) (*kratos.App, func(), error
 }
 
 // wire.go:
-
-func newRepositories(cfg *conf.Bootstrap) (*data.Repositories, func(), error) {
-	repos, err := data.NewRepositories(cfg.Server.RPC)
-	if err != nil {
-		return nil, nil, err
-	}
-	return repos, func() {
-		_ = repos.Close()
-	}, nil
-}
-
-func newWebSocketHub() (*server.WebSocketHub, func(), error) {
-	hub := server.NewWebSocketHub()
-	return hub, func() {
-		hub.Stop()
-	}, nil
-}
-
-func newGatewayDeps(repos *data.Repositories, usecases *biz.Usecases, wsHub *server.WebSocketHub) *server.GatewayDeps {
-	return &server.GatewayDeps{Auth: repos.Auth, Attachment: usecases.Attachment, OperLog: repos.OperLog, WebSocket: wsHub}
-}
-
-func newHTTPServer(cfg *conf.Bootstrap, deps *server.GatewayDeps, services *service.Services) *http.Server {
-	return server.NewHTTPServer(
-		cfg.Server.HTTP,
-		deps,
-		services.Health,
-		services.Auth,
-		services.Captcha,
-		services.Menu,
-		services.User,
-		services.Role,
-		services.Org,
-		services.Config,
-		services.Dict,
-		services.LoginLog,
-		services.OperLog,
-		services.StorageEnv,
-		services.Attachment,
-	)
-}
 
 func newApp(logger log.Logger, httpSrv *http.Server) *kratos.App {
 	return kratos.New(kratos.Name("sys-api"), kratos.Logger(logger), kratos.Server(httpSrv))

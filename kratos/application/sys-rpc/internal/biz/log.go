@@ -12,8 +12,19 @@ type LogUsecase struct {
 	kind string
 }
 
+type LoginLogUsecase struct{ *LogUsecase }
+type OperLogUsecase struct{ *LogUsecase }
+
 func NewLogUsecase(res *data.Resources, kind string) *LogUsecase {
 	return &LogUsecase{res: res, kind: kind}
+}
+
+func NewLoginLogUsecase(res *data.Resources) *LoginLogUsecase {
+	return &LoginLogUsecase{LogUsecase: NewLogUsecase(res, "login")}
+}
+
+func NewOperLogUsecase(res *data.Resources) *OperLogUsecase {
+	return &OperLogUsecase{LogUsecase: NewLogUsecase(res, "oper")}
 }
 
 func (uc *LogUsecase) CreateLogin(ctx context.Context, req *v1.CreateLoginLogRequest) (*v1.MessageReply, error) {

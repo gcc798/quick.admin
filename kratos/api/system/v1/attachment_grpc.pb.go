@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.0
 // - protoc             v3.19.4
-// source: api/system/v1/attachment.proto
+// source: system/v1/attachment.proto
 
 package v1
 
@@ -383,5 +383,5 @@ var AttachmentService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/system/v1/attachment.proto",
+	Metadata: "system/v1/attachment.proto",
 }

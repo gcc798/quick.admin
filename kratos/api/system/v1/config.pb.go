@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.19.4
-// source: api/system/v1/config.proto
+// source: system/v1/config.proto
 
 package v1
 
@@ -32,7 +32,7 @@ type IdRequest struct {
 
 func (x *IdRequest) Reset() {
 	*x = IdRequest{}
-	mi := &file_api_system_v1_config_proto_msgTypes[0]
+	mi := &file_system_v1_config_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +44,7 @@ func (x *IdRequest) String() string {
 func (*IdRequest) ProtoMessage() {}
 
 func (x *IdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_config_proto_msgTypes[0]
+	mi := &file_system_v1_config_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *IdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IdRequest.ProtoReflect.Descriptor instead.
 func (*IdRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_config_proto_rawDescGZIP(), []int{0}
+	return file_system_v1_config_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *IdRequest) GetId() int64 {
@@ -76,7 +76,7 @@ type BatchIdsRequest struct {
 
 func (x *BatchIdsRequest) Reset() {
 	*x = BatchIdsRequest{}
-	mi := &file_api_system_v1_config_proto_msgTypes[1]
+	mi := &file_system_v1_config_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -88,7 +88,7 @@ func (x *BatchIdsRequest) String() string {
 func (*BatchIdsRequest) ProtoMessage() {}
 
 func (x *BatchIdsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_config_proto_msgTypes[1]
+	mi := &file_system_v1_config_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -101,7 +101,7 @@ func (x *BatchIdsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchIdsRequest.ProtoReflect.Descriptor instead.
 func (*BatchIdsRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_config_proto_rawDescGZIP(), []int{1}
+	return file_system_v1_config_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *BatchIdsRequest) GetIds() []int64 {
@@ -120,7 +120,7 @@ type GetConfigByCodeRequest struct {
 
 func (x *GetConfigByCodeRequest) Reset() {
 	*x = GetConfigByCodeRequest{}
-	mi := &file_api_system_v1_config_proto_msgTypes[2]
+	mi := &file_system_v1_config_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -132,7 +132,7 @@ func (x *GetConfigByCodeRequest) String() string {
 func (*GetConfigByCodeRequest) ProtoMessage() {}
 
 func (x *GetConfigByCodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_config_proto_msgTypes[2]
+	mi := &file_system_v1_config_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -145,7 +145,7 @@ func (x *GetConfigByCodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetConfigByCodeRequest.ProtoReflect.Descriptor instead.
 func (*GetConfigByCodeRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_config_proto_rawDescGZIP(), []int{2}
+	return file_system_v1_config_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetConfigByCodeRequest) GetCode() string {
@@ -168,7 +168,7 @@ type PageConfigRequest struct {
 
 func (x *PageConfigRequest) Reset() {
 	*x = PageConfigRequest{}
-	mi := &file_api_system_v1_config_proto_msgTypes[3]
+	mi := &file_system_v1_config_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -180,7 +180,7 @@ func (x *PageConfigRequest) String() string {
 func (*PageConfigRequest) ProtoMessage() {}
 
 func (x *PageConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_config_proto_msgTypes[3]
+	mi := &file_system_v1_config_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -193,7 +193,7 @@ func (x *PageConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageConfigRequest.ProtoReflect.Descriptor instead.
 func (*PageConfigRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_config_proto_rawDescGZIP(), []int{3}
+	return file_system_v1_config_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *PageConfigRequest) GetPageNum() int64 {
@@ -249,7 +249,7 @@ type ConfigItem struct {
 
 func (x *ConfigItem) Reset() {
 	*x = ConfigItem{}
-	mi := &file_api_system_v1_config_proto_msgTypes[4]
+	mi := &file_system_v1_config_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -261,7 +261,7 @@ func (x *ConfigItem) String() string {
 func (*ConfigItem) ProtoMessage() {}
 
 func (x *ConfigItem) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_config_proto_msgTypes[4]
+	mi := &file_system_v1_config_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -274,7 +274,7 @@ func (x *ConfigItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigItem.ProtoReflect.Descriptor instead.
 func (*ConfigItem) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_config_proto_rawDescGZIP(), []int{4}
+	return file_system_v1_config_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ConfigItem) GetId() int64 {
@@ -361,7 +361,7 @@ type UpdateConfigRequest struct {
 
 func (x *UpdateConfigRequest) Reset() {
 	*x = UpdateConfigRequest{}
-	mi := &file_api_system_v1_config_proto_msgTypes[5]
+	mi := &file_system_v1_config_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -373,7 +373,7 @@ func (x *UpdateConfigRequest) String() string {
 func (*UpdateConfigRequest) ProtoMessage() {}
 
 func (x *UpdateConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_config_proto_msgTypes[5]
+	mi := &file_system_v1_config_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -386,7 +386,7 @@ func (x *UpdateConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateConfigRequest.ProtoReflect.Descriptor instead.
 func (*UpdateConfigRequest) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_config_proto_rawDescGZIP(), []int{5}
+	return file_system_v1_config_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateConfigRequest) GetId() int64 {
@@ -443,7 +443,7 @@ type PageConfigReply struct {
 
 func (x *PageConfigReply) Reset() {
 	*x = PageConfigReply{}
-	mi := &file_api_system_v1_config_proto_msgTypes[6]
+	mi := &file_system_v1_config_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -455,7 +455,7 @@ func (x *PageConfigReply) String() string {
 func (*PageConfigReply) ProtoMessage() {}
 
 func (x *PageConfigReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_config_proto_msgTypes[6]
+	mi := &file_system_v1_config_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -468,7 +468,7 @@ func (x *PageConfigReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PageConfigReply.ProtoReflect.Descriptor instead.
 func (*PageConfigReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_config_proto_rawDescGZIP(), []int{6}
+	return file_system_v1_config_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *PageConfigReply) GetList() []*ConfigItem {
@@ -508,7 +508,7 @@ type ConfigListReply struct {
 
 func (x *ConfigListReply) Reset() {
 	*x = ConfigListReply{}
-	mi := &file_api_system_v1_config_proto_msgTypes[7]
+	mi := &file_system_v1_config_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -520,7 +520,7 @@ func (x *ConfigListReply) String() string {
 func (*ConfigListReply) ProtoMessage() {}
 
 func (x *ConfigListReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_config_proto_msgTypes[7]
+	mi := &file_system_v1_config_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -533,7 +533,7 @@ func (x *ConfigListReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigListReply.ProtoReflect.Descriptor instead.
 func (*ConfigListReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_config_proto_rawDescGZIP(), []int{7}
+	return file_system_v1_config_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ConfigListReply) GetItems() []*ConfigItem {
@@ -552,7 +552,7 @@ type ConfigDataReply struct {
 
 func (x *ConfigDataReply) Reset() {
 	*x = ConfigDataReply{}
-	mi := &file_api_system_v1_config_proto_msgTypes[8]
+	mi := &file_system_v1_config_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -564,7 +564,7 @@ func (x *ConfigDataReply) String() string {
 func (*ConfigDataReply) ProtoMessage() {}
 
 func (x *ConfigDataReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_system_v1_config_proto_msgTypes[8]
+	mi := &file_system_v1_config_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -577,7 +577,7 @@ func (x *ConfigDataReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigDataReply.ProtoReflect.Descriptor instead.
 func (*ConfigDataReply) Descriptor() ([]byte, []int) {
-	return file_api_system_v1_config_proto_rawDescGZIP(), []int{8}
+	return file_system_v1_config_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ConfigDataReply) GetData() *structpb.Value {
@@ -587,11 +587,11 @@ func (x *ConfigDataReply) GetData() *structpb.Value {
 	return nil
 }
 
-var File_api_system_v1_config_proto protoreflect.FileDescriptor
+var File_system_v1_config_proto protoreflect.FileDescriptor
 
-const file_api_system_v1_config_proto_rawDesc = "" +
+const file_system_v1_config_proto_rawDesc = "" +
 	"\n" +
-	"\x1aapi/system/v1/config.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x18api/system/v1/auth.proto\"\x1b\n" +
+	"\x16system/v1/config.proto\x12\rapi.system.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x14system/v1/auth.proto\"\x1b\n" +
 	"\tIdRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"#\n" +
 	"\x0fBatchIdsRequest\x12\x10\n" +
@@ -645,19 +645,19 @@ const file_api_system_v1_config_proto_rawDesc = "" +
 	"\fDeleteConfig\x12\x18.api.system.v1.IdRequest\x1a\x1b.api.system.v1.MessageReply\"\x1b\x82\xd3\xe4\x93\x02\x15*\x13/api/v1/config/{id}B5Z3github.com/force-c/nai-tizi/kratos/api/system/v1;v1b\x06proto3"
 
 var (
-	file_api_system_v1_config_proto_rawDescOnce sync.Once
-	file_api_system_v1_config_proto_rawDescData []byte
+	file_system_v1_config_proto_rawDescOnce sync.Once
+	file_system_v1_config_proto_rawDescData []byte
 )
 
-func file_api_system_v1_config_proto_rawDescGZIP() []byte {
-	file_api_system_v1_config_proto_rawDescOnce.Do(func() {
-		file_api_system_v1_config_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_api_system_v1_config_proto_rawDesc), len(file_api_system_v1_config_proto_rawDesc)))
+func file_system_v1_config_proto_rawDescGZIP() []byte {
+	file_system_v1_config_proto_rawDescOnce.Do(func() {
+		file_system_v1_config_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_system_v1_config_proto_rawDesc), len(file_system_v1_config_proto_rawDesc)))
 	})
-	return file_api_system_v1_config_proto_rawDescData
+	return file_system_v1_config_proto_rawDescData
 }
 
-var file_api_system_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
-var file_api_system_v1_config_proto_goTypes = []any{
+var file_system_v1_config_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_system_v1_config_proto_goTypes = []any{
 	(*IdRequest)(nil),              // 0: api.system.v1.IdRequest
 	(*BatchIdsRequest)(nil),        // 1: api.system.v1.BatchIdsRequest
 	(*GetConfigByCodeRequest)(nil), // 2: api.system.v1.GetConfigByCodeRequest
@@ -670,7 +670,7 @@ var file_api_system_v1_config_proto_goTypes = []any{
 	(*structpb.Value)(nil),         // 9: google.protobuf.Value
 	(*MessageReply)(nil),           // 10: api.system.v1.MessageReply
 }
-var file_api_system_v1_config_proto_depIdxs = []int32{
+var file_system_v1_config_proto_depIdxs = []int32{
 	9,  // 0: api.system.v1.ConfigItem.data:type_name -> google.protobuf.Value
 	9,  // 1: api.system.v1.UpdateConfigRequest.data:type_name -> google.protobuf.Value
 	4,  // 2: api.system.v1.PageConfigReply.list:type_name -> api.system.v1.ConfigItem
@@ -699,27 +699,27 @@ var file_api_system_v1_config_proto_depIdxs = []int32{
 	0,  // [0:5] is the sub-list for field type_name
 }
 
-func init() { file_api_system_v1_config_proto_init() }
-func file_api_system_v1_config_proto_init() {
-	if File_api_system_v1_config_proto != nil {
+func init() { file_system_v1_config_proto_init() }
+func file_system_v1_config_proto_init() {
+	if File_system_v1_config_proto != nil {
 		return
 	}
-	file_api_system_v1_auth_proto_init()
+	file_system_v1_auth_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_system_v1_config_proto_rawDesc), len(file_api_system_v1_config_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_system_v1_config_proto_rawDesc), len(file_system_v1_config_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_api_system_v1_config_proto_goTypes,
-		DependencyIndexes: file_api_system_v1_config_proto_depIdxs,
-		MessageInfos:      file_api_system_v1_config_proto_msgTypes,
+		GoTypes:           file_system_v1_config_proto_goTypes,
+		DependencyIndexes: file_system_v1_config_proto_depIdxs,
+		MessageInfos:      file_system_v1_config_proto_msgTypes,
 	}.Build()
-	File_api_system_v1_config_proto = out.File
-	file_api_system_v1_config_proto_goTypes = nil
-	file_api_system_v1_config_proto_depIdxs = nil
+	File_system_v1_config_proto = out.File
+	file_system_v1_config_proto_goTypes = nil
+	file_system_v1_config_proto_depIdxs = nil
 }
