@@ -10,7 +10,8 @@ import (
 	"time"
 
 	appmetrics "github.com/force-c/nai-tizi/kratos/pkg/metrics"
-	"github.com/lib/pq"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/stdlib"
 )
 
 type dbObservability struct {
@@ -18,10 +19,11 @@ type dbObservability struct {
 }
 
 func openObservedPostgresDB(dsn string, obs dbObservability) (*sql.DB, error) {
-	connector, err := pq.NewConnector(dsn)
+	connConfig, err := pgx.ParseConfig(dsn)
 	if err != nil {
 		return nil, err
 	}
+	connector := stdlib.GetConnector(*connConfig)
 	return sql.OpenDB(observedConnector{base: connector, obs: obs}), nil
 }
 

@@ -115,6 +115,7 @@ kratos/
 - `sys-api` 对外提供 HTTP 能力
 - `sys-api` 通过 gRPC 调 `sys-rpc`
 - `sys-rpc` 承担数据库访问、Redis、JWT、注册发现、存储、指标等底层能力
+- PostgreSQL 底层驱动当前使用 `pgx/v5/stdlib`，上层通过 `database/sql + ent` 接入
 - `application/sys-rpc/ent/schema` 已完成 Ent 生成链路
 - `Wire` 已规范为标准 `ProviderSet` 风格
 - OpenAPI 已按服务/版本输出到 `api/system/v1.openapi.yaml`
@@ -235,9 +236,11 @@ kratos/
 
 1. proto 到 HTTP / gRPC 串联流程：
    - [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/proto-http-grpc-flow.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/proto-http-grpc-flow.md)
-2. Wire 使用说明：
+2. Ent 使用说明：
+   - [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/ent-usage.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/ent-usage.md)
+3. Wire 使用说明：
    - [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/wire-usage.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/wire-usage.md)
-3. HTTP 手工路由与 proto 路由边界：
+4. HTTP 手工路由与 proto 路由边界：
    - [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/http-routing-boundary.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/http-routing-boundary.md)
-4. Makefile 详细说明：
+5. Makefile 详细说明：
    - [/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/makefile-reference.md](/Users/guoc/dev/code_go/src/nai-tizi/kratos/docs/makefile-reference.md)
