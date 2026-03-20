@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package kratos.conf.sysrpc;
+
+option go_package = "github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/conf;conf";
+
+message Bootstrap {
+  Server server = 1;
+  Registry registry = 2;
+  Auth auth = 3;
+  JWT jwt = 4;
+  Data data = 5;
+  Observability observability = 6;
+}
+
+message Auth {
+  bool allowConcurrent = 1;
+  bool shareToken = 2;
+}
+
+message JWT {
+  string secret = 1;
+  int64 expire = 2;
+  string issuer = 3;
+}
+
+message Server {
+  GRPC grpc = 1;
+}
+
+message Registry {
+  string mode = 1;
+  string driver = 2;
+  string service = 3;
+  string namespace = 4;
+  string registerTTL = 5;
+  RegistryEtcd etcd = 6;
+}
+
+message RegistryEtcd {
+  repeated string endpoints = 1;
+  string username = 2;
+  string password = 3;
+  string timeout = 4;
+}
+
+message GRPC {
+  string network = 1;
+  string addr = 2;
+  string timeout = 3;
+}
+
+message Data {
+  Database database = 1;
+  Redis redis = 2;
+  WeChat wechat = 3;
+}
+
+message Database {
+  string driver = 1;
+  string dsn = 2;
+}
+
+message Redis {
+  string addr = 1;
+  string password = 2;
+  int32 db = 3;
+}
+
+message WeChat {
+  string appId = 1;
+  string secret = 2;
+  string timeout = 3;
+}
+
+message Observability {
+  int64 dbSlowThresholdMs = 1;
+  int64 redisSlowThresholdMs = 2;
+  string dbPoolSampleInterval = 3;
+}

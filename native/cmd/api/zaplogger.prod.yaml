@@ -1,0 +1,53 @@
+# Zap Logger 配置文件
+# 支持开发环境和生产环境的日志配置
+
+# 日志级别: debug, info, warn, error, fatal
+level: debug
+
+# 输出模式: console, file, all
+# - console: 仅输出到控制台
+# - file: 仅输出到文件
+# - all: 同时输出到控制台和文件
+output: all
+
+# 日志格式: json, console
+# - json: JSON格式（生产环境推荐）
+# - console: 易读的控制台格式（开发环境推荐）
+encoding: console
+
+# 文件输出配置
+file:
+  # 日志文件路径（支持相对路径和绝对路径）
+  path: ./logs
+
+  # 日志文件名（不包含扩展名）
+  # 实际文件名会自动添加时间戳，如: app-2025-12-09.log
+  filename: app
+
+  # 单个日志文件最大大小（MB）
+  # 当文件达到此大小时会自动创建新文件
+  maxSize: 100
+
+  # 最多保留的旧日志文件数量
+  # 超过此数量的旧文件会被自动删除
+  maxBackups: 30
+
+  # 日志文件最多保留天数
+  # 超过此天数的日志文件会被自动删除
+  # 0 表示不根据时间删除
+  maxAge: 7
+
+  # 是否压缩旧日志文件
+  # true: 旧日志文件会被压缩为 .gz 格式以节省空间
+  compress: false
+
+# 控制台输出配置
+console:
+  # 是否启用彩色输出（仅在 encoding: console 时有效）
+  colorful: true
+
+# 是否在日志中包含调用者信息（文件名和行号）
+caller: true
+
+# 是否在日志中包含堆栈跟踪（仅 Error 及以上级别）
+stacktrace: true

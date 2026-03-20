@@ -39,10 +39,10 @@
           </a-input-password>
         </a-form-item>
 
-        <a-form-item v-if="showCaptcha" name="captchaCode" label="验证码">
+        <a-form-item v-if="showCaptcha" name="code" label="验证码">
           <div class="captcha-wrapper">
             <a-input
-              v-model:value="formData.captchaCode"
+              v-model:value="formData.code"
               size="large"
               placeholder="请输入验证码"
               allow-clear
@@ -88,24 +88,24 @@ const title = import.meta.env.VITE_APP_TITLE;
 const loading = ref(false);
 const showCaptcha = ref(false);
 const captchaImage = ref('');
-const captchaId = ref('');
+const uuid = ref('');
 
 const formData = reactive({
   username: '',
   password: '',
-  captchaCode: '',
+  code: '',
 });
 
 const rules = {
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-  captchaCode: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+  code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
 };
 
 const loadCaptcha = async () => {
   try {
     const data = await captchaApi.generateImage();
-    captchaId.value = data.id;
+    uuid.value = data.id;
     captchaImage.value = data.data.image;
   } catch (error: any) {
     message.error('加载验证码失败');
@@ -125,9 +125,8 @@ const handleLogin = async () => {
     };
 
     if (showCaptcha.value) {
-      params.captchaType = 'image';
-      params.captchaId = captchaId.value;
-      params.captchaCode = formData.captchaCode;
+      params.uuid = uuid.value;
+      params.code = formData.code;
     }
 
     await authStore.login(params);
@@ -140,7 +139,7 @@ const handleLogin = async () => {
     message.error(error.message || '登录失败');
     if (showCaptcha.value) {
       await loadCaptcha();
-      formData.captchaCode = '';
+      formData.code = '';
     }
   } finally {
     loading.value = false;

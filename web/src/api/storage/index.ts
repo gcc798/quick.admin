@@ -25,7 +25,7 @@ export const storageEnvApi = {
   delete: (id: number) => request.delete(`/api/v1/storage-env/${id}`),
 
   // 设置默认存储环境
-  setDefault: (id: number | string) =>
+  setDefault: (id: number) =>
       request.post(`/api/v1/storage-env/default`, { id }),
 
   // 测试存储环境连接

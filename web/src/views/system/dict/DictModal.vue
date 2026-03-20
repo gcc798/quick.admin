@@ -27,8 +27,8 @@ import type { FormSchema } from '@/types/form';
 
 const props = defineProps<{
   visible: boolean;
-  id?: string | number;
-  parentId?: string | number;
+  id?: number;
+  parentId?: number;
 }>();
 
 const emit = defineEmits<{

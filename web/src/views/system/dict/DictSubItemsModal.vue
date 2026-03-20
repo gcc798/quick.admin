@@ -73,7 +73,7 @@ import type { Dict } from '@/api/dict';
 
 const props = defineProps<{
   visible: boolean;
-  parentId?: string | number;
+  parentId?: number;
 }>();
 
 const emit = defineEmits<{
@@ -83,7 +83,7 @@ const emit = defineEmits<{
 const visible = ref(false);
 const subItems = ref<Dict[]>([]);
 const itemModalVisible = ref(false);
-const currentItemId = ref<string | number>();
+const currentItemId = ref<number>();
 
 const columns = [
   { title: '字典标签', dataIndex: 'dictLabel', width: 150 },
@@ -98,7 +98,7 @@ const loadSubItems = async () => {
   if (!props.parentId) return;
   try {
     const parent = await dictApi.detail(props.parentId);
-    const items = await dictApi.getByType(parent.dictType, props.parentId as number);
+    const items = await dictApi.getByType(parent.dictType, props.parentId);
     subItems.value = items;
   } catch (error) {
     console.error('加载子项失败:', error);
@@ -115,7 +115,7 @@ const handleEditItem = (record: any) => {
   itemModalVisible.value = true;
 };
 
-const handleDeleteItem = async (id: string | number) => {
+const handleDeleteItem = async (id: number) => {
   try {
     await dictApi.delete(id);
     message.success('删除成功');

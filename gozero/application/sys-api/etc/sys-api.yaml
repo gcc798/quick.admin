@@ -1,0 +1,31 @@
+Name: sys-api
+Host: 0.0.0.0
+Port: 9009
+Mode: dev
+
+SysRpc:
+  Target: 127.0.0.1:9002
+  NonBlock: true
+
+Postgres:
+  Dsn: "host=127.0.0.1 user=postgres password=post123 dbname=nai-tizi port=5433 sslmode=disable TimeZone=Asia/Shanghai"
+
+Redis:
+  Addr: "127.0.0.1:6379"
+  Password: "123456"
+  Db: 0
+
+Jwt:
+  Secret: "your-256-bit-secret"
+  Expire: 7200
+
+Auth:
+  TokenHeader: "Authorization"
+
+Captcha:
+  Image:
+    Enabled: false
+  Sms:
+    Enabled: true
+  Email:
+    Enabled: true

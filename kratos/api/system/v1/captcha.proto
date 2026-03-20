@@ -1,0 +1,22 @@
+syntax = "proto3";
+package api.system.v1;
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+service CaptchaService {
+  rpc GenerateImageCaptcha (GenerateImageCaptchaRequest) returns (CaptchaReply) { option (google.api.http) = { get: "/captcha/image" }; }
+  rpc SendSMSCaptcha (SendSMSCaptchaRequest) returns (CaptchaReply) { option (google.api.http) = { post: "/captcha/sms" body: "*" }; }
+  rpc SendEmailCaptcha (SendEmailCaptchaRequest) returns (CaptchaReply) { option (google.api.http) = { post: "/captcha/email" body: "*" }; }
+  rpc GetEnabledTypes (GetEnabledTypesRequest) returns (GetEnabledTypesReply) { option (google.api.http) = { get: "/captcha/enabled-types" }; }
+}
+message GenerateImageCaptchaRequest {}
+message CaptchaReply {
+  string id = 1;
+  string type = 2;
+  google.protobuf.Struct data = 3;
+  string expireAt = 4;
+}
+message SendSMSCaptchaRequest { string phonenumber = 1; string phone = 2; }
+message SendEmailCaptchaRequest { string email = 1; }
+message GetEnabledTypesRequest {}
+message GetEnabledTypesReply { repeated string items = 1; }

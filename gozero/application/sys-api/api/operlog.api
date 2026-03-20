@@ -1,0 +1,77 @@
+syntax = "v1"
+
+import "common.api"
+
+type OperLogPageReq {
+	pageNum      int64  `json:"pageNum,optional"`
+	pageSize     int64  `json:"pageSize,optional"`
+	title        string `json:"title,optional"`
+	operName     string `json:"operName,optional"`
+	businessType string `json:"businessType,optional"`
+	status       string `json:"status,optional"`
+	startTime    string `json:"startTime,optional"`
+	endTime      string `json:"endTime,optional"`
+}
+
+type OperLogReq {
+	title         string `json:"title"`
+	businessType  string `json:"businessType,optional"`
+	method        string `json:"method,optional"`
+	requestMethod string `json:"requestMethod,optional"`
+	deviceType    string `json:"deviceType,optional"`
+	operName      string `json:"operName,optional"`
+	operUrl       string `json:"operUrl,optional"`
+	operIp        string `json:"operIp,optional"`
+	operLocation  string `json:"operLocation,optional"`
+	operParam     string `json:"operParam,optional"`
+	jsonResult    string `json:"jsonResult,optional"`
+	status        string `json:"status,optional"`
+	errorMsg      string `json:"errorMsg,optional"`
+	costTime      int64  `json:"costTime,optional"`
+	userAgent     string `json:"userAgent,optional"`
+}
+
+type OperLogUpdateReq {
+	id            int64  `path:"id"`
+	title         string `json:"title,optional"`
+	businessType  string `json:"businessType,optional"`
+	method        string `json:"method,optional"`
+	requestMethod string `json:"requestMethod,optional"`
+	deviceType    string `json:"deviceType,optional"`
+	operName      string `json:"operName,optional"`
+	operUrl       string `json:"operUrl,optional"`
+	operIp        string `json:"operIp,optional"`
+	operLocation  string `json:"operLocation,optional"`
+	operParam     string `json:"operParam,optional"`
+	jsonResult    string `json:"jsonResult,optional"`
+	status        string `json:"status,optional"`
+	errorMsg      string `json:"errorMsg,optional"`
+	costTime      int64  `json:"costTime,optional"`
+	userAgent     string `json:"userAgent,optional"`
+}
+
+@server (
+	group: operlog
+)
+service sys-api {
+	@handler OperLogCreate
+	post /api/v1/operLog (OperLogReq) returns (CommonResp)
+
+	@handler OperLogPage
+	post /api/v1/operLog/page (OperLogPageReq) returns (CommonResp)
+
+	@handler OperLogBatchDelete
+	delete /api/v1/operLog/batch (BatchIdsReq) returns (CommonResp)
+
+	@handler OperLogClean
+	post /api/v1/operLog/clean (LogCleanReq) returns (CommonResp)
+
+	@handler OperLogUpdate
+	put /api/v1/operLog/:id (OperLogUpdateReq) returns (CommonResp)
+
+	@handler OperLogDetail
+	get /api/v1/operLog/:id (IdPathReq) returns (CommonResp)
+
+	@handler OperLogDelete
+	delete /api/v1/operLog/:id (IdPathReq) returns (CommonResp)
+}

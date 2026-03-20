@@ -1,0 +1,61 @@
+syntax = "v1"
+
+import "common.api"
+
+type ConfigPageReq {
+	pageNum  int64  `json:"pageNum,optional"`
+	pageSize int64  `json:"pageSize,optional"`
+	name     string `json:"name,optional"`
+	code     string `json:"code,optional"`
+}
+
+type ConfigCreateReq {
+	name     string      `json:"name"`
+	code     string      `json:"code"`
+	data     interface{} `json:"data,optional"`
+	remark   string      `json:"remark,optional"`
+	createBy int64       `json:"createBy"`
+	updateBy int64       `json:"updateBy"`
+}
+
+type ConfigUpdateReq {
+	id       int64       `path:"id"`
+	name     string      `json:"name"`
+	code     string      `json:"code"`
+	data     interface{} `json:"data,optional"`
+	remark   string      `json:"remark,optional"`
+	updateBy int64       `json:"updateBy"`
+}
+
+type ConfigCodeQueryReq {
+	code string `form:"code"`
+}
+
+@server (
+	group: config
+)
+service sys-api {
+	@handler ConfigCreate
+	post /api/v1/config (ConfigCreateReq) returns (CommonResp)
+
+	@handler ConfigPage
+	post /api/v1/config/page (ConfigPageReq) returns (CommonResp)
+
+	@handler ConfigBatchDelete
+	delete /api/v1/config/batch (BatchIdsReq) returns (CommonResp)
+
+	@handler ConfigCode
+	get /api/v1/config/code (ConfigCodeQueryReq) returns (CommonResp)
+
+	@handler ConfigData
+	get /api/v1/config/data (ConfigCodeQueryReq) returns (CommonResp)
+
+	@handler ConfigUpdate
+	put /api/v1/config/:id (ConfigUpdateReq) returns (CommonResp)
+
+	@handler ConfigDetail
+	get /api/v1/config/:id (IdPathReq) returns (CommonResp)
+
+	@handler ConfigDelete
+	delete /api/v1/config/:id (IdPathReq) returns (CommonResp)
+}

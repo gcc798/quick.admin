@@ -1,0 +1,76 @@
+syntax = "v1"
+
+import "common.api"
+
+type DictPageReq {
+	pageNum   int64  `json:"pageNum,optional"`
+	pageSize  int64  `json:"pageSize,optional"`
+	dictType  string `json:"dictType,optional"`
+	dictLabel string `json:"dictLabel,optional"`
+	status    int64  `json:"status,optional"`
+}
+
+type DictCreateReq {
+	parentId  int64  `json:"parentId,optional"`
+	dictType  string `json:"dictType"`
+	dictLabel string `json:"dictLabel"`
+	dictValue string `json:"dictValue"`
+	sort      int64  `json:"sort,optional"`
+	isDefault bool   `json:"isDefault,optional"`
+	status    int64  `json:"status,optional"`
+	remark    string `json:"remark,optional"`
+	createBy  int64  `json:"createBy,optional"`
+	updateBy  int64  `json:"updateBy,optional"`
+}
+
+type DictUpdateReq {
+	id        int64  `path:"id"`
+	parentId  int64  `json:"parentId,optional"`
+	dictType  string `json:"dictType"`
+	dictLabel string `json:"dictLabel"`
+	dictValue string `json:"dictValue"`
+	sort      int64  `json:"sort,optional"`
+	isDefault bool   `json:"isDefault,optional"`
+	status    int64  `json:"status,optional"`
+	remark    string `json:"remark,optional"`
+	updateBy  int64  `json:"updateBy,optional"`
+}
+
+type DictTypeQueryReq {
+	dictType string `form:"dictType"`
+	parentId int64  `form:"parentId,optional"`
+}
+
+type DictLabelQueryReq {
+	dictType  string `form:"dictType"`
+	dictValue string `form:"dictValue"`
+}
+
+@server (
+	group: dict
+)
+service sys-api {
+	@handler DictCreate
+	post /api/v1/dict (DictCreateReq) returns (CommonResp)
+
+	@handler DictPage
+	post /api/v1/dict/page (DictPageReq) returns (CommonResp)
+
+	@handler DictBatchDelete
+	delete /api/v1/dict/batch (BatchIdsReq) returns (CommonResp)
+
+	@handler DictType
+	get /api/v1/dict/type (DictTypeQueryReq) returns (CommonResp)
+
+	@handler DictLabel
+	get /api/v1/dict/label (DictLabelQueryReq) returns (CommonResp)
+
+	@handler DictUpdate
+	put /api/v1/dict/:id (DictUpdateReq) returns (CommonResp)
+
+	@handler DictDetail
+	get /api/v1/dict/:id (IdPathReq) returns (CommonResp)
+
+	@handler DictDelete
+	delete /api/v1/dict/:id (IdPathReq) returns (CommonResp)
+}

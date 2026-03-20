@@ -41,8 +41,8 @@ export const userApi = {
     request.get<any[]>(`/api/v1/role/user`, { params: { userId } }),
 
   // 分配角色（单个）
-  assignRole: (userId: number, roleId: number, orgId: number) =>
-    request.post(`/api/v1/role/assign`, { userId, roleId, orgId }),
+  assignRole: (userId: number, roleId: number, _orgId?: number) =>
+    request.post(`/api/v1/role/assign`, { userId, roleId }),
 
   // 移除用户角色
   removeRole: (userId: number, roleId: number) =>

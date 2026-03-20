@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package api.system.v1;
+
+option go_package = "github.com/force-c/nai-tizi/kratos/api/system/v1;v1";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+service HealthService {
+  rpc Ping (PingRequest) returns (PingReply) {
+    option (google.api.http) = {
+      get: "/health"
+    };
+  }
+}
+
+message PingRequest {
+  string name = 1 [(validate.rules).string.max_len = 64];
+}
+
+message PingReply {
+  string message = 1;
+}

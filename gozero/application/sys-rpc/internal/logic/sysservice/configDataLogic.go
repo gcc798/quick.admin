@@ -1,0 +1,33 @@
+package sysservicelogic
+
+import (
+	"context"
+	"database/sql"
+
+	"github.com/force-c/nai-tizi/application/sys-rpc/internal/svc"
+	"github.com/force-c/nai-tizi/application/sys-rpc/pb"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+type ConfigDataLogic struct {
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+	logx.Logger
+}
+
+func NewConfigDataLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ConfigDataLogic {
+	return &ConfigDataLogic{
+		ctx:    ctx,
+		svcCtx: svcCtx,
+		Logger: logx.WithContext(ctx),
+	}
+}
+
+func (l *ConfigDataLogic) ConfigData(in *pb.ConfigCodeQueryReq) (*pb.ConfigDataResp, error) {
+	var data sql.NullString
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &data, `select data from public.s_config where code = $1 and deleted_at is null order by id desc limit 1`, in.Code); err != nil {
+		return nil, err
+	}
+	return &pb.ConfigDataResp{Code: in.Code, DataJson: nullString(data)}, nil
+}
