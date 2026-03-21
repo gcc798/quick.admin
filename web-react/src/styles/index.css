@@ -1,0 +1,121 @@
+:root {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: rgba(0, 0, 0, 0.88);
+  background: #f5f7fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #f5f7fa;
+}
+
+a {
+  color: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 64px;
+  padding: 0 20px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 20px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.header-user {
+  cursor: pointer;
+}
+
+.app-content {
+  padding: 20px;
+}
+
+.page-search {
+  margin-bottom: 16px;
+  padding: 16px 16px 0;
+  background: #fafafa;
+  border-radius: 12px;
+}
+
+.page-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.page-placeholder {
+  min-height: 320px;
+}
+
+.page-card {
+  border-radius: 16px;
+}
+
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(22, 119, 255, 0.18), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(82, 196, 26, 0.18), transparent 25%),
+    linear-gradient(135deg, #eef5ff 0%, #f8fbff 45%, #fffef8 100%);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 16px;
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(22, 119, 255, 0.08);
+}
+
+.login-captcha {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: 12px;
+}
+
+.login-captcha-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fafafa;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+}
+
+.table-code {
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
