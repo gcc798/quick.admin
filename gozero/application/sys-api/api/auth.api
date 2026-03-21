@@ -33,8 +33,4 @@ service sys-api {
 
 	@handler RefreshToken
 	post /auth/refresh (RefreshTokenReq) returns (CommonResp)
-
-	@handler Me
-	get /me returns (CommonResp)
 }
-

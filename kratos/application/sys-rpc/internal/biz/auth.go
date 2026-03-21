@@ -113,28 +113,6 @@ func (uc *AuthUsecase) RefreshToken(ctx context.Context, req *v1.RefreshTokenReq
 	}, nil
 }
 
-func (uc *AuthUsecase) Me(ctx context.Context) (*v1.MeReply, error) {
-	userID := currentUserID(ctx)
-	if uc.res == nil || userID <= 0 {
-		return &v1.MeReply{}, nil
-	}
-	accessToken := currentAccessToken(ctx)
-	if accessToken != "" {
-		storedUserID, err := uc.res.SessionUserID(ctx, accessToken)
-		if err != nil || storedUserID != userID {
-			return &v1.MeReply{}, nil
-		}
-	}
-	user, err := uc.res.GetUser(ctx, userID)
-	if err != nil {
-		return nil, err
-	}
-	if user == nil {
-		return &v1.MeReply{}, nil
-	}
-	return &v1.MeReply{UserId: user.GetUserId()}, nil
-}
-
 func (uc *AuthUsecase) ValidateAccessToken(ctx context.Context, req *v1.ValidateAccessTokenRequest) (*v1.ValidateAccessTokenReply, error) {
 	if strings.TrimSpace(req.GetAccessToken()) == "" {
 		return &v1.ValidateAccessTokenReply{Valid: false}, nil

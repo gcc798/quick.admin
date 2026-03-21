@@ -14,7 +14,4 @@ func registerAuthRoutes(r *gin.Engine, ctx *RouterContext) {
 	r.POST("/login", authController.Login)               // 统一登录接口
 	r.POST("/logout", authController.Logout)             // 登出
 	r.POST("/auth/refresh", authController.RefreshToken) // 刷新Token
-
-	// 需要认证的路由
-	r.GET("/me", ctx.AuthMiddleware, authController.Me)
 }

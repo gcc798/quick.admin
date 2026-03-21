@@ -475,11 +475,6 @@ components:
                 wxCode:
                     type: string
             type: object
-        api.system.v1.MeReply:
-            properties:
-                userId:
-                    type: string
-            type: object
         api.system.v1.MenuItem:
             properties:
                 children:
@@ -2854,18 +2849,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/api.system.v1.MessageReply'
-                    description: OK
-            tags:
-                - AuthService
-    /me:
-        get:
-            operationId: AuthService_Me
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/api.system.v1.MeReply'
                     description: OK
             tags:
                 - AuthService

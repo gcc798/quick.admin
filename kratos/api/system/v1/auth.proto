@@ -27,12 +27,6 @@ service AuthService {
     };
   }
 
-  rpc Me (MeRequest) returns (MeReply) {
-    option (google.api.http) = {
-      get: "/me"
-    };
-  }
-
   rpc ValidateAccessToken (ValidateAccessTokenRequest) returns (ValidateAccessTokenReply);
   rpc CheckPermission (CheckPermissionRequest) returns (CheckPermissionReply);
 }
@@ -85,12 +79,6 @@ message RefreshTokenReply {
   string refresh_token = 2;
   int64 expires_in = 3;
   int64 refresh_expires_in = 4;
-}
-
-message MeRequest {}
-
-message MeReply {
-  int64 userId = 1;
 }
 
 message ValidateAccessTokenRequest {

@@ -204,8 +204,6 @@ func adaptValue(r *http.Request, v any) any {
 		return nil
 	case *v1.UserInfo:
 		return map[string]any{"userId": item.GetUserId(), "username": item.GetUsername(), "nickname": item.GetNickname(), "phonenumber": item.GetPhonenumber(), "email": item.GetEmail(), "avatar": item.GetAvatar(), "userType": item.GetUserType()}
-	case *v1.MeReply:
-		return map[string]any{"userId": item.GetUserId()}
 	case *v1.UserItem:
 		return map[string]any{"id": item.GetUserId(), "userId": item.GetUserId(), "userName": item.GetUserName(), "username": item.GetUserName(), "nickName": item.GetNickName(), "nickname": item.GetNickName(), "userType": item.GetUserType(), "email": item.GetEmail(), "phonenumber": item.GetPhonenumber(), "sex": item.GetSex(), "avatar": item.GetAvatar(), "status": item.GetStatus(), "sort": item.GetSort(), "loginIp": item.GetLoginIp(), "loginDate": item.GetLoginDate(), "openId": item.GetOpenId(), "unionId": item.GetUnionId(), "remark": item.GetRemark(), "createBy": item.GetCreateBy(), "updateBy": item.GetUpdateBy(), "createdAt": item.GetCreatedTime(), "createdTime": item.GetCreatedTime(), "updatedAt": item.GetUpdatedTime(), "updatedTime": item.GetUpdatedTime()}
 	case *v1.RoleItem:

@@ -27,10 +27,6 @@ func (r *AuthRepo) RefreshToken(ctx context.Context, req *v1.RefreshTokenRequest
 	return r.client.RefreshToken(ctx, req)
 }
 
-func (r *AuthRepo) Me(ctx context.Context) (*v1.MeReply, error) {
-	return r.client.Me(ctx, &v1.MeRequest{})
-}
-
 func (r *AuthRepo) ValidateAccessToken(ctx context.Context, token string) (*v1.ValidateAccessTokenReply, error) {
 	return r.client.ValidateAccessToken(ctx, &v1.ValidateAccessTokenRequest{AccessToken: strings.TrimSpace(token)})
 }

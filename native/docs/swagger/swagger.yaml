@@ -4754,32 +4754,6 @@ paths:
       summary: 用户登出
       tags:
       - 认证
-  /me:
-    get:
-      consumes:
-      - application/json
-      description: 获取当前登录用户的基本信息
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
-            - properties:
-                data:
-                  properties:
-                    userId:
-                      format: int64
-                      type: integer
-                  type: object
-              type: object
-      security:
-      - Bearer: []
-      summary: 获取当前用户信息
-      tags:
-      - 认证
 securityDefinitions:
   Bearer:
     description: '格式: "Bearer {access_token}"，AccessToken 从登录接口获取'

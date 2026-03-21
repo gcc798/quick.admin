@@ -21,13 +21,11 @@ const _ = http.SupportPackageIsVersion1
 
 const OperationAuthServiceLogin = "/api.system.v1.AuthService/Login"
 const OperationAuthServiceLogout = "/api.system.v1.AuthService/Logout"
-const OperationAuthServiceMe = "/api.system.v1.AuthService/Me"
 const OperationAuthServiceRefreshToken = "/api.system.v1.AuthService/RefreshToken"
 
 type AuthServiceHTTPServer interface {
 	Login(context.Context, *LoginRequest) (*LoginReply, error)
 	Logout(context.Context, *LogoutRequest) (*MessageReply, error)
-	Me(context.Context, *MeRequest) (*MeReply, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*RefreshTokenReply, error)
 }
 
@@ -36,7 +34,6 @@ func RegisterAuthServiceHTTPServer(s *http.Server, srv AuthServiceHTTPServer) {
 	r.POST("/login", _AuthService_Login0_HTTP_Handler(srv))
 	r.POST("/logout", _AuthService_Logout0_HTTP_Handler(srv))
 	r.POST("/auth/refresh", _AuthService_RefreshToken0_HTTP_Handler(srv))
-	r.GET("/me", _AuthService_Me0_HTTP_Handler(srv))
 }
 
 func _AuthService_Login0_HTTP_Handler(srv AuthServiceHTTPServer) func(ctx http.Context) error {
@@ -102,29 +99,9 @@ func _AuthService_RefreshToken0_HTTP_Handler(srv AuthServiceHTTPServer) func(ctx
 	}
 }
 
-func _AuthService_Me0_HTTP_Handler(srv AuthServiceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in MeRequest
-		if err := ctx.BindQuery(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, OperationAuthServiceMe)
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.Me(ctx, req.(*MeRequest))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*MeReply)
-		return ctx.Result(200, reply)
-	}
-}
-
 type AuthServiceHTTPClient interface {
 	Login(ctx context.Context, req *LoginRequest, opts ...http.CallOption) (rsp *LoginReply, err error)
 	Logout(ctx context.Context, req *LogoutRequest, opts ...http.CallOption) (rsp *MessageReply, err error)
-	Me(ctx context.Context, req *MeRequest, opts ...http.CallOption) (rsp *MeReply, err error)
 	RefreshToken(ctx context.Context, req *RefreshTokenRequest, opts ...http.CallOption) (rsp *RefreshTokenReply, err error)
 }
 
@@ -156,19 +133,6 @@ func (c *AuthServiceHTTPClientImpl) Logout(ctx context.Context, in *LogoutReques
 	opts = append(opts, http.Operation(OperationAuthServiceLogout))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, nil
-}
-
-func (c *AuthServiceHTTPClientImpl) Me(ctx context.Context, in *MeRequest, opts ...http.CallOption) (*MeReply, error) {
-	var out MeReply
-	pattern := "/me"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation(OperationAuthServiceMe))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
 		return nil, err
 	}

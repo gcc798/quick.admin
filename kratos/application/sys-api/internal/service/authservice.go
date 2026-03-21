@@ -28,7 +28,3 @@ func (s *AuthServiceService) Logout(ctx context.Context, req *v1.LogoutRequest) 
 func (s *AuthServiceService) RefreshToken(ctx context.Context, req *v1.RefreshTokenRequest) (*v1.RefreshTokenReply, error) {
 	return s.uc.RefreshToken(ctx, req)
 }
-
-func (s *AuthServiceService) Me(ctx context.Context, req *v1.MeRequest) (*v1.MeReply, error) {
-	return s.uc.Me(ctx)
-}

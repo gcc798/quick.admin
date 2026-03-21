@@ -87,11 +87,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/logout",
 				Handler: auth.LogoutHandler(serverCtx),
 			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/me",
-				Handler: auth.MeHandler(serverCtx),
-			},
 		},
 	)
 

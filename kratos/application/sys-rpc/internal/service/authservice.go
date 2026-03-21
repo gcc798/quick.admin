@@ -29,10 +29,6 @@ func (s *AuthServiceService) RefreshToken(ctx context.Context, req *v1.RefreshTo
 	return s.uc.RefreshToken(ctx, req)
 }
 
-func (s *AuthServiceService) Me(ctx context.Context, req *v1.MeRequest) (*v1.MeReply, error) {
-	return s.uc.Me(ctx)
-}
-
 func (s *AuthServiceService) ValidateAccessToken(ctx context.Context, req *v1.ValidateAccessTokenRequest) (*v1.ValidateAccessTokenReply, error) {
 	return s.uc.ValidateAccessToken(ctx, req)
 }

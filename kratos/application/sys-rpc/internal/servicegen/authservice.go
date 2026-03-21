@@ -23,6 +23,3 @@ func (s *AuthServiceService) Logout(ctx context.Context, req *pb.LogoutRequest) 
 func (s *AuthServiceService) RefreshToken(ctx context.Context, req *pb.RefreshTokenRequest) (*pb.RefreshTokenReply, error) {
 	return &pb.RefreshTokenReply{}, nil
 }
-func (s *AuthServiceService) Me(ctx context.Context, req *pb.MeRequest) (*pb.MeReply, error) {
-	return &pb.MeReply{}, nil
-}

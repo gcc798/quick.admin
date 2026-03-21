@@ -177,17 +177,6 @@ func invalidateByToken(ctx context.Context, svcCtx *svc.ServiceContext, token st
 	_ = svcCtx.Redis.Del(ctx, refreshKey).Err()
 }
 
-func userIDFromToken(svcCtx *svc.ServiceContext, token string) (int64, error) {
-	if token == "" {
-		return 0, fmt.Errorf("未登录")
-	}
-	claims, err := parseAccessToken(token, svcCtx.Config.Jwt.Secret)
-	if err != nil {
-		return 0, fmt.Errorf("未登录")
-	}
-	return claims.UserId, nil
-}
-
 func generateAccessToken(user *loginUser, client *authClient, secret string) (string, int64, error) {
 	expireSeconds := client.ActiveTimeout
 	if expireSeconds <= 0 {

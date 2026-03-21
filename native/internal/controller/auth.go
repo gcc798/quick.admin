@@ -27,7 +27,6 @@ type AuthController interface {
 	Login(c *gin.Context)        // 用户登录
 	Logout(c *gin.Context)       // 用户登出
 	RefreshToken(c *gin.Context) // 刷新访问令牌
-	Me(c *gin.Context)           // 获取当前用户信息
 }
 
 type authController struct {
@@ -274,31 +273,6 @@ func (h *authController) RefreshToken(c *gin.Context) {
 		ExpiresIn:        accessExpiresIn,
 		RefreshExpiresIn: refreshExpiresIn,
 	})
-}
-
-// Me godoc
-//
-//	@Summary		获取当前用户信息
-//	@Description	获取当前登录用户的基本信息
-//	@Tags			认证
-//	@Accept			json
-//	@Produce		json
-//	@Security		Bearer
-//	@Success		200	{object}	response.Response{data=object{userId=int64}}
-//	@Router			/me [get]
-func (h *authController) Me(c *gin.Context) {
-	v, _ := c.Get("userId")
-	userId := int64(0)
-	switch t := v.(type) {
-	case int64:
-		userId = t
-	case string:
-	}
-	if userId == 0 {
-		response.FailCode(c, response.CodeUnauthorized, "未登录")
-		return
-	}
-	response.Success(c, gin.H{"userId": userId})
 }
 
 func (h *authController) recordLoginLog(c *gin.Context, username, clientId string, status int32, message string) {

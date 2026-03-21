@@ -26,7 +26,3 @@ func (uc *AuthUsecase) Logout(ctx context.Context) (*v1.MessageReply, error) {
 func (uc *AuthUsecase) RefreshToken(ctx context.Context, req *v1.RefreshTokenRequest) (*v1.RefreshTokenReply, error) {
 	return uc.repo.RefreshToken(ctx, req)
 }
-
-func (uc *AuthUsecase) Me(ctx context.Context) (*v1.MeReply, error) {
-	return uc.repo.Me(ctx)
-}
