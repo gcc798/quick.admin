@@ -74,7 +74,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.AttachmentResponse"
+                                                "type": "object"
                                             }
                                         }
                                     }
@@ -128,7 +128,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.PageResponse"
+                                            "type": "object"
                                         }
                                     }
                                 }
@@ -185,7 +185,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.AttachmentResponse"
+                                            "type": "object"
                                         }
                                     }
                                 }
@@ -236,7 +236,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.AttachmentResponse"
+                                            "type": "object"
                                         }
                                     }
                                 }
@@ -418,7 +418,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.AttachmentURLResponse"
+                                            "type": "object"
                                         }
                                     }
                                 }
@@ -2829,51 +2829,6 @@ const docTemplate = `{
             }
         },
         "/api/v1/role": {
-            "put": {
-                "description": "更新角色信息",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "角色管理"
-                ],
-                "summary": "更新角色",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Bearer {token}",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "description": "角色信息",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateRoleRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "参数错误",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
-                        }
-                    }
-                }
-            },
             "post": {
                 "description": "创建新角色",
                 "consumes": [
@@ -2916,7 +2871,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.RoleResponse"
+                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Role"
                                         }
                                     }
                                 }
@@ -3177,10 +3132,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.RolePermissionResponse"
-                                            }
+                                            "type": "object"
                                         }
                                     }
                                 }
@@ -3291,7 +3243,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.RoleResponse"
+                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Role"
                                             }
                                         }
                                     }
@@ -3349,11 +3301,63 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.RoleResponse"
+                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Role"
                                         }
                                     }
                                 }
                             ]
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "更新角色信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "更新角色",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer {token}",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "roleId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "角色信息",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateRoleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
@@ -3409,45 +3413,6 @@ const docTemplate = `{
             }
         },
         "/api/v1/storage-env": {
-            "put": {
-                "description": "更新存储环境配置",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "存储环境管理"
-                ],
-                "summary": "更新存储环境",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Bearer {token}",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "description": "存储环境信息",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateStorageEnvRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
-                        }
-                    }
-                }
-            },
             "post": {
                 "description": "创建新的存储环境配置",
                 "consumes": [
@@ -3490,7 +3455,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.StorageEnvResponse"
+                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.StorageEnv"
                                         }
                                     }
                                 }
@@ -3534,7 +3499,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.StorageEnvResponse"
+                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.StorageEnv"
                                         }
                                     }
                                 }
@@ -3677,11 +3642,57 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.StorageEnvResponse"
+                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.StorageEnv"
                                         }
                                     }
                                 }
                             ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "更新存储环境配置",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "存储环境管理"
+                ],
+                "summary": "更新存储环境",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Bearer {token}",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "环境ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "存储环境信息",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateStorageEnvRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4294,7 +4305,7 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.UserResponse"
+                                            "type": "object"
                                         }
                                     }
                                 }
@@ -4536,7 +4547,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/internal_controller.SendEmailCaptchaRequest"
+                            "$ref": "#/definitions/controller.SendEmailCaptchaRequest"
                         }
                     }
                 ],
@@ -4615,7 +4626,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/internal_controller.SendSMSCaptchaRequest"
+                            "$ref": "#/definitions/controller.SendSMSCaptchaRequest"
                         }
                     }
                 ],
@@ -4689,13 +4700,13 @@ const docTemplate = `{
                     "200": {
                         "description": "服务正常",
                         "schema": {
-                            "$ref": "#/definitions/internal_controller.HealthResponse"
+                            "$ref": "#/definitions/controller.HealthResponse"
                         }
                     },
                     "503": {
                         "description": "服务异常",
                         "schema": {
-                            "$ref": "#/definitions/internal_controller.HealthResponse"
+                            "$ref": "#/definitions/controller.HealthResponse"
                         }
                     }
                 }
@@ -4888,6 +4899,51 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "controller.HealthResponse": {
+            "type": "object",
+            "properties": {
+                "services": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "status": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string"
+                },
+                "uptime": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "controller.SendEmailCaptchaRequest": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "controller.SendSMSCaptchaRequest": {
+            "type": "object",
+            "required": [
+                "phone"
+            ],
+            "properties": {
+                "phone": {
+                    "type": "string"
+                }
+            }
+        },
         "github_com_force-c_nai-tizi_internal_domain_model.Menu": {
             "type": "object",
             "properties": {
@@ -4967,11 +5023,117 @@ const docTemplate = `{
                 }
             }
         },
+        "github_com_force-c_nai-tizi_internal_domain_model.Role": {
+            "type": "object",
+            "properties": {
+                "createBy": {
+                    "description": "创建人",
+                    "type": "integer"
+                },
+                "createdTime": {
+                    "type": "string"
+                },
+                "dataScope": {
+                    "description": "数据范围：1全部 2自定义 3本组织 4本组织及以下 5仅本人",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "角色ID（使用分布式ID）",
+                    "type": "integer"
+                },
+                "isSystem": {
+                    "description": "是否系统内置角色（内置角色不可删除）",
+                    "type": "boolean"
+                },
+                "remark": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "roleKey": {
+                    "description": "角色标识（唯一，用于权限匹配）",
+                    "type": "string"
+                },
+                "roleName": {
+                    "description": "角色名称",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "显示顺序",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "状态：0正常 1停用",
+                    "type": "integer"
+                },
+                "updateBy": {
+                    "description": "更新人",
+                    "type": "integer"
+                },
+                "updatedTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_force-c_nai-tizi_internal_domain_model.StorageEnv": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "环境编码（唯一）",
+                    "type": "string"
+                },
+                "config": {
+                    "description": "存储配置（JSON格式）",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "createBy": {
+                    "description": "创建人",
+                    "type": "integer"
+                },
+                "createdTime": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "使用分布式ID",
+                    "type": "integer"
+                },
+                "isDefault": {
+                    "description": "是否默认环境",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "环境名称",
+                    "type": "string"
+                },
+                "remark": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "状态：0正常 1停用",
+                    "type": "integer"
+                },
+                "storageType": {
+                    "description": "存储类型：local/minio/s3/oss",
+                    "type": "string"
+                },
+                "updateBy": {
+                    "description": "更新人",
+                    "type": "integer"
+                },
+                "updatedTime": {
+                    "description": "更新时间",
+                    "type": "string"
+                }
+            }
+        },
         "github_com_force-c_nai-tizi_internal_domain_request.AddRolePermissionRequest": {
             "type": "object",
             "required": [
                 "action",
-                "orgId",
                 "resource",
                 "roleKey"
             ],
@@ -4980,11 +5142,6 @@ const docTemplate = `{
                     "description": "操作类型（支持通配符）",
                     "type": "string",
                     "example": "write"
-                },
-                "orgId": {
-                    "description": "组织ID",
-                    "type": "integer",
-                    "example": 1
                 },
                 "resource": {
                     "description": "资源路径（支持通配符）",
@@ -5001,16 +5158,10 @@ const docTemplate = `{
         "github_com_force-c_nai-tizi_internal_domain_request.AssignRoleToUserRequest": {
             "type": "object",
             "required": [
-                "orgId",
                 "roleId",
                 "userId"
             ],
             "properties": {
-                "orgId": {
-                    "description": "组织ID",
-                    "type": "integer",
-                    "example": 1
-                },
                 "roleId": {
                     "description": "角色ID",
                     "type": "integer",
@@ -5332,10 +5483,6 @@ const docTemplate = `{
                     "description": "登录状态：0成功 1失败",
                     "type": "integer"
                 },
-                "tenantId": {
-                    "description": "租户ID",
-                    "type": "string"
-                },
                 "userName": {
                     "description": "用户名",
                     "type": "string"
@@ -5566,7 +5713,6 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "nickName",
-                "orgId",
                 "password",
                 "userName"
             ],
@@ -5575,13 +5721,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "email": {
+                    "description": "Email       string ` + "`" + `json:\"email\" binding:\"omitempty,email\" msg:\"邮箱格式不正确，请输入有效的邮箱地址\"` + "`" + `",
                     "type": "string"
                 },
                 "nickName": {
                     "type": "string"
-                },
-                "orgId": {
-                    "type": "integer"
                 },
                 "password": {
                     "type": "string",
@@ -5959,7 +6103,6 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "code",
-                "id",
                 "name",
                 "updateBy"
             ],
@@ -5976,7 +6119,7 @@ const docTemplate = `{
                     }
                 },
                 "id": {
-                    "description": "配置ID",
+                    "description": "配置ID（由路径参数注入）",
                     "type": "integer"
                 },
                 "name": {
@@ -5998,8 +6141,7 @@ const docTemplate = `{
             "required": [
                 "dictLabel",
                 "dictType",
-                "dictValue",
-                "id"
+                "dictValue"
             ],
             "properties": {
                 "dictLabel": {
@@ -6015,7 +6157,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "id": {
-                    "description": "字典ID",
+                    "description": "字典ID（由路径参数注入）",
                     "type": "integer"
                 },
                 "isDefault": {
@@ -6081,10 +6223,6 @@ const docTemplate = `{
                 "status": {
                     "description": "登录状态：0成功 1失败",
                     "type": "integer"
-                },
-                "tenantId": {
-                    "description": "租户ID",
-                    "type": "string"
                 },
                 "userName": {
                     "description": "用户名",
@@ -6270,7 +6408,6 @@ const docTemplate = `{
             "required": [
                 "code",
                 "config",
-                "id",
                 "name",
                 "storageType"
             ],
@@ -6285,6 +6422,7 @@ const docTemplate = `{
                     }
                 },
                 "id": {
+                    "description": "环境ID（由路径参数注入）",
                     "type": "integer"
                 },
                 "isDefault": {
@@ -6328,9 +6466,6 @@ const docTemplate = `{
                 "nickName": {
                     "type": "string"
                 },
-                "orgId": {
-                    "type": "integer"
-                },
                 "phonenumber": {
                     "type": "string"
                 },
@@ -6362,81 +6497,6 @@ const docTemplate = `{
                 "userType": {
                     "description": "用户类型：0系统用户 1微信用户 2APP用户",
                     "type": "integer"
-                }
-            }
-        },
-        "github_com_force-c_nai-tizi_internal_domain_response.AttachmentResponse": {
-            "type": "object",
-            "properties": {
-                "accessUrl": {
-                    "type": "string"
-                },
-                "attachmentId": {
-                    "type": "integer"
-                },
-                "businessField": {
-                    "type": "string"
-                },
-                "businessId": {
-                    "type": "string"
-                },
-                "businessType": {
-                    "type": "string"
-                },
-                "createBy": {
-                    "type": "integer"
-                },
-                "createTime": {
-                    "type": "string"
-                },
-                "envId": {
-                    "type": "integer"
-                },
-                "expireTime": {
-                    "type": "string"
-                },
-                "fileExt": {
-                    "type": "string"
-                },
-                "fileKey": {
-                    "type": "string"
-                },
-                "fileName": {
-                    "type": "string"
-                },
-                "fileSize": {
-                    "type": "integer"
-                },
-                "fileType": {
-                    "type": "string"
-                },
-                "isPublic": {
-                    "type": "boolean"
-                },
-                "metadata": {
-                    "type": "string"
-                },
-                "status": {
-                    "description": "状态：0正常 1已删除",
-                    "type": "integer"
-                },
-                "updateTime": {
-                    "type": "string"
-                }
-            }
-        },
-        "github_com_force-c_nai-tizi_internal_domain_response.AttachmentURLResponse": {
-            "type": "object",
-            "properties": {
-                "attachmentId": {
-                    "type": "integer"
-                },
-                "expires": {
-                    "description": "过期时间（秒）",
-                    "type": "integer"
-                },
-                "url": {
-                    "type": "string"
                 }
             }
         },
@@ -6596,10 +6656,6 @@ const docTemplate = `{
                     "description": "登录状态：0成功 1失败",
                     "type": "integer"
                 },
-                "tenantId": {
-                    "description": "租户ID",
-                    "type": "string"
-                },
                 "userName": {
                     "description": "用户名",
                     "type": "string"
@@ -6713,30 +6769,6 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.PageResponse": {
-            "description": "分页查询统一响应格式",
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "业务状态码",
-                    "type": "integer",
-                    "example": 200
-                },
-                "msg": {
-                    "description": "响应消息",
-                    "type": "string",
-                    "example": "success"
-                },
-                "rows": {
-                    "description": "数据列表"
-                },
-                "total": {
-                    "description": "总记录数",
-                    "type": "integer",
-                    "example": 100
-                }
-            }
-        },
         "github_com_force-c_nai-tizi_internal_domain_response.RefreshTokenRequest": {
             "description": "使用 RefreshToken 刷新 AccessToken 的请求参数",
             "type": "object",
@@ -6809,132 +6841,6 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.RolePermissionResponse": {
-            "type": "object",
-            "properties": {
-                "action": {
-                    "description": "操作类型",
-                    "type": "string",
-                    "example": "*"
-                },
-                "orgId": {
-                    "description": "组织ID",
-                    "type": "string",
-                    "example": "org::1"
-                },
-                "resource": {
-                    "description": "资源路径",
-                    "type": "string",
-                    "example": "*"
-                },
-                "roleKey": {
-                    "description": "角色标识",
-                    "type": "string",
-                    "example": "admin"
-                }
-            }
-        },
-        "github_com_force-c_nai-tizi_internal_domain_response.RoleResponse": {
-            "type": "object",
-            "properties": {
-                "createBy": {
-                    "description": "创建人",
-                    "type": "integer",
-                    "example": 1
-                },
-                "createTime": {
-                    "description": "创建时间",
-                    "type": "string",
-                    "example": "2024-01-01 12:00:00"
-                },
-                "dataScope": {
-                    "description": "数据范围",
-                    "type": "integer",
-                    "example": 1
-                },
-                "isSystem": {
-                    "description": "是否系统内置",
-                    "type": "boolean",
-                    "example": true
-                },
-                "remark": {
-                    "description": "备注",
-                    "type": "string",
-                    "example": "超级管理员，拥有所有权限"
-                },
-                "roleId": {
-                    "description": "角色ID",
-                    "type": "integer",
-                    "example": 1
-                },
-                "roleKey": {
-                    "description": "角色标识",
-                    "type": "string",
-                    "example": "admin"
-                },
-                "roleName": {
-                    "description": "角色名称",
-                    "type": "string",
-                    "example": "超级管理员"
-                },
-                "sort": {
-                    "description": "显示顺序",
-                    "type": "integer",
-                    "example": 1
-                },
-                "status": {
-                    "description": "状态：0正常 1停用",
-                    "type": "integer",
-                    "example": 0
-                }
-            }
-        },
-        "github_com_force-c_nai-tizi_internal_domain_response.StorageEnvResponse": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "config": {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    }
-                },
-                "createBy": {
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "isDefault": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "remark": {
-                    "type": "string"
-                },
-                "status": {
-                    "description": "状态：0正常 1停用",
-                    "type": "integer"
-                },
-                "storageType": {
-                    "description": "存储类型：local/minio/s3/oss",
-                    "type": "string"
-                },
-                "updateBy": {
-                    "type": "integer"
-                },
-                "updatedAt": {
-                    "type": "string"
-                }
-            }
-        },
         "github_com_force-c_nai-tizi_internal_domain_response.UserInfo": {
             "description": "用户基本信息",
             "type": "object",
@@ -6973,74 +6879,6 @@ const docTemplate = `{
                     "description": "用户名",
                     "type": "string",
                     "example": "admin"
-                }
-            }
-        },
-        "github_com_force-c_nai-tizi_internal_domain_response.UserResponse": {
-            "type": "object",
-            "properties": {
-                "avatar": {
-                    "type": "string"
-                },
-                "createBy": {
-                    "type": "integer"
-                },
-                "createdAt": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "loginDate": {
-                    "type": "integer"
-                },
-                "loginIp": {
-                    "type": "string"
-                },
-                "nickName": {
-                    "type": "string"
-                },
-                "openId": {
-                    "type": "string"
-                },
-                "orgId": {
-                    "type": "integer"
-                },
-                "phonenumber": {
-                    "type": "string"
-                },
-                "remark": {
-                    "type": "string"
-                },
-                "sex": {
-                    "description": "性别：0男 1女 2未知",
-                    "type": "integer"
-                },
-                "sort": {
-                    "type": "integer"
-                },
-                "status": {
-                    "description": "状态：0正常 1停用",
-                    "type": "integer"
-                },
-                "unionId": {
-                    "type": "string"
-                },
-                "updateBy": {
-                    "type": "integer"
-                },
-                "updatedAt": {
-                    "type": "string"
-                },
-                "userId": {
-                    "type": "integer"
-                },
-                "userName": {
-                    "type": "string"
-                },
-                "userType": {
-                    "description": "用户类型：0系统用户 1微信用户 2APP用户",
-                    "type": "integer"
                 }
             }
         },
@@ -7173,51 +7011,6 @@ const docTemplate = `{
                 "visible": {
                     "description": "显示状态：0显示 1隐藏",
                     "type": "integer"
-                }
-            }
-        },
-        "internal_controller.HealthResponse": {
-            "type": "object",
-            "properties": {
-                "services": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "status": {
-                    "type": "string"
-                },
-                "timestamp": {
-                    "type": "string"
-                },
-                "uptime": {
-                    "type": "string"
-                },
-                "version": {
-                    "type": "string"
-                }
-            }
-        },
-        "internal_controller.SendEmailCaptchaRequest": {
-            "type": "object",
-            "required": [
-                "email"
-            ],
-            "properties": {
-                "email": {
-                    "type": "string"
-                }
-            }
-        },
-        "internal_controller.SendSMSCaptchaRequest": {
-            "type": "object",
-            "required": [
-                "phone"
-            ],
-            "properties": {
-                "phone": {
-                    "type": "string"
                 }
             }
         }

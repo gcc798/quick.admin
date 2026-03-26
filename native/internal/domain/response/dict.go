@@ -22,12 +22,6 @@ type DictDataResponse struct {
 	UpdatedTime utils.LocalTime `json:"updatedTime"` // 更新时间
 }
 
-// DictListResponse 字典列表响应
-type DictListResponse struct {
-	Total int64              `json:"total"` // 总数
-	List  []DictDataResponse `json:"list"`  // 列表
-}
-
 // ToDictDataResponse 转换为字典响应
 func ToDictDataResponse(dict *model.DictData) DictDataResponse {
 	return DictDataResponse{
@@ -44,17 +38,5 @@ func ToDictDataResponse(dict *model.DictData) DictDataResponse {
 		CreatedTime: dict.CreatedTime,
 		UpdateBy:    dict.UpdateBy,
 		UpdatedTime: dict.UpdatedTime,
-	}
-}
-
-// ToDictListResponse 转换为字典列表响应
-func ToDictListResponse(dicts []model.DictData, total int64) DictListResponse {
-	list := make([]DictDataResponse, 0, len(dicts))
-	for _, dict := range dicts {
-		list = append(list, ToDictDataResponse(&dict))
-	}
-	return DictListResponse{
-		Total: total,
-		List:  list,
 	}
 }

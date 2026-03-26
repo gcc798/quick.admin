@@ -26,12 +26,6 @@ type OperLogResponse struct {
 	UserAgent     string          `json:"userAgent"`     // UA
 }
 
-// OperLogListResponse 操作日志列表响应
-type OperLogListResponse struct {
-	Total int64             `json:"total"` // 总数
-	List  []OperLogResponse `json:"list"`  // 列表
-}
-
 // ToOperLogResponse 转换为操作日志响应
 func ToOperLogResponse(log *model.OperLog) OperLogResponse {
 	return OperLogResponse{
@@ -52,17 +46,5 @@ func ToOperLogResponse(log *model.OperLog) OperLogResponse {
 		OperTime:      log.OperTime,
 		CostTime:      log.CostTime,
 		UserAgent:     log.UserAgent,
-	}
-}
-
-// ToOperLogListResponse 转换为操作日志列表响应
-func ToOperLogListResponse(logs []model.OperLog, total int64) OperLogListResponse {
-	list := make([]OperLogResponse, 0, len(logs))
-	for _, log := range logs {
-		list = append(list, ToOperLogResponse(&log))
-	}
-	return OperLogListResponse{
-		Total: total,
-		List:  list,
 	}
 }

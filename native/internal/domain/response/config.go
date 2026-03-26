@@ -20,12 +20,6 @@ type ConfigResponse struct {
 	UpdatedTime utils.LocalTime `json:"updatedTime"` // 更新时间
 }
 
-// ConfigListResponse 配置列表响应
-type ConfigListResponse struct {
-	Total int64            `json:"total"` // 总数
-	List  []ConfigResponse `json:"list"`  // 列表
-}
-
 // ConfigDataResponse 配置数据响应（仅返回data字段）
 type ConfigDataResponse struct {
 	Code string          `json:"code"` // 配置编码
@@ -44,17 +38,5 @@ func ToConfigResponse(config *model.Config) ConfigResponse {
 		CreatedTime: config.CreatedTime,
 		UpdateBy:    config.UpdateBy,
 		UpdatedTime: config.UpdatedTime,
-	}
-}
-
-// ToConfigListResponse 转换为配置列表响应
-func ToConfigListResponse(configs []model.Config, total int64) ConfigListResponse {
-	list := make([]ConfigResponse, 0, len(configs))
-	for _, config := range configs {
-		list = append(list, ToConfigResponse(&config))
-	}
-	return ConfigListResponse{
-		Total: total,
-		List:  list,
 	}
 }

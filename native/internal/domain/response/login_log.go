@@ -19,12 +19,6 @@ type LoginLogResponse struct {
 	ClientId      string          `json:"clientId"`      // 客户端ID
 }
 
-// LoginLogListResponse 登录日志列表响应
-type LoginLogListResponse struct {
-	Total int64              `json:"total"` // 总数
-	List  []LoginLogResponse `json:"list"`  // 列表
-}
-
 // ToLoginLogResponse 转换为登录日志响应
 func ToLoginLogResponse(log *model.LoginLog) LoginLogResponse {
 	return LoginLogResponse{
@@ -38,17 +32,5 @@ func ToLoginLogResponse(log *model.LoginLog) LoginLogResponse {
 		Msg:           log.Msg,
 		LoginTime:     log.LoginTime,
 		ClientId:      log.ClientId,
-	}
-}
-
-// ToLoginLogListResponse 转换为登录日志列表响应
-func ToLoginLogListResponse(logs []model.LoginLog, total int64) LoginLogListResponse {
-	list := make([]LoginLogResponse, 0, len(logs))
-	for _, log := range logs {
-		list = append(list, ToLoginLogResponse(&log))
-	}
-	return LoginLogListResponse{
-		Total: total,
-		List:  list,
 	}
 }

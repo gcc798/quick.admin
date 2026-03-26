@@ -48,7 +48,7 @@ func NewAttachmentController(c container.Container) AttachmentController {
 //	@Param			Authorization	header		string	true	"Bearer {token}"
 //	@Param			file			formData	file	true	"文件"
 //	@Param			envCode			formData	string	false	"存储环境编码（不传则使用默认环境）"
-//	@Success		200				{object}	response.Response{data=response.AttachmentResponse}
+//	@Success		200				{object}	response.Response{data=object}
 //	@Router			/api/v1/attachment/upload-file [post]
 func (c *attachmentController) UploadFile(ctx *gin.Context) {
 	var req request.UploadFileRequest
@@ -169,7 +169,7 @@ func (c *attachmentController) DeleteAttachment(ctx *gin.Context) {
 //	@Param			Authorization	header		string	true	"Bearer {token}"
 //	@Param			attachmentId	path		int		true	"附件ID"
 //	@Param			expires			query		int		false	"过期时间（秒）"	default(3600)
-//	@Success		200				{object}	response.Response{data=response.AttachmentURLResponse}
+//	@Success		200				{object}	response.Response{data=object}
 //	@Router			/api/v1/attachment/{attachmentId}/url [get]
 func (c *attachmentController) GetAttachmentURL(ctx *gin.Context) {
 	attachmentId, err := utils.ParseInt64Param(ctx, "attachmentId", "required")
@@ -207,7 +207,7 @@ func (c *attachmentController) GetAttachmentURL(ctx *gin.Context) {
 //	@Produce		json
 //	@Param			Authorization	header		string	true	"Bearer {token}"
 //	@Param			attachmentId	path		int		true	"附件ID"
-//	@Success		200				{object}	response.Response{data=response.AttachmentResponse}
+//	@Success		200				{object}	response.Response{data=object}
 //	@Router			/api/v1/attachment/{attachmentId} [get]
 func (c *attachmentController) GetAttachment(ctx *gin.Context) {
 	attachmentId, err := utils.ParseInt64Param(ctx, "attachmentId", "required")
@@ -236,7 +236,7 @@ func (c *attachmentController) GetAttachment(ctx *gin.Context) {
 //	@Param			Authorization	header		string	true	"Bearer {token}"
 //	@Param			businessType	query		string	true	"业务类型"
 //	@Param			businessId		query		string	true	"业务ID"
-//	@Success		200				{object}	response.Response{data=[]response.AttachmentResponse}
+//	@Success		200				{object}	response.Response{data=[]object}
 //	@Router			/api/v1/attachment/business [get]
 func (c *attachmentController) ListAttachmentsByBusiness(ctx *gin.Context) {
 	var req request.ListAttachmentsByBusinessRequest
@@ -264,7 +264,7 @@ func (c *attachmentController) ListAttachmentsByBusiness(ctx *gin.Context) {
 //	@Produce		json
 //	@Param			Authorization	header		string							true	"Bearer {token}"
 //	@Param			body			body		request.PageAttachmentsRequest	true	"查询参数"
-//	@Success		200				{object}	response.Response{data=response.PageResponse}
+//	@Success		200				{object}	response.Response{data=object}
 //	@Router			/api/v1/attachment/page [post]
 func (c *attachmentController) PageAttachments(ctx *gin.Context) {
 	var req request.PageAttachmentsRequest

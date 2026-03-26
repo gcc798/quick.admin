@@ -30,16 +30,6 @@ type Response struct {
 	Data interface{} `json:"data" swaggertype:"object"` // 响应数据
 }
 
-// PageResponse 分页响应结构
-//
-//	@Description	分页查询统一响应格式
-type PageResponse struct {
-	Code  int         `json:"code" example:"200"`    // 业务状态码
-	Msg   string      `json:"msg" example:"success"` // 响应消息
-	Rows  interface{} `json:"rows"`                  // 数据列表
-	Total int64       `json:"total" example:"100"`   // 总记录数
-}
-
 func Success(c *gin.Context, data interface{}) {
 	c.JSON(200, Response{Code: CodeOK, Msg: "success", Data: data})
 }
@@ -167,10 +157,6 @@ func Error(c *gin.Context, err error) {
 		Msg:  "系统异常，请联系管理员",
 		Data: nil,
 	})
-}
-
-func PageSuccess(c *gin.Context, rows interface{}, total int64) {
-	c.JSON(200, PageResponse{Code: CodeOK, Msg: "success", Rows: rows, Total: total})
 }
 
 func SuccessCode(c *gin.Context, code int, data interface{}) {

@@ -45,7 +45,7 @@ func NewStorageEnvController(c container.Container) StorageEnvController {
 //	@Produce		json
 //	@Param			Authorization	header		string							true	"Bearer {token}"
 //	@Param			body			body		request.CreateStorageEnvRequest	true	"存储环境信息"
-//	@Success		200				{object}	response.Response{data=response.StorageEnvResponse}
+//	@Success		200				{object}	response.Response{data=model.StorageEnv}
 //	@Router			/api/v1/storage-env [post]
 func (c *storageEnvController) CreateStorageEnv(ctx *gin.Context) {
 	var req request.CreateStorageEnvRequest
@@ -161,7 +161,7 @@ func (c *storageEnvController) DeleteStorageEnv(ctx *gin.Context) {
 //	@Produce		json
 //	@Param			Authorization	header		string	true	"Bearer {token}"
 //	@Param			id			path		int		true	"环境ID"
-//	@Success		200				{object}	response.Response{data=response.StorageEnvResponse}
+//	@Success		200				{object}	response.Response{data=model.StorageEnv}
 //	@Router			/api/v1/storage-env/{id} [get]
 func (c *storageEnvController) GetStorageEnv(ctx *gin.Context) {
 	envId, err := utils.ParseInt64Param(ctx, "id", "required")
@@ -215,7 +215,7 @@ func (c *storageEnvController) SetDefaultStorageEnv(ctx *gin.Context) {
 //	@Accept			json
 //	@Produce		json
 //	@Param			Authorization	header		string	true	"Bearer {token}"
-//	@Success		200				{object}	response.Response{data=response.StorageEnvResponse}
+//	@Success		200				{object}	response.Response{data=model.StorageEnv}
 //	@Router			/api/v1/storage-env/default [get]
 func (c *storageEnvController) GetDefaultStorageEnv(ctx *gin.Context) {
 	env, err := c.storageEnvService.GetDefault(ctx.Request.Context())

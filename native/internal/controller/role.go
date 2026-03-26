@@ -51,7 +51,7 @@ func NewRoleController(c container.Container) RoleController {
 //	@Produce		json
 //	@Param			Authorization	header		string						true	"Bearer {token}"
 //	@Param			body			body		request.CreateRoleRequest	true	"角色信息"
-//	@Success		200				{object}	response.Response{data=response.RoleResponse}
+//	@Success		200				{object}	response.Response{data=model.Role}
 //	@Failure		400				{object}	response.Response	"参数错误"
 //	@Router			/api/v1/role [post]
 func (c *roleController) CreateRole(ctx *gin.Context) {
@@ -170,7 +170,7 @@ func (c *roleController) DeleteRole(ctx *gin.Context) {
 //	@Produce		json
 //	@Param			Authorization	header		string	true	"Bearer {token}"
 //	@Param			roleId			path		int		true	"角色ID"
-//	@Success		200				{object}	response.Response{data=response.RoleResponse}
+//	@Success		200				{object}	response.Response{data=model.Role}
 //	@Failure		400				{object}	response.Response	"参数错误"
 //	@Router			/api/v1/role/{roleId} [get]
 func (c *roleController) GetRole(ctx *gin.Context) {
@@ -293,7 +293,7 @@ func (c *roleController) RemoveRoleFromUser(ctx *gin.Context) {
 //	@Produce		json
 //	@Param			Authorization	header		string	true	"Bearer {token}"
 //	@Param			userId			query		int		true	"用户ID"
-//	@Success		200				{object}	response.Response{data=[]response.RoleResponse}
+//	@Success		200				{object}	response.Response{data=[]model.Role}
 //	@Failure		400				{object}	response.Response	"参数错误"
 //	@Router			/api/v1/role/user [get]
 func (c *roleController) GetUserRoles(ctx *gin.Context) {
@@ -380,7 +380,7 @@ func (c *roleController) DeleteRolePermission(ctx *gin.Context) {
 //	@Produce		json
 //	@Param			Authorization	header		string	true	"Bearer {token}"
 //	@Param			roleKey			query		string	true	"角色标识"
-//	@Success		200				{object}	response.Response{data=[]response.RolePermissionResponse}
+//	@Success		200				{object}	response.Response{data=object}
 //	@Failure		400				{object}	response.Response	"参数错误"
 //	@Router			/api/v1/role/permissions [get]
 func (c *roleController) GetRolePermissions(ctx *gin.Context) {

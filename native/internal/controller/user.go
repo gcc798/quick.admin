@@ -182,7 +182,7 @@ func (h *userController) BatchDelete(c *gin.Context) {
 //	@Produce		json
 //	@Param			Authorization	header		string	true	"Bearer {token}"
 //	@Param			id				path		int		true	"用户ID"
-//	@Success		200				{object}	response.Response{data=response.UserResponse}
+//	@Success		200				{object}	response.Response{data=object}
 //	@Failure		400				{object}	response.Response	"参数错误"
 //	@Router			/api/v1/user/{id} [get]
 func (h *userController) GetById(c *gin.Context) {
