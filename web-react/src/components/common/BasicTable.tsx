@@ -1,7 +1,9 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Card, Form, Table } from 'antd';
+import { PushpinFilled, PushpinOutlined } from '@ant-design/icons';
+import { Button, Card, Form, Table } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
+import { useLocation } from 'react-router-dom';
 import type { FormSchema } from '@/types/form';
 import type { PageData } from '@/types/api';
 import { BasicForm } from './BasicForm';
@@ -22,6 +24,21 @@ interface BasicTableProps<T extends object> {
   selectable?: boolean;
 }
 
+function hasFixedColumns<T extends object>(columns: TableColumnsType<T>): boolean {
+  return columns.some((column) => {
+    const tableColumn = column as TableColumnsType<T>[number] & {
+      children?: TableColumnsType<T>;
+      fixed?: 'left' | 'right' | boolean;
+    };
+
+    if (tableColumn.fixed) {
+      return true;
+    }
+
+    return Array.isArray(tableColumn.children) ? hasFixedColumns(tableColumn.children) : false;
+  });
+}
+
 function InnerBasicTable<T extends object>(
   {
     columns,
@@ -34,6 +51,7 @@ function InnerBasicTable<T extends object>(
   }: BasicTableProps<T>,
   ref: React.ForwardedRef<BasicTableRef<T>>,
 ) {
+  const location = useLocation();
   const [searchForm] = Form.useForm();
   const [dataSource, setDataSource] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
@@ -42,6 +60,22 @@ function InnerBasicTable<T extends object>(
   const [total, setTotal] = useState(0);
   const [searchValues, setSearchValues] = useState<Record<string, unknown>>({});
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const fixedColumnStorageKey = `web-react-fixed-columns:${location.pathname}`;
+  const [fixedColumnsEnabled, setFixedColumnsEnabled] = useState(() => {
+    if (typeof window === 'undefined') {
+      return true;
+    }
+
+    return window.localStorage.getItem(fixedColumnStorageKey) !== '0';
+  });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    setFixedColumnsEnabled(window.localStorage.getItem(fixedColumnStorageKey) !== '0');
+  }, [fixedColumnStorageKey]);
 
   // 统一把“分页 + 查询条件 + 表格刷新”收敛到一个组件里，
   // 这样后续迁移 CRUD 页面时只需要关注列定义和接口调用。
@@ -76,6 +110,8 @@ function InnerBasicTable<T extends object>(
     return dataSource.filter((record) => selectedRowKeys.includes(resolveRowKey(record)));
   }, [dataSource, rowKey, selectedRowKeys]);
 
+  const supportsFixedColumnToggle = useMemo(() => hasFixedColumns(columns), [columns]);
+
   useImperativeHandle(
     ref,
     () => ({
@@ -94,7 +130,7 @@ function InnerBasicTable<T extends object>(
   );
 
   return (
-    <Card variant="borderless">
+    <>
       {searchSchemas.length ? (
         <div className="page-search">
           <BasicForm
@@ -113,40 +149,64 @@ function InnerBasicTable<T extends object>(
             }}
             resetText="重置"
             submitText="查询"
+            variant="search"
           />
         </div>
       ) : null}
 
-      {toolbar ? <div className="page-toolbar">{toolbar}</div> : null}
+      <Card variant="borderless">
+        {toolbar || supportsFixedColumnToggle ? (
+          <div className="page-toolbar">
+            <div className="page-toolbar-main">{toolbar}</div>
+            {supportsFixedColumnToggle ? (
+              <Button
+                className="table-fixed-toggle-btn"
+                icon={fixedColumnsEnabled ? <PushpinFilled /> : <PushpinOutlined />}
+                onClick={() => {
+                  const nextValue = !fixedColumnsEnabled;
+                  setFixedColumnsEnabled(nextValue);
 
-      <Table<T>
-        columns={columns}
-        dataSource={dataSource}
-        loading={loading}
-        rowKey={rowKey as TableProps<T>['rowKey']}
-        rowSelection={
-          selectable
-            ? {
-                selectedRowKeys,
-                onChange: setSelectedRowKeys,
-              }
-            : undefined
-        }
-        scroll={scroll}
-        pagination={{
-          current: pageNum,
-          pageSize,
-          total,
-          showSizeChanger: true,
-          showQuickJumper: true,
-          showTotal: (currentTotal) => `共 ${currentTotal} 条`,
-          onChange: (nextPage, nextSize) => {
-            setPageNum(nextPage);
-            setPageSize(nextSize);
-          },
-        }}
-      />
-    </Card>
+                  if (typeof window !== 'undefined') {
+                    window.localStorage.setItem(fixedColumnStorageKey, nextValue ? '1' : '0');
+                  }
+                }}
+              >
+                {fixedColumnsEnabled ? '取消固定操作列' : '固定操作列'}
+              </Button>
+            ) : null}
+          </div>
+        ) : null}
+
+        <Table<T>
+          className={fixedColumnsEnabled ? undefined : 'table-fixed-disabled'}
+          columns={columns}
+          dataSource={dataSource}
+          loading={loading}
+          rowKey={rowKey as TableProps<T>['rowKey']}
+          rowSelection={
+            selectable
+              ? {
+                  selectedRowKeys,
+                  onChange: setSelectedRowKeys,
+                }
+              : undefined
+          }
+          scroll={scroll}
+          pagination={{
+            current: pageNum,
+            pageSize,
+            total,
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: (currentTotal) => `共 ${currentTotal} 条`,
+            onChange: (nextPage, nextSize) => {
+              setPageNum(nextPage);
+              setPageSize(nextSize);
+            },
+          }}
+        />
+      </Card>
+    </>
   );
 }
 

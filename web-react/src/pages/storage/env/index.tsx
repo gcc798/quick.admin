@@ -38,7 +38,8 @@ const searchSchemas: FormSchema[] = [
 function previewJson(data: unknown) {
   const text =
     typeof data === 'string' ? data : JSON.stringify(data ?? {}, null, 2);
-  return text.length > 80 ? `${text.slice(0, 80)}...` : text;
+  const singleLine = text.replace(/\s+/g, ' ').trim();
+  return singleLine.length > 72 ? `${singleLine.slice(0, 72)}...` : singleLine;
 }
 
 export default function StorageEnvPage() {
@@ -70,16 +71,26 @@ export default function StorageEnvPage() {
     {
       title: '配置',
       dataIndex: 'config',
-      width: 320,
+      width: 340,
       render: (value) => (
-        <a
+        <span
+          className="json-preview-inline table-code"
+          role="button"
+          tabIndex={0}
           onClick={() => {
             setViewerData(value);
             setViewerOpen(true);
           }}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              setViewerData(value);
+              setViewerOpen(true);
+            }
+          }}
         >
-          <span className="table-code">{previewJson(value)}</span>
-        </a>
+          {previewJson(value)}
+        </span>
       ),
     },
     {

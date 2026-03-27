@@ -175,19 +175,19 @@ export default function OrgPage() {
 
   return (
     <>
-      <Card className="page-card" style={{ marginBottom: 16 }} variant="borderless">
+      <Card className="page-card page-search-card" style={{ marginBottom: 16 }} variant="borderless">
         <Form form={form} layout="inline">
           <Form.Item label="组织名称" name="orgName">
-            <Input allowClear placeholder="请输入组织名称" style={{ width: 220 }} />
+            <Input allowClear placeholder="请输入组织名称" style={{ width: 180 }} />
           </Form.Item>
           <Form.Item label="组织编码" name="orgCode">
-            <Input allowClear placeholder="请输入组织编码" style={{ width: 220 }} />
+            <Input allowClear placeholder="请输入组织编码" style={{ width: 180 }} />
           </Form.Item>
           <Form.Item label="状态" name="status">
             <Select
               allowClear
               placeholder="请选择状态"
-              style={{ width: 140 }}
+              style={{ width: 128 }}
               options={[
                 { label: '正常', value: 0 },
                 { label: '停用', value: 1 },

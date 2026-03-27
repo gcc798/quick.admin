@@ -23,9 +23,10 @@ export function TableAction({ actions }: TableActionProps) {
         .map((action) => {
           const button = (
             <Button
+              className="table-action-btn"
               danger={action.danger}
               size="small"
-              type="link"
+              type="text"
               onClick={action.confirmTitle ? undefined : action.onClick}
             >
               {action.label}

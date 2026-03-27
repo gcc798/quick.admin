@@ -17,9 +17,6 @@ export const authApi = {
   refreshToken: (params: RefreshTokenParams) =>
     request.post<RefreshTokenResponse>('/auth/refresh', params),
 
-  // 获取当前用户信息
-  me: () => request.get<{ userId: number }>('/me'),
-
   // 发送短信验证码
   sendSmsCode: (phonenumber: string) =>
     request.post('/captcha/sms', { phonenumber }),

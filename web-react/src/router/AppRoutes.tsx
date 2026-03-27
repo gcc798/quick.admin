@@ -4,11 +4,12 @@ import { Navigate, useLocation, useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import { message } from 'antd';
 import type { MenuRouteRecord } from '@/types/menu';
-import { flattenLeafMenus } from '@/utils/menu';
+import type { MenuRecord } from '@/types/menu';
 import { PageLoading } from '@/components/common/PageLoading';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { useAuthStore } from '@/store/auth';
 import { usePermissionStore } from '@/store/permission';
+import { findFirstNavigablePath, flattenLeafMenus, isMenuHidden, joinMenuPath } from '@/utils/menu';
 
 const LoginPage = lazy(() => import('@/pages/auth/login'));
 const DashboardPage = lazy(() => import('@/pages/dashboard'));
@@ -92,6 +93,38 @@ function buildDynamicRoutes(menuTree: MenuRouteRecord[]): RouteObject[] {
   });
 }
 
+function buildDirectoryRedirectRoutes(
+  menuTree: MenuRecord[],
+  parentPath = '',
+): RouteObject[] {
+  const routes: RouteObject[] = [];
+
+  menuTree.forEach((menu) => {
+    if (isMenuHidden(menu)) {
+      return;
+    }
+
+    const fullPath = joinMenuPath(parentPath, menu.path);
+
+    if (menu.menuType === 0 && menu.children?.length) {
+      const targetPath = findFirstNavigablePath(menu.children, fullPath);
+
+      if (targetPath) {
+        routes.push({
+          path: fullPath.replace(/^\//, ''),
+          element: <Navigate replace to={targetPath} />,
+        });
+      }
+    }
+
+    if (menu.children?.length) {
+      routes.push(...buildDirectoryRedirectRoutes(menu.children, fullPath));
+    }
+  });
+
+  return routes;
+}
+
 function TitleSync() {
   const location = useLocation();
   const menuTree = usePermissionStore((state) => state.menuTree);
@@ -123,6 +156,9 @@ export function AppRoutes() {
 
   const routes = useMemo<RouteObject[]>(() => {
     const dynamicRoutes = isMenuLoaded ? buildDynamicRoutes(flattenLeafMenus(menuTree)) : [];
+    const directoryRedirectRoutes = isMenuLoaded
+      ? buildDirectoryRedirectRoutes(menuTree)
+      : [];
 
     return [
       {
@@ -173,6 +209,7 @@ export function AppRoutes() {
               </Suspense>
             ),
           },
+          ...directoryRedirectRoutes,
           ...dynamicRoutes,
           {
             path: '*',

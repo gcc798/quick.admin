@@ -15,6 +15,36 @@ export function joinMenuPath(parentPath: string, currentPath: string) {
   return `${normalizedParent}/${currentPath}`.replace(/\/+/g, '/');
 }
 
+export function isMenuHidden(menu: MenuRecord) {
+  return menu.visible === 1 || menu.status === 1;
+}
+
+export function findFirstNavigablePath(
+  menuTree: MenuRecord[],
+  parentPath = '',
+): string | null {
+  for (const menu of menuTree) {
+    if (isMenuHidden(menu) || menu.menuType === 2) {
+      continue;
+    }
+
+    const fullPath = joinMenuPath(parentPath, menu.path);
+
+    if (menu.menuType === 1) {
+      return fullPath;
+    }
+
+    if (menu.children?.length) {
+      const childPath = findFirstNavigablePath(menu.children, fullPath);
+      if (childPath) {
+        return childPath;
+      }
+    }
+  }
+
+  return null;
+}
+
 export function extractPermissions(menuTree: MenuRecord[]) {
   const permissions: string[] = [];
 
@@ -41,7 +71,7 @@ export function flattenLeafMenus(
   const routes: MenuRouteRecord[] = [];
 
   menuTree.forEach((menu) => {
-    if (menu.visible === 1 || menu.status === 1) {
+    if (isMenuHidden(menu)) {
       return;
     }
 
@@ -64,7 +94,7 @@ export function buildSidebarMenus(
   parentPath = '',
 ): ItemType[] {
   return menuTree
-    .filter((menu) => menu.visible !== 1 && menu.status !== 1 && menu.menuType !== 2)
+    .filter((menu) => !isMenuHidden(menu) && menu.menuType !== 2)
     .map((menu) => {
       const fullPath = joinMenuPath(parentPath, menu.path);
       const icon = getMenuIconNode(menu.icon);

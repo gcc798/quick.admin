@@ -87,25 +87,6 @@ export const useAuthStore = defineStore('auth', {
         throw error;
       }
     },
-
-    // 获取当前用户信息
-    async fetchUserInfo() {
-      try {
-        const res = await authApi.me();
-        if (this.userInfo) {
-          this.userInfo.userId = res.userId;
-          return;
-        }
-        this.userInfo = {
-          userId: res.userId,
-          username: '',
-          nickname: '',
-          userType: '',
-        };
-      } catch (error) {
-        throw error;
-      }
-    },
   },
 
   persist: {

@@ -13,60 +13,6 @@ function shouldSkipRefresh(url?: string) {
   return authWhiteList.some((item) => url?.includes(item));
 }
 
-function readRequestPayload(config: AxiosRequestConfig) {
-  const raw = config.data;
-  const params =
-    config.params && typeof config.params === 'object'
-      ? (config.params as Record<string, unknown>)
-      : {};
-
-  if (!raw) {
-    return params;
-  }
-
-  if (typeof raw === 'string') {
-    try {
-      return {
-        ...params,
-        ...(JSON.parse(raw) as Record<string, unknown>),
-      };
-    } catch {
-      return params;
-    }
-  }
-
-  if (typeof raw === 'object') {
-    return {
-      ...params,
-      ...(raw as Record<string, unknown>),
-    };
-  }
-
-  return params;
-}
-
-function normalizePageResponse(
-  rows: unknown,
-  total: unknown,
-  config: AxiosRequestConfig,
-) {
-  const requestPayload = readRequestPayload(config);
-  const current = Number(requestPayload.pageNum ?? 1);
-  const size = Number(
-    requestPayload.pageSize ??
-      (Array.isArray(rows) ? rows.length : 0),
-  );
-  const totalCount = Number(total ?? 0);
-
-  return {
-    records: Array.isArray(rows) ? rows : [],
-    total: totalCount,
-    size,
-    current,
-    pages: size > 0 ? Math.ceil(totalCount / size) : 0,
-  };
-}
-
 function redirectToLogin() {
   const target = `${window.location.pathname}${window.location.search}`;
   const redirect = encodeURIComponent(target);
@@ -123,25 +69,6 @@ service.interceptors.response.use(
     // sys-api 的绝大多数接口都返回 CommonResp，这里统一拆掉外层 data，
     // 让页面和 API 模块直接面对真正的业务数据结构。
     if (payload.code === 200) {
-      const pagePayload = payload as CommonResp<unknown> & {
-        rows?: unknown;
-        total?: number | string;
-      };
-
-      // native 目前的分页接口仍然是 { code, msg, rows, total }，
-      // go-zero 则返回 { code, msg, data: { records, total, ... } }。
-      // 这里统一适配成前端内部约定的 PageData 结构，避免页面层分叉。
-      if (
-        typeof pagePayload.rows !== 'undefined' ||
-        typeof pagePayload.total !== 'undefined'
-      ) {
-        return normalizePageResponse(
-          pagePayload.rows,
-          pagePayload.total,
-          response.config,
-        );
-      }
-
       return payload.data;
     }
 

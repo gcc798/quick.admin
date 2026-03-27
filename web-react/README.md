@@ -4,6 +4,10 @@
 
 详细开发约束见：[docs/react-dev-spec.md](/Users/guoc/dev/code_go/src/nai-tizi/web-react/docs/react-dev-spec.md)
 
+如果你想把这个工程当成 React 学习案例来看，建议从这里开始：
+
+- [docs/learn-react/README.md](/Users/guoc/dev/code_go/src/nai-tizi/web-react/docs/learn-react/README.md)
+
 ## 运行环境
 
 - Node.js：建议 `>= 18`
