@@ -24,6 +24,7 @@ type menuController struct {
 	menuService *service.MenuService
 }
 
+// NewMenuController 创建组件实例。
 func NewMenuController(menuService *service.MenuService) MenuController {
 	return &menuController{
 		menuService: menuService,

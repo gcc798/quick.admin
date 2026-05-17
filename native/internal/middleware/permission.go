@@ -78,6 +78,10 @@ func PermissionAny(casbinService service.CasbinServiceV2, resources []string) gi
 			c.Abort()
 			return
 		}
+		if userId == 1 {
+			c.Next()
+			return
+		}
 
 		// 检查是否满足任意一个权限
 		for _, resource := range resources {
@@ -116,6 +120,10 @@ func PermissionAll(casbinService service.CasbinServiceV2, resources []string) gi
 		if !ok {
 			response.Forbidden(c, "用户ID格式错误")
 			c.Abort()
+			return
+		}
+		if userId == 1 {
+			c.Next()
 			return
 		}
 

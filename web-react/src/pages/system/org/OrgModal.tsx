@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { App, Form } from 'antd';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { OrgRecord } from '@/types/system';
 import { orgApi } from '@/api/org';
@@ -8,8 +9,8 @@ import { BasicModal } from '@/components/common/BasicModal';
 
 interface OrgModalProps {
   open: boolean;
-  orgId?: number;
-  parentId?: number;
+  orgId?: SnowflakeId;
+  parentId?: SnowflakeId;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -162,6 +163,7 @@ export function OrgModal({
         form={form}
         schemas={schemas}
         layout="vertical"
+        variant="modal"
         showActionButtons={false}
       />
     </BasicModal>

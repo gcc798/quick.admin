@@ -116,7 +116,7 @@ export default function OperLogPage() {
       selectable={false}
       scroll={{ x: 1800 }}
       toolbar={
-        <PermissionGate permission="log.delete">
+        <PermissionGate permission="oper_log.delete">
           <Button
             danger
             icon={<DeleteOutlined />}

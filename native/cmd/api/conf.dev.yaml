@@ -7,8 +7,8 @@ database:
   maxOpenConns: 100
   maxIdleConns: 10
   connMaxLifetimeMinutes: 60
+  slowThreshold: 200
   autoMigrate: true
-  enableSoftDelete: false
 
 redis:
   addr: "127.0.0.1:6379"
@@ -38,7 +38,7 @@ captcha:
     template: "SMS_CODE_TEMPLATE"
     provider: "aliyun"
   email:
-    enabled: true
+    enabled: false
     length: 6
     expire: 300
     template: "EMAIL_CODE_TEMPLATE"
@@ -60,7 +60,6 @@ mqtt:
 rabbitmq:
   enabled: false
   url: "amqp://username:pwd@ip:port/"
-  exchange: "NTZ.topic"
 
 sms:
   enabled: true
@@ -84,3 +83,8 @@ scheduler:
 
 websocket:
   enabled: true
+  timeoutEnabled: true
+  readTimeoutSeconds: 60
+  writeTimeoutSeconds: 10
+  heartbeatEnabled: true
+  maxReadTimeouts: 3

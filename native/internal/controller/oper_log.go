@@ -11,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// OperLogController 定义业务数据结构。
 type OperLogController interface {
 	CreateOperLog(ctx *gin.Context)      // 创建操作日志
 	UpdateOperLog(ctx *gin.Context)      // 更新操作日志
@@ -26,6 +27,7 @@ type operLogController struct {
 	operLogService service.OperLogService
 }
 
+// NewOperLogController 创建组件实例。
 func NewOperLogController(c container.Container) OperLogController {
 	return &operLogController{
 		ctr:            c,

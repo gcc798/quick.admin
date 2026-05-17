@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { App, Form } from 'antd';
 import type { FormSchema } from '@/types/form';
+import type { SnowflakeId } from '@/types/api';
 import type { RoleRecord } from '@/types/system';
 import { roleApi } from '@/api/role';
 import { BasicForm } from '@/components/common/BasicForm';
@@ -8,7 +9,7 @@ import { BasicModal } from '@/components/common/BasicModal';
 
 interface RoleModalProps {
   open: boolean;
-  roleId?: number;
+  roleId?: SnowflakeId;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -119,6 +120,7 @@ export function RoleModal({
         form={form}
         schemas={schemas}
         layout="vertical"
+        variant="modal"
         showActionButtons={false}
       />
     </BasicModal>

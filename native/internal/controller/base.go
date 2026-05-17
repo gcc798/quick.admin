@@ -9,10 +9,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// BaseController 定义业务数据结构。
 type BaseController struct {
 	ctr container.Container
 }
 
+// NewBaseController 创建组件实例。
 func NewBaseController(c container.Container) *BaseController {
 	return &BaseController{ctr: c}
 }

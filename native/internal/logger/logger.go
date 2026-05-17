@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"time"
 
+	configx "github.com/force-c/nai-tizi/internal/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"gopkg.in/natefinch/lumberjack.v2"
 	"gopkg.in/yaml.v3"
 )
 
@@ -90,20 +90,20 @@ func LoadConfig(configPath string) (*Config, error) {
 	if config.File.MaxAge == 0 {
 		config.File.MaxAge = 7
 	}
+	if !filepath.IsAbs(config.File.Path) {
+		config.File.Path = filepath.Join(filepath.Dir(configPath), config.File.Path)
+	}
 
 	return &config, nil
 }
 
 // NewLogger 创建新的Logger实例
-func NewLogger(env string) (Logger, error) {
-	// 标准化环境名称：development -> dev, production -> prod
-	normalizedEnv := normalizeEnv(env)
-
-	// 根据环境选择配置文件
-	configFile := fmt.Sprintf("cmd/api/zaplogger.%s.yaml", normalizedEnv)
+func NewLogger(env, appDir string) (Logger, error) {
+	configFileName := fmt.Sprintf("zaplogger.%s.yaml", env)
+	configFile, err := configx.ResolveFilePath(appDir, configFileName)
 
 	// 如果配置文件不存在，使用默认配置
-	if _, err := os.Stat(configFile); os.IsNotExist(err) {
+	if err != nil {
 		return newDefaultLogger(env)
 	}
 
@@ -115,50 +115,26 @@ func NewLogger(env string) (Logger, error) {
 	return NewLoggerWithConfig(config)
 }
 
-// normalizeEnv 标准化环境名称
-func normalizeEnv(env string) string {
-	switch env {
-	case "development", "dev":
-		return "dev"
-	case "production", "prod":
-		return "prod"
-	default:
-		return env
-	}
-}
-
 // NewLoggerWithConfig 使用配置创建Logger
 func NewLoggerWithConfig(config *Config) (Logger, error) {
 	// 解析日志级别
 	level := parseLevel(config.Level)
 
-	// 创建编码器配置
-	encoderConfig := zapcore.EncoderConfig{
-		TimeKey:        "time",
-		LevelKey:       "level",
-		NameKey:        "logger",
-		CallerKey:      "caller",
-		FunctionKey:    zapcore.OmitKey,
-		MessageKey:     "msg",
-		StacktraceKey:  "stacktrace",
-		LineEnding:     zapcore.DefaultLineEnding,
-		EncodeLevel:    zapcore.LowercaseLevelEncoder,
-		EncodeTime:     customTimeEncoder,
-		EncodeDuration: zapcore.SecondsDurationEncoder,
-		EncodeCaller:   zapcore.ShortCallerEncoder,
-	}
-
-	// 如果是控制台格式且启用彩色，使用彩色级别编码器
-	if config.Encoding == "console" && config.Console.Colorful {
-		encoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
-	}
-
-	// 创建编码器
-	var encoder zapcore.Encoder
-	if config.Encoding == "json" {
-		encoder = zapcore.NewJSONEncoder(encoderConfig)
-	} else {
-		encoder = zapcore.NewConsoleEncoder(encoderConfig)
+	// 创建基础编码器配置
+	baseEncoderConfig := zapcore.EncoderConfig{
+		TimeKey:          "time",
+		LevelKey:         "level",
+		NameKey:          "logger",
+		CallerKey:        "caller",
+		FunctionKey:      zapcore.OmitKey,
+		MessageKey:       "msg",
+		StacktraceKey:    "stacktrace",
+		LineEnding:       zapcore.DefaultLineEnding,
+		EncodeLevel:      zapcore.LowercaseLevelEncoder,
+		EncodeTime:       customTimeEncoder,
+		EncodeDuration:   zapcore.SecondsDurationEncoder,
+		EncodeCaller:     zapcore.ShortCallerEncoder,
+		ConsoleSeparator: " ",
 	}
 
 	// 创建输出
@@ -166,18 +142,18 @@ func NewLoggerWithConfig(config *Config) (Logger, error) {
 
 	switch config.Output {
 	case "console":
-		cores = append(cores, zapcore.NewCore(encoder, zapcore.AddSync(os.Stdout), level))
+		cores = append(cores, zapcore.NewCore(newEncoder(baseEncoderConfig, config.Encoding, config.Console.Colorful), zapcore.AddSync(os.Stdout), level))
 	case "file":
 		fileWriter := getFileWriter(config)
-		cores = append(cores, zapcore.NewCore(encoder, zapcore.AddSync(fileWriter), level))
+		cores = append(cores, zapcore.NewCore(newEncoder(baseEncoderConfig, config.Encoding, false), fileWriter, level))
 	case "all":
 		// 控制台输出
-		cores = append(cores, zapcore.NewCore(encoder, zapcore.AddSync(os.Stdout), level))
+		cores = append(cores, zapcore.NewCore(newEncoder(baseEncoderConfig, config.Encoding, config.Console.Colorful), zapcore.AddSync(os.Stdout), level))
 		// 文件输出
 		fileWriter := getFileWriter(config)
-		cores = append(cores, zapcore.NewCore(encoder, zapcore.AddSync(fileWriter), level))
+		cores = append(cores, zapcore.NewCore(newEncoder(baseEncoderConfig, config.Encoding, false), fileWriter, level))
 	default:
-		cores = append(cores, zapcore.NewCore(encoder, zapcore.AddSync(os.Stdout), level))
+		cores = append(cores, zapcore.NewCore(newEncoder(baseEncoderConfig, config.Encoding, config.Console.Colorful), zapcore.AddSync(os.Stdout), level))
 	}
 
 	// 合并所有core
@@ -202,28 +178,19 @@ func NewLoggerWithConfig(config *Config) (Logger, error) {
 	return &zapLogger{logger: logger}, nil
 }
 
-// getFileWriter 创建文件写入器（支持日志轮转）
-func getFileWriter(config *Config) *lumberjack.Logger {
-	// 确保日志目录存在
-	if err := os.MkdirAll(config.File.Path, 0755); err != nil {
-		fmt.Printf("Failed to create log directory: %v\n", err)
+func newEncoder(encoderConfig zapcore.EncoderConfig, encoding string, colorful bool) zapcore.Encoder {
+	if encoding == "console" && colorful {
+		encoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 	}
-
-	// 生成带时间戳的文件名
-	now := time.Now()
-	filename := fmt.Sprintf("%s-%s.log",
-		config.File.Filename,
-		now.Format("2006-01-02"))
-	fullPath := filepath.Join(config.File.Path, filename)
-
-	return &lumberjack.Logger{
-		Filename:   fullPath,
-		MaxSize:    config.File.MaxSize,    // MB
-		MaxBackups: config.File.MaxBackups, // 保留的旧文件数量
-		MaxAge:     config.File.MaxAge,     // 天
-		Compress:   config.File.Compress,   // 是否压缩
-		LocalTime:  true,                   // 使用本地时间
+	if encoding == "json" {
+		return zapcore.NewJSONEncoder(encoderConfig)
 	}
+	return zapcore.NewConsoleEncoder(encoderConfig)
+}
+
+// getFileWriter 创建文件写入器，支持按天切分和按大小轮转。
+func getFileWriter(config *Config) zapcore.WriteSyncer {
+	return newDailyFileWriter(config.File)
 }
 
 // customTimeEncoder 自定义时间格式
@@ -251,13 +218,21 @@ func parseLevel(level string) zapcore.Level {
 
 // newDefaultLogger 创建默认logger（向后兼容）
 func newDefaultLogger(env string) (Logger, error) {
-	var l *zap.Logger
-	var err error
+	var cfg zap.Config
 	if env == "production" || env == "prod" {
-		l, err = zap.NewProduction(zap.AddCallerSkip(1))
+		cfg = zap.NewProductionConfig()
+		cfg.Encoding = "json"
 	} else {
-		l, err = zap.NewDevelopment(zap.AddCallerSkip(1))
+		cfg = zap.NewDevelopmentConfig()
+		cfg.Encoding = "console"
 	}
+	cfg.EncoderConfig.TimeKey = "time"
+	cfg.EncoderConfig.EncodeTime = customTimeEncoder
+	cfg.EncoderConfig.EncodeDuration = zapcore.SecondsDurationEncoder
+	cfg.EncoderConfig.EncodeCaller = zapcore.ShortCallerEncoder
+	cfg.EncoderConfig.ConsoleSeparator = " "
+
+	l, err := cfg.Build(zap.AddCallerSkip(1))
 	if err != nil {
 		return nil, err
 	}
@@ -266,13 +241,25 @@ func newDefaultLogger(env string) (Logger, error) {
 
 // 实现Logger接口
 
+// Get 获取业务数据。
 func (l *zapLogger) Get() *zap.Logger { return l.logger }
 
+// Debug 执行业务逻辑。
 func (l *zapLogger) Debug(msg string, fields ...zap.Field) { l.logger.Debug(msg, fields...) }
-func (l *zapLogger) Info(msg string, fields ...zap.Field)  { l.logger.Info(msg, fields...) }
-func (l *zapLogger) Warn(msg string, fields ...zap.Field)  { l.logger.Warn(msg, fields...) }
+
+// Info 执行业务逻辑。
+func (l *zapLogger) Info(msg string, fields ...zap.Field) { l.logger.Info(msg, fields...) }
+
+// Warn 执行业务逻辑。
+func (l *zapLogger) Warn(msg string, fields ...zap.Field) { l.logger.Warn(msg, fields...) }
+
+// Error 执行业务逻辑。
 func (l *zapLogger) Error(msg string, fields ...zap.Field) { l.logger.Error(msg, fields...) }
+
+// Fatal 执行业务逻辑。
 func (l *zapLogger) Fatal(msg string, fields ...zap.Field) { l.logger.Fatal(msg, fields...) }
+
+// With 执行业务逻辑。
 func (l *zapLogger) With(fields ...zap.Field) Logger {
 	return &zapLogger{logger: l.logger.With(fields...)}
 }

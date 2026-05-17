@@ -7,21 +7,21 @@ import (
 
 // Role 系统角色表
 type Role struct {
-	ID          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`      // 角色ID（使用分布式ID）
-	RoleKey     string          `gorm:"column:role_key;uniqueIndex;not null" json:"roleKey"` // 角色标识（唯一，用于权限匹配）
-	RoleName    string          `gorm:"column:role_name;not null" json:"roleName"`           // 角色名称
-	Sort        int64           `gorm:"column:sort;default:0" json:"sort"`                   // 显示顺序
-	Status      int32           `gorm:"column:status;default:0" json:"status"`               // 状态：0正常 1停用
-	DataScope   int32           `gorm:"column:data_scope;default:1" json:"dataScope"`        // 数据范围：1全部 2自定义 3本组织 4本组织及以下 5仅本人
-	IsSystem    bool            `gorm:"column:is_system;default:false" json:"isSystem"`      // 是否系统内置角色（内置角色不可删除）
-	Remark      string          `gorm:"column:remark" json:"remark"`                         // 备注
-	CreateBy    int64           `gorm:"column:create_by" json:"createBy"`                    // 创建人
-	UpdateBy    int64           `gorm:"column:update_by" json:"updateBy"`                    // 更新人
-	CreatedTime utils.LocalTime `gorm:"column:created_time;autoCreateTime" json:"createdTime"`
-	UpdatedTime utils.LocalTime `gorm:"column:updated_time;autoUpdateTime" json:"updatedTime"`
-	DeletedAt   gorm.DeletedAt  `gorm:"column:deleted_at;index" json:"-"`
+	ID          int64           `gorm:"column:id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"id"` // 角色ID（使用分布式ID）
+	RoleKey     string          `gorm:"column:role_key;type:varchar(64);uniqueIndex;not null" json:"roleKey"`           // 角色标识（唯一，用于权限匹配）
+	RoleName    string          `gorm:"column:role_name;type:varchar(64);not null" json:"roleName"`                     // 角色名称
+	Sort        int64           `gorm:"column:sort;type:bigint;default:0" json:"sort"`                                  // 显示顺序
+	Status      int32           `gorm:"column:status;type:smallint;default:0" json:"status"`                            // 状态：0正常 1停用
+	DataScope   int32           `gorm:"column:data_scope;type:smallint;default:1" json:"dataScope"`                     // 数据范围：1全部 2自定义 3本组织 4本组织及以下 5仅本人
+	IsSystem    bool            `gorm:"column:is_system;type:boolean;default:false" json:"isSystem"`                    // 是否系统内置角色（内置角色不可删除）
+	Remark      string          `gorm:"column:remark;type:varchar(500)" json:"remark"`                                  // 备注
+	CreateBy    int64           `gorm:"column:create_by;type:bigint" json:"createBy"`                                   // 创建人
+	UpdateBy    int64           `gorm:"column:update_by;type:bigint" json:"updateBy"`                                   // 更新人
+	CreatedTime utils.LocalTime `gorm:"column:created_time;type:timestamptz;autoCreateTime" json:"createdTime"`
+	UpdatedTime utils.LocalTime `gorm:"column:updated_time;type:timestamptz;autoUpdateTime" json:"updatedTime"`
 }
 
+// TableName 返回数据库表名。
 func (*Role) TableName() string { return "s_role" }
 
 // FindByRoleKey 根据角色标识查询角色
@@ -72,7 +72,7 @@ func (r *Role) Update(db *gorm.DB, roleId int64, updates map[string]any) error {
 	return db.Model(&Role{}).Where("id = ?", roleId).Updates(updates).Error
 }
 
-// Delete 删除角色（软删除）
+// Delete 删除角色
 func (r *Role) Delete(db *gorm.DB, roleId int64) error {
 	return db.Where("id = ?", roleId).Delete(&Role{}).Error
 }

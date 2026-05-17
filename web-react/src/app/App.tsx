@@ -3,16 +3,18 @@ import { BrowserRouter } from 'react-router-dom';
 import { App as AntApp, ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import { AppRoutes } from '@/router/AppRoutes';
-import { useThemeStore } from '@/store/theme';
+import { useResolvedThemeMode, useThemeStore } from '@/store/theme';
 import { getAntdTheme } from '@/theme/themeConfig';
 
 export function App() {
-  const mode = useThemeStore((state) => state.mode);
-  const themeConfig = useMemo(() => getAntdTheme(mode), [mode]);
+  const themeMode = useThemeStore((state) => state.mode);
+  const resolvedThemeMode = useResolvedThemeMode(themeMode);
+  const themeConfig = useMemo(() => getAntdTheme(resolvedThemeMode), [resolvedThemeMode]);
 
   useEffect(() => {
-    document.documentElement.dataset.theme = mode;
-  }, [mode]);
+    document.documentElement.dataset.theme = resolvedThemeMode;
+    document.documentElement.dataset.themePreference = themeMode;
+  }, [resolvedThemeMode, themeMode]);
 
   return (
     <ConfigProvider locale={zhCN} theme={themeConfig}>

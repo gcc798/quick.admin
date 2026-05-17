@@ -10,15 +10,27 @@ import (
 )
 
 const (
-	CodeOK              = 200
-	CodeBadRequest      = 400
-	CodeUnauthorized    = 401
-	CodeForbidden       = 403
-	CodeNotFound        = 404
-	CodeTimeout         = 408
+	// CodeOK 定义业务常量。
+	CodeOK = 200
+	// CodeBadRequest 定义业务常量。
+	CodeBadRequest = 400
+	// CodeUnauthorized 定义业务常量。
+	CodeUnauthorized = 401
+	// CodeForbidden 定义业务常量。
+	CodeForbidden = 403
+	// CodeNotFound 定义业务常量。
+	CodeNotFound = 404
+	// CodeTimeout 定义业务常量。
+	CodeTimeout = 408
+	// CodeTooManyRequests 定义业务常量。
 	CodeTooManyRequests = 429
-	CodeServerError     = 500
-	CodeInvalidParam    = 400
+	// CodeServerError 定义业务常量。
+	CodeServerError = 500
+	// CodeInvalidParam 定义业务常量。
+	CodeInvalidParam = 400
+
+	defaultSuccessMsg = "操作成功"
+	defaultFailMsg    = "操作失败"
 )
 
 // Response 统一响应结构
@@ -26,37 +38,52 @@ const (
 //	@Description	API 统一响应格式
 type Response struct {
 	Code int         `json:"code" example:"200"`        // 业务状态码
-	Msg  string      `json:"msg" example:"success"`     // 响应消息
+	Msg  string      `json:"msg" example:"操作成功"`        // 响应消息
 	Data interface{} `json:"data" swaggertype:"object"` // 响应数据
 }
 
+// Success 执行业务逻辑。
 func Success(c *gin.Context, data interface{}) {
-	c.JSON(200, Response{Code: CodeOK, Msg: "success", Data: data})
+	c.JSON(200, Response{Code: CodeOK, Msg: defaultSuccessMsg, Data: data})
 }
 
+// SuccessWithMsg 执行业务逻辑。
 func SuccessWithMsg(c *gin.Context, msg string, data interface{}) {
 	c.JSON(200, Response{Code: CodeOK, Msg: msg, Data: data})
 }
 
-func Fail(c *gin.Context, msg string)        { c.JSON(200, Response{Code: CodeServerError, Msg: msg}) }
+// Fail 执行业务逻辑。
+func Fail(c *gin.Context, msg string) {
+	if msg == "" {
+		msg = defaultFailMsg
+	}
+	c.JSON(200, Response{Code: CodeServerError, Msg: msg})
+}
+
+// FailWithMsg 执行业务逻辑。
 func FailWithMsg(c *gin.Context, msg string) { Fail(c, msg) }
 
+// BadRequest 执行业务逻辑。
 func BadRequest(c *gin.Context, msg string) {
 	c.JSON(200, Response{Code: CodeBadRequest, Msg: msg})
 }
 
+// Unauthorized 执行业务逻辑。
 func Unauthorized(c *gin.Context, msg string) {
 	c.JSON(200, Response{Code: CodeUnauthorized, Msg: msg})
 }
 
+// Forbidden 执行业务逻辑。
 func Forbidden(c *gin.Context, msg string) {
 	c.JSON(200, Response{Code: CodeForbidden, Msg: msg})
 }
 
+// NotFound 执行业务逻辑。
 func NotFound(c *gin.Context, msg string) {
 	c.JSON(200, Response{Code: CodeNotFound, Msg: msg})
 }
 
+// InternalServerError 执行业务逻辑。
 func InternalServerError(c *gin.Context, msg string) {
 	c.JSON(200, Response{Code: CodeServerError, Msg: msg})
 }
@@ -159,10 +186,12 @@ func Error(c *gin.Context, err error) {
 	})
 }
 
+// SuccessCode 执行业务逻辑。
 func SuccessCode(c *gin.Context, code int, data interface{}) {
-	c.JSON(200, Response{Code: code, Msg: "success", Data: data})
+	c.JSON(200, Response{Code: code, Msg: defaultSuccessMsg, Data: data})
 }
 
+// FailCode 执行业务逻辑。
 func FailCode(c *gin.Context, code int, msg string) { c.JSON(200, Response{Code: code, Msg: msg}) }
 
 // ValidationFieldError 单个字段验证错误

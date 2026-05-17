@@ -6,12 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// registerCaptchaRoutes 注册验证码相关路由
+// 注册验证码相关路由。
 func registerCaptchaRoutes(r *gin.Engine, ctx *RouterContext) {
 	captchaService := service.NewCaptchaService(ctx.Container.GetCaptchaManager())
-	captchaController := controller.NewCaptchaController(captchaService)
+	captchaController := controller.NewCaptchaController(captchaService, ctx.Container.GetSMS())
 
 	// 公开路由（无需认证）
+	r.GET("/resource/sms/code", captchaController.ResourceSMSCode)
+
 	captcha := r.Group("/captcha")
 	{
 		captcha.GET("/image", captchaController.GenerateImageCaptcha)    // 生成图形验证码

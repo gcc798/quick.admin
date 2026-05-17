@@ -1,15 +1,18 @@
 import { useEffect, useMemo, useState } from 'react';
 import { App, Form } from 'antd';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { MenuRecord } from '@/types/menu';
+import type { ApiPermissionRecord } from '@/types/system';
+import { apiPermissionApi } from '@/api/apiPermission';
 import { menuApi } from '@/api/menu';
 import { BasicForm } from '@/components/common/BasicForm';
 import { BasicModal } from '@/components/common/BasicModal';
 
 interface MenuModalProps {
   open: boolean;
-  menuId?: number;
-  parentId?: number;
+  menuId?: SnowflakeId;
+  parentId?: SnowflakeId;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -34,6 +37,7 @@ export function MenuModal({
   const { message } = App.useApp();
   const [loading, setLoading] = useState(false);
   const [menuOptions, setMenuOptions] = useState<Record<string, unknown>[]>([]);
+  const [apiPermissions, setApiPermissions] = useState<ApiPermissionRecord[]>([]);
 
   const schemas = useMemo<FormSchema[]>(
     () => [
@@ -99,8 +103,20 @@ export function MenuModal({
       {
         name: 'perms',
         label: '权限标识',
-        component: 'Input',
+        component: 'Select',
         hidden: (values) => values.menuType === 0,
+        props: {
+          allowClear: true,
+          showSearch: true,
+          optionFilterProp: 'label',
+          placeholder: '请选择 API 权限标识',
+          options: apiPermissions
+            .filter((item) => item.status === 0)
+            .map((item) => ({
+              label: `${item.code} - ${item.name}`,
+              value: item.code,
+            })),
+        },
       },
       {
         name: 'query',
@@ -166,7 +182,7 @@ export function MenuModal({
         props: { rows: 3 },
       },
     ],
-    [menuOptions, parentId],
+    [apiPermissions, menuOptions, parentId],
   );
 
   useEffect(() => {
@@ -176,8 +192,12 @@ export function MenuModal({
     }
 
     void (async () => {
-      const tree = await menuApi.getMenuTree();
+      const [tree, permissions] = await Promise.all([
+        menuApi.getMenuTree(),
+        apiPermissionApi.list(),
+      ]);
       setMenuOptions(toTreeSelect(tree));
+      setApiPermissions(permissions);
     })();
 
     if (!menuId) {
@@ -235,6 +255,7 @@ export function MenuModal({
         form={form}
         schemas={schemas}
         layout="vertical"
+        variant="modal"
         showActionButtons={false}
       />
     </BasicModal>

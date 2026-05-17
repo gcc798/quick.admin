@@ -7,8 +7,8 @@ database:
   maxOpenConns: 100
   maxIdleConns: 10
   connMaxLifetimeMinutes: 60
+  slowThreshold: 500
   autoMigrate: false
-  enableSoftDelete: false
 
 redis:
   addr: "127.0.0.1:6379"
@@ -60,7 +60,6 @@ mqtt:
 rabbitmq:
   enabled: false
   url: ""
-  exchange: "NTZ.topic"
 
 sms:
   enabled: false
@@ -84,3 +83,8 @@ scheduler:
 
 websocket:
   enabled: true
+  timeoutEnabled: true
+  readTimeoutSeconds: 60
+  writeTimeoutSeconds: 10
+  heartbeatEnabled: true
+  maxReadTimeouts: 3

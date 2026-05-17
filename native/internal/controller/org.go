@@ -29,6 +29,7 @@ type orgController struct {
 	orgService service.OrgService
 }
 
+// NewOrgController 创建组件实例。
 func NewOrgController(c container.Container) OrgController {
 	return &orgController{
 		ctr:        c,
@@ -119,7 +120,7 @@ func (h *orgController) Update(c *gin.Context) {
 // Delete 删除组织
 //
 //	@Summary		删除组织
-//	@Description	删除指定组织（软删除），需要管理员权限
+//	@Description	删除指定组织，需要管理员权限
 //	@Tags			组织管理
 //	@Accept			json
 //	@Produce		json
@@ -151,7 +152,7 @@ func (h *orgController) Delete(c *gin.Context) {
 // BatchDelete 批量删除组织
 //
 //	@Summary		批量删除组织
-//	@Description	批量删除多个组织（软删除），需要管理员权限
+//	@Description	批量删除多个组织，需要管理员权限
 //	@Tags			组织管理
 //	@Accept			json
 //	@Produce		json

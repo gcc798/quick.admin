@@ -1,6 +1,7 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
 import JSONbig from 'json-bigint';
 import { message } from 'antd';
+import { DEFAULT_CLIENT_ID } from '@/constants/auth';
 import type { CommonResp } from '@/types/api';
 import { useAuthStore } from '@/store/auth';
 
@@ -42,6 +43,8 @@ const service: AxiosInstance = axios.create({
 
 service.interceptors.request.use((config) => {
   const { accessToken } = useAuthStore.getState();
+
+  config.headers.clientId = DEFAULT_CLIENT_ID;
 
   // 所有业务请求统一在这里补 Authorization，避免页面层重复处理登录态。
   if (accessToken) {
@@ -113,6 +116,8 @@ service.interceptors.response.use(
         return Promise.reject(error);
       }
     }
+
+    message.error(payload.msg || '请求失败');
 
     const error = new Error(payload.msg || '请求失败') as Error & { code?: number };
     error.code = payload.code;

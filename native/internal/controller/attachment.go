@@ -14,6 +14,7 @@ import (
 	"go.uber.org/zap"
 )
 
+// AttachmentController 定义业务数据结构。
 type AttachmentController interface {
 	UploadFile(ctx *gin.Context)                // 上传文件
 	BindAttachmentToBusiness(ctx *gin.Context)  // 绑定附件到业务
@@ -30,6 +31,7 @@ type attachmentController struct {
 	logger            logger.Logger
 }
 
+// NewAttachmentController 创建组件实例。
 func NewAttachmentController(c container.Container) AttachmentController {
 	storageEnvService := service.NewStorageEnvService(c.GetDB(), c.GetLogger())
 	return &attachmentController{

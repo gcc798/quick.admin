@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { authApi } from '@/api/auth';
+import { DEFAULT_CLIENT_ID } from '@/constants/auth';
 import type { AuthLoginData, LoginReq, UserInfo } from '@/types/api';
 import { usePermissionStore } from './permission';
 
@@ -35,7 +36,7 @@ function normalizeUserInfo(raw: unknown): UserInfo {
   const source = (raw ?? {}) as Record<string, unknown>;
 
   return {
-    userId: Number(source.userId ?? source.user_id ?? 0),
+    userId: readNumberOrString(source.userId ?? source.user_id),
     username: readString(source.username ?? source.userName),
     nickname: readString(source.nickname ?? source.nickName),
     phonenumber: readOptionalString(source.phonenumber ?? source.phoneNumber),
@@ -107,8 +108,7 @@ export const useAuthStore = create<AuthState>()(
         const { refreshToken } = get();
         const rawData = await authApi.refreshToken({
           refreshToken,
-          clientKey: import.meta.env.VITE_CLIENT_KEY,
-          clientSecret: import.meta.env.VITE_CLIENT_SECRET,
+          clientId: DEFAULT_CLIENT_ID,
         });
         const data = normalizeAuthLoginData(rawData);
 

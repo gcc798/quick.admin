@@ -1,7 +1,9 @@
+import type { SnowflakeId } from './api';
+
 export interface MenuRecord {
-  id: number;
+  id: SnowflakeId;
   menuName: string;
-  parentId: number;
+  parentId: SnowflakeId;
   sort?: number;
   path: string;
   component?: string;

@@ -1,7 +1,7 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { PushpinFilled, PushpinOutlined } from '@ant-design/icons';
-import { Button, Card, Form, Table } from 'antd';
+import { PushpinFilled, PushpinOutlined, ReloadOutlined } from '@ant-design/icons';
+import { Button, Card, Form, Space, Table, Tooltip } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import { useLocation } from 'react-router-dom';
 import type { FormSchema } from '@/types/form';
@@ -90,6 +90,7 @@ function InnerBasicTable<T extends object>(
       });
       setDataSource(result.records ?? []);
       setTotal(result.total ?? 0);
+      setSelectedRowKeys([]);
     } finally {
       setLoading(false);
     }
@@ -154,26 +155,46 @@ function InnerBasicTable<T extends object>(
         </div>
       ) : null}
 
-      <Card variant="borderless">
-        {toolbar || supportsFixedColumnToggle ? (
-          <div className="page-toolbar">
-            <div className="page-toolbar-main">{toolbar}</div>
+      <Card className="page-card data-table-card" variant="borderless">
+        <div className="page-toolbar">
+          <div className="page-toolbar-main">{toolbar}</div>
+          <Space className="page-toolbar-tools" size={8}>
+            <Button
+              className="table-utility-btn"
+              icon={<ReloadOutlined />}
+              loading={loading}
+              onClick={() => void loadData()}
+            >
+              刷新
+            </Button>
             {supportsFixedColumnToggle ? (
-              <Button
-                className="table-fixed-toggle-btn"
-                icon={fixedColumnsEnabled ? <PushpinFilled /> : <PushpinOutlined />}
-                onClick={() => {
-                  const nextValue = !fixedColumnsEnabled;
-                  setFixedColumnsEnabled(nextValue);
+              <Tooltip title={fixedColumnsEnabled ? '取消固定操作列' : '固定操作列'}>
+                <Button
+                  aria-label={fixedColumnsEnabled ? '取消固定操作列' : '固定操作列'}
+                  className="table-fixed-toggle-btn table-toolbar-icon-btn"
+                  icon={fixedColumnsEnabled ? <PushpinFilled /> : <PushpinOutlined />}
+                  onClick={() => {
+                    const nextValue = !fixedColumnsEnabled;
+                    setFixedColumnsEnabled(nextValue);
 
-                  if (typeof window !== 'undefined') {
-                    window.localStorage.setItem(fixedColumnStorageKey, nextValue ? '1' : '0');
-                  }
-                }}
-              >
-                {fixedColumnsEnabled ? '取消固定操作列' : '固定操作列'}
-              </Button>
+                    if (typeof window !== 'undefined') {
+                      window.localStorage.setItem(fixedColumnStorageKey, nextValue ? '1' : '0');
+                    }
+                  }}
+                />
+              </Tooltip>
             ) : null}
+          </Space>
+        </div>
+
+        {selectable && selectedRowKeys.length > 0 ? (
+          <div className="table-selection-bar">
+            <span>
+              已选择 <strong>{selectedRowKeys.length}</strong> 项
+            </span>
+            <Button size="small" type="link" onClick={() => setSelectedRowKeys([])}>
+              清空选择
+            </Button>
           </div>
         ) : null}
 

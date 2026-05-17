@@ -13,6 +13,7 @@ import (
 	"go.uber.org/zap"
 )
 
+// StorageEnvController 定义业务数据结构。
 type StorageEnvController interface {
 	CreateStorageEnv(ctx *gin.Context)         // 创建存储环境
 	UpdateStorageEnv(ctx *gin.Context)         // 更新存储环境
@@ -29,6 +30,7 @@ type storageEnvController struct {
 	logger            logger.Logger
 }
 
+// NewStorageEnvController 创建组件实例。
 func NewStorageEnvController(c container.Container) StorageEnvController {
 	return &storageEnvController{
 		storageEnvService: service.NewStorageEnvService(c.GetDB(), c.GetLogger()),

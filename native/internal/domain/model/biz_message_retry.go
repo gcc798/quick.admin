@@ -8,57 +8,63 @@ import (
 
 // 状态常量
 const (
-	RetryStatusPending   = 1 // PENDING - 待处理
-	RetryStatusSuccess   = 2 // SUCCESS - 成功
-	RetryStatusFailed    = 3 // FAILED - 失败
+	// RetryStatusPending 定义业务常量。
+	RetryStatusPending = 1 // PENDING - 待处理
+	// RetryStatusSuccess 定义业务常量。
+	RetryStatusSuccess = 2 // SUCCESS - 成功
+	// RetryStatusFailed 定义业务常量。
+	RetryStatusFailed = 3 // FAILED - 失败
+	// RetryStatusAbandoned 定义业务常量。
 	RetryStatusAbandoned = 4 // ABANDONED - 已废弃
 )
 
 // 结果常量
 const (
+	// RetryResultSuccess 定义业务常量。
 	RetryResultSuccess = 1 // SUCCESS - 成功
+	// RetryResultTimeout 定义业务常量。
 	RetryResultTimeout = 2 // TIMEOUT - 超时
 )
 
 // BuMessageRetry 消息重试主表
 type BuMessageRetry struct {
-	Id                   int64            `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`                      // 重试记录ID
-	MessageId            string           `gorm:"column:message_id;type:varchar(100);not null;index" json:"messageId"` // 消息ID（业务记录ID）
-	DeviceId             int64            `gorm:"column:device_id;not null" json:"deviceId"`                           // 设备ID
-	DeviceMac            string           `gorm:"column:device_mac;type:varchar(50);not null" json:"deviceMac"`        // 设备MAC地址
-	DeviceSnNum          string           `gorm:"column:device_sn_num;type:varchar(50)" json:"deviceSnNum"`            // 设备序列号
-	MessageType          int              `gorm:"column:message_type;not null" json:"messageType"`                     // 消息类型（对应OptCodeEnum）
-	MessageContent       string           `gorm:"column:message_content;type:text" json:"messageContent"`              // MQTT消息内容
-	MaxRetryCount        int              `gorm:"column:max_retry_count;default:3" json:"maxRetryCount"`               // 最大重试次数
-	CurrentRetryCount    int              `gorm:"column:current_retry_count;default:0" json:"currentRetryCount"`       // 当前已重试次数
-	Status               int              `gorm:"column:status;default:1" json:"status"`                               // 状态：1=PENDING, 2=SUCCESS, 3=FAILED, 4=ABANDONED
-	SuccessRetrySequence *int             `gorm:"column:success_retry_sequence" json:"successRetrySequence"`           // 第几次成功（0=首次成功，1=第1次重试成功）
-	SuccessTime          *utils.LocalTime `gorm:"column:success_time" json:"successTime"`                              // 最终成功时间
-	AbandonReason        string           `gorm:"column:abandon_reason;type:varchar(200)" json:"abandonReason"`        // 废弃原因（如：SERVER_RESTART）
-	CreateTime           utils.LocalTime  `gorm:"column:create_time;autoCreateTime" json:"createTime"`                 // 创建时间
-	UpdateTime           utils.LocalTime  `gorm:"column:update_time;autoUpdateTime" json:"updateTime"`                 // 更新时间
-	DeletedAt            gorm.DeletedAt   `gorm:"column:deleted_at;index" json:"-"`                                    // 删除时间
+	Id                   int64            `gorm:"column:id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"id"` // 重试记录ID
+	MessageId            string           `gorm:"column:message_id;type:varchar(100);not null;index" json:"messageId"`            // 消息ID（业务记录ID）
+	DeviceId             int64            `gorm:"column:device_id;type:bigint;not null;index" json:"deviceId"`                    // 设备ID
+	DeviceMac            string           `gorm:"column:device_mac;type:varchar(50);not null" json:"deviceMac"`                   // 设备MAC地址
+	DeviceSnNum          string           `gorm:"column:device_sn_num;type:varchar(50)" json:"deviceSnNum"`                       // 设备序列号
+	MessageType          int              `gorm:"column:message_type;type:integer;not null" json:"messageType"`                   // 消息类型（对应OptCodeEnum）
+	MessageContent       string           `gorm:"column:message_content;type:text" json:"messageContent"`                         // MQTT消息内容
+	MaxRetryCount        int              `gorm:"column:max_retry_count;type:integer;default:3" json:"maxRetryCount"`             // 最大重试次数
+	CurrentRetryCount    int              `gorm:"column:current_retry_count;type:integer;default:0" json:"currentRetryCount"`     // 当前已重试次数
+	Status               int              `gorm:"column:status;type:smallint;default:1" json:"status"`                            // 状态：1=PENDING, 2=SUCCESS, 3=FAILED, 4=ABANDONED
+	SuccessRetrySequence *int             `gorm:"column:success_retry_sequence;type:integer" json:"successRetrySequence"`         // 第几次成功（0=首次成功，1=第1次重试成功）
+	SuccessTime          *utils.LocalTime `gorm:"column:success_time;type:timestamptz" json:"successTime"`                        // 最终成功时间
+	AbandonReason        string           `gorm:"column:abandon_reason;type:varchar(200)" json:"abandonReason"`                   // 废弃原因（如：SERVER_RESTART）
+	CreateTime           utils.LocalTime  `gorm:"column:create_time;type:timestamptz;autoCreateTime" json:"createTime"`           // 创建时间
+	UpdateTime           utils.LocalTime  `gorm:"column:update_time;type:timestamptz;autoUpdateTime" json:"updateTime"`           // 更新时间
 }
 
+// TableName 返回数据库表名。
 func (*BuMessageRetry) TableName() string {
 	return "biz_message_retry"
 }
 
 // BuMessageRetryLog 消息重试明细表
 type BuMessageRetryLog struct {
-	LogId           int64            `gorm:"column:log_id;primaryKey;autoIncrement" json:"logId"`                 // 日志ID
-	RetryId         int64            `gorm:"column:retry_id;not null;index" json:"retryId"`                       // 关联主表外键
-	MessageId       string           `gorm:"column:message_id;type:varchar(100);not null;index" json:"messageId"` // 消息ID（冗余字段，方便直接查询）
-	RetrySequence   int              `gorm:"column:retry_sequence;not null" json:"retrySequence"`                 // 重试序号（0=首次，1=第1次重试...）
-	SendTime        utils.LocalTime  `gorm:"column:send_time;not null" json:"sendTime"`                           // 发送时间
-	ResponseTime    *utils.LocalTime `gorm:"column:response_time" json:"responseTime"`                            // 响应时间（成功时记录）
-	Result          int              `gorm:"column:result;not null" json:"result"`                                // 结果：1=SUCCESS, 2=TIMEOUT
-	ResponseContent string           `gorm:"column:response_content;type:text" json:"responseContent"`            // 响应内容（成功时记录）
-	CreateTime      utils.LocalTime  `gorm:"column:create_time;autoCreateTime" json:"createTime"`                 // 创建时间
-	UpdateTime      utils.LocalTime  `gorm:"column:update_time;autoUpdateTime" json:"updateTime"`                 // 更新时间
-	DeletedAt       gorm.DeletedAt   `gorm:"column:deleted_at;index" json:"-"`                                    // 删除时间
+	LogId           int64            `gorm:"column:log_id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"logId"` // 日志ID
+	RetryId         int64            `gorm:"column:retry_id;type:bigint;not null;index" json:"retryId"`                             // 关联主表外键
+	MessageId       string           `gorm:"column:message_id;type:varchar(100);not null;index" json:"messageId"`                   // 消息ID（冗余字段，方便直接查询）
+	RetrySequence   int              `gorm:"column:retry_sequence;type:integer;not null" json:"retrySequence"`                      // 重试序号（0=首次，1=第1次重试...）
+	SendTime        utils.LocalTime  `gorm:"column:send_time;type:timestamptz;not null" json:"sendTime"`                            // 发送时间
+	ResponseTime    *utils.LocalTime `gorm:"column:response_time;type:timestamptz" json:"responseTime"`                             // 响应时间（成功时记录）
+	Result          int              `gorm:"column:result;type:smallint;not null" json:"result"`                                    // 结果：1=SUCCESS, 2=TIMEOUT
+	ResponseContent string           `gorm:"column:response_content;type:text" json:"responseContent"`                              // 响应内容（成功时记录）
+	CreateTime      utils.LocalTime  `gorm:"column:create_time;type:timestamptz;autoCreateTime" json:"createTime"`                  // 创建时间
+	UpdateTime      utils.LocalTime  `gorm:"column:update_time;type:timestamptz;autoUpdateTime" json:"updateTime"`                  // 更新时间
 }
 
+// TableName 返回数据库表名。
 func (*BuMessageRetryLog) TableName() string {
 	return "biz_message_retry_log"
 }

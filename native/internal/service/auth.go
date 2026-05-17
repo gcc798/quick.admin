@@ -7,11 +7,12 @@ import (
 	"time"
 
 	"github.com/force-c/nai-tizi/internal/domain/model"
-	"github.com/force-c/nai-tizi/internal/infrastructure/jwt"
+	"github.com/force-c/nai-tizi/pkg/jwt"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
+// AuthService 定义业务数据结构。
 type AuthService interface {
 	PasswordLogin(req *PasswordLoginReq) (*LoginResp, error)
 	XcxLogin(req *XcxLoginReq) (*LoginResp, error)
@@ -26,6 +27,7 @@ type authService struct {
 	wxSecret string
 }
 
+// NewAuthService 创建组件实例。
 func NewAuthService(db *gorm.DB, jwtService *jwt.Jwt, wxAppID, wxSecret string) AuthService {
 	return &authService{
 		db:       db,
@@ -35,16 +37,20 @@ func NewAuthService(db *gorm.DB, jwtService *jwt.Jwt, wxAppID, wxSecret string) 
 	}
 }
 
+// PasswordLoginReq 定义业务数据结构。
 type PasswordLoginReq struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
+
+// LoginResp 定义业务数据结构。
 type LoginResp struct {
 	AccessToken string `json:"accessToken"`
 	ExpireIn    int64  `json:"expireIn"`
 	UserId      int64  `json:"userId"`
 }
 
+// PasswordLogin 执行业务逻辑。
 func (s *authService) PasswordLogin(req *PasswordLoginReq) (*LoginResp, error) {
 	u, err := (&model.User{}).FindByUsername(s.db, req.Username)
 	if err != nil {
@@ -60,12 +66,14 @@ func (s *authService) PasswordLogin(req *PasswordLoginReq) (*LoginResp, error) {
 	return &LoginResp{AccessToken: token, ExpireIn: expireIn, UserId: u.ID}, nil
 }
 
+// XcxLoginReq 定义业务数据结构。
 type XcxLoginReq struct {
 	Code     string `json:"code"`
 	NickName string `json:"nickName"`
 	Phone    string `json:"phone"`
 }
 
+// XcxLogin 执行业务逻辑。
 func (s *authService) XcxLogin(req *XcxLoginReq) (*LoginResp, error) {
 	if s.wxAppID == "" || s.wxSecret == "" {
 		return nil, errors.New("wechat_config_missing")
@@ -105,12 +113,15 @@ func (s *authService) XcxLogin(req *XcxLoginReq) (*LoginResp, error) {
 	return &LoginResp{AccessToken: token, ExpireIn: expireIn, UserId: u.ID}, nil
 }
 
+// UpdateLogin 执行业务逻辑。
 func (s *authService) UpdateLogin(userId int64, ip string) error {
 	return (&model.User{}).UpdateLoginInfo(s.db, userId, ip, time.Now().Unix())
 }
+
+// GetProfile 获取业务数据。
 func (s *authService) GetProfile(userId int64) (*model.User, error) {
 	var u model.User
-	tx := s.db.Where("user_id = ?", userId).Limit(1).Find(&u)
+	tx := s.db.Where("id = ?", userId).Limit(1).Find(&u)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}

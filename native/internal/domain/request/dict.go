@@ -18,7 +18,7 @@ type CreateDictRequest struct {
 
 // UpdateDictRequest 更新字典请求
 type UpdateDictRequest struct {
-	ID        int64  `json:"id"`                                            // 字典ID（由路径参数注入）
+	ID        int64  `json:"id"`                                          // 字典ID（由路径参数注入）
 	ParentId  int64  `json:"parentId"`                                    // 父字典ID
 	DictType  string `json:"dictType" binding:"required" msg:"字典类型不能为空"`  // 字典类型
 	DictLabel string `json:"dictLabel" binding:"required" msg:"字典标签不能为空"` // 字典标签

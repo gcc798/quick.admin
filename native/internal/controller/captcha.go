@@ -1,9 +1,11 @@
 package controller
 
 import (
+	"context"
+
 	"github.com/force-c/nai-tizi/internal/domain/response"
-	"github.com/force-c/nai-tizi/internal/infrastructure/captcha"
 	"github.com/force-c/nai-tizi/internal/service"
+	"github.com/force-c/nai-tizi/pkg/captcha"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,12 +13,18 @@ import (
 // CaptchaController 验证码控制器
 type CaptchaController struct {
 	captchaService service.CaptchaService
+	smsSender      interface {
+		SendVerificationCode(ctx context.Context, phonenumber string) (string, error)
+	}
 }
 
 // NewCaptchaController 创建验证码控制器
-func NewCaptchaController(captchaService service.CaptchaService) *CaptchaController {
+func NewCaptchaController(captchaService service.CaptchaService, smsSender interface {
+	SendVerificationCode(ctx context.Context, phonenumber string) (string, error)
+}) *CaptchaController {
 	return &CaptchaController{
 		captchaService: captchaService,
+		smsSender:      smsSender,
 	}
 }
 
@@ -62,6 +70,27 @@ func (c *CaptchaController) SendSMSCaptcha(ctx *gin.Context) {
 		return
 	}
 	response.Success(ctx, data)
+}
+
+// ResourceSMSCode 执行业务逻辑。
+func (c *CaptchaController) ResourceSMSCode(ctx *gin.Context) {
+	phonenumber := ctx.Query("phonenumber")
+	if phonenumber == "" {
+		phonenumber = ctx.Query("phone")
+	}
+	if phonenumber == "" {
+		response.BadRequest(ctx, "手机号不能为空")
+		return
+	}
+	if c.smsSender == nil {
+		response.Fail(ctx, "短信服务未配置")
+		return
+	}
+	if _, err := c.smsSender.SendVerificationCode(ctx.Request.Context(), phonenumber); err != nil {
+		response.Fail(ctx, err.Error())
+		return
+	}
+	response.Success(ctx, nil)
 }
 
 // SendEmailCaptchaRequest 发送邮箱验证码请求

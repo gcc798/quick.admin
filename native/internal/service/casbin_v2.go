@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/casbin/casbin/v2"
+	"github.com/force-c/nai-tizi/internal/domain/model"
 	"github.com/force-c/nai-tizi/internal/logger"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
@@ -32,8 +33,14 @@ type CasbinServiceV2 interface {
 	// action: 操作类型（支持通配符，例如: "write", "*"）
 	AddPermissionForRole(ctx context.Context, roleKey string, resource, action string) error
 
+	// AddPermissionsForRole 批量为角色添加权限
+	AddPermissionsForRole(ctx context.Context, roleKey string, permissions []model.ApiPermission) error
+
 	// DeletePermissionForRole 删除角色的权限
 	DeletePermissionForRole(ctx context.Context, roleKey string, resource, action string) error
+
+	// DeletePermissionsForRole 批量删除角色的权限
+	DeletePermissionsForRole(ctx context.Context, roleKey string, permissions []model.ApiPermission) error
 
 	// GetPermissionsForRole 获取角色的所有权限
 	GetPermissionsForRole(ctx context.Context, roleKey string) ([][]string, error)
@@ -166,6 +173,25 @@ func (s *casbinServiceV2) AddPermissionForRole(ctx context.Context, roleKey stri
 	return nil
 }
 
+// AddPermissionsForRole 批量为角色添加权限
+func (s *casbinServiceV2) AddPermissionsForRole(ctx context.Context, roleKey string, permissions []model.ApiPermission) error {
+	policies := buildRolePermissionPolicies(roleKey, permissions)
+	if len(policies) == 0 {
+		return nil
+	}
+
+	_, err := s.enforcer.AddPoliciesEx(policies)
+	if err != nil {
+		return fmt.Errorf("批量添加角色权限失败: %w", err)
+	}
+
+	s.logger.Info("批量添加角色权限",
+		zap.String("roleKey", roleKey),
+		zap.Int("permissionCount", len(policies)))
+
+	return nil
+}
+
 // DeletePermissionForRole 删除角色的权限
 func (s *casbinServiceV2) DeletePermissionForRole(ctx context.Context, roleKey string, resource, action string) error {
 	sub := fmt.Sprintf("role::%s", roleKey)
@@ -174,6 +200,33 @@ func (s *casbinServiceV2) DeletePermissionForRole(ctx context.Context, roleKey s
 	if err != nil {
 		return fmt.Errorf("删除角色权限失败: %w", err)
 	}
+
+	return nil
+}
+
+// DeletePermissionsForRole 批量删除角色的权限
+func (s *casbinServiceV2) DeletePermissionsForRole(ctx context.Context, roleKey string, permissions []model.ApiPermission) error {
+	policies := buildRolePermissionPolicies(roleKey, permissions)
+	if len(policies) == 0 {
+		return nil
+	}
+	existingPolicies, err := s.enforcer.GetPermissionsForUser(fmt.Sprintf("role::%s", roleKey))
+	if err != nil {
+		return fmt.Errorf("查询角色权限失败: %w", err)
+	}
+	policies = filterExistingPolicies(existingPolicies, policies)
+	if len(policies) == 0 {
+		return nil
+	}
+
+	_, err = s.enforcer.RemovePolicies(policies)
+	if err != nil {
+		return fmt.Errorf("批量删除角色权限失败: %w", err)
+	}
+
+	s.logger.Info("批量删除角色权限",
+		zap.String("roleKey", roleKey),
+		zap.Int("permissionCount", len(policies)))
 
 	return nil
 }
@@ -199,4 +252,44 @@ func (s *casbinServiceV2) ReloadPolicy(ctx context.Context) error {
 
 	s.logger.Info("重新加载策略成功")
 	return nil
+}
+
+func buildRolePermissionPolicies(roleKey string, permissions []model.ApiPermission) [][]string {
+	sub := fmt.Sprintf("role::%s", roleKey)
+	policies := make([][]string, 0, len(permissions))
+	seen := make(map[string]struct{}, len(permissions))
+	for _, permission := range permissions {
+		if permission.Code == "" {
+			continue
+		}
+		action := normalizeAction(permission.Code, permission.Action)
+		key := permission.Code + "\x00" + action
+		if _, ok := seen[key]; ok {
+			continue
+		}
+		seen[key] = struct{}{}
+		policies = append(policies, []string{sub, permission.Code, action})
+	}
+	return policies
+}
+
+func filterExistingPolicies(existing, candidates [][]string) [][]string {
+	existingSet := make(map[string]struct{}, len(existing))
+	for _, policy := range existing {
+		if len(policy) < 3 {
+			continue
+		}
+		existingSet[policy[0]+"\x00"+policy[1]+"\x00"+policy[2]] = struct{}{}
+	}
+
+	result := make([][]string, 0, len(candidates))
+	for _, policy := range candidates {
+		if len(policy) < 3 {
+			continue
+		}
+		if _, ok := existingSet[policy[0]+"\x00"+policy[1]+"\x00"+policy[2]]; ok {
+			result = append(result, policy)
+		}
+	}
+	return result
 }

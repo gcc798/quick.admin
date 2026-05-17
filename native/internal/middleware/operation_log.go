@@ -21,7 +21,9 @@ import (
 
 // 操作日志上下文键
 const (
-	OperLogTitleKey        = "oper_log_title"
+	// OperLogTitleKey 定义业务常量。
+	OperLogTitleKey = "oper_log_title"
+	// OperLogBusinessTypeKey 定义业务常量。
 	OperLogBusinessTypeKey = "oper_log_business_type"
 )
 
@@ -431,6 +433,10 @@ func formatOperName(userId, userName string) string {
 
 // shouldSkipLogging 判断是否应该跳过日志记录
 func shouldSkipLogging(path string) bool {
+	if path == "/health/live" {
+		return true
+	}
+
 	// 跳过操作日志相关的接口
 	skipPaths := []string{
 		"/api/v1/operLog",

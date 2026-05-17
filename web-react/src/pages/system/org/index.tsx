@@ -1,15 +1,18 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { ColumnsType } from 'antd/es/table';
-import { App, Button, Card, Form, Input, Popconfirm, Select, Space, Table, Tag } from 'antd';
+import { App, Button, Card, Form, Popconfirm, Space, Table, Tag } from 'antd';
 import { DeleteOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PlusOutlined } from '@ant-design/icons';
+import { BasicForm } from '@/components/common/BasicForm';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
+import type { SnowflakeId } from '@/types/api';
+import type { FormSchema } from '@/types/form';
 import type { OrgRecord } from '@/types/system';
 import { orgApi } from '@/api/org';
 import { OrgModal } from './OrgModal';
 
-function collectKeys(nodes: OrgRecord[]): number[] {
-  const keys: number[] = [];
+function collectKeys(nodes: OrgRecord[]): SnowflakeId[] {
+  const keys: SnowflakeId[] = [];
   const walk = (items: OrgRecord[]) => {
     items.forEach((item) => {
       keys.push(item.id);
@@ -21,6 +24,31 @@ function collectKeys(nodes: OrgRecord[]): number[] {
   walk(nodes);
   return keys;
 }
+
+const searchSchemas: FormSchema[] = [
+  {
+    name: 'orgName',
+    label: '组织名称',
+    component: 'Input',
+  },
+  {
+    name: 'orgCode',
+    label: '组织编码',
+    component: 'Input',
+  },
+  {
+    name: 'status',
+    label: '状态',
+    component: 'Select',
+    props: {
+      allowClear: true,
+      options: [
+        { label: '正常', value: 0 },
+        { label: '停用', value: 1 },
+      ],
+    },
+  },
+];
 
 function filterTree(
   nodes: OrgRecord[],
@@ -65,8 +93,8 @@ export default function OrgPage() {
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
   const [expandAll, setExpandAll] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentOrgId, setCurrentOrgId] = useState<number>();
-  const [parentId, setParentId] = useState<number>();
+  const [currentOrgId, setCurrentOrgId] = useState<SnowflakeId>();
+  const [parentId, setParentId] = useState<SnowflakeId>();
 
   const loadOrgTree = async () => {
     setLoading(true);
@@ -155,13 +183,13 @@ export default function OrgPage() {
     [message],
   );
 
-  const handleSearch = () => {
-    const values = form.getFieldsValue();
+  const handleSearch = (values: Record<string, unknown> = form.getFieldsValue()) => {
+    const status = typeof values.status === 'number' ? values.status : undefined;
     const filtered = filterTree(
       fullTree,
-      values.orgName ?? '',
-      values.orgCode ?? '',
-      values.status,
+      typeof values.orgName === 'string' ? values.orgName : '',
+      typeof values.orgCode === 'string' ? values.orgCode : '',
+      status,
     );
     setTableData(filtered);
     setExpandedRowKeys(expandAll ? collectKeys(filtered) : []);
@@ -175,35 +203,18 @@ export default function OrgPage() {
 
   return (
     <>
-      <Card className="page-card page-search-card" style={{ marginBottom: 16 }} variant="borderless">
-        <Form form={form} layout="inline">
-          <Form.Item label="组织名称" name="orgName">
-            <Input allowClear placeholder="请输入组织名称" style={{ width: 180 }} />
-          </Form.Item>
-          <Form.Item label="组织编码" name="orgCode">
-            <Input allowClear placeholder="请输入组织编码" style={{ width: 180 }} />
-          </Form.Item>
-          <Form.Item label="状态" name="status">
-            <Select
-              allowClear
-              placeholder="请选择状态"
-              style={{ width: 128 }}
-              options={[
-                { label: '正常', value: 0 },
-                { label: '停用', value: 1 },
-              ]}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Space>
-              <Button type="primary" onClick={handleSearch}>
-                查询
-              </Button>
-              <Button onClick={handleReset}>重置</Button>
-            </Space>
-          </Form.Item>
-        </Form>
-      </Card>
+      <div className="page-search">
+        <BasicForm
+          form={form}
+          schemas={searchSchemas}
+          layout="vertical"
+          onReset={handleReset}
+          onSubmit={handleSearch}
+          resetText="重置"
+          submitText="查询"
+          variant="search"
+        />
+      </div>
 
       <Card className="page-card" variant="borderless">
         <div className="page-toolbar">

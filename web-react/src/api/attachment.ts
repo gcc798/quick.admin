@@ -1,14 +1,14 @@
 import { request } from '@/utils/request';
-import type { PageData, PageQuery } from '@/types/api';
+import type { PageData, PageQuery, SnowflakeId } from '@/types/api';
 import type { AttachmentRecord } from '@/types/system';
 
 export const attachmentApi = {
   page: (
     data: PageQuery & { fileName?: string; fileType?: string; businessType?: string },
   ) => request.post<PageData<AttachmentRecord>>('/api/v1/attachment/page', data),
-  detail: (attachmentId: number) =>
+  detail: (attachmentId: SnowflakeId) =>
     request.get<AttachmentRecord>(`/api/v1/attachment/${attachmentId}`),
-  getUrl: (attachmentId: number, expires?: number) =>
+  getUrl: (attachmentId: SnowflakeId, expires?: number) =>
     request.get<{ url: string; expires?: number }>(`/api/v1/attachment/${attachmentId}/url`, {
       params: { expires },
     }),
@@ -26,11 +26,11 @@ export const attachmentApi = {
     request.get<AttachmentRecord[]>('/api/v1/attachment/business', {
       params: { businessType, businessId },
     }),
-  delete: (attachmentId: number) =>
+  delete: (attachmentId: SnowflakeId) =>
     request.delete<string>(`/api/v1/attachment/${attachmentId}`),
-  batchDelete: (attachmentIds: number[]) =>
+  batchDelete: (attachmentIds: SnowflakeId[]) =>
     Promise.all(attachmentIds.map((attachmentId) => attachmentApi.delete(attachmentId))),
-  download: (attachmentId: number) => {
+  download: (attachmentId: SnowflakeId) => {
     window.open(
       `${import.meta.env.VITE_API_BASE_URL}/api/v1/attachment/${attachmentId}/download`,
       '_blank',

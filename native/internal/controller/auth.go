@@ -23,6 +23,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// AuthController 定义业务数据结构。
 type AuthController interface {
 	Login(c *gin.Context)        // 用户登录
 	Logout(c *gin.Context)       // 用户登出
@@ -41,6 +42,7 @@ type authController struct {
 	}
 }
 
+// NewAuthController 创建组件实例。
 func NewAuthController(c container.Container) AuthController {
 	clientService := service.NewClientService(c.GetDB(), c.GetRedis(), c.GetLogger())
 	tokenManager := service.NewTokenManager(c.GetJWT(), c.GetRedis(), c.GetLogger())
@@ -50,6 +52,8 @@ func NewAuthController(c container.Container) AuthController {
 	strategyFactory.Register(NewPasswordAuthStrategy(c))
 	strategyFactory.Register(NewXcxAuthStrategy(c))
 	strategyFactory.Register(NewEmailAuthStrategy(c))
+	strategyFactory.Register(NewWechatOnlyAuthStrategy(c))
+	strategyFactory.Register(NewSmsAuthStrategy(c))
 
 	return &authController{
 		ctr:                    c,
@@ -81,16 +85,13 @@ func (h *authController) Login(c *gin.Context) {
 		return
 	}
 	ctx := c.Request.Context()
+	req.Normalize()
+	req.LoginIP = c.ClientIP()
 	loginAccount := resolveLoginAccount(&req)
 
-	if req.ClientKey == "" || req.ClientSecret == "" {
-		response.FailCode(c, response.CodeInvalidParam, "缺少客户端认证信息")
-		return
-	}
-
-	client, err := h.clientService.AuthenticateClient(ctx, req.ClientKey, req.ClientSecret, req.GrantType)
+	client, err := h.authenticateClient(ctx, &req)
 	if err != nil {
-		h.recordLoginLog(c, loginAccount, req.ClientKey, 1, err.Error())
+		h.recordLoginLog(c, loginAccount, req.ClientID, 1, err.Error())
 		response.FailCode(c, response.CodeUnauthorized, err.Error())
 		return
 	}
@@ -138,13 +139,7 @@ func (h *authController) Login(c *gin.Context) {
 			return
 		}
 
-		response.Success(c, &LoginResponse{
-			AccessToken:      accessToken,
-			RefreshToken:     refreshToken,
-			ExpiresIn:        accessExpiresIn,
-			RefreshExpiresIn: refreshExpiresIn,
-			UserInfo:         user,
-		})
+		response.Success(c, buildLoginResponse(accessToken, refreshToken, accessExpiresIn, refreshExpiresIn, client, user))
 		return
 	}
 
@@ -176,13 +171,30 @@ func (h *authController) Login(c *gin.Context) {
 		zap.Int64("userId", user.UserId))
 	h.recordLoginLog(c, user.Username, client.ClientId, 0, "登录成功")
 
-	response.Success(c, &LoginResponse{
+	response.Success(c, buildLoginResponse(accessToken, refreshToken, accessExpiresIn, refreshExpiresIn, client, user))
+}
+
+func (h *authController) authenticateClient(ctx context.Context, req *LoginRequest) (*model.AuthClient, error) {
+	return h.clientService.AuthenticateClientID(ctx, req.ClientID, req.GrantType)
+}
+
+func buildLoginResponse(accessToken, refreshToken string, accessExpiresIn, refreshExpiresIn int64, client *model.AuthClient, user *UserInfo) *LoginResponse {
+	resp := &LoginResponse{
 		AccessToken:      accessToken,
 		RefreshToken:     refreshToken,
 		ExpiresIn:        accessExpiresIn,
 		RefreshExpiresIn: refreshExpiresIn,
+		ExpireIn:         accessExpiresIn,
+		RefreshExpireIn:  refreshExpiresIn,
 		UserInfo:         user,
-	})
+	}
+	if client != nil {
+		resp.ClientID = client.ClientId
+	}
+	if user != nil {
+		resp.OpenID = user.OpenID
+	}
+	return resp
 }
 
 // Logout godoc
@@ -246,10 +258,10 @@ func (h *authController) RefreshToken(c *gin.Context) {
 	}
 	ctx := c.Request.Context()
 
-	client, err := h.clientService.AuthenticateClient(ctx, req.ClientKey, req.ClientSecret, "refresh")
+	client, err := h.clientService.AuthenticateClientID(ctx, req.ClientID, "refresh")
 	if err != nil {
 		h.ctr.GetLogger().Error("client authentication failed",
-			zap.String("clientKey", req.ClientKey),
+			zap.String("clientId", req.ClientID),
 			zap.Error(err))
 		response.FailCode(c, response.CodeUnauthorized, err.Error())
 		return
@@ -339,26 +351,37 @@ func resolveLoginAccount(req *LoginRequest) string {
 	return "-"
 }
 
+// LoginRequest 定义业务数据结构。
 type LoginRequest = request.LoginRequest
+
+// LoginResponse 定义业务数据结构。
 type LoginResponse = response.LoginResponse
+
+// UserInfo 定义业务数据结构。
 type UserInfo = response.UserInfo
 
+// IAuthStrategy 定义业务数据结构。
 type IAuthStrategy interface {
 	Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error)
 	GrantType() string
 }
 
+// StrategyFactory 定义业务数据结构。
 type StrategyFactory struct {
 	strategies map[string]IAuthStrategy
 }
 
+// NewStrategyFactory 创建组件实例。
 func NewStrategyFactory() *StrategyFactory {
 	return &StrategyFactory{strategies: make(map[string]IAuthStrategy)}
 }
 
+// Register 执行业务逻辑。
 func (f *StrategyFactory) Register(strategy IAuthStrategy) {
 	f.strategies[strategy.GrantType()] = strategy
 }
+
+// GetStrategy 获取业务数据。
 func (f *StrategyFactory) GetStrategy(grantType string) (IAuthStrategy, error) {
 	s, ok := f.strategies[grantType]
 	if !ok {
@@ -366,6 +389,8 @@ func (f *StrategyFactory) GetStrategy(grantType string) (IAuthStrategy, error) {
 	}
 	return s, nil
 }
+
+// Login 执行业务逻辑。
 func (f *StrategyFactory) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error) {
 	s, err := f.GetStrategy(req.GrantType)
 	if err != nil {
@@ -374,12 +399,16 @@ func (f *StrategyFactory) Login(ctx context.Context, req *LoginRequest) (*LoginR
 	return s.Login(ctx, req)
 }
 
+// CaptchaService 定义业务数据结构。
 type CaptchaService struct{ redis *redis.Client }
 
+// NewCaptchaService 创建组件实例。
 func NewCaptchaService(r *redis.Client) *CaptchaService { return &CaptchaService{redis: r} }
 
+// CaptchaCodeKey 定义业务配置值。
 const CaptchaCodeKey = "global:captcha_codes:"
 
+// ValidateCaptcha 执行业务逻辑。
 func (s *CaptchaService) ValidateCaptcha(ctx context.Context, uuid, code string) error {
 	if uuid == "" || code == "" {
 		return fmt.Errorf("验证码不能为空")
@@ -398,6 +427,8 @@ func (s *CaptchaService) ValidateCaptcha(ctx context.Context, uuid, code string)
 	}
 	return nil
 }
+
+// ValidateSmsCode 执行业务逻辑。
 func (s *CaptchaService) ValidateSmsCode(ctx context.Context, phonenumber, code string) error {
 	if phonenumber == "" || code == "" {
 		return fmt.Errorf("手机号和验证码不能为空")
@@ -405,7 +436,7 @@ func (s *CaptchaService) ValidateSmsCode(ctx context.Context, phonenumber, code 
 	key := CaptchaCodeKey + phonenumber
 	saved, err := s.redis.Get(ctx, key).Result()
 	if err != nil {
-		if err == redis.Nil {
+		if errors.Is(err, redis.Nil) {
 			return fmt.Errorf("验证码已过期")
 		}
 		return fmt.Errorf("验证码验证失败")
@@ -417,6 +448,7 @@ func (s *CaptchaService) ValidateSmsCode(ctx context.Context, phonenumber, code 
 	return nil
 }
 
+// ValidateEmailCode 执行业务逻辑。
 func (s *CaptchaService) ValidateEmailCode(ctx context.Context, email, code string) error {
 	if email == "" || code == "" {
 		return fmt.Errorf("邮箱和验证码不能为空")
@@ -436,6 +468,7 @@ func (s *CaptchaService) ValidateEmailCode(ctx context.Context, email, code stri
 	return nil
 }
 
+// GenerateEmailCode 执行业务逻辑。
 func (s *CaptchaService) GenerateEmailCode(ctx context.Context, email string) (string, error) {
 	if email == "" {
 		return "", fmt.Errorf("邮箱不能为空")
@@ -449,14 +482,20 @@ func (s *CaptchaService) GenerateEmailCode(ctx context.Context, email string) (s
 	return code, nil
 }
 
+// PasswordAuthStrategy 定义业务数据结构。
 type PasswordAuthStrategy struct {
 	ctr container.Container
 }
 
+// NewPasswordAuthStrategy 创建组件实例。
 func NewPasswordAuthStrategy(c container.Container) *PasswordAuthStrategy {
 	return &PasswordAuthStrategy{ctr: c}
 }
+
+// GrantType 执行业务逻辑。
 func (s *PasswordAuthStrategy) GrantType() string { return "password" }
+
+// Login 执行业务逻辑。
 func (s *PasswordAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error) {
 	if req.Username == "" || req.Password == "" {
 		return nil, fmt.Errorf("用户名和密码不能为空")
@@ -495,7 +534,7 @@ func (s *PasswordAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*L
 	s.clearErrorCount(ctx, req.Username)
 
 	var clientModel model.AuthClient
-	client, err := clientModel.FindByClientKey(s.ctr.GetDB(), req.ClientKey)
+	client, err := clientModel.FindByClientId(s.ctr.GetDB(), req.ClientID)
 	if err != nil {
 		s.ctr.GetLogger().Error("failed to query client", zap.Error(err))
 		return nil, fmt.Errorf("客户端配置查询失败")
@@ -516,7 +555,7 @@ func (s *PasswordAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*L
 		activeKey := "token:active:" + tokenHash
 		_ = s.ctr.GetRedis().Set(ctx, activeKey, time.Now().Unix(), time.Duration(client.ActiveTimeout)*time.Second).Err()
 	}
-	return &LoginResponse{AccessToken: token, ExpiresIn: expiresIn, UserInfo: &UserInfo{UserId: user.ID, Username: user.UserName, Nickname: user.NickName, Phonenumber: user.Phonenumber, Avatar: user.Avatar, UserType: user.UserType}}, nil
+	return &LoginResponse{AccessToken: token, ExpiresIn: expiresIn, UserInfo: newLoginUserInfo(user)}, nil
 }
 func (s *PasswordAuthStrategy) checkBruteForce(ctx context.Context, username string) error {
 	key := "pwd_err_cnt:" + username
@@ -542,20 +581,34 @@ func (s *PasswordAuthStrategy) clearErrorCount(ctx context.Context, username str
 	_ = s.ctr.GetRedis().Del(ctx, "pwd_err_cnt:"+username).Err()
 }
 
+// XcxAuthStrategy 定义业务数据结构。
 type XcxAuthStrategy struct {
 	ctr container.Container
 }
 
+const (
+	miniProgramUserType     int32 = 1
+	defaultMiniProgramOrgID int64 = 1880159541355577346
+)
+
+// NewXcxAuthStrategy 创建组件实例。
 func NewXcxAuthStrategy(c container.Container) *XcxAuthStrategy {
 	return &XcxAuthStrategy{ctr: c}
 }
+
+// GrantType 执行业务逻辑。
 func (s *XcxAuthStrategy) GrantType() string { return "xcx" }
+
+// Login 执行业务逻辑。
 func (s *XcxAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error) {
 	if req.Phonenumber == "" || req.Code == "" || req.WxCode == "" {
 		return nil, fmt.Errorf("手机号、验证码和微信code不能为空")
 	}
-	if err := NewCaptchaService(s.ctr.GetRedis()).ValidateSmsCode(ctx, req.Phonenumber, req.Code); err != nil {
-		return nil, err
+	//if err := NewCaptchaService(s.ctr.GetRedis()).ValidateSmsCode(ctx, req.Phonenumber, req.Code); err != nil {
+	//	return nil, err
+	//}
+	if !s.ctr.GetConfig().WeChat.Enabled {
+		return nil, fmt.Errorf("微信小程序登录未启用")
 	}
 	wxResp, err := s.ctr.GetWeChat().Code2Session(req.WxCode)
 	if err != nil {
@@ -571,14 +624,19 @@ func (s *XcxAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginR
 		return nil, fmt.Errorf("查询用户失败")
 	}
 	if errors.Is(err, gorm.ErrRecordNotFound) {
+		loginTime := time.Now().Unix()
 		newUser := &model.User{
 			UserName:    req.Phonenumber,
-			NickName:    "微信用户" + req.Phonenumber[7:],
-			UserType:    1,
+			NickName:    req.Phonenumber,
+			UserType:    miniProgramUserType,
+			OrgID:       defaultMiniProgramOrgID,
 			Phonenumber: req.Phonenumber,
+			Sex:         2,
 			Status:      0,
 			OpenId:      wxResp.OpenID,
 			UnionId:     wxResp.UnionID,
+			LoginIp:     req.LoginIP,
+			LoginDate:   loginTime,
 		}
 		if err := um.Create(s.ctr.GetDB(), newUser); err != nil {
 			s.ctr.GetLogger().Error("failed to create wechat user", zap.Error(err))
@@ -586,7 +644,7 @@ func (s *XcxAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginR
 		}
 		user = newUser
 	} else {
-		if err := s.ctr.GetDB().Model(&model.User{}).Where("user_id = ?", user.ID).Updates(map[string]any{"open_id": wxResp.OpenID, "union_id": wxResp.UnionID}).Error; err != nil {
+		if err := s.ctr.GetDB().Model(&model.User{}).Where("id = ?", user.ID).Updates(map[string]any{"open_id": wxResp.OpenID, "union_id": wxResp.UnionID}).Error; err != nil {
 			s.ctr.GetLogger().Warn("failed to update user openid", zap.Error(err))
 		}
 		user.OpenId = wxResp.OpenID
@@ -596,7 +654,7 @@ func (s *XcxAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginR
 		return nil, fmt.Errorf("用户已被停用")
 	}
 	var clientModel model.AuthClient
-	client, err := clientModel.FindByClientKey(s.ctr.GetDB(), req.ClientKey)
+	client, err := clientModel.FindByClientId(s.ctr.GetDB(), req.ClientID)
 	if err != nil {
 		s.ctr.GetLogger().Error("failed to query client", zap.Error(err))
 		return nil, fmt.Errorf("客户端配置查询失败")
@@ -612,25 +670,124 @@ func (s *XcxAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginR
 		s.ctr.GetLogger().Error("failed to generate token", zap.Error(err))
 		return nil, fmt.Errorf("生成token失败")
 	}
-	_ = um.UpdateLoginInfo(s.ctr.GetDB(), user.ID, "", time.Now().Unix())
+	_ = um.UpdateLoginInfo(s.ctr.GetDB(), user.ID, req.LoginIP, time.Now().Unix())
 	if client.ActiveTimeout > 0 {
 		tokenHash := generateTokenHash(token)
 		activeKey := "token:active:" + tokenHash
 		_ = s.ctr.GetRedis().Set(ctx, activeKey, time.Now().Unix(), time.Duration(client.ActiveTimeout)*time.Second).Err()
 	}
-	return &LoginResponse{AccessToken: token, ExpiresIn: expiresIn, UserInfo: &UserInfo{UserId: user.ID, Username: user.UserName, Nickname: user.NickName, Phonenumber: user.Phonenumber, Avatar: user.Avatar, UserType: user.UserType}}, nil
+	return &LoginResponse{AccessToken: token, ExpiresIn: expiresIn, UserInfo: newLoginUserInfo(user)}, nil
 }
 
+// WechatOnlyAuthStrategy 纯微信小程序登录策略（仅需微信code，自动注册）
+type WechatOnlyAuthStrategy struct {
+	ctr container.Container
+}
+
+// NewWechatOnlyAuthStrategy 创建组件实例。
+func NewWechatOnlyAuthStrategy(c container.Container) *WechatOnlyAuthStrategy {
+	return &WechatOnlyAuthStrategy{ctr: c}
+}
+
+// GrantType 执行业务逻辑。
+func (s *WechatOnlyAuthStrategy) GrantType() string { return "wechat" }
+
+// Login 执行业务逻辑。
+func (s *WechatOnlyAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error) {
+	if req.WxCode == "" {
+		return nil, fmt.Errorf("微信code不能为空")
+	}
+	wechatManager := s.ctr.GetWeChat()
+	if wechatManager == nil {
+		return nil, fmt.Errorf("微信小程序登录未启用")
+	}
+	wxResp, err := wechatManager.Code2Session(req.WxCode)
+	if err != nil {
+		return nil, err
+	}
+	if wxResp.OpenID == "" {
+		return nil, fmt.Errorf("获取微信OpenID失败")
+	}
+	var um model.User
+	user, err := um.FindByOpenId(s.ctr.GetDB(), wxResp.OpenID)
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		s.ctr.GetLogger().Error("failed to query user by openid", zap.Error(err))
+		return nil, fmt.Errorf("查询用户失败")
+	}
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		loginTime := time.Now().Unix()
+		// 自动创建用户
+		newUser := &model.User{
+			UserName:  "wx_" + wxResp.OpenID[:16],
+			NickName:  "微信用户",
+			UserType:  miniProgramUserType,
+			OrgID:     defaultMiniProgramOrgID,
+			Status:    0,
+			OpenId:    wxResp.OpenID,
+			UnionId:   wxResp.UnionID,
+			Sex:       2,
+			LoginIp:   req.LoginIP,
+			LoginDate: loginTime,
+		}
+		if err := um.Create(s.ctr.GetDB(), newUser); err != nil {
+			s.ctr.GetLogger().Error("failed to create wechat user", zap.Error(err))
+			return nil, fmt.Errorf("创建用户失败")
+		}
+		user = newUser
+		s.ctr.GetLogger().Info("wechat user auto registered",
+			zap.Int64("userId", user.ID),
+			zap.String("openId", wxResp.OpenID))
+	} else {
+		// 更新UnionId（如果有）
+		if wxResp.UnionID != "" && user.UnionId != wxResp.UnionID {
+			if err := s.ctr.GetDB().Model(&model.User{}).Where("id = ?", user.ID).Update("union_id", wxResp.UnionID).Error; err != nil {
+				s.ctr.GetLogger().Warn("failed to update user unionid", zap.Error(err))
+			}
+		}
+	}
+	if user.Status != 0 {
+		return nil, fmt.Errorf("用户已被停用")
+	}
+	var clientModel model.AuthClient
+	client, err := clientModel.FindByClientId(s.ctr.GetDB(), req.ClientID)
+	if err != nil {
+		s.ctr.GetLogger().Error("failed to query client", zap.Error(err))
+		return nil, fmt.Errorf("客户端配置查询失败")
+	}
+	token, expiresIn, err := s.ctr.GetJWT().GenerateToken(
+		user.ID,
+		user.UserName,
+		client.ClientId,
+		client.DeviceType,
+		client.Timeout,
+	)
+	if err != nil {
+		s.ctr.GetLogger().Error("failed to generate token", zap.Error(err))
+		return nil, fmt.Errorf("生成token失败")
+	}
+	_ = um.UpdateLoginInfo(s.ctr.GetDB(), user.ID, req.LoginIP, time.Now().Unix())
+	if client.ActiveTimeout > 0 {
+		tokenHash := generateTokenHash(token)
+		activeKey := "token:active:" + tokenHash
+		_ = s.ctr.GetRedis().Set(ctx, activeKey, time.Now().Unix(), time.Duration(client.ActiveTimeout)*time.Second).Err()
+	}
+	return &LoginResponse{AccessToken: token, ExpiresIn: expiresIn, UserInfo: newLoginUserInfo(user)}, nil
+}
+
+// EmailAuthStrategy 定义业务数据结构。
 type EmailAuthStrategy struct {
 	ctr container.Container
 }
 
+// NewEmailAuthStrategy 创建组件实例。
 func NewEmailAuthStrategy(c container.Container) *EmailAuthStrategy {
 	return &EmailAuthStrategy{ctr: c}
 }
 
+// GrantType 执行业务逻辑。
 func (s *EmailAuthStrategy) GrantType() string { return "email" }
 
+// Login 执行业务逻辑。
 func (s *EmailAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error) {
 	if req.Email == "" || req.Code == "" {
 		return nil, fmt.Errorf("邮箱和验证码不能为空")
@@ -655,7 +812,7 @@ func (s *EmailAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*Logi
 	}
 
 	var clientModel model.AuthClient
-	client, err := clientModel.FindByClientKey(s.ctr.GetDB(), req.ClientKey)
+	client, err := clientModel.FindByClientId(s.ctr.GetDB(), req.ClientID)
 	if err != nil {
 		s.ctr.GetLogger().Error("failed to query client", zap.Error(err))
 		return nil, fmt.Errorf("客户端配置查询失败")
@@ -682,16 +839,95 @@ func (s *EmailAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*Logi
 	return &LoginResponse{
 		AccessToken: token,
 		ExpiresIn:   expiresIn,
-		UserInfo: &UserInfo{
-			UserId:      user.ID,
-			Username:    user.UserName,
-			Nickname:    user.NickName,
-			Phonenumber: user.Phonenumber,
-			Email:       user.Email,
-			Avatar:      user.Avatar,
-			UserType:    user.UserType,
-		},
+		UserInfo:    newLoginUserInfo(user),
 	}, nil
+}
+
+// SmsAuthStrategy 短信验证码登录策略
+type SmsAuthStrategy struct {
+	ctr container.Container
+}
+
+// NewSmsAuthStrategy 创建组件实例。
+func NewSmsAuthStrategy(c container.Container) *SmsAuthStrategy {
+	return &SmsAuthStrategy{ctr: c}
+}
+
+// GrantType 执行业务逻辑。
+func (s *SmsAuthStrategy) GrantType() string { return "sms" }
+
+// Login 执行业务逻辑。
+func (s *SmsAuthStrategy) Login(ctx context.Context, req *LoginRequest) (*LoginResponse, error) {
+	if req.Phonenumber == "" || req.Code == "" {
+		return nil, fmt.Errorf("手机号和验证码不能为空")
+	}
+
+	if err := NewCaptchaService(s.ctr.GetRedis()).ValidateSmsCode(ctx, req.Phonenumber, req.Code); err != nil {
+		return nil, err
+	}
+
+	var um model.User
+	user, err := um.FindByPhonenumber(s.ctr.GetDB(), req.Phonenumber)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, fmt.Errorf("手机号或验证码错误")
+		}
+		s.ctr.GetLogger().Error("failed to query user by phonenumber", zap.Error(err))
+		return nil, fmt.Errorf("查询用户失败")
+	}
+
+	if user.Status != 0 {
+		return nil, fmt.Errorf("用户已被停用")
+	}
+
+	var clientModel model.AuthClient
+	client, err := clientModel.FindByClientId(s.ctr.GetDB(), req.ClientID)
+	if err != nil {
+		s.ctr.GetLogger().Error("failed to query client", zap.Error(err))
+		return nil, fmt.Errorf("客户端配置查询失败")
+	}
+
+	token, expiresIn, err := s.ctr.GetJWT().GenerateToken(
+		user.ID,
+		user.UserName,
+		client.ClientId,
+		client.DeviceType,
+		client.Timeout,
+	)
+	if err != nil {
+		s.ctr.GetLogger().Error("failed to generate token", zap.Error(err))
+		return nil, fmt.Errorf("生成token失败")
+	}
+
+	if client.ActiveTimeout > 0 {
+		tokenHash := generateTokenHash(token)
+		activeKey := "token:active:" + tokenHash
+		_ = s.ctr.GetRedis().Set(ctx, activeKey, time.Now().Unix(), time.Duration(client.ActiveTimeout)*time.Second).Err()
+	}
+
+	return &LoginResponse{
+		AccessToken: token,
+		ExpiresIn:   expiresIn,
+		UserInfo:    newLoginUserInfo(user),
+	}, nil
+}
+
+func newLoginUserInfo(user *model.User) *UserInfo {
+	if user == nil {
+		return nil
+	}
+	return &UserInfo{
+		UserId:      user.ID,
+		Username:    user.UserName,
+		Nickname:    user.NickName,
+		Phonenumber: user.Phonenumber,
+		Email:       user.Email,
+		Avatar:      user.Avatar,
+		OrgID:       user.OrgID,
+		UserType:    user.UserType,
+		OpenID:      user.OpenId,
+		UnionID:     user.UnionId,
+	}
 }
 
 func generateTokenHash(token string) string {

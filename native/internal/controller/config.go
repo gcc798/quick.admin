@@ -28,6 +28,7 @@ type configController struct {
 	configService service.ConfigService
 }
 
+// NewConfigController 创建组件实例。
 func NewConfigController(c container.Container) ConfigController {
 	return &configController{
 		ctr:           c,

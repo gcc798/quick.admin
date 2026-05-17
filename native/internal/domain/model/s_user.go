@@ -8,31 +8,33 @@ import (
 
 // User 系统用户
 type User struct {
-	ID          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`        // 用户ID（使用分布式ID）
-	UserName    string          `gorm:"column:user_name;uniqueIndex;not null" json:"userName"` // 用户名（登录账号）
-	NickName    string          `gorm:"column:nick_name" json:"nickName"`                      // 昵称（显示名称）
-	UserType    int32           `gorm:"column:user_type;default:0" json:"userType"`            // 用户类型：0系统用户 1微信用户 2APP用户
-	Email       string          `gorm:"column:email" json:"email"`                             // 邮箱
-	Phonenumber string          `gorm:"column:phonenumber" json:"phonenumber"`                 // 手机号
-	Sex         int32           `gorm:"column:sex;default:2" json:"sex"`                       // 性别：0男 1女 2未知
-	Avatar      string          `gorm:"column:avatar" json:"avatar"`                           // 头像URL
-	Password    string          `gorm:"column:password" json:"-"`                              // 密码（加密）
-	Status      int32           `gorm:"column:status;default:0" json:"status"`                 // 状态：0正常 1停用
-	Sort        int64           `gorm:"column:sort;default:0" json:"sort"`                     // 排序字段
-	LoginIp     string          `gorm:"column:login_ip" json:"loginIp"`                        // 最后登录IP
-	LoginDate   int64           `gorm:"column:login_date" json:"loginDate"`                    // 最后登录时间（时间戳）
-	OpenId      string          `gorm:"column:open_id" json:"openId"`                          // 微信OpenID
-	UnionId     string          `gorm:"column:union_id" json:"unionId"`                        // 微信UnionID
-	Remark      string          `gorm:"column:remark" json:"remark"`                           // 备注
-	CreateBy    int64           `gorm:"column:create_by" json:"createBy"`                      // 创建人
-	UpdateBy    int64           `gorm:"column:update_by" json:"updateBy"`                      // 更新人
-	CreatedTime utils.LocalTime `gorm:"column:created_time;autoCreateTime" json:"createdTime"`
-	UpdatedTime utils.LocalTime `gorm:"column:updated_time;autoUpdateTime" json:"updatedTime"`
-	DeletedAt   gorm.DeletedAt  `gorm:"column:deleted_at;index" json:"-"`
+	ID          int64           `gorm:"column:id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"id"` // 用户ID（使用分布式ID）
+	UserName    string          `gorm:"column:user_name;type:varchar(64);uniqueIndex;not null" json:"userName"`         // 用户名（登录账号）
+	NickName    string          `gorm:"column:nick_name;type:varchar(64)" json:"nickName"`                              // 昵称（显示名称）
+	UserType    int32           `gorm:"column:user_type;type:smallint;default:0" json:"userType"`                       // 用户类型：0系统用户 1微信用户 2APP用户
+	OrgID       int64           `gorm:"column:org_id;type:bigint;default:0;index" json:"orgId"`                         // 组织ID
+	Email       string          `gorm:"column:email;type:varchar(128);index" json:"email"`                              // 邮箱
+	Phonenumber string          `gorm:"column:phonenumber;type:varchar(32);index" json:"phonenumber"`                   // 手机号
+	Sex         int32           `gorm:"column:sex;type:smallint;default:2" json:"sex"`                                  // 性别：0男 1女 2未知
+	Avatar      string          `gorm:"column:avatar;type:varchar(512)" json:"avatar"`                                  // 头像URL
+	Password    string          `gorm:"column:password;type:varchar(255)" json:"-"`                                     // 密码（加密）
+	Status      int32           `gorm:"column:status;type:smallint;default:0" json:"status"`                            // 状态：0正常 1停用
+	Sort        int64           `gorm:"column:sort;type:bigint;default:0" json:"sort"`                                  // 排序字段
+	LoginIp     string          `gorm:"column:login_ip;type:varchar(64)" json:"loginIp"`                                // 最后登录IP
+	LoginDate   int64           `gorm:"column:login_date;type:bigint" json:"loginDate"`                                 // 最后登录时间（时间戳）
+	OpenId      string          `gorm:"column:open_id;type:varchar(128);index" json:"openId"`                           // 微信OpenID
+	UnionId     string          `gorm:"column:union_id;type:varchar(128);index" json:"unionId"`                         // 微信UnionID
+	Remark      string          `gorm:"column:remark;type:varchar(500)" json:"remark"`                                  // 备注
+	CreateBy    int64           `gorm:"column:create_by;type:bigint" json:"createBy"`                                   // 创建人
+	UpdateBy    int64           `gorm:"column:update_by;type:bigint" json:"updateBy"`                                   // 更新人
+	CreatedTime utils.LocalTime `gorm:"column:created_time;type:timestamptz;autoCreateTime" json:"createdTime"`
+	UpdatedTime utils.LocalTime `gorm:"column:updated_time;type:timestamptz;autoUpdateTime" json:"updatedTime"`
 }
 
+// TableName 返回数据库表名。
 func (*User) TableName() string { return "s_user" }
 
+// FindByUsername 执行业务逻辑。
 func (u *User) FindByUsername(db *gorm.DB, username string) (*User, error) {
 	var out User
 	tx := db.Where("user_name = ?", username).Limit(1).Find(&out)
@@ -45,6 +47,7 @@ func (u *User) FindByUsername(db *gorm.DB, username string) (*User, error) {
 	return &out, nil
 }
 
+// FindByOpenId 执行业务逻辑。
 func (u *User) FindByOpenId(db *gorm.DB, openId string) (*User, error) {
 	var out User
 	tx := db.Where("open_id = ?", openId).Limit(1).Find(&out)
@@ -57,6 +60,7 @@ func (u *User) FindByOpenId(db *gorm.DB, openId string) (*User, error) {
 	return &out, nil
 }
 
+// FindByPhonenumber 执行业务逻辑。
 func (u *User) FindByPhonenumber(db *gorm.DB, phonenumber string) (*User, error) {
 	var out User
 	tx := db.Where("phonenumber = ?", phonenumber).Limit(1).Find(&out)
@@ -82,13 +86,14 @@ func (u *User) FindByEmail(db *gorm.DB, email string) (*User, error) {
 	return &out, nil
 }
 
+// Create 创建业务数据。
 func (u *User) Create(db *gorm.DB, nu *User) error {
 	return db.Create(nu).Error
 }
 
 // UpdateLoginInfo 更新登录信息（IP与时间戳）
 func (u *User) UpdateLoginInfo(db *gorm.DB, userId int64, ip string, ts int64) error {
-	return db.Model(&User{}).Where("user_id = ?", userId).Updates(map[string]any{
+	return db.Model(&User{}).Where("id = ?", userId).Updates(map[string]any{
 		"login_ip":   ip,
 		"login_date": ts,
 	}).Error
@@ -179,7 +184,7 @@ func (u *User) Update(db *gorm.DB, userId int64, updates map[string]interface{})
 	return db.Model(&User{}).Where("id = ?", userId).Updates(updates).Error
 }
 
-// Delete 删除用户（软删除）
+// Delete 删除用户
 func (u *User) Delete(db *gorm.DB, userId int64) error {
 	return db.Where("id = ?", userId).Delete(&User{}).Error
 }

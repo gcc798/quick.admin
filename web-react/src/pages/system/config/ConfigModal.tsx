@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { App, Button, Form } from 'antd';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { ConfigRecord } from '@/types/system';
 import { useAuthStore } from '@/store/auth';
@@ -9,7 +10,7 @@ import { BasicModal } from '@/components/common/BasicModal';
 
 interface ConfigModalProps {
   open: boolean;
-  configId?: number;
+  configId?: SnowflakeId;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -154,6 +155,7 @@ export function ConfigModal({
         form={form}
         schemas={schemas}
         layout="vertical"
+        variant="modal"
         showActionButtons={false}
       />
     </BasicModal>

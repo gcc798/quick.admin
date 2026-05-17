@@ -1,8 +1,9 @@
+import type { SnowflakeId } from './api';
 import type { MenuRecord } from './menu';
 
 export interface UserRecord {
-  userId: number;
-  orgId?: number;
+  id: SnowflakeId;
+  orgId?: SnowflakeId;
   userName: string;
   nickName: string;
   email?: string;
@@ -17,7 +18,7 @@ export interface UserRecord {
 }
 
 export interface UserFormData {
-  orgId?: number;
+  orgId?: SnowflakeId;
   userName: string;
   nickName: string;
   password?: string;
@@ -31,7 +32,7 @@ export interface UserFormData {
 }
 
 export interface RoleRecord {
-  roleId: number;
+  id: SnowflakeId;
   roleName: string;
   roleKey: string;
   sort?: number;
@@ -42,11 +43,29 @@ export interface RoleRecord {
   updatedTime?: string;
 }
 
+export interface ApiPermissionRecord {
+  id: SnowflakeId;
+  parentId: SnowflakeId;
+  module: string;
+  code: string;
+  name: string;
+  nodeType: number;
+  action: string;
+  method?: string;
+  path?: string;
+  sort?: number;
+  status?: number;
+  remark?: string;
+  createdTime?: string;
+  updatedTime?: string;
+  children?: ApiPermissionRecord[];
+}
+
 export interface OrgRecord {
-  id: number;
+  id: SnowflakeId;
   orgName: string;
   orgCode?: string;
-  parentId?: number;
+  parentId?: SnowflakeId;
   orgType?: string;
   sort?: number;
   leader?: string;
@@ -59,8 +78,8 @@ export interface OrgRecord {
 }
 
 export interface DictRecord {
-  id: number;
-  parentId?: number;
+  id: SnowflakeId;
+  parentId?: SnowflakeId;
   dictType: string;
   dictLabel: string;
   dictValue: string;
@@ -68,25 +87,25 @@ export interface DictRecord {
   isDefault?: boolean;
   status?: number;
   remark?: string;
-  createBy?: number;
-  updateBy?: number;
+  createBy?: SnowflakeId;
+  updateBy?: SnowflakeId;
   createdTime?: string;
 }
 
 export interface ConfigRecord {
-  id: number;
+  id: SnowflakeId;
   name: string;
   code: string;
   data?: unknown;
   remark?: string;
-  createBy?: number;
-  updateBy?: number;
+  createBy?: SnowflakeId;
+  updateBy?: SnowflakeId;
   createdTime?: string;
   updatedTime?: string;
 }
 
 export interface StorageEnvRecord {
-  id: number;
+  id: SnowflakeId;
   name: string;
   code: string;
   storageType: string;
@@ -99,19 +118,19 @@ export interface StorageEnvRecord {
 }
 
 export interface AttachmentRecord {
-  attachmentId: number;
+  attachmentId: SnowflakeId;
   fileName: string;
   fileSize: number;
   fileType: string;
   filePath?: string;
   businessType?: string;
   businessId?: string;
-  uploadBy?: number;
+  uploadBy?: SnowflakeId;
   uploadTime?: string;
 }
 
 export interface LoginLogRecord {
-  id: number;
+  id: SnowflakeId;
   userName: string;
   ipaddr: string;
   loginLocation?: string;
@@ -124,7 +143,7 @@ export interface LoginLogRecord {
 }
 
 export interface OperLogRecord {
-  id: number;
+  id: SnowflakeId;
   title: string;
   businessType?: string;
   method?: string;

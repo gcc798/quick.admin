@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { App, Form } from 'antd';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { DictRecord } from '@/types/system';
 import { useAuthStore } from '@/store/auth';
@@ -9,8 +10,8 @@ import { BasicModal } from '@/components/common/BasicModal';
 
 interface DictModalProps {
   open: boolean;
-  dictId?: number;
-  parentId?: number;
+  dictId?: SnowflakeId;
+  parentId?: SnowflakeId;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -156,6 +157,7 @@ export function DictModal({
         form={form}
         schemas={schemas}
         layout="vertical"
+        variant="modal"
         showActionButtons={false}
       />
     </BasicModal>

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import type { ReactNode } from 'react';
+import { ReloadOutlined, SearchOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Input, InputNumber, Radio, Row, Select, Space, Switch, TreeSelect } from 'antd';
 import type { FormInstance } from 'antd';
 import type { FormSchema } from '@/types/form';
@@ -11,7 +12,7 @@ interface BasicFormProps {
   schemas: FormSchema[];
   initialValues?: Record<string, unknown>;
   layout?: 'horizontal' | 'vertical' | 'inline';
-  variant?: 'default' | 'search';
+  variant?: 'default' | 'search' | 'modal';
   showActionButtons?: boolean;
   submitText?: string;
   resetText?: string;
@@ -28,24 +29,21 @@ function getSearchPlaceholder(schema: FormSchema) {
 }
 
 function getSearchFieldStyle(schema: FormSchema, style?: Record<string, unknown>) {
-  const defaultWidth =
-    schema.component === 'Select' || schema.component === 'TreeSelect' ? 148 : 176;
-
   return {
-    width: defaultWidth,
+    width: '100%',
     ...style,
   };
 }
 
-function renderField(schema: FormSchema, variant: 'default' | 'search') {
+function renderField(schema: FormSchema, variant: 'default' | 'search' | 'modal') {
   const nextProps = { ...(schema.props ?? {}) };
 
-  if (variant === 'search') {
+  if (variant === 'search' || variant === 'modal') {
     if (nextProps.placeholder === undefined) {
       nextProps.placeholder = getSearchPlaceholder(schema);
     }
 
-    if (nextProps.allowClear === undefined) {
+    if (variant === 'search' && nextProps.allowClear === undefined) {
       nextProps.allowClear = true;
     }
 
@@ -91,7 +89,7 @@ function SchemaFormItem({
 }: {
   schema: FormSchema;
   form: FormInstance;
-  variant: 'default' | 'search';
+  variant: 'default' | 'search' | 'modal';
 }) {
   const values = Form.useWatch([], form) ?? {};
   const hidden =
@@ -129,8 +127,16 @@ function SchemaFormItem({
     );
   }
 
+  const colProps = variant === 'modal' ? schema.modalColProps ?? schema.colProps : schema.colProps;
+  const defaultSpan =
+    variant === 'modal'
+      ? schema.component === 'TextArea' || schema.component === 'MonacoEditor' || schema.component === 'IconPicker' || schema.component === 'TreeSelect'
+        ? 24
+        : 12
+      : 24;
+
   return (
-    <Col {...schema.colProps} span={schema.colProps?.span ?? 24}>
+    <Col {...colProps} span={colProps?.span ?? defaultSpan}>
       {content}
     </Col>
   );
@@ -170,7 +176,13 @@ export function BasicForm({
 
   return (
     <Form
-      className={variant === 'search' ? 'search-form' : undefined}
+      className={
+        variant === 'search'
+          ? 'search-form'
+          : variant === 'modal'
+            ? 'modal-form'
+            : undefined
+      }
       form={form}
       initialValues={formInitialValues}
       layout={layout}
@@ -185,17 +197,19 @@ export function BasicForm({
             <div className="search-form-actions">
               <Form.Item style={{ marginBottom: 0 }}>
                 <Space size={8}>
-                  <Button htmlType="submit" type="primary">
+                  <Button htmlType="submit" icon={<SearchOutlined />} type="primary">
                     {submitText}
                   </Button>
-                  <Button onClick={handleReset}>{resetText}</Button>
+                  <Button icon={<ReloadOutlined />} onClick={handleReset}>
+                    {resetText}
+                  </Button>
                 </Space>
               </Form.Item>
             </div>
           ) : null}
         </div>
       ) : (
-        <Row gutter={16}>
+        <Row gutter={variant === 'modal' ? [18, 2] : 16}>
           {schemas.map((schema) => (
             <SchemaFormItem key={schema.name} form={form} schema={schema} variant={variant} />
           ))}
@@ -203,10 +217,12 @@ export function BasicForm({
             <Col span={24}>
               <Form.Item style={{ marginBottom: 0 }}>
                 <Space>
-                  <Button htmlType="submit" type="primary">
+                  <Button htmlType="submit" icon={<SearchOutlined />} type="primary">
                     {submitText}
                   </Button>
-                  <Button onClick={handleReset}>{resetText}</Button>
+                  <Button icon={<ReloadOutlined />} onClick={handleReset}>
+                    {resetText}
+                  </Button>
                 </Space>
               </Form.Item>
             </Col>

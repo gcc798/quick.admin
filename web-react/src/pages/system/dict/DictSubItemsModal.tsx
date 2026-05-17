@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { ColumnsType } from 'antd/es/table';
 import { App, Button, Space, Table, Tag } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import type { SnowflakeId } from '@/types/api';
 import type { DictRecord } from '@/types/system';
 import { dictApi } from '@/api/dict';
 import { BasicModal } from '@/components/common/BasicModal';
@@ -10,7 +11,7 @@ import { DictModal } from './DictModal';
 
 interface DictSubItemsModalProps {
   open: boolean;
-  parentId?: number;
+  parentId?: SnowflakeId;
   onCancel: () => void;
 }
 
@@ -23,7 +24,7 @@ export function DictSubItemsModal({
   const [loading, setLoading] = useState(false);
   const [subItems, setSubItems] = useState<DictRecord[]>([]);
   const [itemModalOpen, setItemModalOpen] = useState(false);
-  const [currentItemId, setCurrentItemId] = useState<number>();
+  const [currentItemId, setCurrentItemId] = useState<SnowflakeId>();
 
   const loadSubItems = async () => {
     if (!parentId) {

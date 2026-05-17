@@ -12,8 +12,10 @@ import (
 	"time"
 
 	_ "github.com/force-c/nai-tizi/docs/swagger" // 导入 Swagger 文档
+	"github.com/force-c/nai-tizi/internal/bootstrap"
 	"github.com/force-c/nai-tizi/internal/config"
 	"github.com/force-c/nai-tizi/internal/container"
+	ilogger "github.com/force-c/nai-tizi/internal/logger"
 	"github.com/force-c/nai-tizi/internal/middleware"
 	"github.com/force-c/nai-tizi/internal/router"
 	"github.com/force-c/nai-tizi/internal/validator"
@@ -63,8 +65,14 @@ func main() {
 		os.Exit(1)
 	}
 
+	log, err := ilogger.NewLogger(config.CurrentEnv(), cfg.AppDir)
+	if err != nil {
+		fmt.Printf("failed to initialize logger: %v\n", err)
+		os.Exit(1)
+	}
+
 	// 初始化容器
-	c, err := container.New(cfg, v)
+	c, err := container.New(cfg, v, log)
 	if err != nil {
 		fmt.Printf("failed to initialize container: %v\n", err)
 		os.Exit(1)
@@ -72,6 +80,11 @@ func main() {
 
 	logger := c.GetLogger()
 	logger.Info("container initialized successfully")
+
+	b, err := bootstrap.New(c)
+	if err != nil {
+		logger.Fatal("failed to bootstrap business components", zap.Error(err))
+	}
 
 	if err := c.Start(); err != nil {
 		logger.Fatal("failed to start background services", zap.Error(err))
@@ -107,7 +120,7 @@ func main() {
 	r.Use(middleware.OperationLog(c.GetDB(), c.GetLogger()))
 
 	// 注册路由
-	router.Setup(r, c)
+	router.Setup(r, c, b)
 
 	// 配置HTTP服务器
 	addr := fmt.Sprintf(":%d", cfg.Server.Port)
@@ -129,9 +142,9 @@ func main() {
 
 	// 等待中断信号以优雅地关闭服务器
 	quit := make(chan os.Signal, 1)
-	// kill (no param) default send syscall.SIGTERM
-	// kill -2 is syscall.SIGINT
-	// kill -9 is syscall.SIGKILL but can't be caught, so don't need add it
+	// 默认终止命令发送 syscall.SIGTERM。
+	// 中断命令发送 syscall.SIGINT。
+	// 强制终止命令发送 syscall.SIGKILL，进程无法捕获，不需要监听。
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 	logger.Info("shutting down server...")

@@ -5,6 +5,7 @@ import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { BasicTable, type BasicTableRef } from '@/components/common/BasicTable';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { DictRecord } from '@/types/system';
 import { dictApi } from '@/api/dict';
@@ -44,11 +45,10 @@ export default function DictPage() {
   const tableRef = useRef<BasicTableRef<DictRecord>>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [subItemsOpen, setSubItemsOpen] = useState(false);
-  const [currentDictId, setCurrentDictId] = useState<number>();
-  const [currentParentId, setCurrentParentId] = useState<number>();
+  const [currentDictId, setCurrentDictId] = useState<SnowflakeId>();
+  const [currentParentId, setCurrentParentId] = useState<SnowflakeId>();
 
   const columns: ColumnsType<DictRecord> = [
-    { title: '字典 ID', dataIndex: 'id', width: 100 },
     { title: '字典类型', dataIndex: 'dictType', width: 160 },
     { title: '字典标签', dataIndex: 'dictLabel', width: 160 },
     { title: '字典键值', dataIndex: 'dictValue', width: 160 },

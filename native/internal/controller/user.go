@@ -1,7 +1,10 @@
 package controller
 
 import (
+	"strconv"
+
 	"github.com/force-c/nai-tizi/internal/container"
+	"github.com/force-c/nai-tizi/internal/domain/model"
 	"github.com/force-c/nai-tizi/internal/domain/request"
 	"github.com/force-c/nai-tizi/internal/domain/response"
 	"github.com/force-c/nai-tizi/internal/service"
@@ -23,6 +26,7 @@ type UserController interface {
 	ResetPassword(c *gin.Context)  // 重置用户密码
 	PageUser(c *gin.Context)       // 分页查询用户列表
 	ChangePassword(c *gin.Context) // 用户修改密码
+	XcxGetInfo(c *gin.Context)     // 获取小程序用户信息
 }
 
 type userController struct {
@@ -31,6 +35,7 @@ type userController struct {
 	userService service.UserService
 }
 
+// NewUserController 创建组件实例。
 func NewUserController(c container.Container) UserController {
 	return &userController{
 		ctr:         c,
@@ -120,7 +125,7 @@ func (h *userController) Update(c *gin.Context) {
 // Delete 删除用户
 //
 //	@Summary		删除用户
-//	@Description	删除指定用户（软删除）
+//	@Description	删除指定用户
 //	@Tags			用户管理
 //	@Accept			json
 //	@Produce		json
@@ -148,7 +153,7 @@ func (h *userController) Delete(c *gin.Context) {
 // BatchDelete 批量删除用户
 //
 //	@Summary		批量删除用户
-//	@Description	批量删除多个用户（软删除）
+//	@Description	批量删除多个用户
 //	@Tags			用户管理
 //	@Accept			json
 //	@Produce		json
@@ -341,4 +346,46 @@ func (h *userController) ChangePassword(c *gin.Context) {
 	}
 
 	response.Success(c, "ok")
+}
+
+// XcxGetInfo 获取小程序用户信息
+func (h *userController) XcxGetInfo(c *gin.Context) {
+	currentUserId, err := h.base.GetUserId(c)
+	if err != nil {
+		response.Unauthorized(c, err.Error())
+		return
+	}
+
+	user, err := h.userService.GetById(c.Request.Context(), currentUserId)
+	if err != nil {
+		h.ctr.GetLogger().Error("查询用户失败", zap.Error(err))
+		response.FailWithMsg(c, "没有权限访问用户数据!")
+		return
+	}
+
+	info := response.XcxUserInfo{
+		UserID:       user.ID,
+		OrgID:        user.OrgID,
+		Phonenumber:  user.Phonenumber,
+		OpenID:       user.OpenId,
+		UnionID:      user.UnionId,
+		UserName:     user.UserName,
+		NickName:     user.NickName,
+		Sex:          formatUserSex(user.Sex),
+		HeadPortrait: user.Avatar,
+	}
+
+	roles, err := (&model.Role{}).FindByUserId(h.ctr.GetDB(), user.ID)
+	if err != nil {
+		h.ctr.GetLogger().Warn("查询用户角色失败", zap.Error(err))
+	} else if len(roles) > 0 {
+		info.RoleKey = roles[0].RoleKey
+		info.RoleName = roles[0].RoleName
+	}
+
+	response.Success(c, info)
+}
+
+func formatUserSex(sex int32) string {
+	return strconv.FormatInt(int64(sex), 10)
 }

@@ -8,28 +8,28 @@ import (
 
 // Menu 系统菜单权限表
 type Menu struct {
-	ID          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`   // 菜单ID（使用分布式ID）
-	MenuName    string          `gorm:"column:menu_name;not null" json:"menuName"`        // 菜单名称
-	ParentId    int64           `gorm:"column:parent_id;default:0;index" json:"parentId"` // 父菜单ID（0表示根菜单）
-	Sort        int64           `gorm:"column:sort;default:0" json:"sort"`                // 显示顺序
-	Path        string          `gorm:"column:path" json:"path"`                          // 路由地址
-	Component   string          `gorm:"column:component" json:"component"`                // 组件路径
-	Query       string          `gorm:"column:query" json:"query"`                        // 路由参数
-	IsFrame     int32           `gorm:"column:is_frame;default:0" json:"isFrame"`         // 是否外链：0否 1是
-	IsCache     int32           `gorm:"column:is_cache;default:0" json:"isCache"`         // 是否缓存：0否 1是
-	MenuType    int32           `gorm:"column:menu_type;not null" json:"menuType"`        // 菜单类型：0目录 1菜单 2按钮
-	Visible     int32           `gorm:"column:visible;default:0" json:"visible"`          // 显示状态：0显示 1隐藏
-	Status      int32           `gorm:"column:status;default:0" json:"status"`            // 状态：0正常 1停用
-	Perms       string          `gorm:"column:perms" json:"perms"`                        // 权限标识（例如: user.create, user.*, *）
-	Icon        string          `gorm:"column:icon" json:"icon"`                          // 菜单图标
-	Remark      string          `gorm:"column:remark" json:"remark"`                      // 备注
-	CreateBy    int64           `gorm:"column:create_by" json:"createBy"`                 // 创建人
-	UpdateBy    int64           `gorm:"column:update_by" json:"updateBy"`                 // 更新人
-	CreatedTime utils.LocalTime `gorm:"column:created_time;autoCreateTime" json:"createdTime"`
-	UpdatedTime utils.LocalTime `gorm:"column:updated_time;autoUpdateTime" json:"updatedTime"`
-	DeletedAt   gorm.DeletedAt  `gorm:"column:deleted_at;index" json:"-"`
+	ID          int64           `gorm:"column:id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"id"` // 菜单ID（使用分布式ID）
+	MenuName    string          `gorm:"column:menu_name;type:varchar(64);not null" json:"menuName"`                     // 菜单名称
+	ParentId    int64           `gorm:"column:parent_id;type:bigint;default:0;index" json:"parentId"`                   // 父菜单ID（0表示根菜单）
+	Sort        int64           `gorm:"column:sort;type:bigint;default:0" json:"sort"`                                  // 显示顺序
+	Path        string          `gorm:"column:path;type:varchar(255)" json:"path"`                                      // 路由地址
+	Component   string          `gorm:"column:component;type:varchar(255)" json:"component"`                            // 组件路径
+	Query       string          `gorm:"column:query;type:varchar(255)" json:"query"`                                    // 路由参数
+	IsFrame     int32           `gorm:"column:is_frame;type:smallint;default:0" json:"isFrame"`                         // 是否外链：0否 1是
+	IsCache     int32           `gorm:"column:is_cache;type:smallint;default:0" json:"isCache"`                         // 是否缓存：0否 1是
+	MenuType    int32           `gorm:"column:menu_type;type:smallint;not null" json:"menuType"`                        // 菜单类型：0目录 1菜单 2按钮
+	Visible     int32           `gorm:"column:visible;type:smallint;default:0" json:"visible"`                          // 显示状态：0显示 1隐藏
+	Status      int32           `gorm:"column:status;type:smallint;default:0" json:"status"`                            // 状态：0正常 1停用
+	Perms       string          `gorm:"column:perms;type:varchar(255)" json:"perms"`                                    // 权限标识（例如: user.create, user.*, *）
+	Icon        string          `gorm:"column:icon;type:varchar(64)" json:"icon"`                                       // 菜单图标
+	Remark      string          `gorm:"column:remark;type:varchar(500)" json:"remark"`                                  // 备注
+	CreateBy    int64           `gorm:"column:create_by;type:bigint" json:"createBy"`                                   // 创建人
+	UpdateBy    int64           `gorm:"column:update_by;type:bigint" json:"updateBy"`                                   // 更新人
+	CreatedTime utils.LocalTime `gorm:"column:created_time;type:timestamptz;autoCreateTime" json:"createdTime"`
+	UpdatedTime utils.LocalTime `gorm:"column:updated_time;type:timestamptz;autoUpdateTime" json:"updatedTime"`
 }
 
+// TableName 返回数据库表名。
 func (*Menu) TableName() string { return "s_menu" }
 
 // FindByMenuId 根据菜单ID查询菜单
@@ -60,8 +60,9 @@ func (m *Menu) FindByParentId(db *gorm.DB, parentId int64) ([]Menu, error) {
 func (m *Menu) FindByRoleId(db *gorm.DB, roleId int64) ([]Menu, error) {
 	var menus []Menu
 	err := db.Table("s_menu m").
-		Joins("INNER JOIN s_role_menu rm ON m.id = rm.menu_id").
+		Joins("INNER JOIN m_role_menu rm ON m.id = rm.menu_id").
 		Where("rm.role_id = ? AND m.status = 0", roleId).
+		Group("m.id").
 		Order("m.sort ASC").
 		Find(&menus).Error
 	return menus, err
@@ -78,7 +79,7 @@ func (m *Menu) FindAll(db *gorm.DB) ([]Menu, error) {
 func (m *Menu) FindByRoleIds(db *gorm.DB, roleIds []int64) ([]Menu, error) {
 	var menus []Menu
 	err := db.Table("s_menu m").
-		Joins("INNER JOIN s_role_menu rm ON m.id = rm.menu_id").
+		Joins("INNER JOIN m_role_menu rm ON m.id = rm.menu_id").
 		Where("rm.role_id IN ? AND m.status = 0", roleIds).
 		Group("m.id").
 		Order("m.sort ASC").
@@ -121,7 +122,7 @@ func (m *Menu) Update(db *gorm.DB, menu *Menu) error {
 	return db.Save(menu).Error
 }
 
-// Delete 删除菜单（软删除）
+// Delete 删除菜单
 func (m *Menu) Delete(db *gorm.DB, menuId int64) error {
 	return db.Where("id = ?", menuId).Delete(&Menu{}).Error
 }

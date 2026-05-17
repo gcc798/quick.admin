@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/force-c/nai-tizi/internal/bootstrap"
 	"github.com/force-c/nai-tizi/internal/container"
 	"github.com/force-c/nai-tizi/internal/middleware"
 	"github.com/force-c/nai-tizi/internal/service"
@@ -10,23 +11,24 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// RouterContext 路由上下文，统一管理中间件
+// RouterContext 定义业务数据结构。
 type RouterContext struct {
 	Container      container.Container
+	Bootstrap      *bootstrap.Bootstrap
 	TokenManager   service.TokenManager
 	CasbinService  service.CasbinServiceV2
 	AuthMiddleware gin.HandlerFunc
 }
 
-// Setup 配置所有路由
-func Setup(r *gin.Engine, c container.Container) {
+// Setup 配置所有路由。
+func Setup(r *gin.Engine, c container.Container, b *bootstrap.Bootstrap) {
 	// 添加 Prometheus 指标收集中间件
 	r.Use(middleware.PrometheusMiddleware())
 
-	// Prometheus metrics 端点
+	// 指标端点
 	r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
-	// Swagger UI 文档
+	// 接口文档
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// 初始化统一的中间件（除了 auth 模块，其他模块都需要认证）
@@ -37,6 +39,7 @@ func Setup(r *gin.Engine, c container.Container) {
 	// 创建路由上下文
 	ctx := &RouterContext{
 		Container:      c,
+		Bootstrap:      b,
 		TokenManager:   tokenManager,
 		CasbinService:  casbinService,
 		AuthMiddleware: authMiddleware,
@@ -57,6 +60,9 @@ func Setup(r *gin.Engine, c container.Container) {
 
 	// 注册角色管理路由
 	registerRoleRoutes(r, ctx)
+
+	// 注册 API 权限管理路由
+	registerApiPermissionRoutes(r, ctx)
 
 	// 注册组织管理路由
 	registerOrgRoutes(r, ctx)

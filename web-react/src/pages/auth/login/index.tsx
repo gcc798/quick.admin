@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { App, Button, Card, Form, Input, Space, Typography } from 'antd';
+import { App, Button, Card, Form, Input } from 'antd';
 import { LockOutlined, ReloadOutlined, UserOutlined } from '@ant-design/icons';
 import { authApi } from '@/api/auth';
+import { ThemeSwitcher } from '@/components/common/ThemeSwitcher';
+import { DEFAULT_CLIENT_ID } from '@/constants/auth';
 import { useAuthStore } from '@/store/auth';
 
 interface LoginFormValues {
@@ -58,10 +60,8 @@ export default function LoginPage() {
   const handleFinish = async (values: LoginFormValues) => {
     setLoading(true);
     try {
-      // 登录参数严格对齐 sys-api/auth.api，不沿用旧前端里可能出现的残留兼容字段。
       await login({
-        clientKey: import.meta.env.VITE_CLIENT_KEY,
-        clientSecret: import.meta.env.VITE_CLIENT_SECRET,
+        clientId: DEFAULT_CLIENT_ID,
         grantType: 'password',
         username: values.username,
         password: values.password,
@@ -86,76 +86,101 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <Card className="login-card" variant="borderless">
-        <Space direction="vertical" size={8} style={{ width: '100%', marginBottom: 24 }}>
-          <Typography.Title level={2} style={{ marginBottom: 0 }}>
-            {import.meta.env.VITE_APP_TITLE}
-          </Typography.Title>
-          <Typography.Text type="secondary">
-            React 重写版后台。保持功能等价，同时保证代码结构清晰、便于学习。
-          </Typography.Text>
-        </Space>
+      <div className="login-theme-dock">
+        <ThemeSwitcher
+          buttonClassName="login-theme-switch"
+          entryClassName="login-theme-entry"
+          popoverClassName="login-theme-popover"
+        />
+      </div>
 
-        <Form<LoginFormValues>
-          form={form}
-          layout="vertical"
-          onFinish={(values) => void handleFinish(values)}
-        >
-          <Form.Item
-            label="用户名"
-            name="username"
-            rules={[{ required: true, message: '请输入用户名' }]}
+      <div className="login-shell">
+        <section className="login-brand-panel">
+          <div className="login-brand-lockup">
+            <span className="app-logo-text login-brand-text">
+              <strong>Admin</strong>
+            </span>
+          </div>
+        </section>
+
+        <Card className="login-card" variant="borderless">
+          <Form<LoginFormValues>
+            className="login-form"
+            form={form}
+            layout="vertical"
+            onFinish={(values) => void handleFinish(values)}
           >
-            <Input
-              allowClear
-              prefix={<UserOutlined />}
-              placeholder="请输入用户名"
-              size="large"
-            />
-          </Form.Item>
-
-          <Form.Item
-            label="密码"
-            name="password"
-            rules={[{ required: true, message: '请输入密码' }]}
-          >
-            <Input.Password
-              allowClear
-              prefix={<LockOutlined />}
-              placeholder="请输入密码"
-              size="large"
-            />
-          </Form.Item>
-
-          {showCaptcha ? (
             <Form.Item
-              label="验证码"
-              name="code"
-              rules={[{ required: true, message: '请输入验证码' }]}
+              label="用户名"
+              name="username"
+              rules={[{ required: true, message: '请输入用户名' }]}
             >
-              <div className="login-captcha">
-                <Input placeholder="请输入验证码" size="large" />
-                <div
-                  className="login-captcha-image"
-                  onClick={() => void loadCaptcha()}
-                >
-                  {captchaImage ? (
-                    <img alt="验证码" src={captchaImage} style={{ width: '100%' }} />
-                  ) : (
-                    <ReloadOutlined />
-                  )}
-                </div>
-              </div>
+              <Input
+                allowClear
+                prefix={
+                  <span className="login-input-icon">
+                    <UserOutlined />
+                  </span>
+                }
+                placeholder="请输入用户名"
+                size="large"
+              />
             </Form.Item>
-          ) : null}
 
-          <Form.Item style={{ marginBottom: 0 }}>
-            <Button block htmlType="submit" loading={loading} size="large" type="primary">
-              登录
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
+            <Form.Item
+              label="密码"
+              name="password"
+              rules={[{ required: true, message: '请输入密码' }]}
+            >
+              <Input.Password
+                allowClear
+                prefix={
+                  <span className="login-input-icon">
+                    <LockOutlined />
+                  </span>
+                }
+                placeholder="请输入密码"
+                size="large"
+              />
+            </Form.Item>
+
+            {showCaptcha ? (
+              <Form.Item
+                label="验证码"
+                name="code"
+                rules={[{ required: true, message: '请输入验证码' }]}
+              >
+                <div className="login-captcha">
+                  <Input placeholder="请输入验证码" size="large" />
+                  <div
+                    className="login-captcha-image"
+                    onClick={() => void loadCaptcha()}
+                  >
+                    {captchaImage ? (
+                      <img alt="验证码" src={captchaImage} style={{ width: '100%' }} />
+                    ) : (
+                      <ReloadOutlined />
+                    )}
+                  </div>
+                </div>
+              </Form.Item>
+            ) : null}
+
+            <Form.Item style={{ marginBottom: 0 }}>
+              <Button
+                block
+                className="login-submit"
+                htmlType="submit"
+                loading={loading}
+                size="large"
+                type="primary"
+              >
+                登录
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </div>
     </div>
   );
 }

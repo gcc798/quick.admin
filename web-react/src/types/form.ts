@@ -20,6 +20,7 @@ export interface FormSchema {
   rules?: FormItemProps['rules'];
   props?: Record<string, unknown>;
   colProps?: ColProps;
+  modalColProps?: ColProps;
   initialValue?: unknown;
   helpMessage?: string;
   hidden?: boolean | ((values: Record<string, unknown>) => boolean);

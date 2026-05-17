@@ -3,12 +3,15 @@ import type { ColumnsType } from 'antd/es/table';
 import { App, Button, Popconfirm, Space, Tag } from 'antd';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { BasicTable, type BasicTableRef } from '@/components/common/BasicTable';
+import { ApiPermissionAssignModal } from '@/components/common/ApiPermissionAssignModal';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { RoleRecord } from '@/types/system';
 import { roleApi } from '@/api/role';
 import { PermissionModal } from './PermissionModal';
+import { RoleUsersAssignModal } from './RoleUsersAssignModal';
 import { RoleModal } from './RoleModal';
 
 const searchSchemas: FormSchema[] = [
@@ -38,10 +41,12 @@ export default function RolePage() {
   const tableRef = useRef<BasicTableRef<RoleRecord>>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [permissionModalOpen, setPermissionModalOpen] = useState(false);
-  const [currentRoleId, setCurrentRoleId] = useState<number>();
+  const [apiPermissionModalOpen, setApiPermissionModalOpen] = useState(false);
+  const [usersAssignModalOpen, setUsersAssignModalOpen] = useState(false);
+  const [currentRoleId, setCurrentRoleId] = useState<SnowflakeId>();
+  const [currentRole, setCurrentRole] = useState<RoleRecord>();
 
   const columns: ColumnsType<RoleRecord> = [
-    { title: '角色 ID', dataIndex: 'roleId', width: 100 },
     { title: '角色名称', dataIndex: 'roleName', width: 160 },
     { title: '角色标识', dataIndex: 'roleKey', width: 180 },
     { title: '排序', dataIndex: 'sort', width: 100 },
@@ -59,7 +64,7 @@ export default function RolePage() {
     {
       title: '操作',
       key: 'action',
-      width: 240,
+      width: 168,
       fixed: 'right',
       render: (_, record) => (
         <TableAction
@@ -69,7 +74,7 @@ export default function RolePage() {
               label: '编辑',
               permission: 'role.update',
               onClick: () => {
-                setCurrentRoleId(record.roleId);
+                setCurrentRoleId(record.id);
                 setModalOpen(true);
               },
             },
@@ -78,8 +83,27 @@ export default function RolePage() {
               label: '菜单权限',
               permission: 'role.update',
               onClick: () => {
-                setCurrentRoleId(record.roleId);
+                setCurrentRoleId(record.id);
                 setPermissionModalOpen(true);
+              },
+            },
+            {
+              key: 'apiPermission',
+              label: 'API权限',
+              permission: 'api_permission.assign',
+              onClick: () => {
+                setCurrentRoleId(record.id);
+                setApiPermissionModalOpen(true);
+              },
+            },
+            {
+              key: 'assignUsers',
+              label: '分配用户',
+              permission: 'role.assign',
+              onClick: () => {
+                setCurrentRole(record);
+                setCurrentRoleId(record.id);
+                setUsersAssignModalOpen(true);
               },
             },
             {
@@ -89,7 +113,7 @@ export default function RolePage() {
               danger: true,
               confirmTitle: '确定删除该角色吗？',
               onClick: async () => {
-                await roleApi.delete(record.roleId);
+                await roleApi.delete(record.id);
                 message.success('删除成功');
                 tableRef.current?.reload();
               },
@@ -106,9 +130,9 @@ export default function RolePage() {
         ref={tableRef}
         columns={columns}
         fetchData={roleApi.page}
-        rowKey="roleId"
+        rowKey="id"
         searchSchemas={searchSchemas}
-        scroll={{ x: 1200 }}
+        scroll={{ x: 'max-content' }}
         toolbar={
           <Space>
             <PermissionGate permission="role.create">
@@ -117,6 +141,7 @@ export default function RolePage() {
                 type="primary"
                 onClick={() => {
                   setCurrentRoleId(undefined);
+                  setCurrentRole(undefined);
                   setModalOpen(true);
                 }}
               >
@@ -132,7 +157,7 @@ export default function RolePage() {
                     message.warning('请先选择角色');
                     return;
                   }
-                  await Promise.all(rows.map((row) => roleApi.delete(row.roleId)));
+                  await Promise.all(rows.map((row) => roleApi.delete(row.id)));
                   message.success('批量删除成功');
                   tableRef.current?.reload();
                 }}
@@ -162,6 +187,28 @@ export default function RolePage() {
         onCancel={() => setPermissionModalOpen(false)}
         onSuccess={() => {
           setPermissionModalOpen(false);
+          tableRef.current?.reload();
+        }}
+      />
+
+      <ApiPermissionAssignModal
+        open={apiPermissionModalOpen}
+        targetId={currentRoleId}
+        targetType="role"
+        title="分配角色 API 权限"
+        onCancel={() => setApiPermissionModalOpen(false)}
+        onSuccess={() => {
+          setApiPermissionModalOpen(false);
+          tableRef.current?.reload();
+        }}
+      />
+
+      <RoleUsersAssignModal
+        open={usersAssignModalOpen}
+        role={currentRole}
+        onCancel={() => setUsersAssignModalOpen(false)}
+        onSuccess={() => {
+          setUsersAssignModalOpen(false);
           tableRef.current?.reload();
         }}
       />

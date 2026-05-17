@@ -10,21 +10,21 @@ import (
 
 // StorageEnv 存储环境配置
 type StorageEnv struct {
-	ID          int64            `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`        // 使用分布式ID
-	EnvName     string           `gorm:"column:name;not null" json:"name"`                      // 环境名称
-	EnvCode     string           `gorm:"column:code;uniqueIndex;not null" json:"code"`          // 环境编码（唯一）
-	StorageType string           `gorm:"column:storage_type" json:"storageType"`                // 存储类型：local/minio/s3/oss
-	IsDefault   bool             `gorm:"column:is_default;default:false" json:"isDefault"`      // 是否默认环境
-	Status      int32            `gorm:"column:status;default:0" json:"status"`                 // 状态：0正常 1停用
-	Config      *json.RawMessage `gorm:"column:config;type:jsonb;not null" json:"config"`       // 存储配置（JSON格式）
-	Remark      string           `gorm:"column:remark" json:"remark"`                           // 备注
-	CreateBy    int64            `gorm:"column:create_by" json:"createBy"`                      // 创建人
-	CreatedTime utils.LocalTime  `gorm:"column:created_time;autoCreateTime" json:"createdTime"` // 创建时间
-	UpdateBy    int64            `gorm:"column:update_by" json:"updateBy"`                      // 更新人
-	UpdatedTime utils.LocalTime  `gorm:"column:updated_time;autoUpdateTime" json:"updatedTime"` // 更新时间
-	DeletedAt   gorm.DeletedAt   `gorm:"column:deleted_at;index" json:"-"`                      // 删除时间
+	ID          int64            `gorm:"column:id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"id"` // 使用分布式ID
+	EnvName     string           `gorm:"column:name;type:varchar(128);not null" json:"name"`                             // 环境名称
+	EnvCode     string           `gorm:"column:code;type:varchar(64);uniqueIndex;not null" json:"code"`                  // 环境编码（唯一）
+	StorageType string           `gorm:"column:storage_type;type:varchar(32)" json:"storageType"`                        // 存储类型：local/minio/s3/oss
+	IsDefault   bool             `gorm:"column:is_default;type:boolean;default:false" json:"isDefault"`                  // 是否默认环境
+	Status      int32            `gorm:"column:status;type:smallint;default:0" json:"status"`                            // 状态：0正常 1停用
+	Config      *json.RawMessage `gorm:"column:config;type:jsonb;not null" json:"config"`                                // 存储配置（JSON格式）
+	Remark      string           `gorm:"column:remark;type:varchar(500)" json:"remark"`                                  // 备注
+	CreateBy    int64            `gorm:"column:create_by;type:bigint" json:"createBy"`                                   // 创建人
+	CreatedTime utils.LocalTime  `gorm:"column:created_time;type:timestamptz;autoCreateTime" json:"createdTime"`         // 创建时间
+	UpdateBy    int64            `gorm:"column:update_by;type:bigint" json:"updateBy"`                                   // 更新人
+	UpdatedTime utils.LocalTime  `gorm:"column:updated_time;type:timestamptz;autoUpdateTime" json:"updatedTime"`         // 更新时间
 }
 
+// TableName 返回数据库表名。
 func (*StorageEnv) TableName() string {
 	return "s_storage_env"
 }
@@ -100,7 +100,7 @@ func (s *StorageEnv) SetAsDefault(db *gorm.DB, envId int64) error {
 	return db.Model(&StorageEnv{}).Where("id = ?", envId).Update("is_default", true).Error
 }
 
-// Delete 删除存储环境（软删除）
+// Delete 删除存储环境
 func (*StorageEnv) Delete(db *gorm.DB, envId int64) error {
 	return db.Where("id = ?", envId).Delete(&StorageEnv{}).Error
 }

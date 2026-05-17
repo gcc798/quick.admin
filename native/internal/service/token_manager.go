@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/force-c/nai-tizi/internal/domain/model"
-	"github.com/force-c/nai-tizi/internal/infrastructure/jwt"
 	logging "github.com/force-c/nai-tizi/internal/logger"
+	"github.com/force-c/nai-tizi/pkg/jwt"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 )

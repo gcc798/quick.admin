@@ -28,6 +28,7 @@ type dictController struct {
 	dictService service.DictService
 }
 
+// NewDictController 创建组件实例。
 func NewDictController(c container.Container) DictController {
 	return &dictController{
 		ctr:         c,

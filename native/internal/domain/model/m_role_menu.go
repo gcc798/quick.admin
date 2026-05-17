@@ -7,16 +7,16 @@ import (
 
 // MRoleMenu 角色菜单权限关联表（映射表）
 type MRoleMenu struct {
-	Id          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`            // 使用分布式ID
-	RoleId      int64           `gorm:"column:role_id;not null;index:idx_role_menu" json:"roleId"` // 角色ID
-	MenuId      int64           `gorm:"column:menu_id;not null;index:idx_role_menu" json:"menuId"` // 菜单ID
-	CreateBy    int64           `gorm:"column:create_by" json:"createBy"`                          // 创建人
-	UpdateBy    int64           `gorm:"column:update_by" json:"updateBy"`                          // 更新人
-	CreatedTime utils.LocalTime `gorm:"column:created_time;autoCreateTime" json:"createdTime"`
-	UpdatedTime utils.LocalTime `gorm:"column:updated_time;autoUpdateTime" json:"updatedTime"`
-	DeletedAt   gorm.DeletedAt  `gorm:"column:deleted_at;index" json:"-"`
+	Id          int64           `gorm:"column:id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"id"` // 使用分布式ID
+	RoleId      int64           `gorm:"column:role_id;type:bigint;not null;index:idx_role_menu" json:"roleId"`          // 角色ID
+	MenuId      int64           `gorm:"column:menu_id;type:bigint;not null;index:idx_role_menu" json:"menuId"`          // 菜单ID
+	CreateBy    int64           `gorm:"column:create_by;type:bigint" json:"createBy"`                                   // 创建人
+	UpdateBy    int64           `gorm:"column:update_by;type:bigint" json:"updateBy"`                                   // 更新人
+	CreatedTime utils.LocalTime `gorm:"column:created_time;type:timestamptz;autoCreateTime" json:"createdTime"`
+	UpdatedTime utils.LocalTime `gorm:"column:updated_time;type:timestamptz;autoUpdateTime" json:"updatedTime"`
 }
 
+// TableName 返回数据库表名。
 func (*MRoleMenu) TableName() string { return "m_role_menu" }
 
 // FindByRoleId 根据角色ID查询菜单关联

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { App, Form } from 'antd';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { UserFormData } from '@/types/system';
 import { orgApi } from '@/api/org';
@@ -9,7 +10,7 @@ import { BasicModal } from '@/components/common/BasicModal';
 
 interface UserModalProps {
   open: boolean;
-  userId?: number;
+  userId?: SnowflakeId;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -116,6 +117,10 @@ export function UserModal({
   );
 
   useEffect(() => {
+    if (!open) {
+      return;
+    }
+
     void (async () => {
       const data = await orgApi.tree();
       const transform = (nodes: typeof data): Record<string, unknown>[] =>
@@ -128,7 +133,7 @@ export function UserModal({
 
       setOrgTree(transform(data));
     })();
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     if (!open) {
@@ -183,6 +188,7 @@ export function UserModal({
         form={form}
         schemas={schemas}
         layout="vertical"
+        variant="modal"
         showActionButtons={false}
       />
     </BasicModal>

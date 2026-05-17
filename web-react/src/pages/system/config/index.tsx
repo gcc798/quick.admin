@@ -5,6 +5,7 @@ import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { BasicTable, type BasicTableRef } from '@/components/common/BasicTable';
 import { JsonViewerModal } from '@/components/common/JsonViewerModal';
 import { TableAction } from '@/components/common/TableAction';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { ConfigRecord } from '@/types/system';
 import { configApi } from '@/api/config';
@@ -36,7 +37,7 @@ export default function ConfigPage() {
   const { message } = App.useApp();
   const tableRef = useRef<BasicTableRef<ConfigRecord>>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentConfigId, setCurrentConfigId] = useState<number>();
+  const [currentConfigId, setCurrentConfigId] = useState<SnowflakeId>();
   const [viewerOpen, setViewerOpen] = useState(false);
   const [viewerData, setViewerData] = useState<unknown>(null);
 

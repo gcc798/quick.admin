@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/force-c/nai-tizi/internal/infrastructure/captcha"
+	"github.com/force-c/nai-tizi/pkg/captcha"
 )
 
 // CaptchaService 验证码服务接口
@@ -30,14 +30,17 @@ func NewCaptchaService(manager *captcha.CaptchaManager) CaptchaService {
 	}
 }
 
+// Generate 执行业务逻辑。
 func (s *captchaService) Generate(ctx context.Context, captchaType captcha.CaptchaType, params interface{}) (*captcha.CaptchaData, error) {
 	return s.manager.Generate(ctx, captchaType, params)
 }
 
+// Verify 执行业务逻辑。
 func (s *captchaService) Verify(ctx context.Context, captchaType captcha.CaptchaType, params interface{}) error {
 	return s.manager.Verify(ctx, captchaType, params)
 }
 
+// GetEnabledTypes 获取业务数据。
 func (s *captchaService) GetEnabledTypes() []captcha.CaptchaType {
 	return s.manager.GetEnabledTypes()
 }

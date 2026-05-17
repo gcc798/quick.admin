@@ -4,13 +4,14 @@ import { App, Button, Card, Space, Table, Tag } from 'antd';
 import { DeleteOutlined, DownOutlined, EyeOutlined, PlusOutlined, UpOutlined } from '@ant-design/icons';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
+import type { SnowflakeId } from '@/types/api';
 import { getMenuIconNode } from '@/utils/icons';
 import type { MenuRecord } from '@/types/menu';
 import { menuApi } from '@/api/menu';
 import { MenuModal } from './MenuModal';
 
-function collectKeys(nodes: MenuRecord[]): number[] {
-  const keys: number[] = [];
+function collectKeys(nodes: MenuRecord[]): SnowflakeId[] {
+  const keys: SnowflakeId[] = [];
   const walk = (items: MenuRecord[]) => {
     items.forEach((item) => {
       keys.push(item.id);
@@ -29,8 +30,8 @@ export default function MenuPage() {
   const [menuTree, setMenuTree] = useState<MenuRecord[]>([]);
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentMenuId, setCurrentMenuId] = useState<number>();
-  const [parentId, setParentId] = useState<number>();
+  const [currentMenuId, setCurrentMenuId] = useState<SnowflakeId>();
+  const [parentId, setParentId] = useState<SnowflakeId>();
 
   const loadMenuTree = async () => {
     setLoading(true);

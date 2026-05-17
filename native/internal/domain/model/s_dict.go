@@ -8,22 +8,22 @@ import (
 
 // DictData 字典数据
 type DictData struct {
-	ID          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`        // 字典编码（使用分布式ID）
-	ParentId    int64           `gorm:"column:parent_id;default:0;index" json:"parentId"`      // 父字典ID（0表示根节点）
-	Sort        int64           `gorm:"column:sort;default:0" json:"sort"`                     // 字典排序
-	DictLabel   string          `gorm:"column:dict_label" json:"dictLabel"`                    // 字典标签
-	DictValue   string          `gorm:"column:dict_value" json:"dictValue"`                    // 字典键值
-	DictType    string          `gorm:"column:dict_type;index" json:"dictType"`                // 字典类型
-	IsDefault   bool            `gorm:"column:is_default;default:false" json:"isDefault"`      // 是否默认
-	Status      int32           `gorm:"column:status;default:0" json:"status"`                 // 状态：0正常 1停用
-	Remark      string          `gorm:"column:remark" json:"remark"`                           // 备注
-	CreateBy    int64           `gorm:"column:create_by" json:"createBy"`                      // 创建者
-	CreatedTime utils.LocalTime `gorm:"column:created_time;autoCreateTime" json:"createdTime"` // 创建时间
-	UpdateBy    int64           `gorm:"column:update_by" json:"updateBy"`                      // 更新者
-	UpdatedTime utils.LocalTime `gorm:"column:updated_time;autoUpdateTime" json:"updatedTime"` // 更新时间
-	DeletedAt   gorm.DeletedAt  `gorm:"column:deleted_at;index" json:"-"`                      // 删除时间
+	ID          int64           `gorm:"column:id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"id"` // 字典编码（使用分布式ID）
+	ParentId    int64           `gorm:"column:parent_id;type:bigint;default:0;index" json:"parentId"`                   // 父字典ID（0表示根节点）
+	Sort        int64           `gorm:"column:sort;type:bigint;default:0" json:"sort"`                                  // 字典排序
+	DictLabel   string          `gorm:"column:dict_label;type:varchar(128)" json:"dictLabel"`                           // 字典标签
+	DictValue   string          `gorm:"column:dict_value;type:varchar(128)" json:"dictValue"`                           // 字典键值
+	DictType    string          `gorm:"column:dict_type;type:varchar(128);index" json:"dictType"`                       // 字典类型
+	IsDefault   bool            `gorm:"column:is_default;type:boolean;default:false" json:"isDefault"`                  // 是否默认
+	Status      int32           `gorm:"column:status;type:smallint;default:0" json:"status"`                            // 状态：0正常 1停用
+	Remark      string          `gorm:"column:remark;type:varchar(500)" json:"remark"`                                  // 备注
+	CreateBy    int64           `gorm:"column:create_by;type:bigint" json:"createBy"`                                   // 创建者
+	CreatedTime utils.LocalTime `gorm:"column:created_time;type:timestamptz;autoCreateTime" json:"createdTime"`         // 创建时间
+	UpdateBy    int64           `gorm:"column:update_by;type:bigint" json:"updateBy"`                                   // 更新者
+	UpdatedTime utils.LocalTime `gorm:"column:updated_time;type:timestamptz;autoUpdateTime" json:"updatedTime"`         // 更新时间
 }
 
+// TableName 返回数据库表名。
 func (*DictData) TableName() string {
 	return "s_dict_data"
 }
@@ -133,7 +133,7 @@ func (d *DictData) Update(db *gorm.DB, id int64, updates map[string]interface{})
 	return db.Model(&DictData{}).Where("id = ?", id).Updates(updates).Error
 }
 
-// Delete 删除字典数据（软删除）
+// Delete 删除字典数据
 func (*DictData) Delete(db *gorm.DB, id int64) error {
 	return db.Where("id = ?", id).Delete(&DictData{}).Error
 }

@@ -3,15 +3,18 @@ package service
 import (
 	"errors"
 	"fmt"
+	"sort"
 
 	"github.com/force-c/nai-tizi/internal/domain/model"
 	"gorm.io/gorm"
 )
 
+// MenuService 定义业务数据结构。
 type MenuService struct {
 	db *gorm.DB
 }
 
+// NewMenuService 创建组件实例。
 func NewMenuService(db *gorm.DB) *MenuService {
 	return &MenuService{
 		db: db,
@@ -76,6 +79,10 @@ func (s *MenuService) GetUserMenuTree(userId int64) ([]*MenuTree, error) {
 	}
 
 	// 5. 构建菜单树
+	filteredMenus, err = s.withAncestorMenus(filteredMenus)
+	if err != nil {
+		return nil, err
+	}
 	return s.buildMenuTree(filteredMenus, 0), nil
 }
 
@@ -254,4 +261,79 @@ func (s *MenuService) buildMenuTree(menus []model.Menu, parentId int64) []*MenuT
 	}
 
 	return tree
+}
+
+func (s *MenuService) withAncestorMenus(menus []model.Menu) ([]model.Menu, error) {
+	if len(menus) == 0 {
+		return menus, nil
+	}
+
+	menuByID := make(map[int64]model.Menu, len(menus))
+	missingParentIDs := make([]int64, 0)
+	for _, menu := range menus {
+		menuByID[menu.ID] = menu
+	}
+	for _, menu := range menus {
+		if menu.ParentId != 0 {
+			if _, ok := menuByID[menu.ParentId]; !ok {
+				missingParentIDs = append(missingParentIDs, menu.ParentId)
+			}
+		}
+	}
+
+	for len(missingParentIDs) > 0 {
+		parentIDs := uniqueMenuIDs(missingParentIDs)
+		missingParentIDs = nil
+
+		var parents []model.Menu
+		if err := s.db.
+			Where("id IN ? AND status = 0", parentIDs).
+			Find(&parents).Error; err != nil {
+			return nil, fmt.Errorf("failed to get ancestor menus: %w", err)
+		}
+
+		for _, parent := range parents {
+			if _, exists := menuByID[parent.ID]; exists {
+				continue
+			}
+			menuByID[parent.ID] = parent
+			if parent.ParentId != 0 {
+				if _, ok := menuByID[parent.ParentId]; !ok {
+					missingParentIDs = append(missingParentIDs, parent.ParentId)
+				}
+			}
+		}
+	}
+
+	result := make([]model.Menu, 0, len(menuByID))
+	for _, menu := range menuByID {
+		result = append(result, menu)
+	}
+	sort.Slice(result, func(i, j int) bool {
+		if result[i].Sort == result[j].Sort {
+			return result[i].ID < result[j].ID
+		}
+		return result[i].Sort < result[j].Sort
+	})
+	return result, nil
+}
+
+func uniqueMenuIDs(ids []int64) []int64 {
+	if len(ids) == 0 {
+		return nil
+	}
+
+	seen := make(map[int64]struct{}, len(ids))
+	result := make([]int64, 0, len(ids))
+	for _, id := range ids {
+		if id == 0 {
+			continue
+		}
+		if _, ok := seen[id]; ok {
+			continue
+		}
+		seen[id] = struct{}{}
+		result = append(result, id)
+	}
+	return result
 }

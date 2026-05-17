@@ -8,9 +8,17 @@ import (
 	"github.com/spf13/viper"
 )
 
+const (
+	AppEnvVar       = "NAI_TIZI_APP_ENV"
+	LegacyAppEnvVar = "ADCS_APP_ENV"
+)
+
+// Server 定义业务数据结构。
 type Server struct {
 	Port int `mapstructure:"port"`
 }
+
+// Database 定义业务数据结构。
 type Database struct {
 	DSN                    string `mapstructure:"dsn"`
 	MaxOpenConns           int    `mapstructure:"maxOpenConns"`
@@ -19,33 +27,47 @@ type Database struct {
 	SlowThreshold          int    `mapstructure:"slowThreshold"` // 慢 SQL 阈值（毫秒），默认 100ms
 	AutoMigrate            bool   `mapstructure:"autoMigrate"`   // 是否开启 GORM 自动生成表结构
 }
+
+// Redis 定义业务数据结构。
 type Redis struct {
 	Addr, Password string
 	DB             int
 }
+
+// JWT 定义业务数据结构。
 type JWT struct {
 	Secret string
 	Expire int64
 }
+
+// WeChat 定义业务数据结构。
 type WeChat struct {
-	Enabled    bool   `mapstructure:"enabled"`
-	AppID      string `mapstructure:"appid"`
-	Secret     string `mapstructure:"secret"`
-	TemplateID string `mapstructure:"templateId"`
+	Enabled    bool   `mapstructure:"enabled" json:"enabled"`
+	AppID      string `mapstructure:"appId" json:"appid"`
+	Secret     string `mapstructure:"secret" json:"secret"`
+	TemplateID string `mapstructure:"templateId" json:"templateId"`
 }
+
+// MQTT 定义业务数据结构。
 type MQTT struct {
 	Enabled                              bool `mapstructure:"enabled"`
 	Broker, ClientID, Username, Password string
 	QoS                                  byte
 }
+
+// RabbitMQ 定义业务数据结构。
 type RabbitMQ struct {
-	Enabled       bool `mapstructure:"enabled"`
-	URL, Exchange string
+	Enabled bool `mapstructure:"enabled"`
+	URL     string
 }
+
+// SMS 定义业务数据结构。
 type SMS struct {
 	Enabled                                              bool `mapstructure:"enabled"`
 	AccessKeyId, AccessKeySecret, SignName, TemplateCode string
 }
+
+// Email 定义业务数据结构。
 type Email struct {
 	Enabled  bool   `mapstructure:"enabled"`
 	Host     string `mapstructure:"host"`
@@ -54,6 +76,8 @@ type Email struct {
 	Password string `mapstructure:"password"`
 	From     string `mapstructure:"from"`
 }
+
+// S3 定义业务数据结构。
 type S3 struct {
 	Enabled         bool   `mapstructure:"enabled"`         // 是否启用
 	Endpoint        string `mapstructure:"endpoint"`        // MinIO/S3服务器地址
@@ -65,12 +89,19 @@ type S3 struct {
 	ForcePathStyle  bool   `mapstructure:"forcePathStyle"`  // 强制路径样式（MinIO需要）
 }
 
+// Scheduler 定义业务数据结构。
 type Scheduler struct {
 	Enabled bool `mapstructure:"enabled"`
 }
 
+// WebSocket 定义业务数据结构。
 type WebSocket struct {
-	Enabled bool `mapstructure:"enabled"`
+	Enabled             bool `mapstructure:"enabled"`
+	TimeoutEnabled      bool `mapstructure:"timeoutEnabled"`
+	ReadTimeoutSeconds  int  `mapstructure:"readTimeoutSeconds"`
+	WriteTimeoutSeconds int  `mapstructure:"writeTimeoutSeconds"`
+	HeartbeatEnabled    bool `mapstructure:"heartbeatEnabled"`
+	MaxReadTimeouts     int  `mapstructure:"maxReadTimeouts"`
 }
 
 // Auth 认证配置
@@ -113,6 +144,7 @@ type EmailCaptcha struct {
 	Template string `mapstructure:"template"` // 邮件模板
 }
 
+// Config 定义业务数据结构。
 type Config struct {
 	AppDir    string // 应用程序所在目录（可执行文件目录）
 	Server    Server
@@ -132,38 +164,15 @@ type Config struct {
 	Env       string
 }
 
+// Load 执行业务逻辑。
 func Load(appDir string) (*Config, *viper.Viper, error) {
 	v := viper.New()
-	env := os.Getenv("NTZ_APP_ENV")
-	if env == "" {
-		env = "dev"
-	}
+	env := CurrentEnv()
 
-	// 查找配置文件的多个可能位置
 	configFileName := fmt.Sprintf("conf.%s.yaml", env)
-	var configPath string
-	var foundPath string
-
-	// 1. 优先尝试当前工作目录（支持 IDE 调试）
-	workDir, _ := os.Getwd()
-	configPath = filepath.Join(workDir, configFileName)
-	if _, err := os.Stat(configPath); err == nil {
-		foundPath = configPath
-	}
-
-	// 2. 如果当前目录没找到，尝试可执行文件目录（生产环境）
-	if foundPath == "" {
-		configPath = filepath.Join(appDir, configFileName)
-		if _, err := os.Stat(configPath); err == nil {
-			foundPath = configPath
-		}
-	}
-
-	// 3. 如果都没找到，返回错误
-	if foundPath == "" {
-		return nil, nil, fmt.Errorf("config file not found: tried %s and %s",
-			filepath.Join(workDir, configFileName),
-			filepath.Join(appDir, configFileName))
+	foundPath, err := ResolveFilePath(appDir, configFileName)
+	if err != nil {
+		return nil, nil, err
 	}
 
 	v.SetConfigFile(foundPath)
@@ -199,8 +208,8 @@ func Load(appDir string) (*Config, *viper.Viper, error) {
 	}
 	// RabbitMQ validation
 	if cfg.RabbitMQ.Enabled {
-		if cfg.RabbitMQ.URL == "" || cfg.RabbitMQ.Exchange == "" {
-			return nil, nil, fmt.Errorf("rabbitmq url and exchange are required when enabled")
+		if cfg.RabbitMQ.URL == "" {
+			return nil, nil, fmt.Errorf("rabbitmq url is required when enabled")
 		}
 	}
 	// Auth 默认值设置
@@ -233,6 +242,36 @@ func Load(appDir string) (*Config, *viper.Viper, error) {
 	if !v.IsSet("captcha.email.expire") {
 		cfg.Captcha.Email.Expire = 300
 	}
-
 	return &cfg, v, nil
+}
+
+func CurrentEnv() string {
+	env := os.Getenv(AppEnvVar)
+	if env == "" {
+		env = os.Getenv(LegacyAppEnvVar)
+	}
+	if env == "" {
+		return "dev"
+	}
+	return env
+}
+
+func ResolveFilePath(appDir, fileName string) (string, error) {
+	workDir, _ := os.Getwd()
+	candidates := []string{
+		filepath.Join(workDir, fileName),
+		filepath.Join(workDir, "cmd", "api", fileName),
+		filepath.Join(appDir, fileName),
+	}
+
+	for _, path := range candidates {
+		if path == "" {
+			continue
+		}
+		if _, err := os.Stat(path); err == nil {
+			return path, nil
+		}
+	}
+
+	return "", fmt.Errorf("config file not found: tried %v", candidates)
 }

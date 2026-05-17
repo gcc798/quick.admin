@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Key } from 'react';
 import { App, Spin, Tree } from 'antd';
+import type { SnowflakeId } from '@/types/api';
 import { BasicModal } from '@/components/common/BasicModal';
 import { menuApi } from '@/api/menu';
 import { roleApi } from '@/api/role';
@@ -8,7 +9,7 @@ import type { MenuRecord } from '@/types/menu';
 
 interface PermissionModalProps {
   open: boolean;
-  roleId?: number;
+  roleId?: SnowflakeId;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -54,7 +55,9 @@ export function PermissionModal({
     try {
       await roleApi.assignMenus(
         roleId,
-        checkedKeys.map((key) => Number(key)),
+        checkedKeys.filter(
+          (key): key is SnowflakeId => typeof key === 'string' || typeof key === 'number',
+        ),
       );
       message.success('角色菜单分配成功');
       onSuccess();

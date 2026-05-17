@@ -11,7 +11,7 @@ import (
 
 // StringIDConverter 字符串ID转换中间件
 // 用于处理前端传递的字符串类型大数ID，将其转换为int64
-// 这样可以避免JavaScript大数精度丢失问题
+// 这样可以避免前端大数精度丢失问题
 //
 // 支持两种场景：
 // 1. 路径参数中的ID（如 /api/v1/user/:id）

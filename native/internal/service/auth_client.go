@@ -14,13 +14,16 @@ import (
 )
 
 const (
+	// ClientCacheKeyPrefix 定义业务常量。
 	ClientCacheKeyPrefix = "s_auth_client:"
-	ClientCacheTTL       = 30 * 24 * time.Hour
+	// ClientCacheTTL 定义业务常量。
+	ClientCacheTTL = 30 * 24 * time.Hour
 )
 
+// ClientService 定义业务数据结构。
 type ClientService interface {
-	// AuthenticateClient 认证客户端（通过 clientKey + clientSecret）
-	AuthenticateClient(ctx context.Context, clientKey, clientSecret, grantType string) (*model.AuthClient, error)
+	// AuthenticateClientID 认证客户端（通过 clientId）
+	AuthenticateClientID(ctx context.Context, clientID, grantType string) (*model.AuthClient, error)
 }
 
 type clientService struct {
@@ -29,25 +32,21 @@ type clientService struct {
 	logger logging.Logger
 }
 
+// NewClientService 创建组件实例。
 func NewClientService(db *gorm.DB, redis *redis.Client, logger logging.Logger) ClientService {
 	return &clientService{db: db, redis: redis, logger: logger}
 }
 
-// AuthenticateClient 通过 clientKey 和 clientSecret 认证客户端
-// 1. 根据 clientKey 查询客户端配置（优先从 Redis 缓存读取）
-// 2. 验证 clientSecret 是否匹配
-// 3. 检查客户端状态是否启用
-// 4. 检查客户端是否支持请求的授权类型
-func (s *clientService) AuthenticateClient(ctx context.Context, clientKey, clientSecret, grantType string) (*model.AuthClient, error) {
-	if clientKey == "" || clientSecret == "" {
-		return nil, fmt.Errorf("clientKey和clientSecret不能为空")
+// AuthenticateClientID 根据 clientId 认证客户端。
+func (s *clientService) AuthenticateClientID(ctx context.Context, clientID, grantType string) (*model.AuthClient, error) {
+	if clientID == "" {
+		return nil, fmt.Errorf("clientId不能为空")
 	}
 	if grantType == "" {
 		return nil, fmt.Errorf("grantType不能为空")
 	}
 
-	// 尝试从 Redis 缓存读取（使用 clientKey 作为缓存键）
-	cacheKey := ClientCacheKeyPrefix + "key:" + clientKey
+	cacheKey := ClientCacheKeyPrefix + "id:" + clientID
 	val, err := s.redis.Get(ctx, cacheKey).Result()
 	var client *model.AuthClient
 	if err == nil {
@@ -57,10 +56,9 @@ func (s *clientService) AuthenticateClient(ctx context.Context, clientKey, clien
 		}
 	}
 
-	// 缓存未命中，从数据库查询
 	if client == nil {
 		var m model.AuthClient
-		c, err := m.FindByClientKey(s.db, clientKey)
+		c, err := m.FindByClientId(s.db, clientID)
 		if err != nil {
 			if errors.Is(err, gorm.ErrRecordNotFound) {
 				return nil, fmt.Errorf("客户端不存在")
@@ -68,25 +66,15 @@ func (s *clientService) AuthenticateClient(ctx context.Context, clientKey, clien
 			return nil, fmt.Errorf("查询客户端失败: %w", err)
 		}
 		client = c
-		// 写入缓存
 		b, _ := json.Marshal(client)
 		_ = s.redis.Set(ctx, cacheKey, string(b), ClientCacheTTL).Err()
 	}
 
-	// 验证 clientSecret
-	if !client.VerifySecret(clientSecret) {
-		return nil, fmt.Errorf("客户端认证失败")
-	}
-
-	// 检查客户端状态
 	if !client.IsActive() {
 		return nil, fmt.Errorf("客户端已停用")
 	}
-
-	// 检查是否支持该授权类型
 	if !client.IsGrantTypeSupported(grantType) {
 		return nil, fmt.Errorf("客户端不支持该授权类型")
 	}
-
 	return client, nil
 }

@@ -24,6 +24,11 @@ type RoleController interface {
 	AssignRoleToUser(ctx *gin.Context)     // 为用户分配角色
 	RemoveRoleFromUser(ctx *gin.Context)   // 移除用户的角色
 	GetUserRoles(ctx *gin.Context)         // 获取用户的所有角色
+	GetRoleUsers(ctx *gin.Context)         // 获取角色下的用户
+	AssignUsersToRole(ctx *gin.Context)    // 批量为角色添加用户
+	RemoveUsersFromRole(ctx *gin.Context)  // 批量移除角色下的用户
+	GetRoleMenus(ctx *gin.Context)         // 获取角色菜单
+	AssignRoleMenus(ctx *gin.Context)      // 分配角色菜单
 	AddRolePermission(ctx *gin.Context)    // 为角色添加权限
 	DeleteRolePermission(ctx *gin.Context) // 删除角色权限
 	GetRolePermissions(ctx *gin.Context)   // 获取角色的所有权限
@@ -34,6 +39,7 @@ type roleController struct {
 	logger      logger.Logger
 }
 
+// NewRoleController 创建组件实例。
 func NewRoleController(c container.Container) RoleController {
 	casbinService := service.NewCasbinServiceV2(c.GetCasbin(), c.GetDB(), c.GetLogger())
 	return &roleController{
@@ -238,7 +244,7 @@ func (c *roleController) AssignRoleToUser(ctx *gin.Context) {
 		return
 	}
 
-	if err := c.roleService.AssignRoleToUser(ctx.Request.Context(), req.UserId, req.RoleId); err != nil {
+	if err := c.roleService.AssignRoleToUser(ctx.Request.Context(), req.UserId.Int64(), req.RoleId.Int64()); err != nil {
 		c.logger.Error("为用户分配角色失败", zap.Error(err))
 		response.InternalServerError(ctx, "为用户分配角色失败: "+err.Error())
 		return
@@ -313,6 +319,120 @@ func (c *roleController) GetUserRoles(ctx *gin.Context) {
 	}
 
 	response.Success(ctx, roles)
+}
+
+// GetRoleUsers 获取角色下的用户
+func (c *roleController) GetRoleUsers(ctx *gin.Context) {
+	roleId, err := strconv.ParseInt(ctx.Param("roleId"), 10, 64)
+	if err != nil {
+		response.BadRequest(ctx, "角色ID格式错误")
+		return
+	}
+
+	users, err := c.roleService.GetRoleUsers(ctx.Request.Context(), roleId)
+	if err != nil {
+		c.logger.Error("获取角色用户失败", zap.Error(err))
+		response.InternalServerError(ctx, "获取角色用户失败: "+err.Error())
+		return
+	}
+
+	response.Success(ctx, users)
+}
+
+// AssignUsersToRole 批量为角色添加用户
+func (c *roleController) AssignUsersToRole(ctx *gin.Context) {
+	roleId, err := strconv.ParseInt(ctx.Param("roleId"), 10, 64)
+	if err != nil {
+		response.BadRequest(ctx, "角色ID格式错误")
+		return
+	}
+
+	var req request.BatchRoleUsersRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		response.BadRequest(ctx, "参数错误: "+err.Error())
+		return
+	}
+
+	if err := c.roleService.AssignUsersToRole(ctx.Request.Context(), roleId, toInt64IDs(req.UserIds), currentUserId(ctx)); err != nil {
+		c.logger.Error("批量为角色添加用户失败", zap.Error(err))
+		response.InternalServerError(ctx, "批量为角色添加用户失败: "+err.Error())
+		return
+	}
+
+	response.Success(ctx, nil)
+}
+
+// RemoveUsersFromRole 批量移除角色下的用户
+func (c *roleController) RemoveUsersFromRole(ctx *gin.Context) {
+	roleId, err := strconv.ParseInt(ctx.Param("roleId"), 10, 64)
+	if err != nil {
+		response.BadRequest(ctx, "角色ID格式错误")
+		return
+	}
+
+	var req request.BatchRoleUsersRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		response.BadRequest(ctx, "参数错误: "+err.Error())
+		return
+	}
+
+	if err := c.roleService.RemoveUsersFromRole(ctx.Request.Context(), roleId, toInt64IDs(req.UserIds)); err != nil {
+		c.logger.Error("批量移除角色用户失败", zap.Error(err))
+		response.InternalServerError(ctx, "批量移除角色用户失败: "+err.Error())
+		return
+	}
+
+	response.Success(ctx, nil)
+}
+
+func toInt64IDs(ids []request.Int64ID) []int64 {
+	result := make([]int64, 0, len(ids))
+	for _, id := range ids {
+		result = append(result, id.Int64())
+	}
+	return result
+}
+
+// GetRoleMenus 获取角色菜单 ID 列表
+func (c *roleController) GetRoleMenus(ctx *gin.Context) {
+	roleIdStr := ctx.Param("roleId")
+	roleId, err := strconv.ParseInt(roleIdStr, 10, 64)
+	if err != nil {
+		response.BadRequest(ctx, "角色ID格式错误")
+		return
+	}
+	menus, err := c.roleService.GetRoleMenus(ctx.Request.Context(), roleId)
+	if err != nil {
+		c.logger.Error("获取角色菜单失败", zap.Error(err))
+		response.InternalServerError(ctx, "获取角色菜单失败: "+err.Error())
+		return
+	}
+	menuIds := make([]int64, 0, len(menus))
+	for _, menu := range menus {
+		menuIds = append(menuIds, menu.ID)
+	}
+	response.Success(ctx, menuIds)
+}
+
+// AssignRoleMenus 分配角色菜单
+func (c *roleController) AssignRoleMenus(ctx *gin.Context) {
+	roleIdStr := ctx.Param("roleId")
+	roleId, err := strconv.ParseInt(roleIdStr, 10, 64)
+	if err != nil {
+		response.BadRequest(ctx, "角色ID格式错误")
+		return
+	}
+	var req request.AssignRoleMenusRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		response.BadRequest(ctx, "参数错误: "+err.Error())
+		return
+	}
+	if err := c.roleService.AssignMenusToRole(ctx.Request.Context(), roleId, toInt64IDs(req.MenuIds)); err != nil {
+		c.logger.Error("分配角色菜单失败", zap.Error(err))
+		response.InternalServerError(ctx, "分配角色菜单失败: "+err.Error())
+		return
+	}
+	response.Success(ctx, nil)
 }
 
 // AddRolePermission 为角色添加权限

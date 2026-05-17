@@ -6,6 +6,7 @@ import { BasicTable, type BasicTableRef } from '@/components/common/BasicTable';
 import { JsonViewerModal } from '@/components/common/JsonViewerModal';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { StorageEnvRecord } from '@/types/system';
 import { storageEnvApi } from '@/api/storageenv';
@@ -46,7 +47,7 @@ export default function StorageEnvPage() {
   const { message } = App.useApp();
   const tableRef = useRef<BasicTableRef<StorageEnvRecord>>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentEnvId, setCurrentEnvId] = useState<number>();
+  const [currentEnvId, setCurrentEnvId] = useState<SnowflakeId>();
   const [viewerOpen, setViewerOpen] = useState(false);
   const [viewerData, setViewerData] = useState<unknown>(null);
 

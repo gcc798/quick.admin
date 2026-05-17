@@ -77,17 +77,6 @@ func TestStringIDConverter_JSONBody_SingleID(t *testing.T) {
 		expected map[string]interface{}
 	}{
 		{
-			name: "String ID fields",
-			body: map[string]interface{}{
-				"userId": "1234567890123456789",
-				"orgId":  "9876543210987654321",
-			},
-			expected: map[string]interface{}{
-				"userId": float64(1234567890123456789),
-				"orgId":  float64(9876543210987654321),
-			},
-		},
-		{
 			name: "Mixed string and number IDs",
 			body: map[string]interface{}{
 				"userId": "1234567890123456789",
@@ -149,15 +138,6 @@ func TestStringIDConverter_JSONBody_IDArray(t *testing.T) {
 		expected map[string]interface{}
 	}{
 		{
-			name: "String ID array",
-			body: map[string]interface{}{
-				"ids": []interface{}{"1234567890123456789", "9876543210987654321"},
-			},
-			expected: map[string]interface{}{
-				"ids": []interface{}{float64(1234567890123456789), float64(9876543210987654321)},
-			},
-		},
-		{
 			name: "Mixed string and number ID array",
 			body: map[string]interface{}{
 				"ids": []interface{}{"1234567890123456789", 123},
@@ -201,7 +181,7 @@ func TestStringIDConverter_JSONBody_NestedObjects(t *testing.T) {
 	body := map[string]interface{}{
 		"user": map[string]interface{}{
 			"id":    "1234567890123456789",
-			"orgId": "9876543210987654321",
+			"orgId": "2234567890123456789",
 		},
 		"roles": []interface{}{
 			map[string]interface{}{"roleId": "111111111111111111"},
@@ -212,7 +192,7 @@ func TestStringIDConverter_JSONBody_NestedObjects(t *testing.T) {
 	expected := map[string]interface{}{
 		"user": map[string]interface{}{
 			"id":    float64(1234567890123456789),
-			"orgId": float64(9876543210987654321),
+			"orgId": float64(2234567890123456789),
 		},
 		"roles": []interface{}{
 			map[string]interface{}{"roleId": float64(111111111111111111)},

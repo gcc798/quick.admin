@@ -12,9 +12,9 @@ import (
 
 	"github.com/force-c/nai-tizi/internal/domain/model"
 	"github.com/force-c/nai-tizi/internal/domain/request"
-	"github.com/force-c/nai-tizi/internal/infrastructure/storage"
 	"github.com/force-c/nai-tizi/internal/logger"
 	"github.com/force-c/nai-tizi/internal/utils/pagination"
+	"github.com/force-c/nai-tizi/pkg/storage"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
@@ -246,7 +246,7 @@ func (s *attachmentService) Delete(ctx context.Context, attachmentId int64) erro
 			// 继续删除数据库记录
 		}
 
-		// 4. 删除数据库记录（软删除）
+		// 4. 删除数据库记录
 		if err := tx.Model(&model.Attachment{}).
 			Where("attachment_id = ?", attachmentId).
 			Update("status", "1").Error; err != nil {

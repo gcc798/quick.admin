@@ -23,8 +23,9 @@ func CORS() gin.HandlerFunc {
 		// 允许的请求方法
 		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS")
 
-		// 允许的请求头
-		c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, X-Client-Key, X-Client-Secret")
+		// 允许的请求头。
+		// 浏览器在预检请求里可能会把自定义头名规范成小写，因此同时放行 clientId/clientid。
+		c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, clientId, clientid")
 
 		// 允许浏览器访问的响应头
 		c.Header("Access-Control-Expose-Headers", "Content-Length, Content-Type, Authorization")

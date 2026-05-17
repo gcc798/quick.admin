@@ -17,15 +17,14 @@ type AuthClient struct {
 	ClientSecret  string          `gorm:"column:client_secret;type:varchar(255);not null;comment:客户端秘钥" json:"clientSecret"`
 	GrantType     string          `gorm:"column:grant_type;type:varchar(255);comment:授权类型(逗号分隔)" json:"grantType"`
 	DeviceType    string          `gorm:"column:device_type;type:varchar(32);comment:设备类型" json:"deviceType"`
-	Status        int             `gorm:"column:status;default:0;comment:状态(0正常 1停用)" json:"status"`
-	Timeout       int64           `gorm:"column:timeout;default:604800;comment:固定超时时间(秒),默认7天" json:"timeout"`
-	ActiveTimeout int64           `gorm:"column:active_timeout;default:1800;comment:活动超时时间(秒),默认30分钟" json:"activeTimeout"`
+	Status        int             `gorm:"column:status;type:smallint;default:0;comment:状态(0正常 1停用)" json:"status"`
+	Timeout       int64           `gorm:"column:timeout;type:bigint;default:604800;comment:固定超时时间(秒),默认7天" json:"timeout"`
+	ActiveTimeout int64           `gorm:"column:active_timeout;type:bigint;default:1800;comment:活动超时时间(秒),默认30分钟" json:"activeTimeout"`
 	Remark        string          `gorm:"column:remark;type:varchar(500);comment:备注" json:"remark"`
-	CreateBy      int64           `gorm:"column:create_by;comment:创建者" json:"createBy"`
-	CreatedTime   utils.LocalTime `gorm:"column:created_time;autoCreateTime;comment:创建时间" json:"createdTime"`
-	UpdateBy      int64           `gorm:"column:update_by;comment:更新者" json:"updateBy"`
-	UpdatedTime   utils.LocalTime `gorm:"column:updated_time;autoUpdateTime;comment:更新时间" json:"updatedTime"`
-	DeletedAt     gorm.DeletedAt  `gorm:"column:deleted_at;index" json:"-"` // 删除时间
+	CreateBy      int64           `gorm:"column:create_by;type:bigint;comment:创建者" json:"createBy"`
+	CreatedTime   utils.LocalTime `gorm:"column:created_time;type:timestamptz;autoCreateTime;comment:创建时间" json:"createdTime"`
+	UpdateBy      int64           `gorm:"column:update_by;type:bigint;comment:更新者" json:"updateBy"`
+	UpdatedTime   utils.LocalTime `gorm:"column:updated_time;type:timestamptz;autoUpdateTime;comment:更新时间" json:"updatedTime"`
 }
 
 // TableName 指定表名

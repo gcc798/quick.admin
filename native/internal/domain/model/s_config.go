@@ -9,18 +9,18 @@ import (
 
 // Config 配置表
 type Config struct {
-	ID          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`        // 配置ID（使用分布式ID）
-	Name        string          `gorm:"column:name;not null" json:"name"`                      // 配置名称
-	Code        string          `gorm:"column:code;not null;index" json:"code"`                // 配置编码
-	Data        json.RawMessage `gorm:"column:data;type:jsonb" json:"data"`                    // 配置数据（JSON格式）
-	Remark      string          `gorm:"column:remark" json:"remark"`                           // 备注
-	CreateBy    int64           `gorm:"column:create_by" json:"createBy"`                      // 创建者
-	CreatedTime utils.LocalTime `gorm:"column:created_time;autoCreateTime" json:"createdTime"` // 创建时间
-	UpdateBy    int64           `gorm:"column:update_by" json:"updateBy"`                      // 更新者
-	UpdatedTime utils.LocalTime `gorm:"column:updated_time;autoUpdateTime" json:"updatedTime"` // 更新时间
-	DeletedAt   gorm.DeletedAt  `gorm:"column:deleted_at;index" json:"-"`                      // 删除时间
+	ID          int64           `gorm:"column:id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"id"` // 配置ID（使用分布式ID）
+	Name        string          `gorm:"column:name;type:varchar(128);not null" json:"name"`                             // 配置名称
+	Code        string          `gorm:"column:code;type:varchar(128);not null;index" json:"code"`                       // 配置编码
+	Data        json.RawMessage `gorm:"column:data;type:jsonb" json:"data"`                                             // 配置数据（JSON格式）
+	Remark      string          `gorm:"column:remark;type:varchar(500)" json:"remark"`                                  // 备注
+	CreateBy    int64           `gorm:"column:create_by;type:bigint" json:"createBy"`                                   // 创建者
+	CreatedTime utils.LocalTime `gorm:"column:created_time;type:timestamptz;autoCreateTime" json:"createdTime"`         // 创建时间
+	UpdateBy    int64           `gorm:"column:update_by;type:bigint" json:"updateBy"`                                   // 更新者
+	UpdatedTime utils.LocalTime `gorm:"column:updated_time;type:timestamptz;autoUpdateTime" json:"updatedTime"`         // 更新时间
 }
 
+// TableName 返回数据库表名。
 func (*Config) TableName() string {
 	return "s_config"
 }
@@ -80,7 +80,7 @@ func (c *Config) Update(db *gorm.DB, id int64, updates map[string]interface{}) e
 	return db.Model(&Config{}).Where("id = ?", id).Updates(updates).Error
 }
 
-// Delete 删除配置（软删除）
+// Delete 删除配置
 func (*Config) Delete(db *gorm.DB, id int64) error {
 	return db.Where("id = ?", id).Delete(&Config{}).Error
 }

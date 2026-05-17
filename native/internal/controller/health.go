@@ -14,6 +14,7 @@ var (
 	version   = "1.0.0"
 )
 
+// HealthController 定义业务数据结构。
 type HealthController interface {
 	Health(c *gin.Context)  // 基础健康检查
 	Ready(c *gin.Context)   // Kubernetes就绪检查
@@ -25,12 +26,14 @@ type healthController struct {
 	container container.Container
 }
 
+// NewHealthController 创建组件实例。
 func NewHealthController(c container.Container) HealthController {
 	return &healthController{
 		container: c,
 	}
 }
 
+// HealthResponse 定义业务数据结构。
 type HealthResponse struct {
 	Status    string            `json:"status"`
 	Timestamp time.Time         `json:"timestamp"`

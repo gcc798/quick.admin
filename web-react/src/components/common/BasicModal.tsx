@@ -3,7 +3,7 @@ import { Modal } from 'antd';
 
 interface BasicModalProps {
   open: boolean;
-  title: string;
+  title: ReactNode;
   width?: number;
   footer?: ReactNode | null;
   confirmLoading?: boolean;
@@ -15,7 +15,7 @@ interface BasicModalProps {
 export function BasicModal({
   open,
   title,
-  width = 640,
+  width = 720,
   footer,
   confirmLoading,
   onOk,
@@ -24,6 +24,8 @@ export function BasicModal({
 }: BasicModalProps) {
   return (
     <Modal
+      centered
+      className="basic-modal"
       destroyOnClose
       open={open}
       title={title}
@@ -33,7 +35,7 @@ export function BasicModal({
       onOk={onOk}
       onCancel={onCancel}
     >
-      {children}
+      <div className="basic-modal-body">{children}</div>
     </Modal>
   );
 }

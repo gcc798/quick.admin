@@ -3,12 +3,15 @@ import type { ColumnsType } from 'antd/es/table';
 import { App, Button, Popconfirm, Space, Tag } from 'antd';
 import { DeleteOutlined, EditOutlined, KeyOutlined, PlusOutlined } from '@ant-design/icons';
 import type { BasicTableRef } from '@/components/common/BasicTable';
+import { ApiPermissionAssignModal } from '@/components/common/ApiPermissionAssignModal';
 import { BasicTable } from '@/components/common/BasicTable';
 import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { UserRecord } from '@/types/system';
 import { userApi } from '@/api/user';
+import { UserRoleAssignModal } from './UserRoleAssignModal';
 import { UserModal } from './UserModal';
 
 const searchSchemas: FormSchema[] = [
@@ -43,10 +46,12 @@ export default function UserPage() {
   const { message } = App.useApp();
   const tableRef = useRef<BasicTableRef<UserRecord>>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentUserId, setCurrentUserId] = useState<number>();
+  const [apiPermissionModalOpen, setApiPermissionModalOpen] = useState(false);
+  const [roleAssignModalOpen, setRoleAssignModalOpen] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<SnowflakeId>();
+  const [currentUser, setCurrentUser] = useState<UserRecord>();
 
   const columns: ColumnsType<UserRecord> = [
-    { title: '用户 ID', dataIndex: 'userId', width: 100 },
     { title: '用户名', dataIndex: 'userName', width: 140 },
     { title: '昵称', dataIndex: 'nickName', width: 140 },
     { title: '邮箱', dataIndex: 'email', width: 220 },
@@ -75,8 +80,27 @@ export default function UserPage() {
               label: '编辑',
               permission: 'user.update',
               onClick: () => {
-                setCurrentUserId(record.userId);
+                setCurrentUserId(record.id);
                 setModalOpen(true);
+              },
+            },
+            {
+              key: 'apiPermission',
+              label: 'API权限',
+              permission: 'api_permission.assign',
+              onClick: () => {
+                setCurrentUserId(record.id);
+                setApiPermissionModalOpen(true);
+              },
+            },
+            {
+              key: 'assignRole',
+              label: '分配角色',
+              permission: 'role.assign',
+              onClick: () => {
+                setCurrentUser(record);
+                setCurrentUserId(record.id);
+                setRoleAssignModalOpen(true);
               },
             },
             {
@@ -84,7 +108,7 @@ export default function UserPage() {
               label: '重置密码',
               permission: 'user.update',
               onClick: async () => {
-                await userApi.resetPassword(record.userId, '123456');
+                await userApi.resetPassword(record.id, '123456');
                 message.success('密码已重置为 123456');
               },
             },
@@ -95,7 +119,7 @@ export default function UserPage() {
               danger: true,
               confirmTitle: '确定删除该用户吗？',
               onClick: async () => {
-                await userApi.delete(record.userId);
+                await userApi.delete(record.id);
                 message.success('删除成功');
                 tableRef.current?.reload();
               },
@@ -113,7 +137,7 @@ export default function UserPage() {
       return;
     }
 
-    await userApi.batchDelete(rows.map((item) => item.userId));
+    await userApi.batchDelete(rows.map((item) => item.id));
     message.success('批量删除成功');
     tableRef.current?.reload();
   };
@@ -124,7 +148,7 @@ export default function UserPage() {
         ref={tableRef}
         columns={columns}
         fetchData={userApi.page}
-        rowKey="userId"
+        rowKey="id"
         searchSchemas={searchSchemas}
         scroll={{ x: 1200 }}
         toolbar={
@@ -135,6 +159,7 @@ export default function UserPage() {
                 type="primary"
                 onClick={() => {
                   setCurrentUserId(undefined);
+                  setCurrentUser(undefined);
                   setModalOpen(true);
                 }}
               >
@@ -158,6 +183,28 @@ export default function UserPage() {
         onCancel={() => setModalOpen(false)}
         onSuccess={() => {
           setModalOpen(false);
+          tableRef.current?.reload();
+        }}
+      />
+
+      <UserRoleAssignModal
+        open={roleAssignModalOpen}
+        user={currentUser}
+        onCancel={() => setRoleAssignModalOpen(false)}
+        onSuccess={() => {
+          setRoleAssignModalOpen(false);
+          tableRef.current?.reload();
+        }}
+      />
+
+      <ApiPermissionAssignModal
+        open={apiPermissionModalOpen}
+        targetId={currentUserId}
+        targetType="user"
+        title="分配用户 API 权限"
+        onCancel={() => setApiPermissionModalOpen(false)}
+        onSuccess={() => {
+          setApiPermissionModalOpen(false);
           tableRef.current?.reload();
         }}
       />

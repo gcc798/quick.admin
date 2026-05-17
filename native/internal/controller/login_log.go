@@ -11,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// LoginLogController 定义业务数据结构。
 type LoginLogController interface {
 	CreateLoginLog(ctx *gin.Context)      // 创建登录日志
 	UpdateLoginLog(ctx *gin.Context)      // 更新登录日志
@@ -26,6 +27,7 @@ type loginLogController struct {
 	loginLogService service.LoginLogService
 }
 
+// NewLoginLogController 创建组件实例。
 func NewLoginLogController(c container.Container) LoginLogController {
 	return &loginLogController{
 		ctr:             c,

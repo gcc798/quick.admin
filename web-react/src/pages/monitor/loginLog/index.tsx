@@ -70,7 +70,7 @@ export default function LoginLogPage() {
       selectable={false}
       scroll={{ x: 1200 }}
       toolbar={
-        <PermissionGate permission="log.delete">
+        <PermissionGate permission="login_log.delete">
           <Button
             danger
             icon={<DeleteOutlined />}

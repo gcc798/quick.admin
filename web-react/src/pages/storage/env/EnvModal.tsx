@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { App, Button, Form } from 'antd';
+import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { StorageEnvRecord } from '@/types/system';
 import { BasicForm } from '@/components/common/BasicForm';
@@ -8,7 +9,7 @@ import { storageEnvApi } from '@/api/storageenv';
 
 interface EnvModalProps {
   open: boolean;
-  envId?: number;
+  envId?: SnowflakeId;
   onCancel: () => void;
   onSuccess: () => void;
 }
@@ -178,6 +179,7 @@ export function EnvModal({
         form={form}
         schemas={schemas}
         layout="vertical"
+        variant="modal"
         showActionButtons={false}
       />
     </BasicModal>

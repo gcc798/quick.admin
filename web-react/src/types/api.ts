@@ -4,6 +4,8 @@ export interface CommonResp<T = unknown> {
   data?: T;
 }
 
+export type SnowflakeId = string | number;
+
 export interface PageData<T = unknown> {
   records: T[];
   total: number;
@@ -13,8 +15,7 @@ export interface PageData<T = unknown> {
 }
 
 export interface LoginReq {
-  clientKey: string;
-  clientSecret: string;
+  clientId: string;
   grantType: 'password' | 'email' | 'xcx';
   username?: string;
   password?: string;
@@ -27,12 +28,11 @@ export interface LoginReq {
 
 export interface RefreshTokenReq {
   refreshToken: string;
-  clientKey: string;
-  clientSecret: string;
+  clientId: string;
 }
 
 export interface UserInfo {
-  userId: number;
+  userId: SnowflakeId;
   username: string;
   nickname: string;
   phonenumber?: string;

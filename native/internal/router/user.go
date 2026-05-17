@@ -39,4 +39,9 @@ func registerUserRoutes(r *gin.Engine, ctx *RouterContext) {
 		// 用户删除 - 需要 user.delete 权限（带参数的路由放在最后）
 		users.DELETE("/:id", middleware.Permission(ctx.CasbinService, constants.ResourceUserDelete), userController.Delete)
 	}
+
+	systemUsers := r.Group("/system/user", ctx.AuthMiddleware)
+	{
+		systemUsers.POST("/xcxGetInfo", userController.XcxGetInfo)
+	}
 }

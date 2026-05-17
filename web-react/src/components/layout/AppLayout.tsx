@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
-  AppstoreOutlined,
-  BulbFilled,
-  BulbOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -12,10 +9,10 @@ import {
 import type { ItemType } from 'antd/es/menu/interface';
 import { Avatar, Button, Dropdown, Layout, Menu, Space } from 'antd';
 import type { MenuRecord } from '@/types/menu';
+import { ThemeSwitcher } from '@/components/common/ThemeSwitcher';
 import { usePermissionStore } from '@/store/permission';
 import { useAppStore } from '@/store/app';
 import { useAuthStore } from '@/store/auth';
-import { useThemeStore } from '@/store/theme';
 import { getMenuIconNode } from '@/utils/icons';
 import { findFirstNavigablePath, isMenuHidden, joinMenuPath } from '@/utils/menu';
 
@@ -28,6 +25,33 @@ function findOpenKeys(pathname: string) {
   }
 
   return parts.slice(0, -1).map((_, index) => joinMenuPath('', parts.slice(0, index + 1).join('/')));
+}
+
+function findMenuTrail(
+  menuTree: MenuRecord[],
+  pathname: string,
+  parentPath = '',
+  trail: MenuRecord[] = [],
+): MenuRecord[] {
+  for (const menu of menuTree) {
+    if (isMenuHidden(menu)) {
+      continue;
+    }
+
+    const fullPath = joinMenuPath(parentPath, menu.path);
+    const nextTrail = [...trail, menu];
+
+    if (fullPath === pathname && menu.menuType !== 2) {
+      return nextTrail;
+    }
+
+    const childTrail = findMenuTrail(menu.children ?? [], pathname, fullPath, nextTrail);
+    if (childTrail.length) {
+      return childTrail;
+    }
+  }
+
+  return [];
 }
 
 function buildMenuItems(
@@ -77,16 +101,19 @@ export function AppLayout() {
   const location = useLocation();
   const menuTree = usePermissionStore((state) => state.menuTree);
   const collapsed = useAppStore((state) => state.collapsed);
+  const setCollapsed = useAppStore((state) => state.setCollapsed);
   const toggleCollapsed = useAppStore((state) => state.toggleCollapsed);
   const authStore = useAuthStore();
-  const mode = useThemeStore((state) => state.mode);
-  const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
   const menuItems = useMemo(
     () => buildMenuItems(menuTree, (path) => navigate(path)),
     [menuTree, navigate],
   );
   const currentOpenKeys = useMemo(() => findOpenKeys(location.pathname), [location.pathname]);
+  const currentTrail = useMemo(
+    () => findMenuTrail(menuTree, location.pathname),
+    [location.pathname, menuTree],
+  );
   const [openKeys, setOpenKeys] = useState<string[]>(currentOpenKeys);
   const [isPointerPressing, setIsPointerPressing] = useState(false);
 
@@ -132,19 +159,22 @@ export function AppLayout() {
           className="app-sider"
           collapsed={collapsed}
           collapsible
-          onCollapse={toggleCollapsed}
+          onCollapse={setCollapsed}
           theme="light"
           trigger={null}
           width={224}
         >
-          <div className="app-logo">
-            <span className="app-logo-mark">
-              <AppstoreOutlined />
-            </span>
+          <button
+            className="app-logo"
+            type="button"
+            onClick={() => navigate('/dashboard')}
+          >
             {!collapsed ? (
-              <span className="app-logo-text">{import.meta.env.VITE_APP_TITLE}</span>
+              <span className="app-logo-text">
+                <strong>Admin</strong>
+              </span>
             ) : null}
-          </div>
+          </button>
 
           <Menu
             className="app-menu"
@@ -167,15 +197,26 @@ export function AppLayout() {
                 type="text"
                 onClick={toggleCollapsed}
               />
+              <div className="header-page-context">
+                <nav aria-label="当前页面" className="header-breadcrumb">
+                  {(currentTrail.length ? currentTrail.map((menu) => menu.menuName) : ['工作台'])
+                    .map((title, index, items) => (
+                      <span
+                        className={`header-breadcrumb-item${index === items.length - 1 ? ' is-current' : ''}`}
+                        key={`${title}-${index}`}
+                      >
+                        <span>{title}</span>
+                        {index < items.length - 1 ? (
+                          <span className="header-breadcrumb-separator">/</span>
+                        ) : null}
+                      </span>
+                    ))}
+                </nav>
+              </div>
             </Space>
 
             <Space align="center" className="app-header-group" size={12}>
-              <Button
-                className="header-action-btn header-theme-btn"
-                icon={mode === 'dark' ? <BulbFilled /> : <BulbOutlined />}
-                type="text"
-                onClick={toggleTheme}
-              />
+              <ThemeSwitcher />
               <Dropdown
                 menu={{
                   items: [
@@ -191,12 +232,12 @@ export function AppLayout() {
                   ],
                 }}
               >
-                <Space className="header-user">
-                  <Avatar icon={<UserOutlined />} shape="square" size={30} />
-                  <span className="header-user-name">
-                    {authStore.userInfo?.nickname || authStore.userInfo?.username || '管理员'}
-                  </span>
-                </Space>
+                <Button
+                  aria-label="用户菜单"
+                  className="header-user-btn"
+                  icon={<Avatar icon={<UserOutlined />} shape="square" size={28} />}
+                  type="text"
+                />
               </Dropdown>
             </Space>
           </Header>

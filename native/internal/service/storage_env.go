@@ -176,7 +176,7 @@ func (s *storageEnvService) Delete(ctx context.Context, envId int64) error {
 			return fmt.Errorf("该环境下还有 %d 个附件，无法删除", count)
 		}
 
-		// 4. 软删除环境
+		// 4. 删除环境
 		if err := (&model.StorageEnv{}).Delete(tx, envId); err != nil {
 			return fmt.Errorf("删除存储环境失败: %w", err)
 		}

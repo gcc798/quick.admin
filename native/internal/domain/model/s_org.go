@@ -10,25 +10,25 @@ import (
 
 // Org 系统组织表（多租户）
 type Org struct {
-	ID          int64           `gorm:"column:id;primaryKey" autogen:"int64" json:"id"`   // 组织ID（使用分布式ID）
-	ParentId    int64           `gorm:"column:parent_id;default:0;index" json:"parentId"` // 父组织ID（0表示根组织）
-	Ancestors   string          `gorm:"column:ancestors" json:"ancestors"`                // 祖级列表（逗号分隔，例如: "0,1,2"）
-	OrgName     string          `gorm:"column:org_name;not null" json:"orgName"`          // 组织名称
-	OrgCode     string          `gorm:"column:org_code;uniqueIndex" json:"orgCode"`       // 组织编码（唯一）
-	OrgType     string          `gorm:"column:org_type;default:'company'" json:"orgType"` // 组织类型：company公司 department部门 group集团
-	Leader      string          `gorm:"column:leader" json:"leader"`                      // 负责人
-	Phone       string          `gorm:"column:phone" json:"phone"`                        // 联系电话
-	Email       string          `gorm:"column:email" json:"email"`                        // 邮箱
-	Status      int32           `gorm:"column:status;default:0" json:"status"`            // 状态：0正常 1停用
-	Sort        int64           `gorm:"column:sort;default:0" json:"sort"`                // 显示顺序
-	Remark      string          `gorm:"column:remark" json:"remark"`                      // 备注
-	CreateBy    int64           `gorm:"column:create_by" json:"createBy"`                 // 创建人
-	UpdateBy    int64           `gorm:"column:update_by" json:"updateBy"`                 // 更新人
-	CreatedTime utils.LocalTime `gorm:"column:created_time;autoCreateTime" json:"createdTime"`
-	UpdatedTime utils.LocalTime `gorm:"column:updated_time;autoUpdateTime" json:"updatedTime"`
-	DeletedAt   gorm.DeletedAt  `gorm:"column:deleted_at;index" json:"-"`
+	ID          int64           `gorm:"column:id;type:bigint;primaryKey;autoIncrement:false" autogen:"int64" json:"id"` // 组织ID（使用分布式ID）
+	ParentId    int64           `gorm:"column:parent_id;type:bigint;default:0;index" json:"parentId"`                   // 父组织ID（0表示根组织）
+	Ancestors   string          `gorm:"column:ancestors;type:varchar(512)" json:"ancestors"`                            // 祖级列表（逗号分隔，例如: "0,1,2"）
+	OrgName     string          `gorm:"column:org_name;type:varchar(128);not null" json:"orgName"`                      // 组织名称
+	OrgCode     string          `gorm:"column:org_code;type:varchar(64);uniqueIndex" json:"orgCode"`                    // 组织编码（唯一）
+	OrgType     string          `gorm:"column:org_type;type:varchar(32);default:'company'" json:"orgType"`              // 组织类型：company公司 department部门 group集团
+	Leader      string          `gorm:"column:leader;type:varchar(64)" json:"leader"`                                   // 负责人
+	Phone       string          `gorm:"column:phone;type:varchar(32)" json:"phone"`                                     // 联系电话
+	Email       string          `gorm:"column:email;type:varchar(128)" json:"email"`                                    // 邮箱
+	Status      int32           `gorm:"column:status;type:smallint;default:0" json:"status"`                            // 状态：0正常 1停用
+	Sort        int64           `gorm:"column:sort;type:bigint;default:0" json:"sort"`                                  // 显示顺序
+	Remark      string          `gorm:"column:remark;type:varchar(500)" json:"remark"`                                  // 备注
+	CreateBy    int64           `gorm:"column:create_by;type:bigint" json:"createBy"`                                   // 创建人
+	UpdateBy    int64           `gorm:"column:update_by;type:bigint" json:"updateBy"`                                   // 更新人
+	CreatedTime utils.LocalTime `gorm:"column:created_time;type:timestamptz;autoCreateTime" json:"createdTime"`
+	UpdatedTime utils.LocalTime `gorm:"column:updated_time;type:timestamptz;autoUpdateTime" json:"updatedTime"`
 }
 
+// TableName 返回数据库表名。
 func (*Org) TableName() string { return "s_org" }
 
 // FindByOrgId 根据组织ID查询组织
@@ -100,7 +100,7 @@ func (o *Org) Update(db *gorm.DB, org *Org) error {
 	return db.Save(org).Error
 }
 
-// Delete 删除组织（软删除）
+// Delete 删除组织
 func (o *Org) Delete(db *gorm.DB, orgId int64) error {
 	return db.Where("id = ?", orgId).Delete(&Org{}).Error
 }

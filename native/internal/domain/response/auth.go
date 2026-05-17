@@ -8,6 +8,11 @@ type LoginResponse struct {
 	RefreshToken     string    `json:"refresh_token" example:"dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4="`       // 刷新令牌（长期有效）
 	ExpiresIn        int64     `json:"expires_in" example:"1800"`                                      // AccessToken 过期时间（秒）
 	RefreshExpiresIn int64     `json:"refresh_expires_in" example:"604800"`                            // RefreshToken 过期时间（秒）
+	ExpireIn         int64     `json:"expire_in,omitempty" example:"1800"`                             // AccessToken 过期时间（秒）
+	RefreshExpireIn  int64     `json:"refresh_expire_in,omitempty" example:"604800"`                   // RefreshToken 过期时间（秒）
+	ClientID         string    `json:"client_id,omitempty" example:"client-id"`                        // 客户端ID
+	Scope            string    `json:"scope,omitempty" example:""`                                     // 令牌权限
+	OpenID           string    `json:"openId,omitempty" example:"openid"`                              // 微信OpenID
 	UserInfo         *UserInfo `json:"user_info"`                                                      // 用户信息
 }
 
@@ -16,8 +21,7 @@ type LoginResponse struct {
 //	@Description	使用 RefreshToken 刷新 AccessToken 的请求参数
 type RefreshTokenRequest struct {
 	RefreshToken string `json:"refreshToken" binding:"required" example:"dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4="` // 刷新令牌
-	ClientKey    string `json:"clientKey" binding:"required" example:"web-admin"`                           // 客户端Key
-	ClientSecret string `json:"clientSecret" binding:"required" example:"web-secret-2024"`                  // 客户端密钥
+	ClientID     string `json:"clientId" binding:"required" example:"client-id"`                            // 客户端ID
 }
 
 // RefreshTokenResponse 刷新令牌响应
@@ -40,5 +44,23 @@ type UserInfo struct {
 	Phonenumber string `json:"phonenumber" example:"13800138000"`               // 手机号
 	Email       string `json:"email" example:"admin@example.com"`               // 邮箱
 	Avatar      string `json:"avatar" example:"https://example.com/avatar.jpg"` // 头像URL
+	OrgID       int64  `json:"orgId,omitempty" example:"1"`                     // 组织ID
 	UserType    int32  `json:"userType" example:"0"`                            // 用户类型：0系统用户 1微信用户 2APP用户
+	OpenID      string `json:"openId,omitempty" example:"openid"`               // 微信OpenID
+	UnionID     string `json:"unionId,omitempty" example:"unionid"`             // 微信UnionID
+}
+
+// XcxUserInfo 小程序用户信息
+type XcxUserInfo struct {
+	UserID       int64  `json:"userId"`
+	OrgID        int64  `json:"orgId"`
+	Phonenumber  string `json:"phonenumber"`
+	OpenID       string `json:"openId"`
+	UnionID      string `json:"unionId"`
+	UserName     string `json:"userName"`
+	NickName     string `json:"nickName"`
+	Sex          string `json:"sex"`
+	HeadPortrait string `json:"headPortrait"`
+	RoleName     string `json:"roleName"`
+	RoleKey      string `json:"roleKey"`
 }
