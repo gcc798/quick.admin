@@ -3,7 +3,7 @@ package data
 import (
 	"github.com/google/wire"
 
-	"github.com/force-c/nai-tizi/kratos/application/sys-api/internal/conf"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-api/internal/conf"
 )
 
 // ProviderSet is data providers.

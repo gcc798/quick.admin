@@ -7,11 +7,11 @@
 package main
 
 import (
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/biz"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/conf"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/data"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/server"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/service"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/internal/biz"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/internal/conf"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/internal/data"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/internal/server"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/internal/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/registry"

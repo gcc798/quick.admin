@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/dysmsapi"
-	logging "github.com/force-c/nai-tizi/internal/logger"
+	logging "github.com/gcc798/nai-tizi/internal/logger"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 )

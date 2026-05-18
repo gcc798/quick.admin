@@ -22,7 +22,7 @@ package main
 
 import (
     "fmt"
-    "github.com/force-c/nai-tizi/internal/utils"
+    "github.com/gcc798/nai-tizi/internal/utils"
 )
 
 func main() {
@@ -50,7 +50,7 @@ func main() {
 package main
 
 import (
-    "github.com/force-c/nai-tizi/internal/utils"
+    "github.com/gcc798/nai-tizi/internal/utils"
     "golang.org/x/crypto/bcrypt"
 )
 

@@ -3,9 +3,9 @@ package server
 import (
 	"time"
 
-	v1 "github.com/force-c/nai-tizi/kratos/api/system/v1"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/conf"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/service"
+	v1 "github.com/gcc798/nai-tizi/kratos/api/system/v1"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/internal/conf"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/internal/service"
 	kgrpc "github.com/go-kratos/kratos/v2/transport/grpc"
 )
 

@@ -29,7 +29,7 @@ definitions:
     required:
     - phone
     type: object
-  github_com_force-c_nai-tizi_internal_domain_model.Menu:
+  github_com_gcc798_nai-tizi_internal_domain_model.Menu:
     properties:
       component:
         description: 组件路径
@@ -87,7 +87,7 @@ definitions:
         description: 显示状态：0显示 1隐藏
         type: integer
     type: object
-  github_com_force-c_nai-tizi_internal_domain_model.Role:
+  github_com_gcc798_nai-tizi_internal_domain_model.Role:
     properties:
       createBy:
         description: 创建人
@@ -124,7 +124,7 @@ definitions:
       updatedTime:
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_model.StorageEnv:
+  github_com_gcc798_nai-tizi_internal_domain_model.StorageEnv:
     properties:
       code:
         description: 环境编码（唯一）
@@ -165,7 +165,7 @@ definitions:
         description: 更新时间
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.AddRolePermissionRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.AddRolePermissionRequest:
     properties:
       action:
         description: 操作类型（支持通配符）
@@ -184,7 +184,7 @@ definitions:
     - resource
     - roleKey
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.AssignRoleToUserRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.AssignRoleToUserRequest:
     properties:
       roleId:
         description: 角色ID
@@ -198,7 +198,7 @@ definitions:
     - roleId
     - userId
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteConfigRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteConfigRequest:
     properties:
       ids:
         description: 配置ID列表
@@ -209,7 +209,7 @@ definitions:
     required:
     - ids
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteDictRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteDictRequest:
     properties:
       ids:
         description: 字典ID列表
@@ -220,7 +220,7 @@ definitions:
     required:
     - ids
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteLoginLogRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteLoginLogRequest:
     properties:
       ids:
         description: 日志ID列表
@@ -231,7 +231,7 @@ definitions:
     required:
     - ids
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteOperLogRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteOperLogRequest:
     properties:
       ids:
         description: 日志ID列表
@@ -242,7 +242,7 @@ definitions:
     required:
     - ids
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteOrgsRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteOrgsRequest:
     properties:
       ids:
         description: 组织ID列表
@@ -253,7 +253,7 @@ definitions:
     required:
     - ids
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteUsersRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteUsersRequest:
     properties:
       ids:
         items:
@@ -263,17 +263,17 @@ definitions:
     required:
     - ids
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.BatchImportUsersRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.BatchImportUsersRequest:
     properties:
       users:
         items:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateUserRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateUserRequest'
         minItems: 1
         type: array
     required:
     - users
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.BindAttachmentToBusinessRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.BindAttachmentToBusinessRequest:
     properties:
       businessField:
         description: 业务字段
@@ -298,7 +298,7 @@ definitions:
     - businessId
     - businessType
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.ChangePasswordRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.ChangePasswordRequest:
     properties:
       newPassword:
         minLength: 6
@@ -310,7 +310,7 @@ definitions:
     - newPassword
     - oldPassword
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CleanLoginLogRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CleanLoginLogRequest:
     properties:
       days:
         description: 清理多少天之前的日志
@@ -319,7 +319,7 @@ definitions:
     required:
     - days
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CleanOperLogRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CleanOperLogRequest:
     properties:
       days:
         description: 清理多少天之前的日志
@@ -328,7 +328,7 @@ definitions:
     required:
     - days
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CreateConfigRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CreateConfigRequest:
     properties:
       code:
         description: 配置编码
@@ -356,7 +356,7 @@ definitions:
     - name
     - updateBy
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CreateDictRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CreateDictRequest:
     properties:
       createBy:
         description: 创建者
@@ -393,7 +393,7 @@ definitions:
     - dictType
     - dictValue
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CreateLoginLogRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CreateLoginLogRequest:
     properties:
       browser:
         description: 浏览器类型
@@ -422,7 +422,7 @@ definitions:
     required:
     - userName
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CreateOperLogRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CreateOperLogRequest:
     properties:
       businessType:
         description: 业务类型
@@ -472,7 +472,7 @@ definitions:
     required:
     - title
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CreateOrgRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CreateOrgRequest:
     properties:
       email:
         description: 邮箱
@@ -523,7 +523,7 @@ definitions:
     - orgCode
     - orgName
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CreateRoleRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CreateRoleRequest:
     properties:
       dataScope:
         description: 数据范围：1全部 2自定义 3本组织 4本组织及以下 5仅本人
@@ -553,7 +553,7 @@ definitions:
     - roleKey
     - roleName
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CreateStorageEnvRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CreateStorageEnvRequest:
     properties:
       code:
         type: string
@@ -587,7 +587,7 @@ definitions:
     - name
     - storageType
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.CreateUserRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.CreateUserRequest:
     properties:
       avatar:
         type: string
@@ -628,7 +628,7 @@ definitions:
     - password
     - userName
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.LoginRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.LoginRequest:
     description: 统一登录请求参数，根据 grantType 使用不同的字段组合
     properties:
       clientKey:
@@ -680,7 +680,7 @@ definitions:
     - clientSecret
     - grantType
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.PageAttachmentsRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.PageAttachmentsRequest:
     properties:
       businessType:
         type: string
@@ -699,7 +699,7 @@ definitions:
     - pageNum
     - pageSize
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.PageConfigRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.PageConfigRequest:
     properties:
       code:
         description: 配置编码(可选)
@@ -720,7 +720,7 @@ definitions:
         description: PageSize 每页数量
         type: integer
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.PageOperLogRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.PageOperLogRequest:
     properties:
       businessType:
         description: 业务类型（可选）
@@ -753,7 +753,7 @@ definitions:
         description: 模块标题（可选,模糊查询）
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.PageOrgsRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.PageOrgsRequest:
     properties:
       isAsc:
         description: 'IsAsc 排序方向，asc或desc，支持多个，逗号分隔，如: "asc,desc"'
@@ -783,7 +783,7 @@ definitions:
         - 1
         type: integer
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.PageRoleRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.PageRoleRequest:
     properties:
       isAsc:
         description: 'IsAsc 排序方向，asc或desc，支持多个，逗号分隔，如: "asc,desc"'
@@ -806,7 +806,7 @@ definitions:
         example: 0
         type: integer
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.PageStorageEnvsRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.PageStorageEnvsRequest:
     properties:
       isAsc:
         description: 'IsAsc 排序方向，asc或desc，支持多个，逗号分隔，如: "asc,desc"'
@@ -831,7 +831,7 @@ definitions:
         - oss
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.PageUsersRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.PageUsersRequest:
     properties:
       isAsc:
         description: 'IsAsc 排序方向，asc或desc，支持多个，逗号分隔，如: "asc,desc"'
@@ -856,7 +856,7 @@ definitions:
       username:
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.ResetPasswordRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.ResetPasswordRequest:
     properties:
       newPassword:
         minLength: 6
@@ -864,16 +864,16 @@ definitions:
     required:
     - newPassword
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.SetDefaultStorageEnvRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.SetDefaultStorageEnvRequest:
     properties:
       id:
         type: integer
     required:
     - id
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.TestStorageEnvConnectionRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.TestStorageEnvConnectionRequest:
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.UpdateConfigRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.UpdateConfigRequest:
     properties:
       code:
         description: 配置编码
@@ -900,7 +900,7 @@ definitions:
     - name
     - updateBy
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.UpdateDictRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.UpdateDictRequest:
     properties:
       dictLabel:
         description: 字典标签
@@ -937,7 +937,7 @@ definitions:
     - dictType
     - dictValue
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.UpdateLoginLogRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.UpdateLoginLogRequest:
     properties:
       browser:
         description: 浏览器类型
@@ -969,7 +969,7 @@ definitions:
     required:
     - id
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.UpdateOperLogRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.UpdateOperLogRequest:
     properties:
       businessType:
         description: 业务类型
@@ -1022,7 +1022,7 @@ definitions:
     required:
     - id
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.UpdateOrgRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.UpdateOrgRequest:
     properties:
       email:
         description: 邮箱
@@ -1070,7 +1070,7 @@ definitions:
         - 1
         type: integer
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.UpdateRoleRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.UpdateRoleRequest:
     properties:
       dataScope:
         description: 数据范围
@@ -1100,7 +1100,7 @@ definitions:
     - roleId
     - roleName
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.UpdateStorageEnvRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.UpdateStorageEnvRequest:
     properties:
       code:
         type: string
@@ -1137,7 +1137,7 @@ definitions:
     - name
     - storageType
     type: object
-  github_com_force-c_nai-tizi_internal_domain_request.UpdateUserRequest:
+  github_com_gcc798_nai-tizi_internal_domain_request.UpdateUserRequest:
     properties:
       avatar:
         type: string
@@ -1170,7 +1170,7 @@ definitions:
         description: 用户类型：0系统用户 1微信用户 2APP用户
         type: integer
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.ConfigDataResponse:
+  github_com_gcc798_nai-tizi_internal_domain_response.ConfigDataResponse:
     properties:
       code:
         description: 配置编码
@@ -1181,7 +1181,7 @@ definitions:
           type: integer
         type: array
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.ConfigResponse:
+  github_com_gcc798_nai-tizi_internal_domain_response.ConfigResponse:
     properties:
       code:
         description: 配置编码
@@ -1213,7 +1213,7 @@ definitions:
         description: 更新时间
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.DictDataResponse:
+  github_com_gcc798_nai-tizi_internal_domain_response.DictDataResponse:
     properties:
       createBy:
         description: 创建者
@@ -1255,7 +1255,7 @@ definitions:
         description: 更新时间
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.LoginLogResponse:
+  github_com_gcc798_nai-tizi_internal_domain_response.LoginLogResponse:
     properties:
       browser:
         description: 浏览器类型
@@ -1288,7 +1288,7 @@ definitions:
         description: 用户名
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.LoginResponse:
+  github_com_gcc798_nai-tizi_internal_domain_response.LoginResponse:
     description: 登录成功后返回的 Token 信息和用户信息
     properties:
       access_token:
@@ -1309,10 +1309,10 @@ definitions:
         type: string
       user_info:
         allOf:
-        - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.UserInfo'
+        - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.UserInfo'
         description: 用户信息
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.OperLogResponse:
+  github_com_gcc798_nai-tizi_internal_domain_response.OperLogResponse:
     properties:
       businessType:
         description: 业务类型
@@ -1366,7 +1366,7 @@ definitions:
         description: UA
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.RefreshTokenRequest:
+  github_com_gcc798_nai-tizi_internal_domain_response.RefreshTokenRequest:
     description: 使用 RefreshToken 刷新 AccessToken 的请求参数
     properties:
       clientKey:
@@ -1386,7 +1386,7 @@ definitions:
     - clientSecret
     - refreshToken
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.RefreshTokenResponse:
+  github_com_gcc798_nai-tizi_internal_domain_response.RefreshTokenResponse:
     description: 刷新成功后返回的新 Token 对
     properties:
       access_token:
@@ -1406,7 +1406,7 @@ definitions:
         example: bmV3IHJlZnJlc2ggdG9rZW4=
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.Response:
+  github_com_gcc798_nai-tizi_internal_domain_response.Response:
     description: API 统一响应格式
     properties:
       code:
@@ -1421,7 +1421,7 @@ definitions:
         example: success
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_domain_response.UserInfo:
+  github_com_gcc798_nai-tizi_internal_domain_response.UserInfo:
     description: 用户基本信息
     properties:
       avatar:
@@ -1453,7 +1453,7 @@ definitions:
         example: admin
         type: string
     type: object
-  github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaData:
+  github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaData:
     properties:
       data:
         description: 验证码数据
@@ -1465,10 +1465,10 @@ definitions:
         type: string
       type:
         allOf:
-        - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaType'
+        - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaType'
         description: 验证码类型
     type: object
-  github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaType:
+  github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaType:
     enum:
     - image
     - sms
@@ -1486,11 +1486,11 @@ definitions:
     - CaptchaTypeImage
     - CaptchaTypeSMS
     - CaptchaTypeEmail
-  github_com_force-c_nai-tizi_internal_service.MenuTree:
+  github_com_gcc798_nai-tizi_internal_service.MenuTree:
     properties:
       children:
         items:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_service.MenuTree'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_service.MenuTree'
         type: array
       component:
         description: 组件路径
@@ -1584,7 +1584,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 删除附件
       tags:
       - 附件管理
@@ -1610,7 +1610,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -1639,14 +1639,14 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BindAttachmentToBusinessRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BindAttachmentToBusinessRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 绑定附件到业务
       tags:
       - 附件管理
@@ -1704,7 +1704,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -1740,7 +1740,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   items:
@@ -1766,7 +1766,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageAttachmentsRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageAttachmentsRequest'
       produces:
       - application/json
       responses:
@@ -1774,7 +1774,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -1809,7 +1809,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -1828,22 +1828,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateConfigRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateConfigRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 创建成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 创建配置
@@ -1859,22 +1859,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateConfigRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateConfigRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 更新成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 更新配置
@@ -1897,15 +1897,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 删除配置
@@ -1928,19 +1928,19 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.ConfigResponse'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.ConfigResponse'
               type: object
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 根据ID查询配置
@@ -1957,22 +1957,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteConfigRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteConfigRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 批量删除配置
@@ -1997,21 +1997,21 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.ConfigResponse'
+                    $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.ConfigResponse'
                   type: array
               type: object
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 根据编码获取配置列表
       tags:
       - 配置管理
@@ -2034,19 +2034,19 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.ConfigDataResponse'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.ConfigDataResponse'
               type: object
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 根据编码获取配置数据
       tags:
       - 配置管理
@@ -2066,7 +2066,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageConfigRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageConfigRequest'
       produces:
       - application/json
       responses:
@@ -2074,7 +2074,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -2082,7 +2082,7 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 分页查询配置列表
@@ -2099,22 +2099,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateDictRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateDictRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 创建成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 创建字典
@@ -2130,22 +2130,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateDictRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateDictRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 更新成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 更新字典
@@ -2168,15 +2168,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 删除字典
@@ -2199,19 +2199,19 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.DictDataResponse'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.DictDataResponse'
               type: object
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 根据ID查询字典
@@ -2228,22 +2228,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteDictRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteDictRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 批量删除字典
@@ -2274,7 +2274,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: string
@@ -2282,11 +2282,11 @@ paths:
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 根据类型和键值获取标签
       tags:
       - 字典管理
@@ -2314,21 +2314,21 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.DictDataResponse'
+                    $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.DictDataResponse'
                   type: array
               type: object
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 根据类型获取字典列表
       tags:
       - 字典管理
@@ -2343,22 +2343,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateLoginLogRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateLoginLogRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 创建成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 创建登录日志
@@ -2374,22 +2374,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateLoginLogRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateLoginLogRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 更新成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 更新登录日志
@@ -2412,15 +2412,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 删除登录日志
@@ -2443,19 +2443,19 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.LoginLogResponse'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.LoginLogResponse'
               type: object
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 根据ID查询登录日志
@@ -2472,22 +2472,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteLoginLogRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteLoginLogRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 批量删除登录日志
@@ -2504,22 +2504,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CleanLoginLogRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CleanLoginLogRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 清理成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 清理登录日志
@@ -2537,17 +2537,17 @@ paths:
           description: 成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Menu'
+                    $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Menu'
                   type: array
               type: object
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 获取菜单列表
@@ -2563,22 +2563,22 @@ paths:
         name: menu
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Menu'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Menu'
       produces:
       - application/json
       responses:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 创建菜单
@@ -2601,15 +2601,15 @@ paths:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 删除菜单
@@ -2632,23 +2632,23 @@ paths:
           description: 成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Menu'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Menu'
               type: object
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "404":
           description: 菜单不存在
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 获取菜单详情
@@ -2669,22 +2669,22 @@ paths:
         name: menu
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Menu'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Menu'
       produces:
       - application/json
       responses:
         "200":
           description: 成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 更新菜单
@@ -2702,17 +2702,17 @@ paths:
           description: 成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/github_com_force-c_nai-tizi_internal_service.MenuTree'
+                    $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_service.MenuTree'
                   type: array
               type: object
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 获取菜单树
@@ -2730,21 +2730,21 @@ paths:
           description: 成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/github_com_force-c_nai-tizi_internal_service.MenuTree'
+                    $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_service.MenuTree'
                   type: array
               type: object
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 获取用户菜单树
@@ -2761,22 +2761,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateOperLogRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateOperLogRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 创建成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 创建操作日志
@@ -2792,22 +2792,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateOperLogRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateOperLogRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 更新成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 更新操作日志
@@ -2830,15 +2830,15 @@ paths:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 删除操作日志
@@ -2861,19 +2861,19 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.OperLogResponse'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.OperLogResponse'
               type: object
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 根据ID查询操作日志
@@ -2890,22 +2890,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteOperLogRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteOperLogRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 删除成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 批量删除操作日志
@@ -2922,22 +2922,22 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CleanOperLogRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CleanOperLogRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 清理成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 清理操作日志
@@ -2954,22 +2954,22 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageOperLogRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageOperLogRequest'
       produces:
       - application/json
       responses:
         "200":
           description: 查询成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 分页查询操作日志列表
@@ -2991,7 +2991,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateOrgRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateOrgRequest'
       produces:
       - application/json
       responses:
@@ -2999,7 +2999,7 @@ paths:
           description: 创建成功，返回组织ID
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   format: int64
@@ -3008,15 +3008,15 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 创建组织
@@ -3045,7 +3045,7 @@ paths:
           description: 删除成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: string
@@ -3053,19 +3053,19 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "404":
           description: 组织不存在
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 删除组织
@@ -3093,7 +3093,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -3101,19 +3101,19 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "404":
           description: 组织不存在
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 查询组织详情
@@ -3139,7 +3139,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateOrgRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateOrgRequest'
       produces:
       - application/json
       responses:
@@ -3147,7 +3147,7 @@ paths:
           description: 更新成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: string
@@ -3155,19 +3155,19 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "404":
           description: 组织不存在
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 更新组织信息
@@ -3189,7 +3189,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteOrgsRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteOrgsRequest'
       produces:
       - application/json
       responses:
@@ -3197,7 +3197,7 @@ paths:
           description: 删除成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: string
@@ -3205,15 +3205,15 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 批量删除组织
@@ -3235,7 +3235,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageOrgsRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageOrgsRequest'
       produces:
       - application/json
       responses:
@@ -3243,7 +3243,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -3251,7 +3251,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 分页查询组织列表
@@ -3275,7 +3275,7 @@ paths:
           description: 查询成功
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   items:
@@ -3285,11 +3285,11 @@ paths:
         "401":
           description: 未授权
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 获取组织树
@@ -3311,7 +3311,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateRoleRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateRoleRequest'
       produces:
       - application/json
       responses:
@@ -3319,15 +3319,15 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Role'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Role'
               type: object
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 创建角色
       tags:
       - 角色管理
@@ -3353,11 +3353,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 删除角色
       tags:
       - 角色管理
@@ -3383,15 +3383,15 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Role'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Role'
               type: object
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 获取角色详情
       tags:
       - 角色管理
@@ -3415,18 +3415,18 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateRoleRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateRoleRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 更新角色
       tags:
       - 角色管理
@@ -3446,18 +3446,18 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.AssignRoleToUserRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.AssignRoleToUserRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 为用户分配角色
       tags:
       - 角色管理
@@ -3477,7 +3477,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageRoleRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageRoleRequest'
       produces:
       - application/json
       responses:
@@ -3485,7 +3485,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -3525,11 +3525,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 删除角色权限
       tags:
       - 角色管理
@@ -3548,18 +3548,18 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.AddRolePermissionRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.AddRolePermissionRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 为角色添加权限
       tags:
       - 角色管理
@@ -3586,7 +3586,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -3594,7 +3594,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 获取角色的所有权限
       tags:
       - 角色管理
@@ -3625,11 +3625,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 移除用户的角色
       tags:
       - 角色管理
@@ -3656,17 +3656,17 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   items:
-                    $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Role'
+                    $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Role'
                   type: array
               type: object
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 获取用户的所有角色
       tags:
       - 角色管理
@@ -3686,7 +3686,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateStorageEnvRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateStorageEnvRequest'
       produces:
       - application/json
       responses:
@@ -3694,10 +3694,10 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.StorageEnv'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.StorageEnv'
               type: object
       summary: 创建存储环境
       tags:
@@ -3724,7 +3724,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 删除存储环境
       tags:
       - 存储环境管理
@@ -3750,10 +3750,10 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.StorageEnv'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.StorageEnv'
               type: object
       summary: 获取存储环境详情
       tags:
@@ -3778,14 +3778,14 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateStorageEnvRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateStorageEnvRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 更新存储环境
       tags:
       - 存储环境管理
@@ -3809,14 +3809,14 @@ paths:
         in: body
         name: body
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.TestStorageEnvConnectionRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.TestStorageEnvConnectionRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 测试存储环境连接
       tags:
       - 存储环境管理
@@ -3838,10 +3838,10 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_model.StorageEnv'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.StorageEnv'
               type: object
       summary: 获取默认存储环境
       tags:
@@ -3861,14 +3861,14 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.SetDefaultStorageEnvRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.SetDefaultStorageEnvRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 设置默认存储环境
       tags:
       - 存储环境管理
@@ -3888,7 +3888,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageStorageEnvsRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageStorageEnvsRequest'
       produces:
       - application/json
       responses:
@@ -3896,7 +3896,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -3957,15 +3957,15 @@ paths:
         "200":
           description: 查询成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 分页查询字典列表
@@ -4033,15 +4033,15 @@ paths:
         "200":
           description: 查询成功
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 请求参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "500":
           description: 服务器内部错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       security:
       - Bearer: []
       summary: 分页查询登录日志列表
@@ -4063,7 +4063,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateUserRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateUserRequest'
       produces:
       - application/json
       responses:
@@ -4071,7 +4071,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -4079,7 +4079,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 创建用户
       tags:
       - 用户管理
@@ -4105,11 +4105,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 删除用户
       tags:
       - 用户管理
@@ -4135,7 +4135,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -4143,7 +4143,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 获取用户详情
       tags:
       - 用户管理
@@ -4167,18 +4167,18 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateUserRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateUserRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 更新用户
       tags:
       - 用户管理
@@ -4203,18 +4203,18 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.ResetPasswordRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.ResetPasswordRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 重置用户密码
       tags:
       - 用户管理
@@ -4234,18 +4234,18 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteUsersRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteUsersRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 批量删除用户
       tags:
       - 用户管理
@@ -4265,7 +4265,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchImportUsersRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchImportUsersRequest'
       produces:
       - application/json
       responses:
@@ -4273,7 +4273,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -4281,7 +4281,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 批量导入用户
       tags:
       - 用户管理
@@ -4301,7 +4301,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageUsersRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageUsersRequest'
       produces:
       - application/json
       responses:
@@ -4309,7 +4309,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: object
@@ -4317,7 +4317,7 @@ paths:
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 分页查询用户列表
       tags:
       - 用户管理
@@ -4337,18 +4337,18 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.ChangePasswordRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.ChangePasswordRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 用户修改密码
       tags:
       - 用户管理
@@ -4363,7 +4363,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.RefreshTokenRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.RefreshTokenRequest'
       produces:
       - application/json
       responses:
@@ -4371,19 +4371,19 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.RefreshTokenResponse'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.RefreshTokenResponse'
               type: object
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "401":
           description: RefreshToken 无效或已过期
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 刷新访问令牌
       tags:
       - 认证
@@ -4405,10 +4405,10 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaData'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaData'
               type: object
       summary: 发送邮箱验证码
       tags:
@@ -4424,10 +4424,10 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaData'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaData'
               type: object
       summary: 生成图形验证码
       tags:
@@ -4450,10 +4450,10 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaData'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaData'
               type: object
       summary: 发送短信验证码
       tags:
@@ -4467,7 +4467,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   items:
@@ -4562,7 +4562,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_request.LoginRequest'
+          $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.LoginRequest'
       produces:
       - application/json
       responses:
@@ -4570,19 +4570,19 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.LoginResponse'
+                  $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.LoginResponse'
               type: object
         "400":
           description: 参数错误
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
         "401":
           description: 认证失败
           schema:
-            $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
       summary: 用户登录
       tags:
       - 认证
@@ -4598,7 +4598,7 @@ paths:
           description: OK
           schema:
             allOf:
-            - $ref: '#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response'
+            - $ref: '#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response'
             - properties:
                 data:
                   type: string

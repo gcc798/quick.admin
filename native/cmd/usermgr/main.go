@@ -15,9 +15,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/force-c/nai-tizi/internal/config"
-	"github.com/force-c/nai-tizi/internal/domain/model"
-	"github.com/force-c/nai-tizi/internal/utils"
+	"github.com/gcc798/nai-tizi/internal/config"
+	"github.com/gcc798/nai-tizi/internal/domain/model"
+	"github.com/gcc798/nai-tizi/internal/utils"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

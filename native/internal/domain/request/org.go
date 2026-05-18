@@ -1,6 +1,6 @@
 package request
 
-import "github.com/force-c/nai-tizi/internal/utils/pagination"
+import "github.com/gcc798/nai-tizi/internal/utils/pagination"
 
 // CreateOrgRequest 创建组织请求
 type CreateOrgRequest struct {

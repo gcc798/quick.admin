@@ -8,9 +8,9 @@ import (
 	"strings"
 
 	"github.com/casbin/casbin/v2"
-	"github.com/force-c/nai-tizi/internal/domain/model"
-	"github.com/force-c/nai-tizi/internal/domain/request"
-	"github.com/force-c/nai-tizi/internal/logger"
+	"github.com/gcc798/nai-tizi/internal/domain/model"
+	"github.com/gcc798/nai-tizi/internal/domain/request"
+	"github.com/gcc798/nai-tizi/internal/logger"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )

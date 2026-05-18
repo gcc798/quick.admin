@@ -3,9 +3,9 @@ package controller
 import (
 	"context"
 
-	"github.com/force-c/nai-tizi/internal/domain/response"
-	"github.com/force-c/nai-tizi/internal/service"
-	"github.com/force-c/nai-tizi/pkg/captcha"
+	"github.com/gcc798/nai-tizi/internal/domain/response"
+	"github.com/gcc798/nai-tizi/internal/service"
+	"github.com/gcc798/nai-tizi/pkg/captcha"
 
 	"github.com/gin-gonic/gin"
 )

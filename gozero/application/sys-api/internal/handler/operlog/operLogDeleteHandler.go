@@ -6,9 +6,9 @@ package operlog
 import (
 	"net/http"
 
-	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/operlog"
-	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
-	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/logic/operlog"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

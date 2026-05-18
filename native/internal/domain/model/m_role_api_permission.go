@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/force-c/nai-tizi/internal/utils"
+	"github.com/gcc798/nai-tizi/internal/utils"
 )
 
 // MRoleApiPermission 角色 API 权限关联表。

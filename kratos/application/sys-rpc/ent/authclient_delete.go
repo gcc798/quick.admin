@@ -8,8 +8,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/authclient"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/authclient"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/predicate"
 )
 
 // AuthClientDelete is the builder for deleting a AuthClient entity.

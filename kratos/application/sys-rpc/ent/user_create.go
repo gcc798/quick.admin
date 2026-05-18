@@ -10,7 +10,7 @@ import (
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/user"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/user"
 )
 
 // UserCreate is the builder for creating a User entity.

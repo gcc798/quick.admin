@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/force-c/nai-tizi/application/sys-rpc/internal/config"
-	sysserviceServer "github.com/force-c/nai-tizi/application/sys-rpc/internal/server/sysservice"
-	"github.com/force-c/nai-tizi/application/sys-rpc/internal/svc"
-	"github.com/force-c/nai-tizi/application/sys-rpc/pb"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/config"
+	sysserviceServer "github.com/gcc798/nai-tizi/application/sys-rpc/internal/server/sysservice"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/svc"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/pb"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

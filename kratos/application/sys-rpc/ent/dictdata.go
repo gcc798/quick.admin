@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/dictdata"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/dictdata"
 )
 
 // DictData is the model entity for the DictData schema.

@@ -3,9 +3,9 @@ package jobs
 import (
 	"fmt"
 
-	logging "github.com/force-c/nai-tizi/internal/logger"
-	"github.com/force-c/nai-tizi/internal/messaging/mqtt/retry"
-	"github.com/force-c/nai-tizi/pkg/scheduler"
+	logging "github.com/gcc798/nai-tizi/internal/logger"
+	"github.com/gcc798/nai-tizi/internal/messaging/mqtt/retry"
+	"github.com/gcc798/nai-tizi/pkg/scheduler"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 	"gorm.io/gorm"

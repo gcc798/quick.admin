@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	v1 "github.com/force-c/nai-tizi/kratos/api/system/v1"
-	entpkg "github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent"
+	v1 "github.com/gcc798/nai-tizi/kratos/api/system/v1"
+	entpkg "github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent"
 )
 
 func storageEntityToItem(item *entpkg.StorageEnv) *v1.StorageEnvItem {

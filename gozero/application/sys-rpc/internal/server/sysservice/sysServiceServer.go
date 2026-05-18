@@ -7,9 +7,9 @@ package server
 import (
 	"context"
 
-	"github.com/force-c/nai-tizi/application/sys-rpc/internal/logic/sysservice"
-	"github.com/force-c/nai-tizi/application/sys-rpc/internal/svc"
-	"github.com/force-c/nai-tizi/application/sys-rpc/pb"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/logic/sysservice"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/svc"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/pb"
 )
 
 type SysServiceServer struct {

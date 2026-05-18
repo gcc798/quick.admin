@@ -3,9 +3,9 @@ package middleware
 import (
 	"strings"
 
-	"github.com/force-c/nai-tizi/internal/config"
-	"github.com/force-c/nai-tizi/internal/domain/response"
-	"github.com/force-c/nai-tizi/internal/service"
+	"github.com/gcc798/nai-tizi/internal/config"
+	"github.com/gcc798/nai-tizi/internal/domain/response"
+	"github.com/gcc798/nai-tizi/internal/service"
 	"github.com/gin-gonic/gin"
 )
 

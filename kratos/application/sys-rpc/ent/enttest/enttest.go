@@ -5,12 +5,12 @@ package enttest
 import (
 	"context"
 
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent"
 	// required by schema hooks.
-	_ "github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/runtime"
+	_ "github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/runtime"
 
 	"entgo.io/ent/dialect/sql/schema"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/migrate"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/migrate"
 )
 
 type (

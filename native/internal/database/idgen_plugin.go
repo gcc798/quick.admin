@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/force-c/nai-tizi/internal/utils/idgen"
+	"github.com/gcc798/nai-tizi/internal/utils/idgen"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )

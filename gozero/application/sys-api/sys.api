@@ -3,7 +3,7 @@ syntax = "v1"
 info (
 	title:  "nai-tizi sys-api"
 	desc:   "go-zero contracts for native/web compatibility"
-	author: "force-c"
+	author: "gcc798"
 )
 
 import "api/health.api"

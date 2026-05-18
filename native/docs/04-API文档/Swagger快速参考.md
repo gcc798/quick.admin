@@ -133,7 +133,7 @@ swag init -g cmd/api/main.go -o docs/swagger --parseDependency --parseInternal
 ### 3. Swagger UI 404
 ```go
 // 解决：检查导入
-import _ "github.com/force-c/nai-tizi/docs/swagger"
+import _ "github.com/gcc798/nai-tizi/docs/swagger"
 ```
 
 ## 📚 完整示例

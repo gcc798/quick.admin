@@ -66,7 +66,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -112,7 +112,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageAttachmentsRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageAttachmentsRequest"
                         }
                     }
                 ],
@@ -122,7 +122,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -179,7 +179,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -230,7 +230,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -277,7 +277,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -317,7 +317,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BindAttachmentToBusinessRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BindAttachmentToBusinessRequest"
                         }
                     }
                 ],
@@ -325,7 +325,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -412,7 +412,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -453,7 +453,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateConfigRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateConfigRequest"
                         }
                     }
                 ],
@@ -461,19 +461,19 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -502,7 +502,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateConfigRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateConfigRequest"
                         }
                     }
                 ],
@@ -510,19 +510,19 @@ const docTemplate = `{
                     "200": {
                         "description": "创建成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -553,7 +553,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteConfigRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteConfigRequest"
                         }
                     }
                 ],
@@ -561,19 +561,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -608,7 +608,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -616,7 +616,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.ConfigResponse"
+                                                "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.ConfigResponse"
                                             }
                                         }
                                     }
@@ -627,13 +627,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -668,13 +668,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.ConfigDataResponse"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.ConfigDataResponse"
                                         }
                                     }
                                 }
@@ -684,13 +684,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -728,7 +728,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageConfigRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageConfigRequest"
                         }
                     }
                 ],
@@ -738,7 +738,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -754,7 +754,7 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -793,13 +793,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.ConfigResponse"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.ConfigResponse"
                                         }
                                     }
                                 }
@@ -809,13 +809,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -850,19 +850,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -893,7 +893,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateDictRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateDictRequest"
                         }
                     }
                 ],
@@ -901,19 +901,19 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -942,7 +942,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateDictRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateDictRequest"
                         }
                     }
                 ],
@@ -950,19 +950,19 @@ const docTemplate = `{
                     "200": {
                         "description": "创建成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -993,7 +993,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteDictRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteDictRequest"
                         }
                     }
                 ],
@@ -1001,19 +1001,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1056,7 +1056,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1072,13 +1072,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1120,7 +1120,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1128,7 +1128,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.DictDataResponse"
+                                                "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.DictDataResponse"
                                             }
                                         }
                                     }
@@ -1139,13 +1139,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1184,13 +1184,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.DictDataResponse"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.DictDataResponse"
                                         }
                                     }
                                 }
@@ -1200,13 +1200,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1241,19 +1241,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1284,7 +1284,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateLoginLogRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateLoginLogRequest"
                         }
                     }
                 ],
@@ -1292,19 +1292,19 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1333,7 +1333,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateLoginLogRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateLoginLogRequest"
                         }
                     }
                 ],
@@ -1341,19 +1341,19 @@ const docTemplate = `{
                     "200": {
                         "description": "创建成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1384,7 +1384,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteLoginLogRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteLoginLogRequest"
                         }
                     }
                 ],
@@ -1392,19 +1392,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1435,7 +1435,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CleanLoginLogRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CleanLoginLogRequest"
                         }
                     }
                 ],
@@ -1443,19 +1443,19 @@ const docTemplate = `{
                     "200": {
                         "description": "清理成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1494,13 +1494,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.LoginLogResponse"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.LoginLogResponse"
                                         }
                                     }
                                 }
@@ -1510,13 +1510,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1551,19 +1551,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1593,7 +1593,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1601,7 +1601,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Menu"
+                                                "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Menu"
                                             }
                                         }
                                     }
@@ -1612,7 +1612,7 @@ const docTemplate = `{
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1641,7 +1641,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Menu"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Menu"
                         }
                     }
                 ],
@@ -1649,19 +1649,19 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1691,7 +1691,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1699,7 +1699,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_service.MenuTree"
+                                                "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_service.MenuTree"
                                             }
                                         }
                                     }
@@ -1710,7 +1710,7 @@ const docTemplate = `{
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1740,7 +1740,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -1748,7 +1748,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_service.MenuTree"
+                                                "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_service.MenuTree"
                                             }
                                         }
                                     }
@@ -1759,13 +1759,13 @@ const docTemplate = `{
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1804,13 +1804,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Menu"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Menu"
                                         }
                                     }
                                 }
@@ -1820,19 +1820,19 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "404": {
                         "description": "菜单不存在",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1868,7 +1868,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Menu"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Menu"
                         }
                     }
                 ],
@@ -1876,19 +1876,19 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1923,19 +1923,19 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -1966,7 +1966,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateOperLogRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateOperLogRequest"
                         }
                     }
                 ],
@@ -1974,19 +1974,19 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2015,7 +2015,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateOperLogRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateOperLogRequest"
                         }
                     }
                 ],
@@ -2023,19 +2023,19 @@ const docTemplate = `{
                     "200": {
                         "description": "创建成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2066,7 +2066,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteOperLogRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteOperLogRequest"
                         }
                     }
                 ],
@@ -2074,19 +2074,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2117,7 +2117,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CleanOperLogRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CleanOperLogRequest"
                         }
                     }
                 ],
@@ -2125,19 +2125,19 @@ const docTemplate = `{
                     "200": {
                         "description": "清理成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2168,7 +2168,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageOperLogRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageOperLogRequest"
                         }
                     }
                 ],
@@ -2176,19 +2176,19 @@ const docTemplate = `{
                     "200": {
                         "description": "查询成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2227,13 +2227,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.OperLogResponse"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.OperLogResponse"
                                         }
                                     }
                                 }
@@ -2243,13 +2243,13 @@ const docTemplate = `{
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2284,19 +2284,19 @@ const docTemplate = `{
                     "200": {
                         "description": "删除成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2334,7 +2334,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateOrgRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateOrgRequest"
                         }
                     }
                 ],
@@ -2344,7 +2344,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2361,19 +2361,19 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2411,7 +2411,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteOrgsRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteOrgsRequest"
                         }
                     }
                 ],
@@ -2421,7 +2421,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2437,19 +2437,19 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2487,7 +2487,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageOrgsRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageOrgsRequest"
                         }
                     }
                 ],
@@ -2497,7 +2497,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2513,7 +2513,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2552,7 +2552,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2571,13 +2571,13 @@ const docTemplate = `{
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2623,7 +2623,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2639,25 +2639,25 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "404": {
                         "description": "组织不存在",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2700,7 +2700,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateOrgRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateOrgRequest"
                         }
                     }
                 ],
@@ -2710,7 +2710,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2726,25 +2726,25 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "404": {
                         "description": "组织不存在",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2788,7 +2788,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -2804,25 +2804,25 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "404": {
                         "description": "组织不存在",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2855,7 +2855,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateRoleRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateRoleRequest"
                         }
                     }
                 ],
@@ -2865,13 +2865,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Role"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Role"
                                         }
                                     }
                                 }
@@ -2881,7 +2881,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2914,7 +2914,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.AssignRoleToUserRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.AssignRoleToUserRequest"
                         }
                     }
                 ],
@@ -2922,13 +2922,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -2961,7 +2961,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageRoleRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageRoleRequest"
                         }
                     }
                 ],
@@ -2971,7 +2971,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3014,7 +3014,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.AddRolePermissionRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.AddRolePermissionRequest"
                         }
                     }
                 ],
@@ -3022,13 +3022,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3079,13 +3079,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3126,7 +3126,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3142,7 +3142,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3188,13 +3188,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3235,7 +3235,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3243,7 +3243,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Role"
+                                                "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Role"
                                             }
                                         }
                                     }
@@ -3254,7 +3254,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3295,13 +3295,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.Role"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.Role"
                                         }
                                     }
                                 }
@@ -3311,7 +3311,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3349,7 +3349,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateRoleRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateRoleRequest"
                         }
                     }
                 ],
@@ -3357,13 +3357,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3400,13 +3400,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3439,7 +3439,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateStorageEnvRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateStorageEnvRequest"
                         }
                     }
                 ],
@@ -3449,13 +3449,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.StorageEnv"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.StorageEnv"
                                         }
                                     }
                                 }
@@ -3493,13 +3493,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.StorageEnv"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.StorageEnv"
                                         }
                                     }
                                 }
@@ -3534,7 +3534,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.SetDefaultStorageEnvRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.SetDefaultStorageEnvRequest"
                         }
                     }
                 ],
@@ -3542,7 +3542,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3575,7 +3575,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageStorageEnvsRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageStorageEnvsRequest"
                         }
                     }
                 ],
@@ -3585,7 +3585,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -3636,13 +3636,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_model.StorageEnv"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_model.StorageEnv"
                                         }
                                     }
                                 }
@@ -3684,7 +3684,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateStorageEnvRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateStorageEnvRequest"
                         }
                     }
                 ],
@@ -3692,7 +3692,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3729,7 +3729,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3768,7 +3768,7 @@ const docTemplate = `{
                         "name": "body",
                         "in": "body",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.TestStorageEnvConnectionRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.TestStorageEnvConnectionRequest"
                         }
                     }
                 ],
@@ -3776,7 +3776,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3863,19 +3863,19 @@ const docTemplate = `{
                     "200": {
                         "description": "查询成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -3975,19 +3975,19 @@ const docTemplate = `{
                     "200": {
                         "description": "查询成功",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "请求参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4020,7 +4020,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateUserRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateUserRequest"
                         }
                     }
                 ],
@@ -4030,7 +4030,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4046,7 +4046,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4079,7 +4079,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteUsersRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteUsersRequest"
                         }
                     }
                 ],
@@ -4087,13 +4087,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4126,7 +4126,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.BatchImportUsersRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.BatchImportUsersRequest"
                         }
                     }
                 ],
@@ -4136,7 +4136,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4152,7 +4152,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4185,7 +4185,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.PageUsersRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.PageUsersRequest"
                         }
                     }
                 ],
@@ -4195,7 +4195,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4211,7 +4211,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4244,7 +4244,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.ChangePasswordRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.ChangePasswordRequest"
                         }
                     }
                 ],
@@ -4252,13 +4252,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4299,7 +4299,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4315,7 +4315,7 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4353,7 +4353,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.UpdateUserRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.UpdateUserRequest"
                         }
                     }
                 ],
@@ -4361,13 +4361,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4404,13 +4404,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4450,7 +4450,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.ResetPasswordRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.ResetPasswordRequest"
                         }
                     }
                 ],
@@ -4458,13 +4458,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4490,7 +4490,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.RefreshTokenRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.RefreshTokenRequest"
                         }
                     }
                 ],
@@ -4500,13 +4500,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.RefreshTokenResponse"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.RefreshTokenResponse"
                                         }
                                     }
                                 }
@@ -4516,13 +4516,13 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "401": {
                         "description": "RefreshToken 无效或已过期",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4557,13 +4557,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaData"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaData"
                                         }
                                     }
                                 }
@@ -4591,13 +4591,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaData"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaData"
                                         }
                                     }
                                 }
@@ -4636,13 +4636,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaData"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaData"
                                         }
                                     }
                                 }
@@ -4667,7 +4667,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4819,7 +4819,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.LoginRequest"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.LoginRequest"
                         }
                     }
                 ],
@@ -4829,13 +4829,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.LoginResponse"
+                                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.LoginResponse"
                                         }
                                     }
                                 }
@@ -4845,13 +4845,13 @@ const docTemplate = `{
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     },
                     "401": {
                         "description": "认证失败",
                         "schema": {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                         }
                     }
                 }
@@ -4881,7 +4881,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.Response"
+                                    "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.Response"
                                 },
                                 {
                                     "type": "object",
@@ -4944,7 +4944,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_model.Menu": {
+        "github_com_gcc798_nai-tizi_internal_domain_model.Menu": {
             "type": "object",
             "properties": {
                 "component": {
@@ -5023,7 +5023,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_model.Role": {
+        "github_com_gcc798_nai-tizi_internal_domain_model.Role": {
             "type": "object",
             "properties": {
                 "createBy": {
@@ -5074,7 +5074,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_model.StorageEnv": {
+        "github_com_gcc798_nai-tizi_internal_domain_model.StorageEnv": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5130,7 +5130,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.AddRolePermissionRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.AddRolePermissionRequest": {
             "type": "object",
             "required": [
                 "action",
@@ -5155,7 +5155,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.AssignRoleToUserRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.AssignRoleToUserRequest": {
             "type": "object",
             "required": [
                 "roleId",
@@ -5174,7 +5174,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteConfigRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteConfigRequest": {
             "type": "object",
             "required": [
                 "ids"
@@ -5190,7 +5190,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteDictRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteDictRequest": {
             "type": "object",
             "required": [
                 "ids"
@@ -5206,7 +5206,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteLoginLogRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteLoginLogRequest": {
             "type": "object",
             "required": [
                 "ids"
@@ -5222,7 +5222,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteOperLogRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteOperLogRequest": {
             "type": "object",
             "required": [
                 "ids"
@@ -5238,7 +5238,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteOrgsRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteOrgsRequest": {
             "type": "object",
             "required": [
                 "ids"
@@ -5254,7 +5254,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.BatchDeleteUsersRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.BatchDeleteUsersRequest": {
             "type": "object",
             "required": [
                 "ids"
@@ -5269,7 +5269,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.BatchImportUsersRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.BatchImportUsersRequest": {
             "type": "object",
             "required": [
                 "users"
@@ -5279,12 +5279,12 @@ const docTemplate = `{
                     "type": "array",
                     "minItems": 1,
                     "items": {
-                        "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_request.CreateUserRequest"
+                        "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_request.CreateUserRequest"
                     }
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.BindAttachmentToBusinessRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.BindAttachmentToBusinessRequest": {
             "type": "object",
             "required": [
                 "businessId",
@@ -5318,7 +5318,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.ChangePasswordRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.ChangePasswordRequest": {
             "type": "object",
             "required": [
                 "newPassword",
@@ -5335,7 +5335,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CleanLoginLogRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CleanLoginLogRequest": {
             "type": "object",
             "required": [
                 "days"
@@ -5348,7 +5348,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CleanOperLogRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CleanOperLogRequest": {
             "type": "object",
             "required": [
                 "days"
@@ -5361,7 +5361,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CreateConfigRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CreateConfigRequest": {
             "type": "object",
             "required": [
                 "code",
@@ -5399,7 +5399,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CreateDictRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CreateDictRequest": {
             "type": "object",
             "required": [
                 "dictLabel",
@@ -5449,7 +5449,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CreateLoginLogRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CreateLoginLogRequest": {
             "type": "object",
             "required": [
                 "userName"
@@ -5489,7 +5489,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CreateOperLogRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CreateOperLogRequest": {
             "type": "object",
             "required": [
                 "title"
@@ -5557,7 +5557,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CreateOrgRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CreateOrgRequest": {
             "type": "object",
             "required": [
                 "orgCode",
@@ -5623,7 +5623,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CreateRoleRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CreateRoleRequest": {
             "type": "object",
             "required": [
                 "roleKey",
@@ -5662,7 +5662,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CreateStorageEnvRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CreateStorageEnvRequest": {
             "type": "object",
             "required": [
                 "code",
@@ -5709,7 +5709,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.CreateUserRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.CreateUserRequest": {
             "type": "object",
             "required": [
                 "nickName",
@@ -5765,7 +5765,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.LoginRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.LoginRequest": {
             "description": "统一登录请求参数，根据 grantType 使用不同的字段组合",
             "type": "object",
             "required": [
@@ -5831,7 +5831,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.PageAttachmentsRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.PageAttachmentsRequest": {
             "type": "object",
             "required": [
                 "pageNum",
@@ -5858,7 +5858,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.PageConfigRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.PageConfigRequest": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5887,7 +5887,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.PageOperLogRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.PageOperLogRequest": {
             "type": "object",
             "properties": {
                 "businessType": {
@@ -5932,7 +5932,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.PageOrgsRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.PageOrgsRequest": {
             "type": "object",
             "properties": {
                 "isAsc": {
@@ -5973,7 +5973,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.PageRoleRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.PageRoleRequest": {
             "type": "object",
             "properties": {
                 "isAsc": {
@@ -6004,7 +6004,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.PageStorageEnvsRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.PageStorageEnvsRequest": {
             "type": "object",
             "properties": {
                 "isAsc": {
@@ -6038,7 +6038,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.PageUsersRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.PageUsersRequest": {
             "type": "object",
             "properties": {
                 "isAsc": {
@@ -6073,7 +6073,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.ResetPasswordRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.ResetPasswordRequest": {
             "type": "object",
             "required": [
                 "newPassword"
@@ -6085,7 +6085,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.SetDefaultStorageEnvRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.SetDefaultStorageEnvRequest": {
             "type": "object",
             "required": [
                 "id"
@@ -6096,10 +6096,10 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.TestStorageEnvConnectionRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.TestStorageEnvConnectionRequest": {
             "type": "object"
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.UpdateConfigRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.UpdateConfigRequest": {
             "type": "object",
             "required": [
                 "code",
@@ -6136,7 +6136,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.UpdateDictRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.UpdateDictRequest": {
             "type": "object",
             "required": [
                 "dictLabel",
@@ -6186,7 +6186,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.UpdateLoginLogRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.UpdateLoginLogRequest": {
             "type": "object",
             "required": [
                 "id"
@@ -6230,7 +6230,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.UpdateOperLogRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.UpdateOperLogRequest": {
             "type": "object",
             "required": [
                 "id"
@@ -6302,7 +6302,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.UpdateOrgRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.UpdateOrgRequest": {
             "type": "object",
             "properties": {
                 "email": {
@@ -6364,7 +6364,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.UpdateRoleRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.UpdateRoleRequest": {
             "type": "object",
             "required": [
                 "roleId",
@@ -6403,7 +6403,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.UpdateStorageEnvRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.UpdateStorageEnvRequest": {
             "type": "object",
             "required": [
                 "code",
@@ -6454,7 +6454,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_request.UpdateUserRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_request.UpdateUserRequest": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -6500,7 +6500,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.ConfigDataResponse": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.ConfigDataResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6516,7 +6516,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.ConfigResponse": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.ConfigResponse": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6560,7 +6560,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.DictDataResponse": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.DictDataResponse": {
             "type": "object",
             "properties": {
                 "createBy": {
@@ -6617,7 +6617,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.LoginLogResponse": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.LoginLogResponse": {
             "type": "object",
             "properties": {
                 "browser": {
@@ -6662,7 +6662,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.LoginResponse": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.LoginResponse": {
             "description": "登录成功后返回的 Token 信息和用户信息",
             "type": "object",
             "properties": {
@@ -6690,13 +6690,13 @@ const docTemplate = `{
                     "description": "用户信息",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_domain_response.UserInfo"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_domain_response.UserInfo"
                         }
                     ]
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.OperLogResponse": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.OperLogResponse": {
             "type": "object",
             "properties": {
                 "businessType": {
@@ -6769,7 +6769,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.RefreshTokenRequest": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.RefreshTokenRequest": {
             "description": "使用 RefreshToken 刷新 AccessToken 的请求参数",
             "type": "object",
             "required": [
@@ -6795,7 +6795,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.RefreshTokenResponse": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.RefreshTokenResponse": {
             "description": "刷新成功后返回的新 Token 对",
             "type": "object",
             "properties": {
@@ -6821,7 +6821,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.Response": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.Response": {
             "description": "API 统一响应格式",
             "type": "object",
             "properties": {
@@ -6841,7 +6841,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_domain_response.UserInfo": {
+        "github_com_gcc798_nai-tizi_internal_domain_response.UserInfo": {
             "description": "用户基本信息",
             "type": "object",
             "properties": {
@@ -6882,7 +6882,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaData": {
+        "github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaData": {
             "type": "object",
             "properties": {
                 "data": {
@@ -6900,13 +6900,13 @@ const docTemplate = `{
                     "description": "验证码类型",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaType"
+                            "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaType"
                         }
                     ]
                 }
             }
         },
-        "github_com_force-c_nai-tizi_internal_infrastructure_captcha.CaptchaType": {
+        "github_com_gcc798_nai-tizi_internal_infrastructure_captcha.CaptchaType": {
             "type": "string",
             "enum": [
                 "image",
@@ -6929,13 +6929,13 @@ const docTemplate = `{
                 "CaptchaTypeEmail"
             ]
         },
-        "github_com_force-c_nai-tizi_internal_service.MenuTree": {
+        "github_com_gcc798_nai-tizi_internal_service.MenuTree": {
             "type": "object",
             "properties": {
                 "children": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_force-c_nai-tizi_internal_service.MenuTree"
+                        "$ref": "#/definitions/github_com_gcc798_nai-tizi_internal_service.MenuTree"
                     }
                 },
                 "component": {

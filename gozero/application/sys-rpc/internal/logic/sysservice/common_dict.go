@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/force-c/nai-tizi/application/sys-rpc/internal/svc"
-	"github.com/force-c/nai-tizi/application/sys-rpc/pb"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/svc"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/pb"
 	gzsqlx "github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 

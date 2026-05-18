@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/force-c/nai-tizi/internal/domain/model"
-	logging "github.com/force-c/nai-tizi/internal/logger"
+	"github.com/gcc798/nai-tizi/internal/domain/model"
+	logging "github.com/gcc798/nai-tizi/internal/logger"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 	"gorm.io/gorm"

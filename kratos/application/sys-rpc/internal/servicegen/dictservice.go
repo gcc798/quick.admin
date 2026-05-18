@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	pb "github.com/force-c/nai-tizi/kratos/api/system/v1"
+	pb "github.com/gcc798/nai-tizi/kratos/api/system/v1"
 )
 
 type DictServiceService struct {

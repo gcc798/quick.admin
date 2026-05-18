@@ -3,9 +3,9 @@ package role
 import (
 	"context"
 
-	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
-	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
-	"github.com/force-c/nai-tizi/application/sys-rpc/client/sysservice"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/types"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/client/sysservice"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 

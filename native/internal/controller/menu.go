@@ -3,9 +3,9 @@ package controller
 import (
 	"strconv"
 
-	"github.com/force-c/nai-tizi/internal/domain/model"
-	"github.com/force-c/nai-tizi/internal/domain/response"
-	"github.com/force-c/nai-tizi/internal/service"
+	"github.com/gcc798/nai-tizi/internal/domain/model"
+	"github.com/gcc798/nai-tizi/internal/domain/response"
+	"github.com/gcc798/nai-tizi/internal/service"
 	"github.com/gin-gonic/gin"
 )
 

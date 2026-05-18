@@ -3,8 +3,8 @@ package biz
 import (
 	"context"
 
-	v1 "github.com/force-c/nai-tizi/kratos/api/system/v1"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/data"
+	v1 "github.com/gcc798/nai-tizi/kratos/api/system/v1"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/internal/data"
 )
 
 type RoleUsecase struct {

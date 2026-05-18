@@ -552,8 +552,7 @@ grafana:
 ## 📚 相关文档
 
 - [Kubernetes 部署指南](./Kubernetes部署指南.md)
-- [监控系统配置](./监控系统配置.md)
-- [CI/CD 配置指南](./CICD配置指南.md)
+- [部署说明](./部署说明.md)
 
 ---
 

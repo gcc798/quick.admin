@@ -11,9 +11,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
-	"github.com/force-c/nai-tizi/application/sys-api/internal/types"
-	"github.com/force-c/nai-tizi/application/sys-rpc/client/sysservice"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/types"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/client/sysservice"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/redis/go-redis/v9"
 )

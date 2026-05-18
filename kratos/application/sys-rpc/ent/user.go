@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/user"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/user"
 )
 
 // User is the model entity for the User schema.

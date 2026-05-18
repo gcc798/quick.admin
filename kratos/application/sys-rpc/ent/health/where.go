@@ -4,7 +4,7 @@ package health
 
 import (
 	"entgo.io/ent/dialect/sql"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/predicate"
 )
 
 // ID filters vertices based on their ID field.

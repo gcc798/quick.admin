@@ -2,7 +2,7 @@
 
 package runtime
 
-// The schema-stitching logic is generated in github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/runtime.go
+// The schema-stitching logic is generated in github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/runtime.go
 
 const (
 	Version = "v0.14.5"                                         // Version of ent codegen.

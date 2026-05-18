@@ -3,10 +3,10 @@ package controller
 import (
 	"strconv"
 
-	"github.com/force-c/nai-tizi/internal/container"
-	"github.com/force-c/nai-tizi/internal/domain/request"
-	"github.com/force-c/nai-tizi/internal/domain/response"
-	"github.com/force-c/nai-tizi/internal/service"
+	"github.com/gcc798/nai-tizi/internal/container"
+	"github.com/gcc798/nai-tizi/internal/domain/request"
+	"github.com/gcc798/nai-tizi/internal/domain/response"
+	"github.com/gcc798/nai-tizi/internal/service"
 	"github.com/gin-gonic/gin"
 )
 

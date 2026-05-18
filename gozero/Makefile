@@ -41,9 +41,9 @@ gen-sys-rpc: ## Generate sys-rpc service code from sys.proto
 	@goctl rpc protoc \
 		-I=$(SYS_RPC_DIR) \
 		--go_out=$(SYS_RPC_DIR)/pb \
-		--go_opt=module=github.com/force-c/nai-tizi/application/sys-rpc/pb \
+		--go_opt=module=github.com/gcc798/nai-tizi/application/sys-rpc/pb \
 		--go-grpc_out=$(SYS_RPC_DIR)/pb \
-		--go-grpc_opt=module=github.com/force-c/nai-tizi/application/sys-rpc/pb \
+		--go-grpc_opt=module=github.com/gcc798/nai-tizi/application/sys-rpc/pb \
 		--zrpc_out=$(SYS_RPC_DIR) \
 		--style=$(STYLE) \
 		-m \

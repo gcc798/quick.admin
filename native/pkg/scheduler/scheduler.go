@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	logging "github.com/force-c/nai-tizi/internal/logger"
+	logging "github.com/gcc798/nai-tizi/internal/logger"
 
 	"github.com/robfig/cron/v3"
 	"go.uber.org/zap"

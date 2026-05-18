@@ -1,6 +1,6 @@
 package request
 
-import "github.com/force-c/nai-tizi/internal/utils/pagination"
+import "github.com/gcc798/nai-tizi/internal/utils/pagination"
 
 // CreateLoginLogRequest 创建登录日志请求
 type CreateLoginLogRequest struct {

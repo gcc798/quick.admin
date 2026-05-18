@@ -5,7 +5,7 @@ import (
 	"encoding/hex"
 	"strings"
 
-	"github.com/force-c/nai-tizi/internal/utils"
+	"github.com/gcc798/nai-tizi/internal/utils"
 
 	"gorm.io/gorm"
 )

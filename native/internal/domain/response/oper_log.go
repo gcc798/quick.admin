@@ -1,8 +1,8 @@
 package response
 
 import (
-	"github.com/force-c/nai-tizi/internal/domain/model"
-	"github.com/force-c/nai-tizi/internal/utils"
+	"github.com/gcc798/nai-tizi/internal/domain/model"
+	"github.com/gcc798/nai-tizi/internal/utils"
 )
 
 // OperLogResponse 操作日志响应

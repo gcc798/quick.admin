@@ -9,9 +9,9 @@ import (
 	"time"
 
 	entsql "entgo.io/ent/dialect/sql"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/internal/conf"
-	"github.com/force-c/nai-tizi/kratos/pkg/configx"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/internal/conf"
+	"github.com/gcc798/nai-tizi/kratos/pkg/configx"
 	"github.com/redis/go-redis/v9"
 )
 

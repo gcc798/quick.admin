@@ -11,14 +11,14 @@ import (
 	"syscall"
 	"time"
 
-	_ "github.com/force-c/nai-tizi/docs/swagger" // 导入 Swagger 文档
-	"github.com/force-c/nai-tizi/internal/bootstrap"
-	"github.com/force-c/nai-tizi/internal/config"
-	"github.com/force-c/nai-tizi/internal/container"
-	ilogger "github.com/force-c/nai-tizi/internal/logger"
-	"github.com/force-c/nai-tizi/internal/middleware"
-	"github.com/force-c/nai-tizi/internal/router"
-	"github.com/force-c/nai-tizi/internal/validator"
+	_ "github.com/gcc798/nai-tizi/docs/swagger" // 导入 Swagger 文档
+	"github.com/gcc798/nai-tizi/internal/bootstrap"
+	"github.com/gcc798/nai-tizi/internal/config"
+	"github.com/gcc798/nai-tizi/internal/container"
+	ilogger "github.com/gcc798/nai-tizi/internal/logger"
+	"github.com/gcc798/nai-tizi/internal/middleware"
+	"github.com/gcc798/nai-tizi/internal/router"
+	"github.com/gcc798/nai-tizi/internal/validator"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )

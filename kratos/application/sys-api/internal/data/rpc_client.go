@@ -6,11 +6,11 @@ import (
 	"strings"
 	"time"
 
-	v1 "github.com/force-c/nai-tizi/kratos/api/system/v1"
-	"github.com/force-c/nai-tizi/kratos/application/sys-api/internal/conf"
-	"github.com/force-c/nai-tizi/kratos/pkg/configx"
-	"github.com/force-c/nai-tizi/kratos/pkg/grpcx"
-	"github.com/force-c/nai-tizi/kratos/pkg/registryx"
+	v1 "github.com/gcc798/nai-tizi/kratos/api/system/v1"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-api/internal/conf"
+	"github.com/gcc798/nai-tizi/kratos/pkg/configx"
+	"github.com/gcc798/nai-tizi/kratos/pkg/grpcx"
+	"github.com/gcc798/nai-tizi/kratos/pkg/registryx"
 	grpc "google.golang.org/grpc"
 )
 

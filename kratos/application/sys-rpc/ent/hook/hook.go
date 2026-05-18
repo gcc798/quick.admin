@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent"
 )
 
 // The AttachmentFunc type is an adapter to allow the use of ordinary

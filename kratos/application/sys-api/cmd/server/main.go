@@ -4,8 +4,8 @@ import (
 	"flag"
 	"os"
 
-	"github.com/force-c/nai-tizi/kratos/application/sys-api/internal/conf"
-	"github.com/force-c/nai-tizi/kratos/pkg/configx"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-api/internal/conf"
+	"github.com/gcc798/nai-tizi/kratos/pkg/configx"
 	"github.com/go-kratos/kratos/v2/log"
 )
 

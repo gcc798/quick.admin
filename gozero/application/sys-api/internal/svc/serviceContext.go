@@ -4,8 +4,8 @@
 package svc
 
 import (
-	"github.com/force-c/nai-tizi/application/sys-api/internal/config"
-	"github.com/force-c/nai-tizi/application/sys-rpc/client/sysservice"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/config"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/client/sysservice"
 	"github.com/redis/go-redis/v9"
 	"github.com/zeromicro/go-zero/zrpc"
 )

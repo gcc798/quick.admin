@@ -3,13 +3,13 @@ package controller
 import (
 	"strconv"
 
-	"github.com/force-c/nai-tizi/internal/container"
-	"github.com/force-c/nai-tizi/internal/domain/model"
-	"github.com/force-c/nai-tizi/internal/domain/request"
-	"github.com/force-c/nai-tizi/internal/domain/response"
-	"github.com/force-c/nai-tizi/internal/logger"
-	"github.com/force-c/nai-tizi/internal/service"
-	_ "github.com/force-c/nai-tizi/internal/utils/pagination"
+	"github.com/gcc798/nai-tizi/internal/container"
+	"github.com/gcc798/nai-tizi/internal/domain/model"
+	"github.com/gcc798/nai-tizi/internal/domain/request"
+	"github.com/gcc798/nai-tizi/internal/domain/response"
+	"github.com/gcc798/nai-tizi/internal/logger"
+	"github.com/gcc798/nai-tizi/internal/service"
+	_ "github.com/gcc798/nai-tizi/internal/utils/pagination"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )

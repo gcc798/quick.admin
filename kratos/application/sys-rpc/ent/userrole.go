@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/userrole"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/userrole"
 )
 
 // UserRole is the model entity for the UserRole schema.

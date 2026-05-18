@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/force-c/nai-tizi/internal/controller"
+	"github.com/gcc798/nai-tizi/internal/controller"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,4 +1,4 @@
-module github.com/force-c/nai-tizi/kratos
+module github.com/gcc798/nai-tizi/kratos
 
 go 1.24.0
 

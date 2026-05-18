@@ -1,8 +1,8 @@
 package router
 
 import (
-	"github.com/force-c/nai-tizi/internal/controller"
-	"github.com/force-c/nai-tizi/internal/messaging/websocket"
+	"github.com/gcc798/nai-tizi/internal/controller"
+	"github.com/gcc798/nai-tizi/internal/messaging/websocket"
 	"github.com/gin-gonic/gin"
 )
 

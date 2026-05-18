@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
-	configx "github.com/force-c/nai-tizi/internal/config"
+	configx "github.com/gcc798/nai-tizi/internal/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/yaml.v3"

@@ -13,8 +13,8 @@ import (
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/dialect/sql/sqljson"
 	"entgo.io/ent/schema/field"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/predicate"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/systemconfig"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/systemconfig"
 )
 
 // SystemConfigUpdate is the builder for updating SystemConfig entities.

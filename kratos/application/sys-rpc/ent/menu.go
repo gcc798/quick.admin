@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/menu"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/menu"
 )
 
 // Menu is the model entity for the Menu schema.

@@ -9,7 +9,7 @@ import (
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/authclient"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/authclient"
 )
 
 // AuthClient is the model entity for the AuthClient schema.

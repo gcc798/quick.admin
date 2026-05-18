@@ -7,7 +7,7 @@ package sysservice
 import (
 	"context"
 
-	"github.com/force-c/nai-tizi/application/sys-rpc/pb"
+	"github.com/gcc798/nai-tizi/application/sys-rpc/pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

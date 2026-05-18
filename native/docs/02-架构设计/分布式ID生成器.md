@@ -56,7 +56,7 @@ db.Create(user)
 如果需要提前生成ID：
 
 ```go
-import "github.com/force-c/nai-tizi/internal/utils/idgen"
+import "github.com/gcc798/nai-tizi/internal/utils/idgen"
 
 // 生成ID（返回错误）
 id, err := idgen.NextID()
@@ -90,7 +90,7 @@ func (c *container) initDB() error {
 注册了 `IDGenPlugin` 插件，在创建记录前自动生成ID：
 
 ```go
-// internal/infrastructure/database/idgen_plugin.go
+// internal/database/idgen_plugin.go
 func (p *IDGenPlugin) beforeCreate(db *gorm.DB) {
     // 检查主键字段
     // 如果主键值为0（未设置），则生成新ID

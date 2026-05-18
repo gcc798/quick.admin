@@ -11,8 +11,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/dictdata"
-	"github.com/force-c/nai-tizi/kratos/application/sys-rpc/ent/predicate"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/dictdata"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-rpc/ent/predicate"
 )
 
 // DictDataUpdate is the builder for updating DictData entities.

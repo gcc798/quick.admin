@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	v1 "github.com/force-c/nai-tizi/kratos/api/system/v1"
+	v1 "github.com/gcc798/nai-tizi/kratos/api/system/v1"
 )
 
 type AuthRepo struct {

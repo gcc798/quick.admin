@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	logging "github.com/force-c/nai-tizi/internal/logger"
+	logging "github.com/gcc798/nai-tizi/internal/logger"
 	"github.com/gorilla/websocket"
 	"go.uber.org/zap"
 )

@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"github.com/force-c/nai-tizi/internal/domain/response"
-	apperrors "github.com/force-c/nai-tizi/internal/utils/errors"
+	"github.com/gcc798/nai-tizi/internal/domain/response"
+	apperrors "github.com/gcc798/nai-tizi/internal/utils/errors"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )

@@ -1,6 +1,6 @@
 package request
 
-import "github.com/force-c/nai-tizi/internal/utils/pagination"
+import "github.com/gcc798/nai-tizi/internal/utils/pagination"
 
 // CreateDictRequest 创建字典请求
 type CreateDictRequest struct {

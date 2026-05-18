@@ -1,10 +1,10 @@
 package router
 
 import (
-	"github.com/force-c/nai-tizi/internal/constants"
-	"github.com/force-c/nai-tizi/internal/controller"
-	"github.com/force-c/nai-tizi/internal/middleware"
-	"github.com/force-c/nai-tizi/internal/service"
+	"github.com/gcc798/nai-tizi/internal/constants"
+	"github.com/gcc798/nai-tizi/internal/controller"
+	"github.com/gcc798/nai-tizi/internal/middleware"
+	"github.com/gcc798/nai-tizi/internal/service"
 	"github.com/gin-gonic/gin"
 )
 

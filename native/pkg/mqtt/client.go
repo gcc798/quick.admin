@@ -5,7 +5,7 @@ import (
 	"time"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
-	logging "github.com/force-c/nai-tizi/internal/logger"
+	logging "github.com/gcc798/nai-tizi/internal/logger"
 	"go.uber.org/zap"
 )
 

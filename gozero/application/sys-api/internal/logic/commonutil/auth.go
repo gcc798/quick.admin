@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
 	"github.com/golang-jwt/jwt/v4"
 )
 

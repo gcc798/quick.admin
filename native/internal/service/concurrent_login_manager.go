@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/force-c/nai-tizi/internal/config"
-	logging "github.com/force-c/nai-tizi/internal/logger"
+	"github.com/gcc798/nai-tizi/internal/config"
+	logging "github.com/gcc798/nai-tizi/internal/logger"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 )

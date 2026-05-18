@@ -1,4 +1,4 @@
-module github.com/force-c/nai-tizi
+module github.com/gcc798/nai-tizi
 
 go 1.25.6
 

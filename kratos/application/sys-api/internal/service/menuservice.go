@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	v1 "github.com/force-c/nai-tizi/kratos/api/system/v1"
-	"github.com/force-c/nai-tizi/kratos/application/sys-api/internal/biz"
+	v1 "github.com/gcc798/nai-tizi/kratos/api/system/v1"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-api/internal/biz"
 )
 
 type MenuServiceService struct {

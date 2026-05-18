@@ -1,7 +1,7 @@
 package captcha
 
 import (
-	"github.com/force-c/nai-tizi/pkg/thirdparty/sms"
+	"github.com/gcc798/nai-tizi/pkg/thirdparty/sms"
 )
 
 // SMSManagerAdapter 适配器，将 sms.Manager 适配为 SMSProvider 接口

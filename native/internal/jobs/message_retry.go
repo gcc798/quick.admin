@@ -3,8 +3,8 @@ package jobs
 import (
 	"context"
 
-	logging "github.com/force-c/nai-tizi/internal/logger"
-	"github.com/force-c/nai-tizi/internal/messaging/mqtt/retry"
+	logging "github.com/gcc798/nai-tizi/internal/logger"
+	"github.com/gcc798/nai-tizi/internal/messaging/mqtt/retry"
 	"go.uber.org/zap"
 )
 

@@ -6,8 +6,8 @@ package captcha
 import (
 	"net/http"
 
-	"github.com/force-c/nai-tizi/application/sys-api/internal/logic/captcha"
-	"github.com/force-c/nai-tizi/application/sys-api/internal/svc"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/logic/captcha"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

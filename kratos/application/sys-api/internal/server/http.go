@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/force-c/nai-tizi/kratos/application/sys-api/internal/conf"
-	"github.com/force-c/nai-tizi/kratos/application/sys-api/internal/service"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-api/internal/conf"
+	"github.com/gcc798/nai-tizi/kratos/application/sys-api/internal/service"
 	selector "github.com/go-kratos/kratos/v2/middleware/selector"
 	khttp "github.com/go-kratos/kratos/v2/transport/http"
 )
