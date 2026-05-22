@@ -11,7 +11,7 @@ type LoginLogPageReq {
 	pageSize  int64  `json:"pageSize,optional"`
 	userName  string `json:"userName,optional"`
 	ipaddr    string `json:"ipaddr,optional"`
-	status    int64  `json:"status,optional"`
+	status    int32  `json:"status,optional"`
 	startTime string `json:"startTime,optional"`
 	endTime   string `json:"endTime,optional"`
 }
@@ -22,19 +22,19 @@ type LoginLogReq {
 	loginLocation string `json:"loginLocation,optional"`
 	browser       string `json:"browser,optional"`
 	os            string `json:"os,optional"`
-	status        int64  `json:"status,optional"`
+	status        int32  `json:"status,optional"`
 	msg           string `json:"msg,optional"`
 	clientId      string `json:"clientId,optional"`
 }
 
 type LoginLogUpdateReq {
-	id            int64  `path:"id"`
+	id            int64  `json:"id"`
 	userName      string `json:"userName,optional"`
 	ipaddr        string `json:"ipaddr,optional"`
 	loginLocation string `json:"loginLocation,optional"`
 	browser       string `json:"browser,optional"`
 	os            string `json:"os,optional"`
-	status        int64  `json:"status,optional"`
+	status        int32  `json:"status,optional"`
 	msg           string `json:"msg,optional"`
 	clientId      string `json:"clientId,optional"`
 }

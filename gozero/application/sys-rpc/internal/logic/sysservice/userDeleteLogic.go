@@ -18,7 +18,7 @@ func NewUserDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserDe
 	return &UserDeleteLogic{ctx: ctx, svcCtx: svcCtx, Logger: logx.WithContext(ctx)}
 }
 func (l *UserDeleteLogic) UserDelete(in *pb.IdReq) (*pb.Ack, error) {
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_user set deleted_at = now() where id = $1 and deleted_at is null`, in.Id); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.s_user where id = $1`, in.Id); err != nil {
 		return nil, err
 	}
 	return &pb.Ack{Msg: "ok"}, nil

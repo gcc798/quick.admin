@@ -9,7 +9,7 @@ import (
 )
 
 func success(data interface{}) *types.CommonResp {
-	return &types.CommonResp{Code: 200, Msg: "success", Data: data}
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: data}
 }
 
 func failure(err error) *types.CommonResp {

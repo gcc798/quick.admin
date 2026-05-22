@@ -28,7 +28,7 @@ func (l *AttachmentDownloadLogic) AttachmentDownload(in *pb.AttachmentDownloadRe
 	if err != nil {
 		return nil, err
 	}
-	content, contentType, err := readAttachmentContent(row)
+	content, contentType, err := readAttachmentContent(l.ctx, l.svcCtx, row)
 	if err != nil {
 		return nil, err
 	}

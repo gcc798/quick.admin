@@ -2,6 +2,7 @@ package sysservicelogic
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/svc"
 	"github.com/gcc798/nai-tizi/application/sys-rpc/pb"
@@ -24,11 +25,10 @@ func NewLoginLogCleanLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Log
 }
 
 func (l *LoginLogCleanLogic) LoginLogClean(in *pb.LogCleanReq) (*pb.Ack, error) {
-	days := in.Days
-	if days <= 0 {
-		days = 30
+	if in.Days <= 0 {
+		return nil, fmt.Errorf("天数必须大于0")
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.s_login_log where login_time < now() - ($1 || ' day')::interval`, days); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.s_login_log where login_time < now() - ($1 || ' day')::interval`, in.Days); err != nil {
 		return nil, err
 	}
 	return &pb.Ack{Msg: "ok"}, nil

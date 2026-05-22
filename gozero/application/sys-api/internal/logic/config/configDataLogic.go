@@ -24,5 +24,8 @@ func (l *ConfigDataLogic) ConfigData(req *types.ConfigCodeQueryReq) (resp *types
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: commonutil.JSONStringToValue(data.DataJson)}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: map[string]interface{}{
+		"code": req.Code,
+		"data": commonutil.JSONStringToValue(data.DataJson),
+	}}, nil
 }

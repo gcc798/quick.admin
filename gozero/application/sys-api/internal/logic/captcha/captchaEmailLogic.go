@@ -33,7 +33,7 @@ func (l *CaptchaEmailLogic) CaptchaEmail(req *types.CaptchaEmailReq) (resp *type
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: map[string]interface{}{
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: map[string]interface{}{
 		"id":       data.Id,
 		"type":     data.Type,
 		"data":     commonutil.JSONStringToValue(data.DataJson),

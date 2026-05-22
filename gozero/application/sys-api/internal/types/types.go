@@ -12,12 +12,12 @@ type ApiPermissionSaveReq struct {
 	Module   string `json:"module"`
 	Code     string `json:"code"`
 	Name     string `json:"name"`
-	NodeType int64  `json:"nodeType,optional"`
+	NodeType int32  `json:"nodeType"`
 	Action   string `json:"action"`
 	Method   string `json:"method,optional"`
 	Path     string `json:"path,optional"`
 	Sort     int64  `json:"sort,optional"`
-	Status   int64  `json:"status,optional"`
+	Status   int32  `json:"status"`
 	Remark   string `json:"remark,optional"`
 }
 
@@ -27,12 +27,12 @@ type ApiPermissionUpdateReq struct {
 	Module   string `json:"module"`
 	Code     string `json:"code"`
 	Name     string `json:"name"`
-	NodeType int64  `json:"nodeType,optional"`
+	NodeType int32  `json:"nodeType"`
 	Action   string `json:"action"`
 	Method   string `json:"method,optional"`
 	Path     string `json:"path,optional"`
 	Sort     int64  `json:"sort,optional"`
-	Status   int64  `json:"status,optional"`
+	Status   int32  `json:"status"`
 	Remark   string `json:"remark,optional"`
 }
 
@@ -74,7 +74,7 @@ type AttachmentUploadReq struct {
 
 type AttachmentUrlQueryReq struct {
 	AttachmentId int64 `path:"attachmentId"`
-	Expires      int64 `form:"expires,optional"`
+	Expires      int   `form:"expires,optional"`
 }
 
 type BatchIdsReq struct {
@@ -86,13 +86,13 @@ type CaptchaEmailReq struct {
 }
 
 type CaptchaPhoneReq struct {
-	Phonenumber string `json:"phonenumber"`
+	Phone string `json:"phone"`
 }
 
 type CommonResp struct {
 	Code int         `json:"code"`
 	Msg  string      `json:"msg"`
-	Data interface{} `json:"data,optional"`
+	Data interface{} `json:"data"`
 }
 
 type ConfigCodeQueryReq struct {
@@ -131,7 +131,7 @@ type DictCreateReq struct {
 	DictValue string `json:"dictValue"`
 	Sort      int64  `json:"sort,optional"`
 	IsDefault bool   `json:"isDefault,optional"`
-	Status    int64  `json:"status,optional"`
+	Status    int32  `json:"status,optional"`
 	Remark    string `json:"remark,optional"`
 	CreateBy  int64  `json:"createBy,optional"`
 	UpdateBy  int64  `json:"updateBy,optional"`
@@ -147,7 +147,7 @@ type DictPageReq struct {
 	PageSize  int64  `json:"pageSize,optional"`
 	DictType  string `json:"dictType,optional"`
 	DictLabel string `json:"dictLabel,optional"`
-	Status    int64  `json:"status,optional"`
+	Status    int32  `json:"status,optional"`
 }
 
 type DictTypeQueryReq struct {
@@ -163,7 +163,7 @@ type DictUpdateReq struct {
 	DictValue string `json:"dictValue"`
 	Sort      int64  `json:"sort,optional"`
 	IsDefault bool   `json:"isDefault,optional"`
-	Status    int64  `json:"status,optional"`
+	Status    int32  `json:"status,optional"`
 	Remark    string `json:"remark,optional"`
 	UpdateBy  int64  `json:"updateBy,optional"`
 }
@@ -181,7 +181,7 @@ type LoginLogPageReq struct {
 	PageSize  int64  `json:"pageSize,optional"`
 	UserName  string `json:"userName,optional"`
 	Ipaddr    string `json:"ipaddr,optional"`
-	Status    int64  `json:"status,optional"`
+	Status    int32  `json:"status,optional"`
 	StartTime string `json:"startTime,optional"`
 	EndTime   string `json:"endTime,optional"`
 }
@@ -192,34 +192,35 @@ type LoginLogReq struct {
 	LoginLocation string `json:"loginLocation,optional"`
 	Browser       string `json:"browser,optional"`
 	Os            string `json:"os,optional"`
-	Status        int64  `json:"status,optional"`
+	Status        int32  `json:"status,optional"`
 	Msg           string `json:"msg,optional"`
 	ClientId      string `json:"clientId,optional"`
 }
 
 type LoginLogUpdateReq struct {
-	Id            int64  `path:"id"`
+	Id            int64  `json:"id"`
 	UserName      string `json:"userName,optional"`
 	Ipaddr        string `json:"ipaddr,optional"`
 	LoginLocation string `json:"loginLocation,optional"`
 	Browser       string `json:"browser,optional"`
 	Os            string `json:"os,optional"`
-	Status        int64  `json:"status,optional"`
+	Status        int32  `json:"status,optional"`
 	Msg           string `json:"msg,optional"`
 	ClientId      string `json:"clientId,optional"`
 }
 
 type LoginReq struct {
-	ClientKey    string `json:"clientKey"`
-	ClientSecret string `json:"clientSecret"`
-	GrantType    string `json:"grantType"`
-	Username     string `json:"username,optional"`
-	Password     string `json:"password,optional"`
-	Code         string `json:"code,optional"`
-	Phonenumber  string `json:"phonenumber,optional"`
-	Email        string `json:"email,optional"`
-	WxCode       string `json:"wxCode,optional"`
-	Uuid         string `json:"uuid,optional"`
+	ClientId    string `json:"clientId"`
+	GrantType   string `json:"grantType"`
+	Username    string `json:"username,optional"`
+	Password    string `json:"password,optional"`
+	Code        string `json:"code,optional"`
+	SmsCode     string `json:"smsCode,optional"`
+	Phonenumber string `json:"phonenumber,optional"`
+	Email       string `json:"email,optional"`
+	WxCode      string `json:"wxCode,optional"`
+	Appid       string `json:"appid,optional"`
+	Uuid        string `json:"uuid,optional"`
 }
 
 type MenuReq struct {
@@ -230,11 +231,11 @@ type MenuReq struct {
 	Path      string `json:"path,optional"`
 	Component string `json:"component,optional"`
 	Query     string `json:"query,optional"`
-	IsFrame   int64  `json:"isFrame,optional"`
-	IsCache   int64  `json:"isCache,optional"`
-	MenuType  int64  `json:"menuType,optional"`
-	Visible   int64  `json:"visible,optional"`
-	Status    int64  `json:"status,optional"`
+	IsFrame   int32  `json:"isFrame,optional"`
+	IsCache   int32  `json:"isCache,optional"`
+	MenuType  int32  `json:"menuType,optional"`
+	Visible   int32  `json:"visible,optional"`
+	Status    int32  `json:"status,optional"`
 	Perms     string `json:"perms,optional"`
 	Icon      string `json:"icon,optional"`
 	Remark    string `json:"remark,optional"`
@@ -248,11 +249,11 @@ type MenuUpdateReq struct {
 	Path      string `json:"path,optional"`
 	Component string `json:"component,optional"`
 	Query     string `json:"query,optional"`
-	IsFrame   int64  `json:"isFrame,optional"`
-	IsCache   int64  `json:"isCache,optional"`
-	MenuType  int64  `json:"menuType,optional"`
-	Visible   int64  `json:"visible,optional"`
-	Status    int64  `json:"status,optional"`
+	IsFrame   int32  `json:"isFrame,optional"`
+	IsCache   int32  `json:"isCache,optional"`
+	MenuType  int32  `json:"menuType,optional"`
+	Visible   int32  `json:"visible,optional"`
+	Status    int32  `json:"status,optional"`
 	Perms     string `json:"perms,optional"`
 	Icon      string `json:"icon,optional"`
 	Remark    string `json:"remark,optional"`
@@ -288,7 +289,7 @@ type OperLogReq struct {
 }
 
 type OperLogUpdateReq struct {
-	Id            int64  `path:"id"`
+	Id            int64  `json:"id"`
 	Title         string `json:"title,optional"`
 	BusinessType  string `json:"businessType,optional"`
 	Method        string `json:"method,optional"`
@@ -314,7 +315,7 @@ type OrgCreateReq struct {
 	Leader   string `json:"leader,optional"`
 	Phone    string `json:"phone,optional"`
 	Email    string `json:"email,optional"`
-	Status   int64  `json:"status,optional"`
+	Status   int32  `json:"status,optional"`
 	Sort     int64  `json:"sort,optional"`
 	Remark   string `json:"remark,optional"`
 }
@@ -324,7 +325,7 @@ type OrgPageReq struct {
 	PageSize int64  `json:"pageSize,optional"`
 	OrgName  string `json:"orgName,optional"`
 	OrgCode  string `json:"orgCode,optional"`
-	Status   int64  `json:"status,optional"`
+	Status   int32  `json:"status,optional"`
 	ParentId int64  `json:"parentId,optional"`
 }
 
@@ -337,20 +338,23 @@ type OrgUpdateReq struct {
 	Leader   string `json:"leader,optional"`
 	Phone    string `json:"phone,optional"`
 	Email    string `json:"email,optional"`
-	Status   int64  `json:"status,optional"`
+	Status   int32  `json:"status,optional"`
 	Sort     int64  `json:"sort,optional"`
 	Remark   string `json:"remark,optional"`
 }
 
 type RefreshTokenReq struct {
 	RefreshToken string `json:"refreshToken"`
-	ClientKey    string `json:"clientKey"`
-	ClientSecret string `json:"clientSecret"`
+	ClientId     string `json:"clientId"`
 }
 
 type RemoveRoleReq struct {
 	UserId int64 `form:"userId"`
 	RoleId int64 `form:"roleId"`
+}
+
+type ResourceSmsCodeReq struct {
+	Phone string `form:"phone"`
 }
 
 type RoleApiPermissionsAssignReq struct {
@@ -366,8 +370,8 @@ type RoleCreateReq struct {
 	RoleKey   string `json:"roleKey"`
 	RoleName  string `json:"roleName"`
 	Sort      int64  `json:"sort,optional"`
-	Status    int64  `json:"status,optional"`
-	DataScope int64  `json:"dataScope,optional"`
+	Status    int32  `json:"status,optional"`
+	DataScope int32  `json:"dataScope,optional"`
 	Remark    string `json:"remark,optional"`
 }
 
@@ -388,7 +392,7 @@ type RolePageReq struct {
 	PageNum  int64  `json:"pageNum,optional"`
 	PageSize int64  `json:"pageSize,optional"`
 	RoleName string `json:"roleName,optional"`
-	Status   int64  `json:"status,optional"`
+	Status   int32  `json:"status,optional"`
 }
 
 type RolePermissionDeleteReq struct {
@@ -411,8 +415,8 @@ type RoleUpdateReq struct {
 	RoleId    int64  `path:"roleId"`
 	RoleName  string `json:"roleName"`
 	Sort      int64  `json:"sort,optional"`
-	Status    int64  `json:"status,optional"`
-	DataScope int64  `json:"dataScope,optional"`
+	Status    int32  `json:"status,optional"`
+	DataScope int32  `json:"dataScope,optional"`
 	Remark    string `json:"remark,optional"`
 }
 
@@ -430,7 +434,7 @@ type StorageEnvCreateReq struct {
 	Code        string      `json:"code"`
 	StorageType string      `json:"storageType"`
 	IsDefault   bool        `json:"isDefault,optional"`
-	Status      int64       `json:"status,optional"`
+	Status      int32       `json:"status,optional"`
 	Config      interface{} `json:"config,optional"`
 	Remark      string      `json:"remark,optional"`
 }
@@ -456,7 +460,7 @@ type StorageEnvUpdateReq struct {
 	Code        string      `json:"code"`
 	StorageType string      `json:"storageType"`
 	IsDefault   bool        `json:"isDefault,optional"`
-	Status      int64       `json:"status,optional"`
+	Status      int32       `json:"status,optional"`
 	Config      interface{} `json:"config"`
 	Remark      string      `json:"remark,optional"`
 }
@@ -483,12 +487,12 @@ type UserCreateReq struct {
 	UserName    string `json:"userName"`
 	NickName    string `json:"nickName"`
 	Password    string `json:"password"`
-	UserType    int64  `json:"userType,optional"`
+	UserType    int32  `json:"userType,optional"`
 	Email       string `json:"email,optional"`
 	Phonenumber string `json:"phonenumber,optional"`
-	Sex         int64  `json:"sex,optional"`
+	Sex         int32  `json:"sex,optional"`
 	Avatar      string `json:"avatar,optional"`
-	Status      int64  `json:"status,optional"`
+	Status      int32  `json:"status,optional"`
 	Remark      string `json:"remark,optional"`
 }
 
@@ -501,7 +505,7 @@ type UserPageReq struct {
 	PageSize    int64  `json:"pageSize,optional"`
 	Username    string `json:"username,optional"`
 	Phonenumber string `json:"phonenumber,optional"`
-	Status      int64  `json:"status,optional"`
+	Status      int32  `json:"status,optional"`
 }
 
 type UserPasswordPathReq struct {
@@ -517,11 +521,11 @@ type UserUpdateReq struct {
 	Id          int64  `path:"id"`
 	UserName    string `json:"userName,optional"`
 	NickName    string `json:"nickName,optional"`
-	UserType    int64  `json:"userType,optional"`
+	UserType    int32  `json:"userType,optional"`
 	Email       string `json:"email,optional"`
 	Phonenumber string `json:"phonenumber,optional"`
-	Sex         int64  `json:"sex,optional"`
+	Sex         int32  `json:"sex,optional"`
 	Avatar      string `json:"avatar,optional"`
-	Status      int64  `json:"status,optional"`
+	Status      int32  `json:"status,optional"`
 	Remark      string `json:"remark,optional"`
 }

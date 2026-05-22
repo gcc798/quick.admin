@@ -31,5 +31,5 @@ func (l *UserResetPasswordLogic) UserResetPassword(req *types.UserPasswordPathRe
 	if _, err := l.svcCtx.SysRpcClient.UserResetPassword(l.ctx, &sysservice.UserPasswordReq{Id: req.Id, NewPassword: req.NewPassword}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

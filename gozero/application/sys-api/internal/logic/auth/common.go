@@ -47,16 +47,15 @@ type loginUser struct {
 
 func loginWithRPC(ctx context.Context, svcCtx *svc.ServiceContext, req *types.LoginReq) (*loginUser, *authClient, error) {
 	resp, err := svcCtx.SysRpcClient.AuthLogin(ctx, &sysservice.AuthLoginReq{
-		ClientKey:    req.ClientKey,
-		ClientSecret: req.ClientSecret,
-		GrantType:    req.GrantType,
-		Username:     req.Username,
-		Password:     req.Password,
-		Code:         req.Code,
-		Phonenumber:  req.Phonenumber,
-		Email:        req.Email,
-		WxCode:       req.WxCode,
-		Uuid:         req.Uuid,
+		ClientKey:   req.ClientId,
+		GrantType:   req.GrantType,
+		Username:    req.Username,
+		Password:    req.Password,
+		Code:        req.Code,
+		Phonenumber: req.Phonenumber,
+		Email:       req.Email,
+		WxCode:      req.WxCode,
+		Uuid:        req.Uuid,
 	})
 	if err != nil {
 		return nil, nil, err
@@ -98,12 +97,12 @@ func buildLoginResponse(ctx context.Context, svcCtx *svc.ServiceContext, user *l
 	if err := storeRefreshToken(ctx, svcCtx, user, client, refreshToken); err != nil {
 		return nil, fmt.Errorf("生成Token失败")
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: map[string]interface{}{
-		"accessToken":      accessToken,
-		"refreshToken":     refreshToken,
-		"expiresIn":        accessExpiresIn,
-		"refreshExpiresIn": client.Timeout,
-		"userInfo": map[string]interface{}{
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: map[string]interface{}{
+		"access_token":       accessToken,
+		"refresh_token":      refreshToken,
+		"expires_in":         accessExpiresIn,
+		"refresh_expires_in": client.Timeout,
+		"user_info": map[string]interface{}{
 			"userId":      user.Id,
 			"username":    user.UserName,
 			"nickname":    user.NickName,
@@ -118,7 +117,7 @@ func buildLoginResponse(ctx context.Context, svcCtx *svc.ServiceContext, user *l
 	}}, nil
 }
 
-func refreshLoginToken(ctx context.Context, svcCtx *svc.ServiceContext, refreshToken string, clientKey, clientSecret string) (*types.CommonResp, error) {
+func refreshLoginToken(ctx context.Context, svcCtx *svc.ServiceContext, refreshToken string, clientId string) (*types.CommonResp, error) {
 	if refreshToken == "" {
 		return nil, fmt.Errorf("RefreshToken 无效或已过期")
 	}
@@ -137,9 +136,8 @@ func refreshLoginToken(ctx context.Context, svcCtx *svc.ServiceContext, refreshT
 	if refreshData["token"] != refreshToken {
 		return nil, fmt.Errorf("RefreshToken 无效")
 	}
-	_ = clientSecret
-	// refresh flow uses cached client metadata; clientKey must match the stored token owner
-	if refreshData["clientKey"] != "" && refreshData["clientKey"] != clientKey {
+	// refresh flow uses cached client metadata; clientId must match the stored token owner
+	if refreshData["clientKey"] != "" && refreshData["clientKey"] != clientId {
 		return nil, fmt.Errorf("客户端不匹配")
 	}
 	userId, _ := strconv.ParseInt(refreshData["userId"], 10, 64)
@@ -147,7 +145,7 @@ func refreshLoginToken(ctx context.Context, svcCtx *svc.ServiceContext, refreshT
 	if err != nil {
 		return nil, fmt.Errorf("用户不存在")
 	}
-	client := &authClient{ClientId: refreshData["clientId"], ClientKey: clientKey, DeviceType: refreshData["deviceType"], Timeout: parseInt64(refreshData["timeout"]), ActiveTimeout: parseInt64(refreshData["activeTimeout"])}
+	client := &authClient{ClientId: refreshData["clientId"], ClientKey: clientId, DeviceType: refreshData["deviceType"], Timeout: parseInt64(refreshData["timeout"]), ActiveTimeout: parseInt64(refreshData["activeTimeout"])}
 	user := &loginUser{Id: userResp.UserId, UserName: userResp.UserName, NickName: userResp.NickName, Email: userResp.Email, Phonenumber: userResp.Phonenumber, Avatar: userResp.Avatar, UserType: int64(userResp.UserType), OrgID: userResp.OrgId}
 	if err := enrichLoginUserAuthContext(ctx, svcCtx, user); err != nil {
 		return nil, fmt.Errorf("用户权限上下文获取失败")
@@ -165,7 +163,7 @@ func refreshLoginToken(ctx context.Context, svcCtx *svc.ServiceContext, refreshT
 	}
 	_ = svcCtx.Redis.Del(ctx, indexKey).Err()
 	_ = svcCtx.Redis.Set(ctx, refreshTokenIndexPrefix+hashToken(newRefreshToken), refreshKey, time.Duration(client.Timeout)*time.Second).Err()
-	return &types.CommonResp{Code: 200, Msg: "success", Data: map[string]interface{}{"accessToken": accessToken, "refreshToken": newRefreshToken, "expiresIn": accessExpiresIn, "refreshExpiresIn": client.Timeout}}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: map[string]interface{}{"access_token": accessToken, "refresh_token": newRefreshToken, "expires_in": accessExpiresIn, "refresh_expires_in": client.Timeout}}, nil
 }
 
 func invalidateByToken(ctx context.Context, svcCtx *svc.ServiceContext, token string) {

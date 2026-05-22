@@ -33,6 +33,11 @@ func (l *ApiPermissionDeleteLogic) ApiPermissionDelete(in *pb.IdReq) (*pb.Ack, e
 	if childCount > 0 {
 		return nil, fmt.Errorf("存在子权限，无法删除")
 	}
+	roleIDs, userIDs, err := findAffectedPermissionSubjects(l.ctx, l.svcCtx, in.Id)
+	if err != nil {
+		l.Errorf("查询受影响主体失败: %v", err)
+		roleIDs, userIDs = nil, nil
+	}
 	if err := l.svcCtx.DB.TransactCtx(l.ctx, func(ctx context.Context, session sqlx.Session) error {
 		if _, err := session.ExecCtx(ctx, `delete from public.m_role_api_permission where permission_id = $1`, in.Id); err != nil {
 			return fmt.Errorf("删除角色 API 权限关联失败: %w", err)
@@ -50,6 +55,16 @@ func (l *ApiPermissionDeleteLogic) ApiPermissionDelete(in *pb.IdReq) (*pb.Ack, e
 		return nil
 	}); err != nil {
 		return nil, err
+	}
+	for _, roleID := range roleIDs {
+		if err := syncRolePermissionRedis(l.ctx, l.svcCtx, roleID); err != nil {
+			l.Errorf("同步角色权限缓存失败 roleID=%d: %v", roleID, err)
+		}
+	}
+	for _, userID := range userIDs {
+		if err := syncUserPermissionRedis(l.ctx, l.svcCtx, userID); err != nil {
+			l.Errorf("同步用户权限缓存失败 userID=%d: %v", userID, err)
+		}
 	}
 	return &pb.Ack{Msg: "ok"}, nil
 }

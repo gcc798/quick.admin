@@ -301,3 +301,47 @@ func uniqueInt64Values(values []int64) []int64 {
 	sort.Slice(result, func(i, j int) bool { return result[i] < result[j] })
 	return result
 }
+
+func findAffectedPermissionSubjects(ctx context.Context, svcCtx *svc.ServiceContext, permissionID int64) ([]int64, []int64, error) {
+	var roleIDs []int64
+	if err := svcCtx.DB.QueryRowsCtx(ctx, &roleIDs, `select distinct role_id from public.m_role_api_permission where permission_id = $1`, permissionID); err != nil {
+		return nil, nil, fmt.Errorf("查询受影响角色失败: %w", err)
+	}
+	var userIDs []int64
+	if err := svcCtx.DB.QueryRowsCtx(ctx, &userIDs, `select distinct user_id from public.m_user_api_permission where permission_id = $1`, permissionID); err != nil {
+		return nil, nil, fmt.Errorf("查询受影响用户失败: %w", err)
+	}
+	return roleIDs, userIDs, nil
+}
+
+func syncRolePermissionRedis(ctx context.Context, svcCtx *svc.ServiceContext, roleID int64) error {
+	var roleKey string
+	if err := svcCtx.DB.QueryRowCtx(ctx, &roleKey, `select role_key from public.s_role where id = $1 and deleted_at is null`, roleID); err != nil {
+		return nil
+	}
+	var rows []apiPermissionRow
+	if err := svcCtx.DB.QueryRowsCtx(ctx, &rows, `
+		select p.id, p.parent_id, p.module, p.code, p.name, p.node_type, p.action, p.method, p.path, p.sort, p.status, p.remark, p.create_by, p.update_by, p.created_time, p.updated_time
+		from public.s_api_permission p
+		join public.m_role_api_permission rp on rp.permission_id = p.id
+		where rp.role_id = $1 and p.status = 0
+	`, roleID); err != nil {
+		return fmt.Errorf("查询角色API权限失败: %w", err)
+	}
+	normalized := normalizeCoveredApiPermissions(rows)
+	return replacePermissionRedis(ctx, svcCtx, "casbin:role:"+roleKey+":permissions", normalized)
+}
+
+func syncUserPermissionRedis(ctx context.Context, svcCtx *svc.ServiceContext, userID int64) error {
+	var rows []apiPermissionRow
+	if err := svcCtx.DB.QueryRowsCtx(ctx, &rows, `
+		select p.id, p.parent_id, p.module, p.code, p.name, p.node_type, p.action, p.method, p.path, p.sort, p.status, p.remark, p.create_by, p.update_by, p.created_time, p.updated_time
+		from public.s_api_permission p
+		join public.m_user_api_permission up on up.permission_id = p.id
+		where up.user_id = $1 and p.status = 0
+	`, userID); err != nil {
+		return fmt.Errorf("查询用户API权限失败: %w", err)
+	}
+	normalized := normalizeCoveredApiPermissions(rows)
+	return replacePermissionRedis(ctx, svcCtx, fmt.Sprintf("casbin:user:%d:permissions", userID), normalized)
+}

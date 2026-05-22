@@ -22,5 +22,5 @@ func (l *StorageEnvSetDefaultLogic) StorageEnvSetDefault(req *types.StorageEnvDe
 	if _, err := l.svcCtx.SysRpcClient.StorageEnvSetDefault(l.ctx, &sysservice.StorageEnvDefaultReq{Id: req.Id}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

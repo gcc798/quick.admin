@@ -30,20 +30,20 @@ func (l *ConfigUpdateLogic) ConfigUpdate(in *pb.ConfigUpdateReq) (*pb.Ack, error
 	if err != nil {
 		return nil, err
 	}
-	code := in.Code
-	if code == "" {
-		code = oldRow.Code
+	name := in.Name
+	if name == "" {
+		name = oldRow.Name
 	}
-	exists, err := configCodeExists(l.ctx, l.svcCtx, code, in.Id)
+	exists, err := configNameExists(l.ctx, l.svcCtx, name, in.Id)
 	if err != nil {
 		return nil, err
 	}
 	if exists {
-		return nil, errors.New("配置编码已存在")
+		return nil, errors.New("配置名称已存在")
 	}
-	name := in.Name
-	if name == "" {
-		name = oldRow.Name
+	code := in.Code
+	if code == "" {
+		code = oldRow.Code
 	}
 	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_config set name = $2, code = $3, data = $4, remark = $5, update_by = nullif($6, 0), updated_time = now() where id = $1 and deleted_at is null`,
 		in.Id, name, code, sql.NullString{String: in.DataJson, Valid: in.DataJson != ""}, sql.NullString{String: in.Remark, Valid: in.Remark != ""}, in.UpdateBy); err != nil {

@@ -32,5 +32,5 @@ func (l *RoleMenusLogic) RoleMenus(req *types.RoleMenusPathReq) (resp *types.Com
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: data.MenuIds}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: data.MenuIds}, nil
 }

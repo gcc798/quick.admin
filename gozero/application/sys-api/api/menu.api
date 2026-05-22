@@ -10,11 +10,11 @@ type MenuReq {
 	path      string `json:"path,optional"`
 	component string `json:"component,optional"`
 	query     string `json:"query,optional"`
-	isFrame   int64  `json:"isFrame,optional"`
-	isCache   int64  `json:"isCache,optional"`
-	menuType  int64  `json:"menuType,optional"`
-	visible   int64  `json:"visible,optional"`
-	status    int64  `json:"status,optional"`
+	isFrame   int32  `json:"isFrame,optional"`
+	isCache   int32  `json:"isCache,optional"`
+	menuType  int32  `json:"menuType,optional"`
+	visible   int32  `json:"visible,optional"`
+	status    int32  `json:"status,optional"`
 	perms     string `json:"perms,optional"`
 	icon      string `json:"icon,optional"`
 	remark    string `json:"remark,optional"`
@@ -28,11 +28,11 @@ type MenuUpdateReq {
 	path      string `json:"path,optional"`
 	component string `json:"component,optional"`
 	query     string `json:"query,optional"`
-	isFrame   int64  `json:"isFrame,optional"`
-	isCache   int64  `json:"isCache,optional"`
-	menuType  int64  `json:"menuType,optional"`
-	visible   int64  `json:"visible,optional"`
-	status    int64  `json:"status,optional"`
+	isFrame   int32  `json:"isFrame,optional"`
+	isCache   int32  `json:"isCache,optional"`
+	menuType  int32  `json:"menuType,optional"`
+	visible   int32  `json:"visible,optional"`
+	status    int32  `json:"status,optional"`
 	perms     string `json:"perms,optional"`
 	icon      string `json:"icon,optional"`
 	remark    string `json:"remark,optional"`

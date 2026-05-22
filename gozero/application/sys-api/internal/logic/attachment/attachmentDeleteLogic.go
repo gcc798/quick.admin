@@ -31,5 +31,5 @@ func (l *AttachmentDeleteLogic) AttachmentDelete(req *types.AttachmentIdPathReq)
 	if _, err := l.svcCtx.SysRpcClient.AttachmentDelete(l.ctx, &sysservice.IdReq{Id: req.AttachmentId}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

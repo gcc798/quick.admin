@@ -22,5 +22,5 @@ func (l *RoleDeleteLogic) RoleDelete(req *types.RoleIdPathReq) (resp *types.Comm
 	if _, err := l.svcCtx.SysRpcClient.RoleDelete(l.ctx, &sysservice.IdReq{Id: req.RoleId}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

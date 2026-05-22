@@ -34,8 +34,8 @@ func (l *OrgPageLogic) OrgPage(in *pb.OrgPageReq) (*pb.OrgPageResp, error) {
 		where = append(where, fmt.Sprintf("org_name like $%d", len(args)))
 	}
 	if in.OrgCode != "" {
-		args = append(args, "%"+in.OrgCode+"%")
-		where = append(where, fmt.Sprintf("org_code like $%d", len(args)))
+		args = append(args, in.OrgCode)
+		where = append(where, fmt.Sprintf("org_code = $%d", len(args)))
 	}
 	if in.Status == 0 || in.Status == 1 {
 		args = append(args, in.Status)

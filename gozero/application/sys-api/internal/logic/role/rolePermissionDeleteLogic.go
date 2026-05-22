@@ -22,5 +22,5 @@ func (l *RolePermissionDeleteLogic) RolePermissionDelete(req *types.RolePermissi
 	if _, err := l.svcCtx.SysRpcClient.RolePermissionDelete(l.ctx, &sysservice.RolePermissionReq{RoleKey: req.RoleKey, Resource: req.Resource, Action: req.Action}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

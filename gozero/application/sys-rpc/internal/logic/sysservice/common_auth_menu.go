@@ -5,6 +5,8 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"sort"
+	"strings"
 
 	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/svc"
 	"github.com/gcc798/nai-tizi/application/sys-rpc/pb"
@@ -61,9 +63,9 @@ type roleKeyRow struct {
 	RoleKey sql.NullString `db:"role_key"`
 }
 
-func authenticateClient(ctx context.Context, svcCtx *svc.ServiceContext, clientKey, clientSecret, grantType string) (*authClientRow, error) {
-	if clientKey == "" || clientSecret == "" {
-		return nil, fmt.Errorf("clientKey和clientSecret不能为空")
+func authenticateClient(ctx context.Context, svcCtx *svc.ServiceContext, clientId, grantType string) (*authClientRow, error) {
+	if clientId == "" {
+		return nil, fmt.Errorf("clientId不能为空")
 	}
 	if grantType == "" {
 		return nil, fmt.Errorf("grantType不能为空")
@@ -72,17 +74,14 @@ func authenticateClient(ctx context.Context, svcCtx *svc.ServiceContext, clientK
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select client_id, client_key, client_secret, grant_type, device_type, status, timeout, active_timeout
 		from public.s_auth_client
-		where client_key = $1 and deleted_at is null
+		where client_id = $1 and deleted_at is null
 		limit 1
-	`, clientKey)
+	`, clientId)
 	if err != nil {
 		if errors.Is(err, gzsqlx.ErrNotFound) {
 			return nil, fmt.Errorf("客户端不存在")
 		}
 		return nil, fmt.Errorf("查询客户端失败")
-	}
-	if row.ClientSecret != clientSecret {
-		return nil, fmt.Errorf("客户端认证失败")
 	}
 	if row.Status != 0 {
 		return nil, fmt.Errorf("客户端已停用")
@@ -115,6 +114,58 @@ func authenticatePassword(ctx context.Context, svcCtx *svc.ServiceContext, usern
 	}
 	if err := bcrypt.CompareHashAndPassword([]byte(row.Password.String), []byte(password)); err != nil {
 		return nil, fmt.Errorf("用户名或密码错误")
+	}
+	if row.Status != 0 {
+		return nil, fmt.Errorf("用户已被停用")
+	}
+	return &row, nil
+}
+
+func authenticateEmail(ctx context.Context, svcCtx *svc.ServiceContext, email, uuidValue, code string) (*userAuthRow, error) {
+	if email == "" {
+		return nil, fmt.Errorf("邮箱不能为空")
+	}
+	if err := verifyEmailCaptcha(ctx, svcCtx, uuidValue, email, code); err != nil {
+		return nil, err
+	}
+	var row userAuthRow
+	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
+		select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
+		from public.s_user
+		where email = $1 and deleted_at is null
+		limit 1
+	`, email)
+	if err != nil {
+		if errors.Is(err, gzsqlx.ErrNotFound) {
+			return nil, fmt.Errorf("邮箱或验证码错误")
+		}
+		return nil, fmt.Errorf("登录失败")
+	}
+	if row.Status != 0 {
+		return nil, fmt.Errorf("用户已被停用")
+	}
+	return &row, nil
+}
+
+func authenticateSms(ctx context.Context, svcCtx *svc.ServiceContext, phonenumber, uuidValue, code string) (*userAuthRow, error) {
+	if phonenumber == "" {
+		return nil, fmt.Errorf("手机号不能为空")
+	}
+	if err := verifySmsCaptcha(ctx, svcCtx, uuidValue, phonenumber, code); err != nil {
+		return nil, err
+	}
+	var row userAuthRow
+	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
+		select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
+		from public.s_user
+		where phonenumber = $1 and deleted_at is null
+		limit 1
+	`, phonenumber)
+	if err != nil {
+		if errors.Is(err, gzsqlx.ErrNotFound) {
+			return nil, fmt.Errorf("手机号或验证码错误")
+		}
+		return nil, fmt.Errorf("登录失败")
 	}
 	if row.Status != 0 {
 		return nil, fmt.Errorf("用户已被停用")
@@ -243,7 +294,76 @@ func getUserMenus(ctx context.Context, svcCtx *svc.ServiceContext, userId int64)
 		where mur.user_id = $1 and m.deleted_at is null and r.deleted_at is null and m.status = 0 and r.status = 0
 		order by m.sort asc, m.id asc
 	`, userId)
-	return rows, err
+	if err != nil {
+		return nil, err
+	}
+	return withAncestorMenus(ctx, svcCtx, rows)
+}
+
+func withAncestorMenus(ctx context.Context, svcCtx *svc.ServiceContext, menus []menuRow) ([]menuRow, error) {
+	if len(menus) == 0 {
+		return menus, nil
+	}
+	menuByID := make(map[int64]menuRow, len(menus))
+	for _, m := range menus {
+		menuByID[m.Id] = m
+	}
+	missingParentIDs := make([]int64, 0)
+	missingSet := make(map[int64]struct{})
+	for _, m := range menus {
+		if m.ParentId != 0 {
+			if _, ok := menuByID[m.ParentId]; !ok {
+				if _, already := missingSet[m.ParentId]; !already {
+					missingParentIDs = append(missingParentIDs, m.ParentId)
+					missingSet[m.ParentId] = struct{}{}
+				}
+			}
+		}
+	}
+	for len(missingParentIDs) > 0 {
+		var parents []menuRow
+		placeholders := make([]string, len(missingParentIDs))
+		args := make([]interface{}, len(missingParentIDs))
+		for i, id := range missingParentIDs {
+			placeholders[i] = fmt.Sprintf("$%d", i+1)
+			args[i] = id
+		}
+		query := fmt.Sprintf(`
+			select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, created_time, updated_time
+			from public.s_menu
+			where id in (%s) and deleted_at is null and status = 0
+		`, strings.Join(placeholders, ", "))
+		if err := svcCtx.DB.QueryRowsCtx(ctx, &parents, query, args...); err != nil {
+			return nil, fmt.Errorf("failed to get ancestor menus: %w", err)
+		}
+		missingParentIDs = nil
+		missingSet = make(map[int64]struct{})
+		for _, parent := range parents {
+			if _, exists := menuByID[parent.Id]; exists {
+				continue
+			}
+			menuByID[parent.Id] = parent
+			if parent.ParentId != 0 {
+				if _, ok := menuByID[parent.ParentId]; !ok {
+					if _, already := missingSet[parent.ParentId]; !already {
+						missingParentIDs = append(missingParentIDs, parent.ParentId)
+						missingSet[parent.ParentId] = struct{}{}
+					}
+				}
+			}
+		}
+	}
+	result := make([]menuRow, 0, len(menuByID))
+	for _, m := range menuByID {
+		result = append(result, m)
+	}
+	sort.Slice(result, func(i, j int) bool {
+		if result[i].Sort == result[j].Sort {
+			return result[i].Id < result[j].Id
+		}
+		return result[i].Sort < result[j].Sort
+	})
+	return result, nil
 }
 
 func getMenuByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*pb.Menu, error) {

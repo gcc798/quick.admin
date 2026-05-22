@@ -23,5 +23,5 @@ func (l *RolePermissionsLogic) RolePermissions(req *types.RolePermissionsQueryRe
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: data.Records}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: data.Records}, nil
 }

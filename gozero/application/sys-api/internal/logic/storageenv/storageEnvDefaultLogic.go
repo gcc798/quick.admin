@@ -23,5 +23,5 @@ func (l *StorageEnvDefaultLogic) StorageEnvDefault() (resp *types.CommonResp, er
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: row}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: row}, nil
 }

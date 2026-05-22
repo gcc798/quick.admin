@@ -31,7 +31,7 @@ type AttachmentBusinessQueryReq {
 
 type AttachmentUrlQueryReq {
 	attachmentId int64 `path:"attachmentId"`
-	expires      int64 `form:"expires,optional"`
+	expires      int   `form:"expires,optional"`
 }
 
 @server (

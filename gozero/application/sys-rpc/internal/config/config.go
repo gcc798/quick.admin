@@ -30,9 +30,16 @@ type CaptchaConf struct {
 	Email CaptchaEmailConf
 }
 
+type WechatConf struct {
+	Enabled bool
+	AppId   string
+	Secret  string
+}
+
 type Config struct {
 	zrpc.RpcServerConf
 	Postgres   PostgresConf
 	CacheRedis RedisConf
 	Captcha    CaptchaConf
+	Wechat     WechatConf
 }

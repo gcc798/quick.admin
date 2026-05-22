@@ -25,5 +25,5 @@ func (l *UserBatchDeleteLogic) UserBatchDelete(req *types.BatchIdsReq) (resp *ty
 	if _, err := l.svcCtx.SysRpcClient.UserBatchDelete(l.ctx, &sysservice.BatchIdsReq{Ids: req.Ids}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功"}, nil
 }

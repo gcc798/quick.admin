@@ -22,5 +22,5 @@ func (l *UserDeleteLogic) UserDelete(req *types.IdPathReq) (resp *types.CommonRe
 	if _, err := l.svcCtx.SysRpcClient.UserDelete(l.ctx, &sysservice.IdReq{Id: req.Id}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功"}, nil
 }

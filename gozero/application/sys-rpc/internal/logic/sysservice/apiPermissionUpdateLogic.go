@@ -52,5 +52,19 @@ func (l *ApiPermissionUpdateLogic) ApiPermissionUpdate(in *pb.ApiPermissionSaveR
 	); err != nil {
 		return nil, err
 	}
+	roleIDs, userIDs, err := findAffectedPermissionSubjects(l.ctx, l.svcCtx, in.Id)
+	if err != nil {
+		l.Errorf("查询受影响主体失败: %v", err)
+	}
+	for _, roleID := range roleIDs {
+		if err := syncRolePermissionRedis(l.ctx, l.svcCtx, roleID); err != nil {
+			l.Errorf("同步角色权限缓存失败 roleID=%d: %v", roleID, err)
+		}
+	}
+	for _, userID := range userIDs {
+		if err := syncUserPermissionRedis(l.ctx, l.svcCtx, userID); err != nil {
+			l.Errorf("同步用户权限缓存失败 userID=%d: %v", userID, err)
+		}
+	}
 	return &pb.Ack{Msg: "ok"}, nil
 }

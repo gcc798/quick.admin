@@ -2,17 +2,17 @@ package sysservicelogic
 
 import (
 	"context"
-	"encoding/base64"
+	"crypto/rand"
 	"encoding/json"
 	"fmt"
-	"html"
-	"math/rand"
+	"math/big"
 	"strings"
 	"time"
 
 	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/svc"
 	"github.com/gcc798/nai-tizi/application/sys-rpc/pb"
 	"github.com/google/uuid"
+	base64Captcha "github.com/mojocn/base64Captcha"
 )
 
 const (
@@ -34,6 +34,44 @@ func captchaEnabledTypes(svcCtx *svc.ServiceContext) []string {
 		types = append(types, "email")
 	}
 	return types
+}
+
+func verifySmsCaptcha(ctx context.Context, svcCtx *svc.ServiceContext, uuidValue, phone, code string) error {
+	if uuidValue == "" || phone == "" || code == "" {
+		return fmt.Errorf("手机号、验证码ID和验证码不能为空")
+	}
+	key := captchaSmsKeyPrefix + uuidValue
+	fields, err := svcCtx.Redis.HGetAll(ctx, key).Result()
+	if err != nil || len(fields) == 0 {
+		return fmt.Errorf("验证码已过期或不存在")
+	}
+	_ = svcCtx.Redis.Del(ctx, key).Err()
+	if fields["phone"] != phone {
+		return fmt.Errorf("手机号与验证码不匹配")
+	}
+	if fields["code"] != code {
+		return fmt.Errorf("验证码错误")
+	}
+	return nil
+}
+
+func verifyEmailCaptcha(ctx context.Context, svcCtx *svc.ServiceContext, uuidValue, email, code string) error {
+	if uuidValue == "" || email == "" || code == "" {
+		return fmt.Errorf("邮箱、验证码ID和验证码不能为空")
+	}
+	key := captchaEmailKeyPrefix + uuidValue
+	fields, err := svcCtx.Redis.HGetAll(ctx, key).Result()
+	if err != nil || len(fields) == 0 {
+		return fmt.Errorf("验证码已过期或不存在")
+	}
+	_ = svcCtx.Redis.Del(ctx, key).Err()
+	if fields["email"] != email {
+		return fmt.Errorf("邮箱与验证码不匹配")
+	}
+	if fields["code"] != code {
+		return fmt.Errorf("验证码错误")
+	}
+	return nil
 }
 
 func verifyImageCaptcha(ctx context.Context, svcCtx *svc.ServiceContext, uuidValue, code string) error {
@@ -69,15 +107,18 @@ func newCaptchaData(captchaType, id string, data interface{}, expireAt time.Time
 }
 
 func generateImageCaptcha(ctx context.Context, svcCtx *svc.ServiceContext) (*pb.CaptchaDataResp, error) {
+	driver := base64Captcha.NewDriverDigit(80, 240, 4, 0.7, 80)
+	captcha := base64Captcha.NewCaptcha(driver, base64Captcha.DefaultMemStore)
+	_, b64s, answer, err := captcha.Generate()
+	if err != nil {
+		return nil, fmt.Errorf("生成验证码失败: %w", err)
+	}
 	id := uuid.NewString()
-	code := randomCode(4)
 	expire := 5 * time.Minute
-	if err := svcCtx.Redis.Set(ctx, captchaImageKeyPrefix+id, code, expire).Err(); err != nil {
+	if err := svcCtx.Redis.Set(ctx, captchaImageKeyPrefix+id, answer, expire).Err(); err != nil {
 		return nil, err
 	}
-	svg := buildCaptchaSVG(code)
-	image := "data:image/svg+xml;base64," + base64.StdEncoding.EncodeToString([]byte(svg))
-	return newCaptchaData("image", id, map[string]interface{}{"image": image}, time.Now().Add(expire))
+	return newCaptchaData("image", id, map[string]interface{}{"image": b64s}, time.Now().Add(expire))
 }
 
 func generateSmsCaptcha(ctx context.Context, svcCtx *svc.ServiceContext, phone string) (*pb.CaptchaDataResp, error) {
@@ -102,6 +143,9 @@ func generateSmsCaptcha(ctx context.Context, svcCtx *svc.ServiceContext, phone s
 		return nil, err
 	}
 	_ = svcCtx.Redis.Set(ctx, rateKey, "1", time.Minute).Err()
+	if err := svcCtx.SMSProvider.SendSMS(phone, code); err != nil {
+		return nil, fmt.Errorf("发送短信验证码失败: %w", err)
+	}
 	return newCaptchaData("sms", id, map[string]interface{}{"phone": maskPhone(phone)}, time.Now().Add(expire))
 }
 
@@ -127,6 +171,9 @@ func generateEmailCaptcha(ctx context.Context, svcCtx *svc.ServiceContext, email
 		return nil, err
 	}
 	_ = svcCtx.Redis.Set(ctx, rateKey, "1", time.Minute).Err()
+	if err := svcCtx.EmailProvider.SendEmail(email, code); err != nil {
+		return nil, fmt.Errorf("发送邮箱验证码失败: %w", err)
+	}
 	return newCaptchaData("email", id, map[string]interface{}{"email": maskEmail(email)}, time.Now().Add(expire))
 }
 
@@ -135,16 +182,15 @@ func randomDigits(length int) string {
 	return randomFromCharset(length, digits)
 }
 
-func randomCode(length int) string {
-	const charset = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
-	return randomFromCharset(length, charset)
-}
-
 func randomFromCharset(length int, charset string) string {
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	out := make([]byte, length)
 	for i := range out {
-		out[i] = charset[r.Intn(len(charset))]
+		n, err := rand.Int(rand.Reader, big.NewInt(int64(len(charset))))
+		if err != nil {
+			out[i] = charset[0]
+			continue
+		}
+		out[i] = charset[n.Int64()]
 	}
 	return string(out)
 }
@@ -162,14 +208,4 @@ func maskEmail(email string) string {
 		return email
 	}
 	return parts[0][:1] + "***@" + parts[1]
-}
-
-func buildCaptchaSVG(code string) string {
-	escaped := html.EscapeString(code)
-	return fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40">
-<rect width="120" height="40" fill="#f5f5f5"/>
-<path d="M0 10 C20 20, 40 0, 60 10 S100 20, 120 10" stroke="#d0d7de" fill="none"/>
-<path d="M0 30 C20 20, 40 40, 60 30 S100 20, 120 30" stroke="#d0d7de" fill="none"/>
-<text x="60" y="26" text-anchor="middle" font-size="22" font-family="monospace" fill="#1f2328" letter-spacing="4">%s</text>
-</svg>`, escaped)
 }

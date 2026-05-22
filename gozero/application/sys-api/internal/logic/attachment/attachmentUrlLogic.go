@@ -30,10 +30,10 @@ func NewAttachmentUrlLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Att
 func (l *AttachmentUrlLogic) AttachmentUrl(req *types.AttachmentUrlQueryReq) (resp *types.CommonResp, err error) {
 	data, err := l.svcCtx.SysRpcClient.AttachmentUrl(l.ctx, &sysservice.AttachmentUrlQueryReq{
 		AttachmentId: req.AttachmentId,
-		Expires:      req.Expires,
+		Expires:      int64(req.Expires),
 	})
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: data}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: data}, nil
 }

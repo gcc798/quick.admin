@@ -2,6 +2,7 @@ package sysservicelogic
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/svc"
 	"github.com/gcc798/nai-tizi/application/sys-rpc/pb"
@@ -24,10 +25,15 @@ func NewUserImportLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserIm
 }
 
 func (l *UserImportLogic) UserImport(in *pb.UserImportReq) (*pb.Ack, error) {
+	successCount := 0
+	failCount := 0
 	for _, user := range in.Users {
 		if _, err := NewUserCreateLogic(l.ctx, l.svcCtx).UserCreate(user); err != nil {
-			return nil, err
+			failCount++
+			l.Errorf("导入用户失败: %s, 错误: %v", user.UserName, err)
+		} else {
+			successCount++
 		}
 	}
-	return &pb.Ack{Msg: "ok"}, nil
+	return &pb.Ack{Msg: fmt.Sprintf("导入完成：成功%d条，失败%d条", successCount, failCount)}, nil
 }

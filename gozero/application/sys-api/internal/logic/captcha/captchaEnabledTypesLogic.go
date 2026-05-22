@@ -32,5 +32,5 @@ func (l *CaptchaEnabledTypesLogic) CaptchaEnabledTypes() (resp *types.CommonResp
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: data.Types}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: data.Types}, nil
 }

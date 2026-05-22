@@ -44,7 +44,7 @@ func (l *ConfigPageLogic) ConfigPage(in *pb.ConfigPageReq) (*pb.ConfigPageResp, 
 	}
 	queryArgs := append(append([]interface{}{}, args...), pageSize, (pageNum-1)*pageSize)
 	var rows []configRow
-	query := `select id, name, code, data, remark, create_by, created_time, update_by, updated_time from public.s_config where ` + whereSQL + ` order by id desc limit $` + fmt.Sprint(len(args)+1) + ` offset $` + fmt.Sprint(len(args)+2)
+	query := `select id, name, code, data, remark, create_by, created_time, update_by, updated_time from public.s_config where ` + whereSQL + ` order by code asc, id asc limit $` + fmt.Sprint(len(args)+1) + ` offset $` + fmt.Sprint(len(args)+2)
 	if err := l.svcCtx.DB.QueryRowsCtx(l.ctx, &rows, query, queryArgs...); err != nil {
 		return nil, err
 	}

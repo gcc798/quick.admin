@@ -23,5 +23,5 @@ func (l *UserDetailLogic) UserDetail(req *types.IdPathReq) (resp *types.CommonRe
 	if err != nil {
 		return &types.CommonResp{Code: 404, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: data}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: data}, nil
 }

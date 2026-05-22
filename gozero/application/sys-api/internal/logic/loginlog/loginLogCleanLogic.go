@@ -22,5 +22,5 @@ func (l *LoginLogCleanLogic) LoginLogClean(req *types.LogCleanReq) (resp *types.
 	if _, err := l.svcCtx.SysRpcClient.LoginLogClean(l.ctx, &sysservice.LogCleanReq{Days: req.Days}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: nil}, nil
 }

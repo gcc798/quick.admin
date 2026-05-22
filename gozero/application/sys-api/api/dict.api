@@ -7,7 +7,7 @@ type DictPageReq {
 	pageSize  int64  `json:"pageSize,optional"`
 	dictType  string `json:"dictType,optional"`
 	dictLabel string `json:"dictLabel,optional"`
-	status    int64  `json:"status,optional"`
+	status    int32  `json:"status,optional"`
 }
 
 type DictCreateReq {
@@ -17,7 +17,7 @@ type DictCreateReq {
 	dictValue string `json:"dictValue"`
 	sort      int64  `json:"sort,optional"`
 	isDefault bool   `json:"isDefault,optional"`
-	status    int64  `json:"status,optional"`
+	status    int32  `json:"status,optional"`
 	remark    string `json:"remark,optional"`
 	createBy  int64  `json:"createBy,optional"`
 	updateBy  int64  `json:"updateBy,optional"`
@@ -31,7 +31,7 @@ type DictUpdateReq {
 	dictValue string `json:"dictValue"`
 	sort      int64  `json:"sort,optional"`
 	isDefault bool   `json:"isDefault,optional"`
-	status    int64  `json:"status,optional"`
+	status    int32  `json:"status,optional"`
 	remark    string `json:"remark,optional"`
 	updateBy  int64  `json:"updateBy,optional"`
 }

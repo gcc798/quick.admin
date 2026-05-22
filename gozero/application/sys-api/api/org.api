@@ -7,7 +7,7 @@ type OrgPageReq {
 	pageSize int64  `json:"pageSize,optional"`
 	orgName  string `json:"orgName,optional"`
 	orgCode  string `json:"orgCode,optional"`
-	status   int64  `json:"status,optional"`
+	status   int32  `json:"status,optional"`
 	parentId int64  `json:"parentId,optional"`
 }
 
@@ -19,7 +19,7 @@ type OrgCreateReq {
 	leader   string `json:"leader,optional"`
 	phone    string `json:"phone,optional"`
 	email    string `json:"email,optional"`
-	status   int64  `json:"status,optional"`
+	status   int32  `json:"status,optional"`
 	sort     int64  `json:"sort,optional"`
 	remark   string `json:"remark,optional"`
 }
@@ -33,7 +33,7 @@ type OrgUpdateReq {
 	leader   string `json:"leader,optional"`
 	phone    string `json:"phone,optional"`
 	email    string `json:"email,optional"`
-	status   int64  `json:"status,optional"`
+	status   int32  `json:"status,optional"`
 	sort     int64  `json:"sort,optional"`
 	remark   string `json:"remark,optional"`
 }

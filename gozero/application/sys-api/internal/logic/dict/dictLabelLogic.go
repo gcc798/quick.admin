@@ -23,5 +23,5 @@ func (l *DictLabelLogic) DictLabel(req *types.DictLabelQueryReq) (resp *types.Co
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: data.Label}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: data.Label}, nil
 }

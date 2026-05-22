@@ -29,7 +29,7 @@ func (l *DictTypeLogic) DictType(in *pb.DictTypeQueryReq) (*pb.DictListResp, err
 	query := `
 		select id, parent_id, dict_type, dict_label, dict_value, sort, is_default, status, remark, create_by, update_by, created_time, updated_time
 		from public.s_dict_data
-		where dict_type = $1 and deleted_at is null`
+		where dict_type = $1 and status = 0`
 	if in.ParentId > 0 {
 		args = append(args, in.ParentId)
 		query += fmt.Sprintf(" and parent_id = $%d", len(args))

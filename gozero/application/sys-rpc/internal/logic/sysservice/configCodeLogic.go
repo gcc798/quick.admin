@@ -25,7 +25,7 @@ func NewConfigCodeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Config
 
 func (l *ConfigCodeLogic) ConfigCode(in *pb.ConfigCodeQueryReq) (*pb.ConfigListResp, error) {
 	var rows []configRow
-	if err := l.svcCtx.DB.QueryRowsCtx(l.ctx, &rows, `select id, name, code, data, remark, create_by, created_time, update_by, updated_time from public.s_config where code = $1 and deleted_at is null order by id desc`, in.Code); err != nil {
+	if err := l.svcCtx.DB.QueryRowsCtx(l.ctx, &rows, `select id, name, code, data, remark, create_by, created_time, update_by, updated_time from public.s_config where code = $1 and deleted_at is null order by id asc`, in.Code); err != nil {
 		return nil, err
 	}
 	return &pb.ConfigListResp{Records: toConfigList(rows)}, nil

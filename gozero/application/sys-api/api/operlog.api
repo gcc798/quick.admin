@@ -32,7 +32,7 @@ type OperLogReq {
 }
 
 type OperLogUpdateReq {
-	id            int64  `path:"id"`
+	id            int64  `json:"id"`
 	title         string `json:"title,optional"`
 	businessType  string `json:"businessType,optional"`
 	method        string `json:"method,optional"`

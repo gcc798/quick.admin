@@ -22,5 +22,5 @@ func (l *RoleRemoveLogic) RoleRemove(req *types.RemoveRoleReq) (resp *types.Comm
 	if _, err := l.svcCtx.SysRpcClient.RoleRemove(l.ctx, &sysservice.RemoveRoleReq{UserId: req.UserId, RoleId: req.RoleId}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

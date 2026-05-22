@@ -6,15 +6,15 @@ type RolePageReq {
 	pageNum  int64  `json:"pageNum,optional"`
 	pageSize int64  `json:"pageSize,optional"`
 	roleName string `json:"roleName,optional"`
-	status   int64  `json:"status,optional"`
+	status   int32  `json:"status,optional"`
 }
 
 type RoleCreateReq {
 	roleKey   string `json:"roleKey"`
 	roleName  string `json:"roleName"`
 	sort      int64  `json:"sort,optional"`
-	status    int64  `json:"status,optional"`
-	dataScope int64  `json:"dataScope,optional"`
+	status    int32  `json:"status,optional"`
+	dataScope int32  `json:"dataScope,optional"`
 	remark    string `json:"remark,optional"`
 }
 
@@ -22,8 +22,8 @@ type RoleUpdateReq {
 	roleId    int64  `path:"roleId"`
 	roleName  string `json:"roleName"`
 	sort      int64  `json:"sort,optional"`
-	status    int64  `json:"status,optional"`
-	dataScope int64  `json:"dataScope,optional"`
+	status    int32  `json:"status,optional"`
+	dataScope int32  `json:"dataScope,optional"`
 	remark    string `json:"remark,optional"`
 }
 
@@ -71,7 +71,7 @@ type RoleUsersPathReq {
 }
 
 type RoleUsersReq {
-	roleId int64   `path:"roleId"`
+	roleId  int64   `path:"roleId"`
 	userIds []int64 `json:"userIds"`
 }
 

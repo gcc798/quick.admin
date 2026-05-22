@@ -27,7 +27,7 @@ func NewDictPageLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictPage
 
 func (l *DictPageLogic) DictPage(in *pb.DictPageReq) (*pb.DictPageResp, error) {
 	pageNum, pageSize := normalizePage(in.PageNum, in.PageSize)
-	where := []string{"deleted_at is null"}
+	where := []string{"deleted_at is null", "(parent_id = 0 or parent_id is null)"}
 	args := make([]interface{}, 0)
 	if in.DictType != "" {
 		args = append(args, "%"+in.DictType+"%")

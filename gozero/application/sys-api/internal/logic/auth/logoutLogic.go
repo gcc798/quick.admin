@@ -31,7 +31,7 @@ func (l *LogoutLogic) Logout(token string) (resp *types.CommonResp, err error) {
 
 	return &types.CommonResp{
 		Code: 200,
-		Msg:  "success",
-		Data: "ok",
+		Msg:  "操作成功",
+		Data: nil,
 	}, nil
 }

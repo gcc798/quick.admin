@@ -25,5 +25,5 @@ func (l *ConfigBatchDeleteLogic) ConfigBatchDelete(req *types.BatchIdsReq) (resp
 	if _, err := l.svcCtx.SysRpcClient.ConfigBatchDelete(l.ctx, &sysservice.BatchIdsReq{Ids: req.Ids}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

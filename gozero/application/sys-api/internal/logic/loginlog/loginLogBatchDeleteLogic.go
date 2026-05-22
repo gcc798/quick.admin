@@ -25,5 +25,5 @@ func (l *LoginLogBatchDeleteLogic) LoginLogBatchDelete(req *types.BatchIdsReq) (
 	if _, err := l.svcCtx.SysRpcClient.LoginLogBatchDelete(l.ctx, &sysservice.BatchIdsReq{Ids: req.Ids}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

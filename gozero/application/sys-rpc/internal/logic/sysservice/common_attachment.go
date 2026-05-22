@@ -3,12 +3,10 @@ package sysservicelogic
 import (
 	"context"
 	"database/sql"
-	"encoding/base64"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
-	"os"
-	"path/filepath"
 	"strings"
 	"time"
 
@@ -96,25 +94,20 @@ func buildAttachmentInt64In(ids []int64, start int) (string, []interface{}) {
 	return strings.Join(parts, ", "), args
 }
 
-func attachmentRootDir() string {
-	return filepath.Join("runtime", "attachments")
-}
-
-func ensureAttachmentDir() error {
-	return os.MkdirAll(attachmentRootDir(), 0o755)
-}
-
-func buildAttachmentFilePath(id int64, fileName string) string {
-	base := filepath.Base(fileName)
-	base = strings.ReplaceAll(base, " ", "_")
-	return filepath.Join(attachmentRootDir(), fmt.Sprintf("%d_%d_%s", id, time.Now().UnixNano(), base))
-}
-
-func readAttachmentContent(row *attachmentRow) ([]byte, string, error) {
+func readAttachmentContent(ctx context.Context, svcCtx *svc.ServiceContext, row *attachmentRow) ([]byte, string, error) {
 	if row.FileKey == "" {
 		return nil, "", fmt.Errorf("附件文件不存在")
 	}
-	content, err := os.ReadFile(row.FileKey)
+	s, err := svcCtx.StorageManager.GetStorage(ctx, row.EnvId)
+	if err != nil {
+		return nil, "", err
+	}
+	reader, err := s.Download(ctx, row.FileKey)
+	if err != nil {
+		return nil, "", err
+	}
+	defer reader.Close()
+	content, err := io.ReadAll(reader)
 	if err != nil {
 		return nil, "", err
 	}
@@ -125,9 +118,19 @@ func readAttachmentContent(row *attachmentRow) ([]byte, string, error) {
 	return content, contentType, nil
 }
 
-func buildAttachmentDataURL(content []byte, contentType string) string {
-	if contentType == "" {
-		contentType = "application/octet-stream"
+func getAttachmentAccessURL(ctx context.Context, svcCtx *svc.ServiceContext, row *attachmentRow, expires time.Duration) (string, error) {
+	s, err := svcCtx.StorageManager.GetStorage(ctx, row.EnvId)
+	if err != nil {
+		return "", err
 	}
-	return "data:" + contentType + ";base64," + base64.StdEncoding.EncodeToString(content)
+	return s.GetURL(ctx, row.FileKey, expires)
+}
+
+func buildAttachmentStorageKey(id int64, fileName string) string {
+	base := fileName
+	if idx := strings.LastIndex(fileName, "/"); idx >= 0 {
+		base = fileName[idx+1:]
+	}
+	base = strings.ReplaceAll(base, " ", "_")
+	return fmt.Sprintf("%s/%d_%s", time.Now().Format("20060102"), id, base)
 }

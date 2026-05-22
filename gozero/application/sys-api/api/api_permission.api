@@ -7,12 +7,12 @@ type ApiPermissionSaveReq {
 	module   string `json:"module"`
 	code     string `json:"code"`
 	name     string `json:"name"`
-	nodeType int64  `json:"nodeType,optional"`
+	nodeType int32  `json:"nodeType"`
 	action   string `json:"action"`
 	method   string `json:"method,optional"`
 	path     string `json:"path,optional"`
 	sort     int64  `json:"sort,optional"`
-	status   int64  `json:"status,optional"`
+	status   int32  `json:"status"`
 	remark   string `json:"remark,optional"`
 }
 
@@ -22,12 +22,12 @@ type ApiPermissionUpdateReq {
 	module   string `json:"module"`
 	code     string `json:"code"`
 	name     string `json:"name"`
-	nodeType int64  `json:"nodeType,optional"`
+	nodeType int32  `json:"nodeType"`
 	action   string `json:"action"`
 	method   string `json:"method,optional"`
 	path     string `json:"path,optional"`
 	sort     int64  `json:"sort,optional"`
-	status   int64  `json:"status,optional"`
+	status   int32  `json:"status"`
 	remark   string `json:"remark,optional"`
 }
 

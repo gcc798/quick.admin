@@ -7,19 +7,19 @@ type UserPageReq {
 	pageSize    int64  `json:"pageSize,optional"`
 	username    string `json:"username,optional"`
 	phonenumber string `json:"phonenumber,optional"`
-	status      int64  `json:"status,optional"`
+	status      int32  `json:"status,optional"`
 }
 
 type UserCreateReq {
 	userName    string `json:"userName"`
 	nickName    string `json:"nickName"`
 	password    string `json:"password"`
-	userType    int64  `json:"userType,optional"`
+	userType    int32  `json:"userType,optional"`
 	email       string `json:"email,optional"`
 	phonenumber string `json:"phonenumber,optional"`
-	sex         int64  `json:"sex,optional"`
+	sex         int32  `json:"sex,optional"`
 	avatar      string `json:"avatar,optional"`
-	status      int64  `json:"status,optional"`
+	status      int32  `json:"status,optional"`
 	remark      string `json:"remark,optional"`
 }
 
@@ -27,12 +27,12 @@ type UserUpdateReq {
 	id          int64  `path:"id"`
 	userName    string `json:"userName,optional"`
 	nickName    string `json:"nickName,optional"`
-	userType    int64  `json:"userType,optional"`
+	userType    int32  `json:"userType,optional"`
 	email       string `json:"email,optional"`
 	phonenumber string `json:"phonenumber,optional"`
-	sex         int64  `json:"sex,optional"`
+	sex         int32  `json:"sex,optional"`
 	avatar      string `json:"avatar,optional"`
-	status      int64  `json:"status,optional"`
+	status      int32  `json:"status,optional"`
 	remark      string `json:"remark,optional"`
 }
 
@@ -68,6 +68,9 @@ service sys-api {
 
 	@handler UserChangePassword
 	post /api/v1/user/password/change (UserChangePasswordReq) returns (CommonResp)
+
+	@handler XcxGetInfo
+	post /system/user/xcxGetInfo returns (CommonResp)
 
 	@handler UserUpdate
 	put /api/v1/user/:id (UserUpdateReq) returns (CommonResp)

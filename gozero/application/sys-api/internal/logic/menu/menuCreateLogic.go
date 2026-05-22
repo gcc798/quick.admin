@@ -37,11 +37,11 @@ func (l *MenuCreateLogic) MenuCreate(req *types.MenuReq) (resp *types.CommonResp
 		Path:      req.Path,
 		Component: req.Component,
 		Query:     req.Query,
-		IsFrame:   req.IsFrame,
-		IsCache:   req.IsCache,
-		MenuType:  req.MenuType,
-		Visible:   req.Visible,
-		Status:    req.Status,
+		IsFrame:   int64(req.IsFrame),
+		IsCache:   int64(req.IsCache),
+		MenuType:  int64(req.MenuType),
+		Visible:   int64(req.Visible),
+		Status:    int64(req.Status),
 		Perms:     req.Perms,
 		Icon:      req.Icon,
 		Remark:    req.Remark,
@@ -50,5 +50,5 @@ func (l *MenuCreateLogic) MenuCreate(req *types.MenuReq) (resp *types.CommonResp
 	}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

@@ -18,5 +18,5 @@ func NewRefreshTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Refr
 	return &RefreshTokenLogic{Logger: logx.WithContext(ctx), ctx: ctx, svcCtx: svcCtx}
 }
 func (l *RefreshTokenLogic) RefreshToken(req *types.RefreshTokenReq) (resp *types.CommonResp, err error) {
-	return refreshLoginToken(l.ctx, l.svcCtx, req.RefreshToken, req.ClientKey, req.ClientSecret)
+	return refreshLoginToken(l.ctx, l.svcCtx, req.RefreshToken, req.ClientId)
 }

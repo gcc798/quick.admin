@@ -34,9 +34,9 @@ func (l *AttachmentBindLogic) AttachmentBind(in *pb.AttachmentBindReq) (*pb.Ack,
 		if err != nil {
 			return nil, err
 		}
-		content, contentType, err := readAttachmentContent(row)
+		generatedURL, err := getAttachmentAccessURL(l.ctx, l.svcCtx, row, 0)
 		if err == nil {
-			accessURL = buildAttachmentDataURL(content, contentType)
+			accessURL = generatedURL
 		}
 	}
 	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `

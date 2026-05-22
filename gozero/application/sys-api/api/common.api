@@ -3,7 +3,7 @@ syntax = "v1"
 type CommonResp {
 	code int         `json:"code"`
 	msg  string      `json:"msg"`
-	data interface{} `json:"data,optional"`
+	data interface{} `json:"data"`
 }
 
 type IdPathReq {

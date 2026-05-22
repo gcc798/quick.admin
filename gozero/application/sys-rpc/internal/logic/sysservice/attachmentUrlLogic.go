@@ -2,6 +2,7 @@ package sysservicelogic
 
 import (
 	"context"
+	"time"
 
 	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/svc"
 	"github.com/gcc798/nai-tizi/application/sys-rpc/pb"
@@ -28,20 +29,18 @@ func (l *AttachmentUrlLogic) AttachmentUrl(in *pb.AttachmentUrlQueryReq) (*pb.At
 	if err != nil {
 		return nil, err
 	}
+	expires := in.Expires
+	if expires <= 0 {
+		expires = 3600
+	}
 	url := ""
 	if row.AccessUrl.Valid && row.AccessUrl.String != "" {
 		url = row.AccessUrl.String
 	} else {
-		content, contentType, err := readAttachmentContent(row)
+		generatedURL, err := getAttachmentAccessURL(l.ctx, l.svcCtx, row, time.Duration(expires)*time.Second)
 		if err == nil {
-			url = buildAttachmentDataURL(content, contentType)
-		} else {
-			url = row.FileKey
+			url = generatedURL
 		}
-	}
-	expires := in.Expires
-	if expires <= 0 {
-		expires = 3600
 	}
 	return &pb.AttachmentUrlResp{AttachmentId: in.AttachmentId, Url: url, Expires: expires}, nil
 }

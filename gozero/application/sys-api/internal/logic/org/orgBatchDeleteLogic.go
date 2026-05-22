@@ -34,5 +34,5 @@ func (l *OrgBatchDeleteLogic) OrgBatchDelete(req *types.BatchIdsReq) (resp *type
 	if _, err := l.svcCtx.SysRpcClient.OrgBatchDelete(l.ctx, &sysservice.BatchIdsReq{Ids: req.Ids}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功"}, nil
 }

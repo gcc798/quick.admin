@@ -23,5 +23,5 @@ func (l *LoginLogDetailLogic) LoginLogDetail(req *types.IdPathReq) (resp *types.
 	if err != nil {
 		return &types.CommonResp{Code: 404, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: row}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: row}, nil
 }

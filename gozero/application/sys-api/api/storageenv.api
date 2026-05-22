@@ -14,7 +14,7 @@ type StorageEnvCreateReq {
 	code        string      `json:"code"`
 	storageType string      `json:"storageType"`
 	isDefault   bool        `json:"isDefault,optional"`
-	status      int64       `json:"status,optional"`
+	status      int32       `json:"status,optional"`
 	config      interface{} `json:"config,optional"`
 	remark      string      `json:"remark,optional"`
 }
@@ -25,7 +25,7 @@ type StorageEnvUpdateReq {
 	code        string      `json:"code"`
 	storageType string      `json:"storageType"`
 	isDefault   bool        `json:"isDefault,optional"`
-	status      int64       `json:"status,optional"`
+	status      int32       `json:"status,optional"`
 	config      interface{} `json:"config"`
 	remark      string      `json:"remark,optional"`
 }

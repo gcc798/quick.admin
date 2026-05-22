@@ -24,11 +24,18 @@ func NewAttachmentDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *AttachmentDeleteLogic) AttachmentDelete(in *pb.IdReq) (*pb.Ack, error) {
-	if _, err := getAttachmentByID(l.ctx, l.svcCtx, in.Id); err != nil {
+	row, err := getAttachmentByID(l.ctx, l.svcCtx, in.Id)
+	if err != nil {
 		return nil, err
 	}
 	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.biz_attachment set status = 1, update_time = now(), deleted_at = now() where id = $1 and deleted_at is null`, in.Id); err != nil {
 		return nil, err
+	}
+	if row.FileKey != "" {
+		s, err := l.svcCtx.StorageManager.GetStorage(l.ctx, row.EnvId)
+		if err == nil {
+			_ = s.Delete(l.ctx, row.FileKey)
+		}
 	}
 	return &pb.Ack{Msg: "ok"}, nil
 }

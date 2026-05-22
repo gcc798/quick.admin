@@ -29,11 +29,11 @@ func NewCaptchaSmsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Captch
 }
 
 func (l *CaptchaSmsLogic) CaptchaSms(req *types.CaptchaPhoneReq) (resp *types.CommonResp, err error) {
-	data, err := l.svcCtx.SysRpcClient.CaptchaSms(l.ctx, &sysservice.CaptchaPhoneReq{Phonenumber: req.Phonenumber})
+	data, err := l.svcCtx.SysRpcClient.CaptchaSms(l.ctx, &sysservice.CaptchaPhoneReq{Phonenumber: req.Phone})
 	if err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: map[string]interface{}{
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: map[string]interface{}{
 		"id":       data.Id,
 		"type":     data.Type,
 		"data":     commonutil.JSONStringToValue(data.DataJson),

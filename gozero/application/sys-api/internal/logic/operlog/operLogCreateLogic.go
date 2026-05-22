@@ -38,5 +38,5 @@ func (l *OperLogCreateLogic) OperLogCreate(req *types.OperLogReq) (resp *types.C
 	}); err != nil {
 		return &types.CommonResp{Code: 500, Msg: err.Error()}, nil
 	}
-	return &types.CommonResp{Code: 200, Msg: "success", Data: "ok"}, nil
+	return &types.CommonResp{Code: 200, Msg: "操作成功", Data: "ok"}, nil
 }

@@ -45,5 +45,8 @@ func (l *RoleDeleteLogic) RoleDelete(in *pb.IdReq) (*pb.Ack, error) {
 	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_role set deleted_at = now() where id = $1 and deleted_at is null`, in.Id); err != nil {
 		return nil, err
 	}
+	if err := l.svcCtx.Redis.Del(l.ctx, "casbin:role:"+row.RoleKey+":permissions").Err(); err != nil {
+		l.Errorf("删除角色权限缓存失败 roleKey=%s: %v", row.RoleKey, err)
+	}
 	return &pb.Ack{Msg: "ok"}, nil
 }

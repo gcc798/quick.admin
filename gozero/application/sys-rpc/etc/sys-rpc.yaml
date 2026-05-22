@@ -17,3 +17,8 @@ Captcha:
     Enabled: true
   Email:
     Enabled: true
+
+Wechat:
+  Enabled: false
+  AppId: ""
+  Secret: ""
