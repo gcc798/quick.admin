@@ -28,7 +28,7 @@ func (l *AttachmentDeleteLogic) AttachmentDelete(in *pb.IdReq) (*pb.Ack, error) 
 	if err != nil {
 		return nil, err
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.biz_attachment set status = 1, update_time = now(), deleted_at = now() where id = $1 and deleted_at is null`, in.Id); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.biz_attachment where id = $1`, in.Id); err != nil {
 		return nil, err
 	}
 	if row.FileKey != "" {

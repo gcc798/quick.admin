@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -11,6 +12,7 @@ import (
 	"time"
 
 	"github.com/gcc798/nai-tizi/application/sys-rpc/internal/svc"
+	gzsqlx "github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
 const (
@@ -51,7 +53,64 @@ func wechatCode2Session(appId, secret, wxCode string) (*wechatCode2SessionResp, 
 	return &result, nil
 }
 
-func authenticateXcx(ctx context.Context, svcCtx *svc.ServiceContext, wxCode string) (*userAuthRow, error) {
+func authenticateXcx(ctx context.Context, svcCtx *svc.ServiceContext, phonenumber, code, wxCode string) (*userAuthRow, error) {
+	if phonenumber == "" || code == "" || wxCode == "" {
+		return nil, fmt.Errorf("手机号、验证码和微信code不能为空")
+	}
+	if !svcCtx.Config.Wechat.Enabled {
+		return nil, fmt.Errorf("微信小程序登录未启用")
+	}
+	wxResp, err := wechatCode2Session(svcCtx.Config.Wechat.AppId, svcCtx.Config.Wechat.Secret, wxCode)
+	if err != nil {
+		return nil, err
+	}
+
+	var row userAuthRow
+	err = svcCtx.DB.QueryRowCtx(ctx, &row, `
+		select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
+		from public.s_user
+		where phonenumber = $1
+		limit 1
+	`, phonenumber)
+	if err != nil && !errors.Is(err, gzsqlx.ErrNotFound) {
+		return nil, fmt.Errorf("查询用户失败")
+	}
+	if errors.Is(err, gzsqlx.ErrNotFound) {
+		now := time.Now().Unix()
+		if _, err := svcCtx.DB.ExecCtx(ctx, `
+			insert into public.s_user (user_name, nick_name, user_type, org_id, phonenumber, status, sex, open_id, union_id, login_date, created_time, updated_time)
+			values ($1, $2, $3, $4, $5, 0, 2, $6, $7, $8, now(), now())
+		`, phonenumber, phonenumber,
+			int64(miniProgramUserType), defaultMiniProgramOrgID, phonenumber,
+			sql.NullString{String: wxResp.OpenId, Valid: true},
+			sql.NullString{String: wxResp.UnionId, Valid: wxResp.UnionId != ""},
+			now); err != nil {
+			return nil, fmt.Errorf("创建用户失败: %w", err)
+		}
+		if err := svcCtx.DB.QueryRowCtx(ctx, &row, `
+			select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
+			from public.s_user
+			where phonenumber = $1
+			limit 1
+		`, phonenumber); err != nil {
+			return nil, fmt.Errorf("查询新用户失败: %w", err)
+		}
+	} else if _, err := svcCtx.DB.ExecCtx(ctx, `
+		update public.s_user
+		set open_id = $1, union_id = $2, login_date = $3, updated_time = now()
+		where id = $4
+	`, sql.NullString{String: wxResp.OpenId, Valid: true},
+		sql.NullString{String: wxResp.UnionId, Valid: wxResp.UnionId != ""},
+		time.Now().Unix(), row.Id); err != nil {
+		return nil, fmt.Errorf("更新微信用户信息失败: %w", err)
+	}
+	if row.Status != 0 {
+		return nil, fmt.Errorf("用户已被停用")
+	}
+	return &row, nil
+}
+
+func authenticateWechat(ctx context.Context, svcCtx *svc.ServiceContext, wxCode string) (*userAuthRow, error) {
 	if wxCode == "" {
 		return nil, fmt.Errorf("微信code不能为空")
 	}
@@ -67,54 +126,41 @@ func authenticateXcx(ctx context.Context, svcCtx *svc.ServiceContext, wxCode str
 	err = svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
 		from public.s_user
-		where open_id = $1 and deleted_at is null
+		where open_id = $1
 		limit 1
 	`, wxResp.OpenId)
-	if err == nil {
-		if wxResp.UnionId != "" {
-			svcCtx.DB.ExecCtx(ctx, `update public.s_user set union_id = $1, login_date = $2, updated_time = now() where id = $3`,
-				sql.NullString{String: wxResp.UnionId, Valid: true}, time.Now().Unix(), row.Id)
+	if err != nil && !errors.Is(err, gzsqlx.ErrNotFound) {
+		return nil, fmt.Errorf("查询用户失败")
+	}
+	if errors.Is(err, gzsqlx.ErrNotFound) {
+		userName := "wx_" + wxResp.OpenId[:minInt(16, len(wxResp.OpenId))]
+		now := time.Now().Unix()
+		if _, err := svcCtx.DB.ExecCtx(ctx, `
+			insert into public.s_user (user_name, nick_name, user_type, org_id, status, sex, open_id, union_id, login_date, created_time, updated_time)
+			values ($1, $2, $3, $4, 0, 2, $5, $6, $7, now(), now())
+		`, userName, "微信用户",
+			int64(miniProgramUserType), defaultMiniProgramOrgID,
+			sql.NullString{String: wxResp.OpenId, Valid: true},
+			sql.NullString{String: wxResp.UnionId, Valid: wxResp.UnionId != ""},
+			now); err != nil {
+			return nil, fmt.Errorf("创建用户失败: %w", err)
 		}
-		if row.Status != 0 {
-			return nil, fmt.Errorf("用户已被停用")
+		if err := svcCtx.DB.QueryRowCtx(ctx, &row, `
+			select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
+			from public.s_user
+			where open_id = $1
+			limit 1
+		`, wxResp.OpenId); err != nil {
+			return nil, fmt.Errorf("查询新用户失败: %w", err)
 		}
-		return &row, nil
+	} else if wxResp.UnionId != "" {
+		_, _ = svcCtx.DB.ExecCtx(ctx, `update public.s_user set union_id = $1, login_date = $2, updated_time = now() where id = $3`,
+			sql.NullString{String: wxResp.UnionId, Valid: true}, time.Now().Unix(), row.Id)
 	}
-
-	// Auto create user
-	userName := "wx_" + wxResp.OpenId[:minInt(16, len(wxResp.OpenId))]
-	now := time.Now().Unix()
-	if _, err := svcCtx.DB.ExecCtx(ctx, `
-		insert into public.s_user (user_name, nick_name, user_type, org_id, status, sex, open_id, union_id, login_date, created_time, updated_time)
-		values ($1, $2, $3, $4, 0, 2, $5, $6, $7, now(), now())
-	`, userName, "微信用户",
-		int64(miniProgramUserType), defaultMiniProgramOrgID,
-		sql.NullString{String: wxResp.OpenId, Valid: true},
-		sql.NullString{String: wxResp.UnionId, Valid: wxResp.UnionId != ""},
-		now); err != nil {
-		return nil, fmt.Errorf("创建用户失败: %w", err)
+	if row.Status != 0 {
+		return nil, fmt.Errorf("用户已被停用")
 	}
-
-	var newRow userAuthRow
-	if err := svcCtx.DB.QueryRowCtx(ctx, &newRow, `
-		select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
-		from public.s_user
-		where open_id = $1 and deleted_at is null
-		limit 1
-	`, wxResp.OpenId); err != nil {
-		return nil, fmt.Errorf("查询新用户失败: %w", err)
-	}
-	return &newRow, nil
-}
-
-func authenticateWechat(ctx context.Context, svcCtx *svc.ServiceContext, wxCode string) (*userAuthRow, error) {
-	if wxCode == "" {
-		return nil, fmt.Errorf("微信code不能为空")
-	}
-	if !svcCtx.Config.Wechat.Enabled {
-		return nil, fmt.Errorf("微信小程序登录未启用")
-	}
-	return authenticateXcx(ctx, svcCtx, wxCode)
+	return &row, nil
 }
 
 func minInt(a, b int) int {

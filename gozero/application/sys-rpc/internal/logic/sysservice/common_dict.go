@@ -38,7 +38,7 @@ func getDictByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*di
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, parent_id, dict_type, dict_label, dict_value, sort, is_default, status, remark, create_by, update_by, created_time, updated_time
 		from public.s_dict_data
-		where id = $1 and deleted_at is null
+		where id = $1
 		limit 1
 	`, id)
 	if err != nil {
@@ -51,7 +51,7 @@ func getDictByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*di
 }
 
 func dictValueExists(ctx context.Context, svcCtx *svc.ServiceContext, dictType, dictValue string, excludeID int64) (bool, error) {
-	query := `select count(1) from public.s_dict_data where dict_type = $1 and dict_value = $2 and deleted_at is null`
+	query := `select count(1) from public.s_dict_data where dict_type = $1 and dict_value = $2`
 	args := []interface{}{dictType, dictValue}
 	if excludeID > 0 {
 		query += ` and id <> $3`
@@ -68,11 +68,10 @@ func dictDescendantExists(ctx context.Context, svcCtx *svc.ServiceContext, id, p
 	var count int64
 	err := svcCtx.DB.QueryRowCtx(ctx, &count, `
 		with recursive dict_tree as (
-			select id, parent_id from public.s_dict_data where id = $1 and deleted_at is null
+			select id, parent_id from public.s_dict_data where id = $1
 			union all
 			select d.id, d.parent_id from public.s_dict_data d
 			inner join dict_tree dt on d.parent_id = dt.id
-			where d.deleted_at is null
 		)
 		select count(1) from dict_tree where id = $2
 	`, id, parentID)

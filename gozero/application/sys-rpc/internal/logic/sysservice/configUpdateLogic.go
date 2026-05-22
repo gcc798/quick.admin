@@ -45,7 +45,7 @@ func (l *ConfigUpdateLogic) ConfigUpdate(in *pb.ConfigUpdateReq) (*pb.Ack, error
 	if code == "" {
 		code = oldRow.Code
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_config set name = $2, code = $3, data = $4, remark = $5, update_by = nullif($6, 0), updated_time = now() where id = $1 and deleted_at is null`,
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_config set name = $2, code = $3, data = $4, remark = $5, update_by = nullif($6, 0), updated_time = now() where id = $1`,
 		in.Id, name, code, sql.NullString{String: in.DataJson, Valid: in.DataJson != ""}, sql.NullString{String: in.Remark, Valid: in.Remark != ""}, in.UpdateBy); err != nil {
 		return nil, err
 	}

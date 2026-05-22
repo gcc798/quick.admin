@@ -24,7 +24,7 @@ func NewConfigDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Conf
 }
 
 func (l *ConfigDeleteLogic) ConfigDelete(in *pb.IdReq) (*pb.Ack, error) {
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_config set deleted_at = now() where id = $1 and deleted_at is null`, in.Id); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.s_config where id = $1`, in.Id); err != nil {
 		return nil, err
 	}
 	return &pb.Ack{Msg: "ok"}, nil

@@ -34,7 +34,7 @@ func (l *UserUpdateLogic) UserUpdate(in *pb.UserUpdateReq) (*pb.Ack, error) {
 	}
 	var count int64
 	if in.UserName != "" {
-		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where id <> $1 and user_name = $2 and deleted_at is null`, in.Id, in.UserName); err != nil {
+		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where id <> $1 and user_name = $2`, in.Id, in.UserName); err != nil {
 			return nil, err
 		}
 		if count > 0 {
@@ -42,7 +42,7 @@ func (l *UserUpdateLogic) UserUpdate(in *pb.UserUpdateReq) (*pb.Ack, error) {
 		}
 	}
 	if in.Phonenumber != "" {
-		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where id <> $1 and phonenumber = $2 and deleted_at is null`, in.Id, in.Phonenumber); err != nil {
+		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where id <> $1 and phonenumber = $2`, in.Id, in.Phonenumber); err != nil {
 			return nil, err
 		}
 		if count > 0 {
@@ -50,7 +50,7 @@ func (l *UserUpdateLogic) UserUpdate(in *pb.UserUpdateReq) (*pb.Ack, error) {
 		}
 	}
 	if in.Email != "" {
-		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where id <> $1 and email = $2 and deleted_at is null`, in.Id, in.Email); err != nil {
+		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where id <> $1 and email = $2`, in.Id, in.Email); err != nil {
 			return nil, err
 		}
 		if count > 0 {

@@ -29,11 +29,11 @@ func (l *DictDeleteLogic) DictDelete(in *pb.IdReq) (*pb.Ack, error) {
 	}
 	_, err := l.svcCtx.DB.ExecCtx(l.ctx, `
 		with recursive dict_tree as (
-			select id from public.s_dict_data where id = $1 and deleted_at is null
+			select id from public.s_dict_data where id = $1
 			union all
-			select d.id from public.s_dict_data d inner join dict_tree dt on d.parent_id = dt.id where d.deleted_at is null
+			select d.id from public.s_dict_data d inner join dict_tree dt on d.parent_id = dt.id
 		)
-		update public.s_dict_data set deleted_at = now() where id in (select id from dict_tree)
+		delete from public.s_dict_data where id in (select id from dict_tree)
 	`, in.Id)
 	if err != nil {
 		return nil, err

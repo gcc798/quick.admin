@@ -74,7 +74,7 @@ func authenticateClient(ctx context.Context, svcCtx *svc.ServiceContext, clientI
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select client_id, client_key, client_secret, grant_type, device_type, status, timeout, active_timeout
 		from public.s_auth_client
-		where client_id = $1 and deleted_at is null
+		where client_id = $1
 		limit 1
 	`, clientId)
 	if err != nil {
@@ -100,7 +100,7 @@ func authenticatePassword(ctx context.Context, svcCtx *svc.ServiceContext, usern
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
 		from public.s_user
-		where user_name = $1 and deleted_at is null
+		where user_name = $1
 		limit 1
 	`, username)
 	if err != nil {
@@ -132,7 +132,7 @@ func authenticateEmail(ctx context.Context, svcCtx *svc.ServiceContext, email, u
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
 		from public.s_user
-		where email = $1 and deleted_at is null
+		where email = $1
 		limit 1
 	`, email)
 	if err != nil {
@@ -158,7 +158,7 @@ func authenticateSms(ctx context.Context, svcCtx *svc.ServiceContext, phonenumbe
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
 		from public.s_user
-		where phonenumber = $1 and deleted_at is null
+		where phonenumber = $1
 		limit 1
 	`, phonenumber)
 	if err != nil {
@@ -229,7 +229,7 @@ func getUserByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*pb
 	}
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, user_name, nick_name, user_type, email, phonenumber, sex, avatar, status, sort, login_ip, login_date, open_id, union_id, remark, create_by, update_by, created_time, updated_time, org_id
-		from public.s_user where id = $1 and deleted_at is null limit 1
+		from public.s_user where id = $1 limit 1
 	`, id)
 	if err != nil {
 		if errors.Is(err, gzsqlx.ErrNotFound) {
@@ -265,7 +265,7 @@ func getAllMenus(ctx context.Context, svcCtx *svc.ServiceContext) ([]menuRow, er
 	var rows []menuRow
 	err := svcCtx.DB.QueryRowsCtx(ctx, &rows, `
 		select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, created_time, updated_time
-		from public.s_menu where deleted_at is null and status = 0 order by sort asc, id asc
+		from public.s_menu where status = 0 order by sort asc, id asc
 	`)
 	return rows, err
 }
@@ -275,7 +275,7 @@ func getUserMenus(ctx context.Context, svcCtx *svc.ServiceContext, userId int64)
 	if err := svcCtx.DB.QueryRowsCtx(ctx, &roles, `
 		select r.role_key from public.s_role r
 		join public.m_user_role mur on mur.role_id = r.id
-		where mur.user_id = $1 and mur.deleted_at is null and r.deleted_at is null and r.status = 0
+		where mur.user_id = $1 and r.status = 0
 	`, userId); err != nil {
 		return nil, err
 	}
@@ -288,10 +288,10 @@ func getUserMenus(ctx context.Context, svcCtx *svc.ServiceContext, userId int64)
 	err := svcCtx.DB.QueryRowsCtx(ctx, &rows, `
 		select distinct m.id, m.menu_name, m.parent_id, m.sort, m.path, m.component, m.query, m.is_frame, m.is_cache, m.menu_type, m.visible, m.status, m.perms, m.icon, m.remark, m.create_by, m.created_time, m.updated_time
 		from public.s_menu m
-		join public.m_role_menu rm on rm.menu_id = m.id and rm.deleted_at is null
-		join public.m_user_role mur on mur.role_id = rm.role_id and mur.deleted_at is null
+		join public.m_role_menu rm on rm.menu_id = m.id
+		join public.m_user_role mur on mur.role_id = rm.role_id
 		join public.s_role r on r.id = mur.role_id
-		where mur.user_id = $1 and m.deleted_at is null and r.deleted_at is null and m.status = 0 and r.status = 0
+		where mur.user_id = $1 and m.status = 0 and r.status = 0
 		order by m.sort asc, m.id asc
 	`, userId)
 	if err != nil {
@@ -331,7 +331,7 @@ func withAncestorMenus(ctx context.Context, svcCtx *svc.ServiceContext, menus []
 		query := fmt.Sprintf(`
 			select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, created_time, updated_time
 			from public.s_menu
-			where id in (%s) and deleted_at is null and status = 0
+			where id in (%s) and status = 0
 		`, strings.Join(placeholders, ", "))
 		if err := svcCtx.DB.QueryRowsCtx(ctx, &parents, query, args...); err != nil {
 			return nil, fmt.Errorf("failed to get ancestor menus: %w", err)
@@ -370,7 +370,7 @@ func getMenuByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*pb
 	var row menuRow
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, created_time, updated_time
-		from public.s_menu where id = $1 and deleted_at is null limit 1
+		from public.s_menu where id = $1 limit 1
 	`, id)
 	if err != nil {
 		if errors.Is(err, gzsqlx.ErrNotFound) {

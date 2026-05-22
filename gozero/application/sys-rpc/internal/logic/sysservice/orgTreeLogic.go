@@ -28,7 +28,6 @@ func (l *OrgTreeLogic) OrgTree(in *pb.Empty) (*pb.OrgTreeResp, error) {
 	if err := l.svcCtx.DB.QueryRowsCtx(l.ctx, &rows, `
 		select id, parent_id, ancestors, org_name, org_code, org_type, leader, phone, email, status, sort, remark, created_time, updated_time
 		from public.s_org
-		where deleted_at is null
 		order by sort asc, id asc
 	`); err != nil {
 		return nil, err

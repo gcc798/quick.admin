@@ -38,7 +38,7 @@ func (l *RoleAssignUsersLogic) RoleAssignUsers(in *pb.RoleUsersReq) (*pb.Ack, er
 		return &pb.Ack{Msg: "ok"}, nil
 	}
 	var userCount int64
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &userCount, `select count(1) from public.s_user where id = any($1) and deleted_at is null`, pq.Array(userIDs)); err != nil {
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &userCount, `select count(1) from public.s_user where id = any($1)`, pq.Array(userIDs)); err != nil {
 		return nil, fmt.Errorf("查询用户失败: %w", err)
 	}
 	if userCount != int64(len(userIDs)) {
@@ -46,25 +46,15 @@ func (l *RoleAssignUsersLogic) RoleAssignUsers(in *pb.RoleUsersReq) (*pb.Ack, er
 	}
 	if err := l.svcCtx.DB.TransactCtx(l.ctx, func(ctx context.Context, session sqlx.Session) error {
 		for _, userID := range userIDs {
-			var activeCount int64
-			if err := session.QueryRowCtx(ctx, &activeCount, `select count(1) from public.m_user_role where user_id = $1 and role_id = $2 and deleted_at is null`, userID, in.RoleId); err != nil {
-				return err
-			}
-			if activeCount > 0 {
-				continue
-			}
 			var totalCount int64
 			if err := session.QueryRowCtx(ctx, &totalCount, `select count(1) from public.m_user_role where user_id = $1 and role_id = $2`, userID, in.RoleId); err != nil {
 				return err
 			}
-			if totalCount == 0 {
-				if _, err := session.ExecCtx(ctx, `insert into public.m_user_role (user_id, role_id, create_by, update_by, created_time, updated_time) values ($1, $2, nullif($3, 0), nullif($3, 0), now(), now())`, userID, in.RoleId, in.OperatorId); err != nil {
-					return err
-				}
-			} else {
-				if _, err := session.ExecCtx(ctx, `update public.m_user_role set deleted_at = null, update_by = nullif($3, 0), updated_time = now() where user_id = $1 and role_id = $2`, userID, in.RoleId, in.OperatorId); err != nil {
-					return err
-				}
+			if totalCount > 0 {
+				continue
+			}
+			if _, err := session.ExecCtx(ctx, `insert into public.m_user_role (user_id, role_id, create_by, update_by, created_time, updated_time) values ($1, $2, nullif($3, 0), nullif($3, 0), now(), now())`, userID, in.RoleId, in.OperatorId); err != nil {
+				return err
 			}
 		}
 		return nil

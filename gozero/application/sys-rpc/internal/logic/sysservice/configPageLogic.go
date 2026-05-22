@@ -27,7 +27,7 @@ func NewConfigPageLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Config
 
 func (l *ConfigPageLogic) ConfigPage(in *pb.ConfigPageReq) (*pb.ConfigPageResp, error) {
 	pageNum, pageSize := normalizePage(in.PageNum, in.PageSize)
-	where := []string{"deleted_at is null"}
+	where := []string{"1=1"}
 	args := make([]interface{}, 0)
 	if in.Name != "" {
 		args = append(args, "%"+in.Name+"%")

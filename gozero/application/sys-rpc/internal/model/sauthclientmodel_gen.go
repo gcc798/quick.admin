@@ -50,7 +50,6 @@ type (
 		CreatedTime   sql.NullTime   `db:"created_time"`   // 创建时间
 		UpdateBy      sql.NullInt64  `db:"update_by"`      // 更新者
 		UpdatedTime   sql.NullTime   `db:"updated_time"`   // 更新时间
-		DeletedAt     sql.NullTime   `db:"deleted_at"`
 	}
 )
 
@@ -96,14 +95,14 @@ func (m *defaultSAuthClientModel) FindOneByClientKey(ctx context.Context, client
 }
 
 func (m *defaultSAuthClientModel) Insert(ctx context.Context, data *SAuthClient) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)", m.table, sAuthClientRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.ClientId, data.ClientKey, data.ClientSecret, data.GrantType, data.DeviceType, data.Status, data.Timeout, data.ActiveTimeout, data.Remark, data.CreateBy, data.CreatedTime, data.UpdateBy, data.UpdatedTime, data.DeletedAt)
+	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)", m.table, sAuthClientRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.ClientId, data.ClientKey, data.ClientSecret, data.GrantType, data.DeviceType, data.Status, data.Timeout, data.ActiveTimeout, data.Remark, data.CreateBy, data.CreatedTime, data.UpdateBy, data.UpdatedTime)
 	return ret, err
 }
 
 func (m *defaultSAuthClientModel) Update(ctx context.Context, newData *SAuthClient) error {
 	query := fmt.Sprintf("update %s set %s where client_id = $1", m.table, sAuthClientRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, newData.ClientId, newData.ClientKey, newData.ClientSecret, newData.GrantType, newData.DeviceType, newData.Status, newData.Timeout, newData.ActiveTimeout, newData.Remark, newData.CreateBy, newData.CreatedTime, newData.UpdateBy, newData.UpdatedTime, newData.DeletedAt)
+	_, err := m.conn.ExecCtx(ctx, query, newData.ClientId, newData.ClientKey, newData.ClientSecret, newData.GrantType, newData.DeviceType, newData.Status, newData.Timeout, newData.ActiveTimeout, newData.Remark, newData.CreateBy, newData.CreatedTime, newData.UpdateBy, newData.UpdatedTime)
 	return err
 }
 

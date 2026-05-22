@@ -47,7 +47,7 @@ func getRoleByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*ro
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, role_key, role_name, sort, status, data_scope, is_system, remark, create_by, created_time
 		from public.s_role
-		where id = $1 and deleted_at is null
+		where id = $1
 		limit 1
 	`, id)
 	if err != nil {
@@ -87,7 +87,7 @@ func getOrgByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*org
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, parent_id, ancestors, org_name, org_code, org_type, leader, phone, email, status, sort, remark, created_time, updated_time
 		from public.s_org
-		where id = $1 and deleted_at is null
+		where id = $1
 		limit 1
 	`, id)
 	if err != nil {

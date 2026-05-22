@@ -57,7 +57,7 @@ type (
 		UpdateBy    sql.NullInt64  `db:"update_by"`
 		CreatedTime sql.NullTime   `db:"created_time"`
 		UpdatedTime sql.NullTime   `db:"updated_time"`
-		DeletedAt   sql.NullTime   `db:"deleted_at"`
+		OrgId       int64          `db:"org_id"`
 	}
 )
 
@@ -104,13 +104,13 @@ func (m *defaultSUserModel) FindOneByUserName(ctx context.Context, userName stri
 
 func (m *defaultSUserModel) Insert(ctx context.Context, data *SUser) (sql.Result, error) {
 	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)", m.table, sUserRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.UserName, data.NickName, data.UserType, data.Email, data.Phonenumber, data.Sex, data.Avatar, data.Password, data.Status, data.Sort, data.LoginIp, data.LoginDate, data.OpenId, data.UnionId, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime, data.DeletedAt)
+	ret, err := m.conn.ExecCtx(ctx, query, data.UserName, data.NickName, data.UserType, data.Email, data.Phonenumber, data.Sex, data.Avatar, data.Password, data.Status, data.Sort, data.LoginIp, data.LoginDate, data.OpenId, data.UnionId, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime, data.OrgId)
 	return ret, err
 }
 
 func (m *defaultSUserModel) Update(ctx context.Context, newData *SUser) error {
 	query := fmt.Sprintf("update %s set %s where id = $1", m.table, sUserRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, newData.Id, newData.UserName, newData.NickName, newData.UserType, newData.Email, newData.Phonenumber, newData.Sex, newData.Avatar, newData.Password, newData.Status, newData.Sort, newData.LoginIp, newData.LoginDate, newData.OpenId, newData.UnionId, newData.Remark, newData.CreateBy, newData.UpdateBy, newData.CreatedTime, newData.UpdatedTime, newData.DeletedAt)
+	_, err := m.conn.ExecCtx(ctx, query, newData.Id, newData.UserName, newData.NickName, newData.UserType, newData.Email, newData.Phonenumber, newData.Sex, newData.Avatar, newData.Password, newData.Status, newData.Sort, newData.LoginIp, newData.LoginDate, newData.OpenId, newData.UnionId, newData.Remark, newData.CreateBy, newData.UpdateBy, newData.CreatedTime, newData.UpdatedTime, newData.OrgId)
 	return err
 }
 

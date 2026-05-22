@@ -22,7 +22,7 @@ func NewUserPageLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserPage
 }
 func (l *UserPageLogic) UserPage(in *pb.UserPageReq) (*pb.UserPageResp, error) {
 	pageNum, pageSize := normalizePage(in.PageNum, in.PageSize)
-	where := []string{"deleted_at is null"}
+	where := []string{"1=1"}
 	args := make([]interface{}, 0)
 	if in.Username != "" {
 		args = append(args, "%"+in.Username+"%")

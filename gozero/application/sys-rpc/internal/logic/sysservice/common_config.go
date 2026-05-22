@@ -29,7 +29,7 @@ func getConfigByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, name, code, data, remark, create_by, created_time, update_by, updated_time
 		from public.s_config
-		where id = $1 and deleted_at is null
+		where id = $1
 		limit 1
 	`, id)
 	if err != nil {
@@ -42,7 +42,7 @@ func getConfigByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*
 }
 
 func configNameExists(ctx context.Context, svcCtx *svc.ServiceContext, name string, excludeID int64) (bool, error) {
-	query := `select count(1) from public.s_config where name = $1 and deleted_at is null`
+	query := `select count(1) from public.s_config where name = $1`
 	args := []interface{}{name}
 	if excludeID > 0 {
 		query += ` and id <> $2`

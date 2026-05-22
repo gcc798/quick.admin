@@ -32,7 +32,7 @@ func (l *UserChangePasswordLogic) UserChangePassword(in *pb.UserChangePasswordRe
 	var row struct {
 		Password string `db:"password"`
 	}
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &row, `select password from public.s_user where id = $1 and deleted_at is null limit 1`, in.UserId); err != nil {
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &row, `select password from public.s_user where id = $1 limit 1`, in.UserId); err != nil {
 		return nil, fmt.Errorf("用户不存在")
 	}
 	if err := bcrypt.CompareHashAndPassword([]byte(row.Password), []byte(in.OldPassword)); err != nil {

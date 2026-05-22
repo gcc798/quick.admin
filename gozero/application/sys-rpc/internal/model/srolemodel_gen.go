@@ -49,7 +49,6 @@ type (
 		UpdateBy    sql.NullInt64  `db:"update_by"`
 		CreatedTime sql.NullTime   `db:"created_time"`
 		UpdatedTime sql.NullTime   `db:"updated_time"`
-		DeletedAt   sql.NullTime   `db:"deleted_at"`
 	}
 )
 
@@ -95,14 +94,14 @@ func (m *defaultSRoleModel) FindOneByRoleKey(ctx context.Context, roleKey string
 }
 
 func (m *defaultSRoleModel) Insert(ctx context.Context, data *SRole) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)", m.table, sRoleRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.RoleKey, data.RoleName, data.Sort, data.Status, data.DataScope, data.IsSystem, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime, data.DeletedAt)
+	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)", m.table, sRoleRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.RoleKey, data.RoleName, data.Sort, data.Status, data.DataScope, data.IsSystem, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime)
 	return ret, err
 }
 
 func (m *defaultSRoleModel) Update(ctx context.Context, newData *SRole) error {
 	query := fmt.Sprintf("update %s set %s where id = $1", m.table, sRoleRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, newData.Id, newData.RoleKey, newData.RoleName, newData.Sort, newData.Status, newData.DataScope, newData.IsSystem, newData.Remark, newData.CreateBy, newData.UpdateBy, newData.CreatedTime, newData.UpdatedTime, newData.DeletedAt)
+	_, err := m.conn.ExecCtx(ctx, query, newData.Id, newData.RoleKey, newData.RoleName, newData.Sort, newData.Status, newData.DataScope, newData.IsSystem, newData.Remark, newData.CreateBy, newData.UpdateBy, newData.CreatedTime, newData.UpdatedTime)
 	return err
 }
 

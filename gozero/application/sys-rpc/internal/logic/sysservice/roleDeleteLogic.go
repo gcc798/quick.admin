@@ -33,16 +33,16 @@ func (l *RoleDeleteLogic) RoleDelete(in *pb.IdReq) (*pb.Ack, error) {
 		return nil, errors.New("系统角色不可删除")
 	}
 	var count int64
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.m_user_role where role_id = $1 and deleted_at is null`, in.Id); err != nil {
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.m_user_role where role_id = $1`, in.Id); err != nil {
 		return nil, err
 	}
 	if count > 0 {
 		return nil, errors.New("该角色已被用户使用，无法删除")
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.m_role_menu set deleted_at = now() where role_id = $1 and deleted_at is null`, in.Id); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.m_role_menu where role_id = $1`, in.Id); err != nil {
 		return nil, err
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_role set deleted_at = now() where id = $1 and deleted_at is null`, in.Id); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.s_role where id = $1`, in.Id); err != nil {
 		return nil, err
 	}
 	if err := l.svcCtx.Redis.Del(l.ctx, "casbin:role:"+row.RoleKey+":permissions").Err(); err != nil {

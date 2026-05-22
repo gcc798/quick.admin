@@ -39,7 +39,7 @@ func listUsersByRole(ctx context.Context, svcCtx *svc.ServiceContext, roleID int
 		       u.login_ip, u.login_date, u.open_id, u.union_id, u.remark, u.create_by, u.update_by, u.created_time, u.updated_time, u.org_id
 		from public.s_user u
 		inner join public.m_user_role ur on u.id = ur.user_id
-		where ur.role_id = $1 and u.deleted_at is null and ur.deleted_at is null
+		where ur.role_id = $1
 		order by u.created_time desc
 	`, roleID)
 	if err != nil {

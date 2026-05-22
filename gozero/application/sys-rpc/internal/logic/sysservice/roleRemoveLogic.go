@@ -28,7 +28,7 @@ func (l *RoleRemoveLogic) RoleRemove(in *pb.RemoveRoleReq) (*pb.Ack, error) {
 	if _, err := getRoleByID(l.ctx, l.svcCtx, in.RoleId); err != nil {
 		return nil, err
 	}
-	result, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.m_user_role set deleted_at = now(), updated_time = now() where user_id = $1 and role_id = $2 and deleted_at is null`, in.UserId, in.RoleId)
+	result, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.m_user_role where user_id = $1 and role_id = $2`, in.UserId, in.RoleId)
 	if err != nil {
 		return nil, err
 	}

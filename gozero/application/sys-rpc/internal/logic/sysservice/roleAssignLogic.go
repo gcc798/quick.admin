@@ -31,25 +31,15 @@ func (l *RoleAssignLogic) RoleAssign(in *pb.AssignRoleReq) (*pb.Ack, error) {
 	if _, err := getRoleByID(l.ctx, l.svcCtx, in.RoleId); err != nil {
 		return nil, err
 	}
-	var activeCount int64
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &activeCount, `select count(1) from public.m_user_role where user_id = $1 and role_id = $2 and deleted_at is null`, in.UserId, in.RoleId); err != nil {
-		return nil, err
-	}
-	if activeCount > 0 {
-		return nil, errors.New("用户已拥有该角色")
-	}
 	var totalCount int64
 	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &totalCount, `select count(1) from public.m_user_role where user_id = $1 and role_id = $2`, in.UserId, in.RoleId); err != nil {
 		return nil, err
 	}
-	if totalCount == 0 {
-		if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `insert into public.m_user_role (user_id, role_id, create_by, update_by, created_time, updated_time) values ($1, $2, null, null, now(), now())`, in.UserId, in.RoleId); err != nil {
-			return nil, err
-		}
-	} else {
-		if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.m_user_role set deleted_at = null, updated_time = now() where user_id = $1 and role_id = $2`, in.UserId, in.RoleId); err != nil {
-			return nil, err
-		}
+	if totalCount > 0 {
+		return nil, errors.New("用户已拥有该角色")
+	}
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `insert into public.m_user_role (user_id, role_id, create_by, update_by, created_time, updated_time) values ($1, $2, null, null, now(), now())`, in.UserId, in.RoleId); err != nil {
+		return nil, err
 	}
 	return &pb.Ack{Msg: "ok"}, nil
 }

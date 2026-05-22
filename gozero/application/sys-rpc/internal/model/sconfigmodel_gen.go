@@ -45,7 +45,6 @@ type (
 		CreatedTime sql.NullTime   `db:"created_time"`
 		UpdateBy    sql.NullInt64  `db:"update_by"`
 		UpdatedTime sql.NullTime   `db:"updated_time"`
-		DeletedAt   sql.NullTime   `db:"deleted_at"`
 	}
 )
 
@@ -77,14 +76,14 @@ func (m *defaultSConfigModel) FindOne(ctx context.Context, id int64) (*SConfig, 
 }
 
 func (m *defaultSConfigModel) Insert(ctx context.Context, data *SConfig) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9)", m.table, sConfigRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.Code, data.Data, data.Remark, data.CreateBy, data.CreatedTime, data.UpdateBy, data.UpdatedTime, data.DeletedAt)
+	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8)", m.table, sConfigRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.Code, data.Data, data.Remark, data.CreateBy, data.CreatedTime, data.UpdateBy, data.UpdatedTime)
 	return ret, err
 }
 
 func (m *defaultSConfigModel) Update(ctx context.Context, data *SConfig) error {
 	query := fmt.Sprintf("update %s set %s where id = $1", m.table, sConfigRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.Id, data.Name, data.Code, data.Data, data.Remark, data.CreateBy, data.CreatedTime, data.UpdateBy, data.UpdatedTime, data.DeletedAt)
+	_, err := m.conn.ExecCtx(ctx, query, data.Id, data.Name, data.Code, data.Data, data.Remark, data.CreateBy, data.CreatedTime, data.UpdateBy, data.UpdatedTime)
 	return err
 }
 

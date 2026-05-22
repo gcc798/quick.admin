@@ -32,13 +32,13 @@ func (l *MenuDeleteLogic) MenuDelete(in *pb.IdReq) (*pb.Ack, error) {
 		return nil, err
 	}
 	var count int64
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_menu where parent_id = $1 and deleted_at is null`, in.Id); err != nil {
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_menu where parent_id = $1`, in.Id); err != nil {
 		return nil, err
 	}
 	if count > 0 {
 		return nil, fmt.Errorf("存在子菜单，无法删除")
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_menu set deleted_at = now() where id = $1`, in.Id); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.s_menu where id = $1`, in.Id); err != nil {
 		return nil, err
 	}
 	return &pb.Ack{Msg: "ok"}, nil

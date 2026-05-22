@@ -38,7 +38,7 @@ func (l *AuthLoginLogic) AuthLogin(in *pb.AuthLoginReq) (*pb.AuthLoginResp, erro
 	case "sms":
 		user, err = authenticateSms(l.ctx, l.svcCtx, in.Phonenumber, in.Uuid, in.Code)
 	case "xcx":
-		user, err = authenticateXcx(l.ctx, l.svcCtx, in.WxCode)
+		user, err = authenticateXcx(l.ctx, l.svcCtx, in.Phonenumber, in.Code, in.WxCode)
 	case "wechat":
 		user, err = authenticateWechat(l.ctx, l.svcCtx, in.WxCode)
 	default:

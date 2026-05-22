@@ -33,10 +33,10 @@ func (l *StorageEnvDeleteLogic) StorageEnvDelete(in *pb.IdReq) (*pb.Ack, error) 
 		return nil, errors.New("默认存储环境不能删除")
 	}
 	var count int64
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.biz_attachment where env_id = $1 and status = '0' and deleted_at is null`, in.Id); err == nil && count > 0 {
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.biz_attachment where env_id = $1 and status = '0'`, in.Id); err == nil && count > 0 {
 		return nil, errors.New("该环境下仍有关联附件，无法删除")
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_storage_env set deleted_at = now() where id = $1 and deleted_at is null`, in.Id); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.s_storage_env where id = $1`, in.Id); err != nil {
 		return nil, err
 	}
 	return &pb.Ack{Msg: "ok"}, nil

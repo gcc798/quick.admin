@@ -316,7 +316,7 @@ func findAffectedPermissionSubjects(ctx context.Context, svcCtx *svc.ServiceCont
 
 func syncRolePermissionRedis(ctx context.Context, svcCtx *svc.ServiceContext, roleID int64) error {
 	var roleKey string
-	if err := svcCtx.DB.QueryRowCtx(ctx, &roleKey, `select role_key from public.s_role where id = $1 and deleted_at is null`, roleID); err != nil {
+	if err := svcCtx.DB.QueryRowCtx(ctx, &roleKey, `select role_key from public.s_role where id = $1`, roleID); err != nil {
 		return nil
 	}
 	var rows []apiPermissionRow

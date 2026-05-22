@@ -31,7 +31,7 @@ func (l *OrgCreateLogic) OrgCreate(in *pb.OrgCreateReq) (*pb.Ack, error) {
 	}
 	if in.OrgCode != "" {
 		var count int64
-		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_org where org_code = $1 and deleted_at is null`, in.OrgCode); err != nil {
+		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_org where org_code = $1`, in.OrgCode); err != nil {
 			return nil, err
 		}
 		if count > 0 {

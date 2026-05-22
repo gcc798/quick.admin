@@ -27,7 +27,7 @@ func NewAttachmentPageLogic(ctx context.Context, svcCtx *svc.ServiceContext) *At
 
 func (l *AttachmentPageLogic) AttachmentPage(in *pb.AttachmentPageReq) (*pb.AttachmentPageResp, error) {
 	pageNum, pageSize := normalizePage(in.PageNum, in.PageSize)
-	where := []string{"status = 0", "deleted_at is null"}
+	where := []string{"status = 0"}
 	args := make([]interface{}, 0)
 	if in.FileName != "" {
 		args = append(args, "%"+in.FileName+"%")

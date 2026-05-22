@@ -46,12 +46,16 @@ type loginUser struct {
 }
 
 func loginWithRPC(ctx context.Context, svcCtx *svc.ServiceContext, req *types.LoginReq) (*loginUser, *authClient, error) {
+	code := req.Code
+	if code == "" && req.SmsCode != "" {
+		code = req.SmsCode
+	}
 	resp, err := svcCtx.SysRpcClient.AuthLogin(ctx, &sysservice.AuthLoginReq{
 		ClientKey:   req.ClientId,
 		GrantType:   req.GrantType,
 		Username:    req.Username,
 		Password:    req.Password,
-		Code:        req.Code,
+		Code:        code,
 		Phonenumber: req.Phonenumber,
 		Email:       req.Email,
 		WxCode:      req.WxCode,

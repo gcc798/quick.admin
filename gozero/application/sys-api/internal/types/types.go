@@ -354,7 +354,8 @@ type RemoveRoleReq struct {
 }
 
 type ResourceSmsCodeReq struct {
-	Phone string `form:"phone"`
+	Phone       string `form:"phone,optional"`
+	Phonenumber string `form:"phonenumber,optional"`
 }
 
 type RoleApiPermissionsAssignReq struct {

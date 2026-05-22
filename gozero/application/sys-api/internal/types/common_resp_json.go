@@ -87,6 +87,10 @@ func normalizeNativeAliases(item map[string]interface{}) {
 		item["metadata"] = parseJSONString(value)
 		delete(item, "metadataJson")
 	}
+	if value, ok := item["page"]; ok {
+		flattenPageInfo(item, value)
+		delete(item, "page")
+	}
 	if value, ok := item["createdAt"]; ok {
 		if _, exists := item["createdTime"]; !exists {
 			item["createdTime"] = value
@@ -105,6 +109,21 @@ func normalizeNativeAliases(item map[string]interface{}) {
 	if value, ok := item["updateTime"]; ok {
 		if _, exists := item["updatedTime"]; !exists {
 			item["updatedTime"] = value
+		}
+	}
+}
+
+func flattenPageInfo(item map[string]interface{}, value interface{}) {
+	page, ok := value.(map[string]interface{})
+	if !ok {
+		return
+	}
+	for _, key := range []string{"total", "size", "current", "pages"} {
+		if _, exists := item[key]; exists {
+			continue
+		}
+		if pageValue, ok := page[key]; ok {
+			item[key] = pageValue
 		}
 	}
 }

@@ -51,7 +51,7 @@ func (l *MenuUpdateLogic) MenuUpdate(in *pb.MenuReq) (*pb.Ack, error) {
 		}
 	}
 	var count int64
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_menu where id <> $1 and parent_id = $2 and menu_name = $3 and deleted_at is null`, in.Id, in.ParentId, in.MenuName); err != nil {
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_menu where id <> $1 and parent_id = $2 and menu_name = $3`, in.Id, in.ParentId, in.MenuName); err != nil {
 		return nil, err
 	}
 	if count > 0 {

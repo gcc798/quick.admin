@@ -33,7 +33,7 @@ func (l *RoleUpdateLogic) RoleUpdate(in *pb.RoleUpdateReq) (*pb.Ack, error) {
 	if in.RoleName != "" {
 		roleName = in.RoleName
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_role set role_name = $2, sort = $3, status = $4, data_scope = $5, remark = $6, updated_time = now() where id = $1 and deleted_at is null`,
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_role set role_name = $2, sort = $3, status = $4, data_scope = $5, remark = $6, updated_time = now() where id = $1`,
 		in.RoleId, roleName, in.Sort, in.Status, in.DataScope, sql.NullString{String: in.Remark, Valid: in.Remark != ""}); err != nil {
 		return nil, err
 	}

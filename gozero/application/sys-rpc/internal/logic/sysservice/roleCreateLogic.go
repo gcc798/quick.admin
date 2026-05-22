@@ -30,7 +30,7 @@ func (l *RoleCreateLogic) RoleCreate(in *pb.RoleCreateReq) (*pb.Ack, error) {
 		return nil, errors.New("角色标识和角色名称不能为空")
 	}
 	var count int64
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_role where role_key = $1 and deleted_at is null`, in.RoleKey); err != nil {
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_role where role_key = $1`, in.RoleKey); err != nil {
 		return nil, err
 	}
 	if count > 0 {

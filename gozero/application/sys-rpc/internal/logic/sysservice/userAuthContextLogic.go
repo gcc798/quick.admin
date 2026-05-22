@@ -52,16 +52,18 @@ func (l *UserAuthContextLogic) UserAuthContext(in *pb.UserAuthContextReq) (*pb.U
 }
 
 func getUserOrgID(ctx context.Context, svcCtx *svc.ServiceContext, userID int64) (int64, error) {
-	var orgID sql.NullInt64
-	if err := svcCtx.DB.QueryRowCtx(ctx, &orgID, `
+	var row struct {
+		OrgID sql.NullInt64 `db:"org_id"`
+	}
+	if err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select org_id
 		from public.s_user
-		where id = $1 and deleted_at is null
+		where id = $1
 		limit 1
 	`, userID); err != nil {
 		return 0, fmt.Errorf("查询用户组织失败: %w", err)
 	}
-	return nullInt64(orgID), nil
+	return nullInt64(row.OrgID), nil
 }
 
 func getUserRoleKeys(ctx context.Context, svcCtx *svc.ServiceContext, userID int64) ([]string, error) {
@@ -71,8 +73,6 @@ func getUserRoleKeys(ctx context.Context, svcCtx *svc.ServiceContext, userID int
 		from public.s_role r
 		inner join public.m_user_role ur on ur.role_id = r.id
 		where ur.user_id = $1
-		  and ur.deleted_at is null
-		  and r.deleted_at is null
 		  and r.status = 0
 		  and r.role_key <> ''
 		order by r.role_key asc
@@ -92,8 +92,6 @@ func getUserPermissionCodes(ctx context.Context, svcCtx *svc.ServiceContext, use
 		inner join public.m_user_role ur on ur.role_id = rap.role_id
 		inner join public.s_role r on r.id = ur.role_id
 		where ur.user_id = $1
-		  and ur.deleted_at is null
-		  and r.deleted_at is null
 		  and r.status = 0
 		  and p.status = 0
 		  and p.code <> ''
@@ -111,10 +109,6 @@ func getUserPermissionCodes(ctx context.Context, svcCtx *svc.ServiceContext, use
 		inner join public.m_user_role ur on ur.role_id = rm.role_id
 		inner join public.s_role r on r.id = ur.role_id
 		where ur.user_id = $1
-		  and ur.deleted_at is null
-		  and rm.deleted_at is null
-		  and r.deleted_at is null
-		  and m.deleted_at is null
 		  and r.status = 0
 		  and m.status = 0
 		  and m.perms <> ''

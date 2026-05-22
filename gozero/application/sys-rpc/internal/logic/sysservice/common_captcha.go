@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/big"
+	"regexp"
 	"strings"
 	"time"
 
@@ -107,6 +108,9 @@ func newCaptchaData(captchaType, id string, data interface{}, expireAt time.Time
 }
 
 func generateImageCaptcha(ctx context.Context, svcCtx *svc.ServiceContext) (*pb.CaptchaDataResp, error) {
+	if !svcCtx.Config.Captcha.Image.Enabled {
+		return nil, fmt.Errorf("验证码类型 image 未启用")
+	}
 	driver := base64Captcha.NewDriverDigit(80, 240, 4, 0.7, 80)
 	captcha := base64Captcha.NewCaptcha(driver, base64Captcha.DefaultMemStore)
 	_, b64s, answer, err := captcha.Generate()
@@ -118,12 +122,18 @@ func generateImageCaptcha(ctx context.Context, svcCtx *svc.ServiceContext) (*pb.
 	if err := svcCtx.Redis.Set(ctx, captchaImageKeyPrefix+id, answer, expire).Err(); err != nil {
 		return nil, err
 	}
-	return newCaptchaData("image", id, map[string]interface{}{"image": b64s}, time.Now().Add(expire))
+	return newCaptchaData("image", id, b64s, time.Now().Add(expire))
 }
 
 func generateSmsCaptcha(ctx context.Context, svcCtx *svc.ServiceContext, phone string) (*pb.CaptchaDataResp, error) {
+	if !svcCtx.Config.Captcha.Sms.Enabled {
+		return nil, fmt.Errorf("验证码类型 sms 未启用")
+	}
 	if phone == "" {
 		return nil, fmt.Errorf("手机号不能为空")
+	}
+	if !isValidPhone(phone) {
+		return nil, fmt.Errorf("手机号格式错误")
 	}
 	rateKey := captchaRatePrefix + "sms:" + phone
 	exists, err := svcCtx.Redis.Exists(ctx, rateKey).Result()
@@ -150,8 +160,14 @@ func generateSmsCaptcha(ctx context.Context, svcCtx *svc.ServiceContext, phone s
 }
 
 func generateEmailCaptcha(ctx context.Context, svcCtx *svc.ServiceContext, email string) (*pb.CaptchaDataResp, error) {
+	if !svcCtx.Config.Captcha.Email.Enabled {
+		return nil, fmt.Errorf("验证码类型 email 未启用")
+	}
 	if email == "" {
 		return nil, fmt.Errorf("邮箱不能为空")
+	}
+	if !isValidEmail(email) {
+		return nil, fmt.Errorf("邮箱格式错误")
 	}
 	rateKey := captchaRatePrefix + "email:" + email
 	exists, err := svcCtx.Redis.Exists(ctx, rateKey).Result()
@@ -208,4 +224,14 @@ func maskEmail(email string) string {
 		return email
 	}
 	return parts[0][:1] + "***@" + parts[1]
+}
+
+func isValidPhone(phone string) bool {
+	matched, _ := regexp.MatchString(`^1[3-9]\d{9}$`, phone)
+	return matched
+}
+
+func isValidEmail(email string) bool {
+	matched, _ := regexp.MatchString(`^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$`, email)
+	return matched
 }

@@ -30,7 +30,7 @@ func (l *ConfigBatchDeleteLogic) ConfigBatchDelete(in *pb.BatchIdsReq) (*pb.Ack,
 		return nil, errors.New("ids 不能为空")
 	}
 	placeholders, args := buildConfigInt64In(in.Ids, 1)
-	query := fmt.Sprintf(`update public.s_config set deleted_at = now() where id in (%s) and deleted_at is null`, placeholders)
+	query := fmt.Sprintf(`delete from public.s_config where id in (%s)`, placeholders)
 	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, query, args...); err != nil {
 		return nil, err
 	}

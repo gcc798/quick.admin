@@ -46,7 +46,7 @@ func (m *StorageManager) GetStorage(ctx context.Context, envID int64) (storage.S
 		Config      string `db:"config"`
 	}
 	err := m.db.QueryRowCtx(ctx, &row,
-		`select storage_type, config from public.s_storage_env where id = $1 and status = 0 and deleted_at is null limit 1`,
+		`select storage_type, config from public.s_storage_env where id = $1 and status = 0 limit 1`,
 		envID,
 	)
 	if err != nil {
@@ -65,7 +65,7 @@ func (m *StorageManager) GetStorage(ctx context.Context, envID int64) (storage.S
 func (m *StorageManager) GetStorageByCode(ctx context.Context, code string) (storage.Storage, error) {
 	var envID int64
 	err := m.db.QueryRowCtx(ctx, &envID,
-		`select id from public.s_storage_env where code = $1 and status = 0 and deleted_at is null limit 1`,
+		`select id from public.s_storage_env where code = $1 and status = 0 limit 1`,
 		code,
 	)
 	if err != nil {
@@ -78,7 +78,7 @@ func (m *StorageManager) GetStorageByCode(ctx context.Context, code string) (sto
 func (m *StorageManager) GetDefaultStorage(ctx context.Context) (storage.Storage, error) {
 	var envID int64
 	err := m.db.QueryRowCtx(ctx, &envID,
-		`select id from public.s_storage_env where is_default = true and status = 0 and deleted_at is null order by id desc limit 1`,
+		`select id from public.s_storage_env where is_default = true and status = 0 order by id desc limit 1`,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("no default storage env: %w", err)

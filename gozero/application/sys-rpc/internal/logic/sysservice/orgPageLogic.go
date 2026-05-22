@@ -27,7 +27,7 @@ func NewOrgPageLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrgPageLo
 
 func (l *OrgPageLogic) OrgPage(in *pb.OrgPageReq) (*pb.OrgPageResp, error) {
 	pageNum, pageSize := normalizePage(in.PageNum, in.PageSize)
-	where := []string{"deleted_at is null"}
+	where := []string{"1=1"}
 	args := make([]interface{}, 0)
 	if in.OrgName != "" {
 		args = append(args, "%"+in.OrgName+"%")

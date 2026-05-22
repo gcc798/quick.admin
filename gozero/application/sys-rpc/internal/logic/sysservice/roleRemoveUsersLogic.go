@@ -37,9 +37,8 @@ func (l *RoleRemoveUsersLogic) RoleRemoveUsers(in *pb.RoleUsersReq) (*pb.Ack, er
 		return &pb.Ack{Msg: "ok"}, nil
 	}
 	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `
-		update public.m_user_role
-		set deleted_at = now(), updated_time = now()
-		where role_id = $1 and user_id = any($2) and deleted_at is null
+		delete from public.m_user_role
+		where role_id = $1 and user_id = any($2)
 	`, in.RoleId, pq.Array(userIDs)); err != nil {
 		return nil, fmt.Errorf("批量移除角色用户失败: %w", err)
 	}

@@ -28,8 +28,8 @@ func (l *RoleUserLogic) RoleUser(in *pb.UserRoleQueryReq) (*pb.RoleListResp, err
 	if err := l.svcCtx.DB.QueryRowsCtx(l.ctx, &rows, `
 		select r.id, r.role_key, r.role_name, r.sort, r.status, r.data_scope, r.is_system, r.remark, r.create_by, r.created_time
 		from public.s_role r
-		inner join public.m_user_role ur on ur.role_id = r.id and ur.deleted_at is null
-		where ur.user_id = $1 and r.deleted_at is null
+		inner join public.m_user_role ur on ur.role_id = r.id
+		where ur.user_id = $1
 		order by r.sort asc, r.id asc
 	`, in.UserId); err != nil {
 		return nil, err

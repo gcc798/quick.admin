@@ -24,10 +24,10 @@ func NewStorageEnvSetDefaultLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 func (l *StorageEnvSetDefaultLogic) StorageEnvSetDefault(in *pb.StorageEnvDefaultReq) (*pb.Ack, error) {
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_storage_env set is_default = false where is_default = true and deleted_at is null`); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_storage_env set is_default = false where is_default = true`); err != nil {
 		return nil, err
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_storage_env set is_default = true, updated_time = now() where id = $1 and deleted_at is null`, in.Id); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_storage_env set is_default = true, updated_time = now() where id = $1`, in.Id); err != nil {
 		return nil, err
 	}
 	return &pb.Ack{Msg: "ok"}, nil

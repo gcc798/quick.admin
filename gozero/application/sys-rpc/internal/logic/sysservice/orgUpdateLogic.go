@@ -37,7 +37,7 @@ func (l *OrgUpdateLogic) OrgUpdate(in *pb.OrgUpdateReq) (*pb.Ack, error) {
 	}
 	if in.OrgCode != "" && in.OrgCode != nullString(row.OrgCode) {
 		var count int64
-		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_org where org_code = $1 and id <> $2 and deleted_at is null`, in.OrgCode, in.Id); err != nil {
+		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_org where org_code = $1 and id <> $2`, in.OrgCode, in.Id); err != nil {
 			return nil, err
 		}
 		if count > 0 {
@@ -71,7 +71,7 @@ func (l *OrgUpdateLogic) OrgUpdate(in *pb.OrgUpdateReq) (*pb.Ack, error) {
 	}
 	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_org
 		set parent_id = $2, ancestors = $3, org_name = $4, org_code = $5, org_type = $6, leader = $7, phone = $8, email = $9, status = $10, sort = $11, remark = $12, updated_time = now()
-		where id = $1 and deleted_at is null`,
+		where id = $1`,
 		in.Id, parentID, ancestors, orgName, orgCode, orgType,
 		sql.NullString{String: in.Leader, Valid: in.Leader != ""},
 		sql.NullString{String: in.Phone, Valid: in.Phone != ""},

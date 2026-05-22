@@ -75,7 +75,7 @@ func (l *DictUpdateLogic) DictUpdate(in *pb.DictUpdateReq) (*pb.Ack, error) {
 	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `
 		update public.s_dict_data
 		set parent_id = $2, dict_type = $3, dict_label = $4, dict_value = $5, sort = $6, is_default = $7, status = $8, remark = $9, update_by = nullif($10, 0), updated_time = now()
-		where id = $1 and deleted_at is null
+		where id = $1
 	`, in.Id, in.ParentId, dictType, dictLabel, dictValue, in.Sort, in.IsDefault, in.Status, sql.NullString{String: in.Remark, Valid: in.Remark != ""}, in.UpdateBy); err != nil {
 		return nil, err
 	}

@@ -30,7 +30,7 @@ func (l *RoleMenusLogic) RoleMenus(in *pb.RoleMenusReq) (*pb.MenuIdsResp, error)
 	if err := l.svcCtx.DB.QueryRowsCtx(l.ctx, &rows, `
 		select menu_id
 		from public.m_role_menu
-		where role_id = $1 and deleted_at is null
+		where role_id = $1
 		order by menu_id asc
 	`, in.RoleId); err != nil {
 		return nil, err

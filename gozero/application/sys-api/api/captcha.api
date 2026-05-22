@@ -11,7 +11,8 @@ type CaptchaEmailReq {
 }
 
 type ResourceSmsCodeReq {
-	phone string `form:"phone"`
+	phone       string `form:"phone,optional"`
+	phonenumber string `form:"phonenumber,optional"`
 }
 
 @server (

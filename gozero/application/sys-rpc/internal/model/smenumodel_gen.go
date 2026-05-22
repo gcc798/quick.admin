@@ -55,7 +55,6 @@ type (
 		UpdateBy    sql.NullInt64  `db:"update_by"`
 		CreatedTime sql.NullTime   `db:"created_time"`
 		UpdatedTime sql.NullTime   `db:"updated_time"`
-		DeletedAt   sql.NullTime   `db:"deleted_at"`
 	}
 )
 
@@ -87,14 +86,14 @@ func (m *defaultSMenuModel) FindOne(ctx context.Context, id int64) (*SMenu, erro
 }
 
 func (m *defaultSMenuModel) Insert(ctx context.Context, data *SMenu) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)", m.table, sMenuRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.MenuName, data.ParentId, data.Sort, data.Path, data.Component, data.Query, data.IsFrame, data.IsCache, data.MenuType, data.Visible, data.Status, data.Perms, data.Icon, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime, data.DeletedAt)
+	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)", m.table, sMenuRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.MenuName, data.ParentId, data.Sort, data.Path, data.Component, data.Query, data.IsFrame, data.IsCache, data.MenuType, data.Visible, data.Status, data.Perms, data.Icon, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime)
 	return ret, err
 }
 
 func (m *defaultSMenuModel) Update(ctx context.Context, data *SMenu) error {
 	query := fmt.Sprintf("update %s set %s where id = $1", m.table, sMenuRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.Id, data.MenuName, data.ParentId, data.Sort, data.Path, data.Component, data.Query, data.IsFrame, data.IsCache, data.MenuType, data.Visible, data.Status, data.Perms, data.Icon, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime, data.DeletedAt)
+	_, err := m.conn.ExecCtx(ctx, query, data.Id, data.MenuName, data.ParentId, data.Sort, data.Path, data.Component, data.Query, data.IsFrame, data.IsCache, data.MenuType, data.Visible, data.Status, data.Perms, data.Icon, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime)
 	return err
 }
 

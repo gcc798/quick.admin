@@ -6,6 +6,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 
 	"github.com/gcc798/nai-tizi/application/sys-api/internal/config"
 	"github.com/gcc798/nai-tizi/application/sys-api/internal/handler"
@@ -24,7 +25,9 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 
-	server := rest.MustNewServer(c.RestConf)
+	server := rest.MustNewServer(c.RestConf, rest.WithCustomCors(func(header http.Header) {
+		middleware.SetCORSHeaders(header, middleware.CORSConfig{})
+	}, nil, "*"))
 	defer server.Stop()
 
 	server.Use(middleware.PanicRecoveryMiddleware)

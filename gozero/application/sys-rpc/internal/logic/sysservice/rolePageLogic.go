@@ -26,7 +26,7 @@ func NewRolePageLogic(ctx context.Context, svcCtx *svc.ServiceContext) *RolePage
 
 func (l *RolePageLogic) RolePage(in *pb.RolePageReq) (*pb.RolePageResp, error) {
 	pageNum, pageSize := normalizePage(in.PageNum, in.PageSize)
-	where := []string{"deleted_at is null"}
+	where := []string{"1=1"}
 	args := make([]interface{}, 0)
 	if in.RoleName != "" {
 		args = append(args, "%"+in.RoleName+"%")

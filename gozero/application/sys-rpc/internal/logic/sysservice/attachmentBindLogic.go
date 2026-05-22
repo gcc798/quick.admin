@@ -42,7 +42,7 @@ func (l *AttachmentBindLogic) AttachmentBind(in *pb.AttachmentBindReq) (*pb.Ack,
 	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `
 		update public.biz_attachment
 		set business_type = $2, business_id = $3, business_field = $4, is_public = $5, access_url = $6, metadata = $7, expire_time = nullif($8, '')::timestamp, update_time = now()
-		where id = $1 and deleted_at is null
+		where id = $1
 	`, in.AttachmentId, in.BusinessType, in.BusinessId, in.BusinessField, in.IsPublic, sql.NullString{String: accessURL, Valid: accessURL != ""}, sql.NullString{String: in.MetadataJson, Valid: in.MetadataJson != ""}, in.ExpireTime); err != nil {
 		return nil, err
 	}

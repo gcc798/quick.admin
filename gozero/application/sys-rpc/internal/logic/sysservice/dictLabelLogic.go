@@ -25,9 +25,11 @@ func NewDictLabelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DictLab
 }
 
 func (l *DictLabelLogic) DictLabel(in *pb.DictLabelQueryReq) (*pb.DictLabelResp, error) {
-	var label sql.NullString
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &label, `select dict_label from public.s_dict_data where dict_type = $1 and dict_value = $2 and status = 0 order by sort asc, id asc limit 1`, in.DictType, in.DictValue); err != nil {
+	var row struct {
+		Label sql.NullString `db:"dict_label"`
+	}
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &row, `select dict_label from public.s_dict_data where dict_type = $1 and dict_value = $2 and status = 0 order by sort asc, id asc limit 1`, in.DictType, in.DictValue); err != nil {
 		return nil, err
 	}
-	return &pb.DictLabelResp{Label: label.String}, nil
+	return &pb.DictLabelResp{Label: row.Label.String}, nil
 }

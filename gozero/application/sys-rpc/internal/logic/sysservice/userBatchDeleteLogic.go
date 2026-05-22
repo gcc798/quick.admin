@@ -29,7 +29,7 @@ func (l *UserBatchDeleteLogic) UserBatchDelete(in *pb.BatchIdsReq) (*pb.Ack, err
 		parts = append(parts, fmt.Sprintf("$%d", i+1))
 		args = append(args, id)
 	}
-	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `update public.s_user set deleted_at = now() where id in (`+strings.Join(parts, ",")+`) and deleted_at is null`, args...); err != nil {
+	if _, err := l.svcCtx.DB.ExecCtx(l.ctx, `delete from public.s_user where id in (`+strings.Join(parts, ",")+`)`, args...); err != nil {
 		return nil, err
 	}
 	return &pb.Ack{Msg: "ok"}, nil

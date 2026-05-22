@@ -41,7 +41,7 @@ func getAttachmentByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
 		select id, env_id, file_name, file_key, file_size, file_type, file_ext, business_type, business_id, business_field, is_public, access_url, metadata, status, expire_time, create_by, create_time, update_time
 		from public.biz_attachment
-		where id = $1 and status = 0 and deleted_at is null
+		where id = $1 and status = 0
 		limit 1
 	`, id)
 	if err != nil {

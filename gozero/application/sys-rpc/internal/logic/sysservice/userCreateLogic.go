@@ -31,14 +31,14 @@ func (l *UserCreateLogic) UserCreate(in *pb.UserCreateReq) (*pb.Ack, error) {
 		return nil, fmt.Errorf("用户名不能为空")
 	}
 	var count int64
-	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where user_name = $1 and deleted_at is null`, in.UserName); err != nil {
+	if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where user_name = $1`, in.UserName); err != nil {
 		return nil, err
 	}
 	if count > 0 {
 		return nil, fmt.Errorf("用户名已存在")
 	}
 	if in.Phonenumber != "" {
-		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where phonenumber = $1 and deleted_at is null`, in.Phonenumber); err != nil {
+		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where phonenumber = $1`, in.Phonenumber); err != nil {
 			return nil, err
 		}
 		if count > 0 {
@@ -46,7 +46,7 @@ func (l *UserCreateLogic) UserCreate(in *pb.UserCreateReq) (*pb.Ack, error) {
 		}
 	}
 	if in.Email != "" {
-		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where email = $1 and deleted_at is null`, in.Email); err != nil {
+		if err := l.svcCtx.DB.QueryRowCtx(l.ctx, &count, `select count(1) from public.s_user where email = $1`, in.Email); err != nil {
 			return nil, err
 		}
 		if count > 0 {

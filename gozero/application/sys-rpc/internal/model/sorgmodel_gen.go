@@ -53,7 +53,6 @@ type (
 		UpdateBy    sql.NullInt64  `db:"update_by"`
 		CreatedTime sql.NullTime   `db:"created_time"`
 		UpdatedTime sql.NullTime   `db:"updated_time"`
-		DeletedAt   sql.NullTime   `db:"deleted_at"`
 	}
 )
 
@@ -99,14 +98,14 @@ func (m *defaultSOrgModel) FindOneByOrgCode(ctx context.Context, orgCode sql.Nul
 }
 
 func (m *defaultSOrgModel) Insert(ctx context.Context, data *SOrg) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)", m.table, sOrgRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.ParentId, data.Ancestors, data.OrgName, data.OrgCode, data.OrgType, data.Leader, data.Phone, data.Email, data.Status, data.Sort, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime, data.DeletedAt)
+	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)", m.table, sOrgRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.ParentId, data.Ancestors, data.OrgName, data.OrgCode, data.OrgType, data.Leader, data.Phone, data.Email, data.Status, data.Sort, data.Remark, data.CreateBy, data.UpdateBy, data.CreatedTime, data.UpdatedTime)
 	return ret, err
 }
 
 func (m *defaultSOrgModel) Update(ctx context.Context, newData *SOrg) error {
 	query := fmt.Sprintf("update %s set %s where id = $1", m.table, sOrgRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, newData.Id, newData.ParentId, newData.Ancestors, newData.OrgName, newData.OrgCode, newData.OrgType, newData.Leader, newData.Phone, newData.Email, newData.Status, newData.Sort, newData.Remark, newData.CreateBy, newData.UpdateBy, newData.CreatedTime, newData.UpdatedTime, newData.DeletedAt)
+	_, err := m.conn.ExecCtx(ctx, query, newData.Id, newData.ParentId, newData.Ancestors, newData.OrgName, newData.OrgCode, newData.OrgType, newData.Leader, newData.Phone, newData.Email, newData.Status, newData.Sort, newData.Remark, newData.CreateBy, newData.UpdateBy, newData.CreatedTime, newData.UpdatedTime)
 	return err
 }
 

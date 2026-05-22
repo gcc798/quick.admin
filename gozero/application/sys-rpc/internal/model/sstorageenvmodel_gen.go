@@ -49,7 +49,6 @@ type (
 		CreatedTime sql.NullTime   `db:"created_time"`
 		UpdateBy    sql.NullInt64  `db:"update_by"`
 		UpdatedTime sql.NullTime   `db:"updated_time"`
-		DeletedAt   sql.NullTime   `db:"deleted_at"`
 	}
 )
 
@@ -95,14 +94,14 @@ func (m *defaultSStorageEnvModel) FindOneByCode(ctx context.Context, code string
 }
 
 func (m *defaultSStorageEnvModel) Insert(ctx context.Context, data *SStorageEnv) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)", m.table, sStorageEnvRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.Code, data.StorageType, data.IsDefault, data.Status, data.Config, data.Remark, data.CreateBy, data.CreatedTime, data.UpdateBy, data.UpdatedTime, data.DeletedAt)
+	query := fmt.Sprintf("insert into %s (%s) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)", m.table, sStorageEnvRowsExpectAutoSet)
+	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.Code, data.StorageType, data.IsDefault, data.Status, data.Config, data.Remark, data.CreateBy, data.CreatedTime, data.UpdateBy, data.UpdatedTime)
 	return ret, err
 }
 
 func (m *defaultSStorageEnvModel) Update(ctx context.Context, newData *SStorageEnv) error {
 	query := fmt.Sprintf("update %s set %s where id = $1", m.table, sStorageEnvRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, newData.Id, newData.Name, newData.Code, newData.StorageType, newData.IsDefault, newData.Status, newData.Config, newData.Remark, newData.CreateBy, newData.CreatedTime, newData.UpdateBy, newData.UpdatedTime, newData.DeletedAt)
+	_, err := m.conn.ExecCtx(ctx, query, newData.Id, newData.Name, newData.Code, newData.StorageType, newData.IsDefault, newData.Status, newData.Config, newData.Remark, newData.CreateBy, newData.CreatedTime, newData.UpdateBy, newData.UpdatedTime)
 	return err
 }
 
