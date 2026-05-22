@@ -1,8 +1,8 @@
 package commonutil
 
 import (
-	"encoding/json"
 	"database/sql"
+	"encoding/json"
 	"time"
 )
 

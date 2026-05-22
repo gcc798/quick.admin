@@ -6,6 +6,7 @@ package handler
 import (
 	"net/http"
 
+	apipermission "github.com/gcc798/nai-tizi/application/sys-api/internal/handler/apipermission"
 	attachment "github.com/gcc798/nai-tizi/application/sys-api/internal/handler/attachment"
 	auth "github.com/gcc798/nai-tizi/application/sys-api/internal/handler/auth"
 	captcha "github.com/gcc798/nai-tizi/application/sys-api/internal/handler/captcha"
@@ -25,6 +26,56 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/v1/api-permission",
+				Handler: apipermission.ApiPermissionListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/v1/api-permission",
+				Handler: apipermission.ApiPermissionCreateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/api/v1/api-permission/:id",
+				Handler: apipermission.ApiPermissionUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/api/v1/api-permission/:id",
+				Handler: apipermission.ApiPermissionDeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/v1/api-permission/tree",
+				Handler: apipermission.ApiPermissionTreeHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/v1/role/:roleId/api-permissions",
+				Handler: apipermission.RoleApiPermissionsHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/v1/role/:roleId/api-permissions",
+				Handler: apipermission.RoleApiPermissionsAssignHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/v1/user/:id/api-permissions",
+				Handler: apipermission.UserApiPermissionsHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/v1/user/:id/api-permissions",
+				Handler: apipermission.UserApiPermissionsAssignHandler(serverCtx),
+			},
+		},
+	)
+
 	server.AddRoutes(
 		[]rest.Route{
 			{
@@ -421,6 +472,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/api/v1/role/:roleId/menus",
 				Handler: role.RoleAssignMenusHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/api/v1/role/:roleId/users",
+				Handler: role.RoleUsersHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/v1/role/:roleId/users",
+				Handler: role.RoleAssignUsersHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/api/v1/role/:roleId/users",
+				Handler: role.RoleRemoveUsersHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,

@@ -8,10 +8,6 @@ import (
 	"github.com/zeromicro/go-zero/zrpc"
 )
 
-type PostgresConf struct {
-	Dsn string
-}
-
 type RedisConf struct {
 	Addr     string
 	Password string
@@ -27,30 +23,10 @@ type AuthConf struct {
 	TokenHeader string
 }
 
-type CaptchaImageConf struct {
-	Enabled bool
-}
-
-type CaptchaSmsConf struct {
-	Enabled bool
-}
-
-type CaptchaEmailConf struct {
-	Enabled bool
-}
-
-type CaptchaConf struct {
-	Image CaptchaImageConf
-	Sms   CaptchaSmsConf
-	Email CaptchaEmailConf
-}
-
 type Config struct {
 	rest.RestConf
-	SysRpc   zrpc.RpcClientConf
-	Postgres PostgresConf
-	Redis    RedisConf
-	Jwt      JwtConf
-	Auth     AuthConf
-	Captcha  CaptchaConf
+	SysRpc zrpc.RpcClientConf
+	Redis  RedisConf
+	Jwt    JwtConf
+	Auth   AuthConf
 }

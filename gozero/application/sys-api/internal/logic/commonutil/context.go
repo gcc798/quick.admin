@@ -1,20 +1,27 @@
 package commonutil
 
-import "context"
+import (
+	"context"
 
-type contextKey string
-
-const userIDContextKey contextKey = "userId"
+	"github.com/gcc798/nai-tizi/common/auth"
+)
 
 func WithUserID(ctx context.Context, userID int64) context.Context {
-	return context.WithValue(ctx, userIDContextKey, userID)
+	return auth.WithUserID(ctx, userID)
 }
 
 func UserIDFromContext(ctx context.Context) int64 {
-	value := ctx.Value(userIDContextKey)
-	userID, ok := value.(int64)
-	if !ok {
-		return 0
-	}
-	return userID
+	return auth.UserIDFromContext(ctx)
+}
+
+func OrgIDFromContext(ctx context.Context) int64 {
+	return auth.OrgIDFromContext(ctx)
+}
+
+func RolesFromContext(ctx context.Context) []string {
+	return auth.RolesFromContext(ctx)
+}
+
+func PermissionsFromContext(ctx context.Context) []string {
+	return auth.PermissionsFromContext(ctx)
 }

@@ -25,6 +25,7 @@ type authClientRow struct {
 
 type userAuthRow struct {
 	Id          int64          `db:"id"`
+	OrgId       sql.NullInt64  `db:"org_id"`
 	UserName    string         `db:"user_name"`
 	NickName    sql.NullString `db:"nick_name"`
 	UserType    int64          `db:"user_type"`
@@ -98,7 +99,7 @@ func authenticatePassword(ctx context.Context, svcCtx *svc.ServiceContext, usern
 	}
 	var row userAuthRow
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
-		select id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
+		select id, org_id, user_name, nick_name, user_type, email, phonenumber, avatar, password, status
 		from public.s_user
 		where user_name = $1 and deleted_at is null
 		limit 1
@@ -173,9 +174,10 @@ func getUserByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*pb
 		UpdateBy    sql.NullInt64  `db:"update_by"`
 		CreatedTime sql.NullTime   `db:"created_time"`
 		UpdatedTime sql.NullTime   `db:"updated_time"`
+		OrgId       sql.NullInt64  `db:"org_id"`
 	}
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
-		select id, user_name, nick_name, user_type, email, phonenumber, sex, avatar, status, sort, login_ip, login_date, open_id, union_id, remark, create_by, update_by, created_time, updated_time
+		select id, user_name, nick_name, user_type, email, phonenumber, sex, avatar, status, sort, login_ip, login_date, open_id, union_id, remark, create_by, update_by, created_time, updated_time, org_id
 		from public.s_user where id = $1 and deleted_at is null limit 1
 	`, id)
 	if err != nil {
@@ -204,6 +206,7 @@ func getUserByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*pb
 		UpdateBy:    nullInt64(row.UpdateBy),
 		CreatedAt:   nullTime(row.CreatedTime),
 		UpdatedAt:   nullTime(row.UpdatedTime),
+		OrgId:       nullInt64(row.OrgId),
 	}, nil
 }
 

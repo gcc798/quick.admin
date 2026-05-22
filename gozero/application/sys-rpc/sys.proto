@@ -33,6 +33,7 @@ message UserInfo {
   string email = 5;
   string avatar = 6;
   int32 user_type = 7;
+  int64 org_id = 8;
 }
 
 message AuthLoginReq {
@@ -55,6 +56,14 @@ message AuthLoginResp {
   int64 timeout = 4;
   int64 active_timeout = 5;
   UserInfo user_info = 6;
+}
+
+message UserAuthContextReq { int64 user_id = 1; }
+
+message UserAuthContextResp {
+  int64 org_id = 1;
+  repeated string roles = 2;
+  repeated string permissions = 3;
 }
 
 
@@ -81,6 +90,7 @@ message User {
   int64 update_by = 17;
   string created_at = 18;
   string updated_at = 19;
+  int64 org_id = 20;
 }
 
 message UserPageReq {
@@ -178,8 +188,51 @@ message RolePermissionsResp { repeated RolePermission records = 1; }
 message RoleMenusReq { int64 role_id = 1; }
 message RoleMenusAssignReq { int64 role_id = 1; repeated int64 menu_ids = 2; }
 message MenuIdsResp { repeated int64 menu_ids = 1; }
+message RoleUsersReq { int64 role_id = 1; repeated int64 user_ids = 2; int64 operator_id = 3; }
 message RolePageResp { repeated Role records = 1; PageInfo page = 2; }
 message RoleListResp { repeated Role records = 1; }
+
+message ApiPermission {
+  int64 id = 1;
+  int64 parent_id = 2;
+  string module = 3;
+  string code = 4;
+  string name = 5;
+  int32 node_type = 6;
+  string action = 7;
+  string method = 8;
+  string path = 9;
+  int64 sort = 10;
+  int32 status = 11;
+  string remark = 12;
+  int64 create_by = 13;
+  int64 update_by = 14;
+  string created_time = 15;
+  string updated_time = 16;
+  repeated ApiPermission children = 17;
+}
+
+message ApiPermissionSaveReq {
+  int64 id = 1;
+  int64 parent_id = 2;
+  string module = 3;
+  string code = 4;
+  string name = 5;
+  int32 node_type = 6;
+  string action = 7;
+  string method = 8;
+  string path = 9;
+  int64 sort = 10;
+  int32 status = 11;
+  string remark = 12;
+  int64 user_id = 13;
+}
+
+message ApiPermissionIdsReq { repeated int64 permission_ids = 1; }
+message RoleApiPermissionsReq { int64 role_id = 1; repeated int64 permission_ids = 2; int64 operator_id = 3; }
+message UserApiPermissionsReq { int64 user_id = 1; repeated int64 permission_ids = 2; int64 operator_id = 3; }
+message ApiPermissionListResp { repeated ApiPermission records = 1; }
+message ApiPermissionIdsResp { repeated int64 permission_ids = 1; }
 
 
 
@@ -638,6 +691,7 @@ service SysService {
 
   rpc AuthLogin(AuthLoginReq) returns (AuthLoginResp);
   rpc UserProfile(IdReq) returns (User);
+  rpc UserAuthContext(UserAuthContextReq) returns (UserAuthContextResp);
 
   rpc UserCreate(UserCreateReq) returns (Ack);
   rpc UserImport(UserImportReq) returns (Ack);
@@ -657,11 +711,24 @@ service SysService {
   rpc RolePermissionAdd(RolePermissionReq) returns (Ack);
   rpc RolePermissionDelete(RolePermissionReq) returns (Ack);
   rpc RolePermissions(RolePermissionsQueryReq) returns (RolePermissionsResp);
+  rpc RoleUsers(RoleUsersReq) returns (UserListResp);
+  rpc RoleAssignUsers(RoleUsersReq) returns (Ack);
+  rpc RoleRemoveUsers(RoleUsersReq) returns (Ack);
   rpc RoleMenus(RoleMenusReq) returns (MenuIdsResp);
   rpc RoleAssignMenus(RoleMenusAssignReq) returns (Ack);
   rpc RoleUpdate(RoleUpdateReq) returns (Ack);
   rpc RoleDetail(IdReq) returns (Role);
   rpc RoleDelete(IdReq) returns (Ack);
+
+  rpc ApiPermissionTree(Empty) returns (ApiPermissionListResp);
+  rpc ApiPermissionList(Empty) returns (ApiPermissionListResp);
+  rpc ApiPermissionCreate(ApiPermissionSaveReq) returns (ApiPermission);
+  rpc ApiPermissionUpdate(ApiPermissionSaveReq) returns (Ack);
+  rpc ApiPermissionDelete(IdReq) returns (Ack);
+  rpc RoleApiPermissions(IdReq) returns (ApiPermissionIdsResp);
+  rpc RoleApiPermissionsAssign(RoleApiPermissionsReq) returns (Ack);
+  rpc UserApiPermissions(IdReq) returns (ApiPermissionIdsResp);
+  rpc UserApiPermissionsAssign(UserApiPermissionsReq) returns (Ack);
 
   rpc OrgCreate(OrgCreateReq) returns (Ack);
   rpc OrgPage(OrgPageReq) returns (OrgPageResp);

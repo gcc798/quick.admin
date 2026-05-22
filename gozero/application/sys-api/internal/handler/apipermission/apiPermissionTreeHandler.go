@@ -1,23 +1,20 @@
 // Code scaffolded by goctl. Safe to edit.
 // goctl 1.9.2
 
-package menu
+package apipermission
 
 import (
 	"net/http"
 
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/logic/menu"
+	"github.com/gcc798/nai-tizi/application/sys-api/internal/logic/apipermission"
 	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
-	commonauth "github.com/gcc798/nai-tizi/common/auth"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func MenuUserTreeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func ApiPermissionTreeHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		userId := commonauth.UserIDFromContext(r.Context())
-
-		l := menu.NewMenuUserTreeLogic(r.Context(), svcCtx)
-		resp, err := l.MenuUserTree(userId)
+		l := apipermission.NewApiPermissionTreeLogic(r.Context(), svcCtx)
+		resp, err := l.ApiPermissionTree()
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

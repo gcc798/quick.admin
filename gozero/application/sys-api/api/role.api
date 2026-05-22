@@ -66,6 +66,15 @@ type RoleMenusAssignReq {
 	menuIds []int64 `json:"menuIds"`
 }
 
+type RoleUsersPathReq {
+	roleId int64 `path:"roleId"`
+}
+
+type RoleUsersReq {
+	roleId int64   `path:"roleId"`
+	userIds []int64 `json:"userIds"`
+}
+
 @server (
 	group: role
 )
@@ -93,6 +102,15 @@ service sys-api {
 
 	@handler RolePermissions
 	get /api/v1/role/permissions (RolePermissionsQueryReq) returns (CommonResp)
+
+	@handler RoleUsers
+	get /api/v1/role/:roleId/users (RoleUsersPathReq) returns (CommonResp)
+
+	@handler RoleAssignUsers
+	post /api/v1/role/:roleId/users (RoleUsersReq) returns (CommonResp)
+
+	@handler RoleRemoveUsers
+	delete /api/v1/role/:roleId/users (RoleUsersReq) returns (CommonResp)
 
 	@handler RoleMenus
 	get /api/v1/role/:roleId/menus (RoleMenusPathReq) returns (CommonResp)

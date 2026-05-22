@@ -14,6 +14,7 @@ import (
 	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
 	"github.com/gcc798/nai-tizi/application/sys-api/internal/types"
 	"github.com/gcc798/nai-tizi/application/sys-rpc/client/sysservice"
+	commonauth "github.com/gcc798/nai-tizi/common/auth"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/redis/go-redis/v9"
 )
@@ -22,14 +23,6 @@ const (
 	refreshTokenKeyPrefix   = "refresh_token:"
 	refreshTokenIndexPrefix = "refresh_token_index:"
 )
-
-type accessClaims struct {
-	UserId     int64  `json:"userId"`
-	UserName   string `json:"userName"`
-	ClientId   string `json:"clientId"`
-	DeviceType string `json:"deviceType"`
-	jwt.RegisteredClaims
-}
 
 type authClient struct {
 	ClientId      string
@@ -47,6 +40,9 @@ type loginUser struct {
 	Phonenumber string
 	Avatar      string
 	UserType    int64
+	OrgID       int64
+	Roles       []string
+	Permissions []string
 }
 
 func loginWithRPC(ctx context.Context, svcCtx *svc.ServiceContext, req *types.LoginReq) (*loginUser, *authClient, error) {
@@ -68,21 +64,26 @@ func loginWithRPC(ctx context.Context, svcCtx *svc.ServiceContext, req *types.Lo
 	if resp.UserInfo == nil {
 		return nil, nil, fmt.Errorf("登录失败")
 	}
-	return &loginUser{
-			Id:          resp.UserInfo.UserId,
-			UserName:    resp.UserInfo.Username,
-			NickName:    resp.UserInfo.Nickname,
-			Email:       resp.UserInfo.Email,
-			Phonenumber: resp.UserInfo.Phonenumber,
-			Avatar:      resp.UserInfo.Avatar,
-			UserType:    int64(resp.UserInfo.UserType),
-		}, &authClient{
-			ClientId:      resp.ClientId,
-			ClientKey:     resp.ClientKey,
-			DeviceType:    resp.DeviceType,
-			Timeout:       resp.Timeout,
-			ActiveTimeout: resp.ActiveTimeout,
-		}, nil
+	user := &loginUser{
+		Id:          resp.UserInfo.UserId,
+		UserName:    resp.UserInfo.Username,
+		NickName:    resp.UserInfo.Nickname,
+		Email:       resp.UserInfo.Email,
+		Phonenumber: resp.UserInfo.Phonenumber,
+		Avatar:      resp.UserInfo.Avatar,
+		UserType:    int64(resp.UserInfo.UserType),
+		OrgID:       resp.UserInfo.OrgId,
+	}
+	if err := enrichLoginUserAuthContext(ctx, svcCtx, user); err != nil {
+		return nil, nil, err
+	}
+	return user, &authClient{
+		ClientId:      resp.ClientId,
+		ClientKey:     resp.ClientKey,
+		DeviceType:    resp.DeviceType,
+		Timeout:       resp.Timeout,
+		ActiveTimeout: resp.ActiveTimeout,
+	}, nil
 }
 
 func buildLoginResponse(ctx context.Context, svcCtx *svc.ServiceContext, user *loginUser, client *authClient) (*types.CommonResp, error) {
@@ -110,6 +111,9 @@ func buildLoginResponse(ctx context.Context, svcCtx *svc.ServiceContext, user *l
 			"email":       user.Email,
 			"avatar":      user.Avatar,
 			"userType":    user.UserType,
+			"orgId":       user.OrgID,
+			"roles":       user.Roles,
+			"permissions": user.Permissions,
 		},
 	}}, nil
 }
@@ -143,7 +147,12 @@ func refreshLoginToken(ctx context.Context, svcCtx *svc.ServiceContext, refreshT
 	if err != nil {
 		return nil, fmt.Errorf("用户不存在")
 	}
-	accessToken, accessExpiresIn, err := generateAccessToken(&loginUser{Id: userResp.UserId, UserName: userResp.UserName, NickName: userResp.NickName, Email: userResp.Email, Phonenumber: userResp.Phonenumber, Avatar: userResp.Avatar, UserType: int64(userResp.UserType)}, &authClient{ClientId: refreshData["clientId"], ClientKey: clientKey, DeviceType: refreshData["deviceType"], Timeout: parseInt64(refreshData["timeout"]), ActiveTimeout: parseInt64(refreshData["activeTimeout"])}, svcCtx.Config.Jwt.Secret)
+	client := &authClient{ClientId: refreshData["clientId"], ClientKey: clientKey, DeviceType: refreshData["deviceType"], Timeout: parseInt64(refreshData["timeout"]), ActiveTimeout: parseInt64(refreshData["activeTimeout"])}
+	user := &loginUser{Id: userResp.UserId, UserName: userResp.UserName, NickName: userResp.NickName, Email: userResp.Email, Phonenumber: userResp.Phonenumber, Avatar: userResp.Avatar, UserType: int64(userResp.UserType), OrgID: userResp.OrgId}
+	if err := enrichLoginUserAuthContext(ctx, svcCtx, user); err != nil {
+		return nil, fmt.Errorf("用户权限上下文获取失败")
+	}
+	accessToken, accessExpiresIn, err := generateAccessToken(user, client, svcCtx.Config.Jwt.Secret)
 	if err != nil {
 		return nil, fmt.Errorf("生成新Token失败")
 	}
@@ -151,8 +160,6 @@ func refreshLoginToken(ctx context.Context, svcCtx *svc.ServiceContext, refreshT
 	if err != nil {
 		return nil, fmt.Errorf("生成新Token失败")
 	}
-	client := &authClient{ClientId: refreshData["clientId"], ClientKey: clientKey, DeviceType: refreshData["deviceType"], Timeout: parseInt64(refreshData["timeout"]), ActiveTimeout: parseInt64(refreshData["activeTimeout"])}
-	user := &loginUser{Id: userResp.UserId, UserName: userResp.UserName}
 	if err := storeRefreshData(ctx, svcCtx, refreshKey, user, client, newRefreshToken); err != nil {
 		return nil, fmt.Errorf("更新RefreshToken失败")
 	}
@@ -169,7 +176,7 @@ func invalidateByToken(ctx context.Context, svcCtx *svc.ServiceContext, token st
 	if err != nil {
 		return
 	}
-	refreshKey := buildRefreshKey(claims.UserId, claims.ClientId)
+	refreshKey := buildRefreshKey(claims.UserID, claims.ClientID)
 	refreshData, err := svcCtx.Redis.HGetAll(ctx, refreshKey).Result()
 	if err == nil && len(refreshData) > 0 && refreshData["token"] != "" {
 		_ = svcCtx.Redis.Del(ctx, refreshTokenIndexPrefix+hashToken(refreshData["token"])).Err()
@@ -183,7 +190,20 @@ func generateAccessToken(user *loginUser, client *authClient, secret string) (st
 		expireSeconds = 1800
 	}
 	expireAt := time.Now().Add(time.Duration(expireSeconds) * time.Second)
-	claims := accessClaims{UserId: user.Id, UserName: user.UserName, ClientId: client.ClientId, DeviceType: client.DeviceType, RegisteredClaims: jwt.RegisteredClaims{ExpiresAt: jwt.NewNumericDate(expireAt), IssuedAt: jwt.NewNumericDate(time.Now()), Issuer: "NAI-TIZI-gozero"}}
+	claims := commonauth.AccessClaims{
+		UserID:      user.Id,
+		UserName:    user.UserName,
+		ClientID:    client.ClientId,
+		DeviceType:  client.DeviceType,
+		OrgID:       user.OrgID,
+		Roles:       user.Roles,
+		Permissions: user.Permissions,
+		RegisteredClaims: jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(expireAt),
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
+			Issuer:    "NAI-TIZI-gozero",
+		},
+	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString([]byte(secret))
 	if err != nil {
@@ -192,16 +212,8 @@ func generateAccessToken(user *loginUser, client *authClient, secret string) (st
 	return tokenString, expireSeconds, nil
 }
 
-func parseAccessToken(tokenString, secret string) (*accessClaims, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &accessClaims{}, func(token *jwt.Token) (interface{}, error) { return []byte(secret), nil })
-	if err != nil {
-		return nil, err
-	}
-	claims, ok := token.Claims.(*accessClaims)
-	if !ok || !token.Valid {
-		return nil, jwt.ErrTokenInvalidClaims
-	}
-	return claims, nil
+func parseAccessToken(tokenString, secret string) (*commonauth.AccessClaims, error) {
+	return commonauth.ParseAccessToken(tokenString, secret)
 }
 
 func generateRefreshToken() (string, error) {
@@ -221,11 +233,22 @@ func storeRefreshToken(ctx context.Context, svcCtx *svc.ServiceContext, user *lo
 }
 
 func storeRefreshData(ctx context.Context, svcCtx *svc.ServiceContext, refreshKey string, user *loginUser, client *authClient, refreshToken string) error {
-	data := map[string]interface{}{"token": refreshToken, "userId": strconv.FormatInt(user.Id, 10), "userName": user.UserName, "clientId": client.ClientId, "clientKey": client.ClientKey, "deviceType": client.DeviceType, "timeout": strconv.FormatInt(client.Timeout, 10), "activeTimeout": strconv.FormatInt(client.ActiveTimeout, 10)}
+	data := map[string]interface{}{"token": refreshToken, "userId": strconv.FormatInt(user.Id, 10), "userName": user.UserName, "orgId": strconv.FormatInt(user.OrgID, 10), "clientId": client.ClientId, "clientKey": client.ClientKey, "deviceType": client.DeviceType, "timeout": strconv.FormatInt(client.Timeout, 10), "activeTimeout": strconv.FormatInt(client.ActiveTimeout, 10)}
 	if err := svcCtx.Redis.HSet(ctx, refreshKey, data).Err(); err != nil {
 		return err
 	}
 	return svcCtx.Redis.Expire(ctx, refreshKey, time.Duration(client.Timeout)*time.Second).Err()
+}
+
+func enrichLoginUserAuthContext(ctx context.Context, svcCtx *svc.ServiceContext, user *loginUser) error {
+	authCtx, err := svcCtx.SysRpcClient.UserAuthContext(ctx, &sysservice.UserAuthContextReq{UserId: user.Id})
+	if err != nil {
+		return fmt.Errorf("获取用户权限上下文失败: %w", err)
+	}
+	user.OrgID = authCtx.OrgId
+	user.Roles = authCtx.Roles
+	user.Permissions = authCtx.Permissions
+	return nil
 }
 
 func buildRefreshKey(userId int64, clientId string) string {

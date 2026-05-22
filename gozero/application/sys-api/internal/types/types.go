@@ -3,6 +3,39 @@
 
 package types
 
+type ApiPermissionAssignReq struct {
+	PermissionIds []int64 `json:"permissionIds"`
+}
+
+type ApiPermissionSaveReq struct {
+	ParentId int64  `json:"parentId,optional"`
+	Module   string `json:"module"`
+	Code     string `json:"code"`
+	Name     string `json:"name"`
+	NodeType int64  `json:"nodeType,optional"`
+	Action   string `json:"action"`
+	Method   string `json:"method,optional"`
+	Path     string `json:"path,optional"`
+	Sort     int64  `json:"sort,optional"`
+	Status   int64  `json:"status,optional"`
+	Remark   string `json:"remark,optional"`
+}
+
+type ApiPermissionUpdateReq struct {
+	Id       int64  `path:"id"`
+	ParentId int64  `json:"parentId,optional"`
+	Module   string `json:"module"`
+	Code     string `json:"code"`
+	Name     string `json:"name"`
+	NodeType int64  `json:"nodeType,optional"`
+	Action   string `json:"action"`
+	Method   string `json:"method,optional"`
+	Path     string `json:"path,optional"`
+	Sort     int64  `json:"sort,optional"`
+	Status   int64  `json:"status,optional"`
+	Remark   string `json:"remark,optional"`
+}
+
 type AssignRoleReq struct {
 	UserId int64 `json:"userId"`
 	RoleId int64 `json:"roleId"`
@@ -320,6 +353,15 @@ type RemoveRoleReq struct {
 	RoleId int64 `form:"roleId"`
 }
 
+type RoleApiPermissionsAssignReq struct {
+	RoleId        int64   `path:"roleId"`
+	PermissionIds []int64 `json:"permissionIds"`
+}
+
+type RoleApiPermissionsPathReq struct {
+	RoleId int64 `path:"roleId"`
+}
+
 type RoleCreateReq struct {
 	RoleKey   string `json:"roleKey"`
 	RoleName  string `json:"roleName"`
@@ -374,6 +416,15 @@ type RoleUpdateReq struct {
 	Remark    string `json:"remark,optional"`
 }
 
+type RoleUsersPathReq struct {
+	RoleId int64 `path:"roleId"`
+}
+
+type RoleUsersReq struct {
+	RoleId  int64   `path:"roleId"`
+	UserIds []int64 `json:"userIds"`
+}
+
 type StorageEnvCreateReq struct {
 	Name        string      `json:"name"`
 	Code        string      `json:"code"`
@@ -412,6 +463,15 @@ type StorageEnvUpdateReq struct {
 
 type StringIdPathReq struct {
 	Id string `path:"id"`
+}
+
+type UserApiPermissionsAssignReq struct {
+	Id            int64   `path:"id"`
+	PermissionIds []int64 `json:"permissionIds"`
+}
+
+type UserApiPermissionsPathReq struct {
+	Id int64 `path:"id"`
 }
 
 type UserChangePasswordReq struct {

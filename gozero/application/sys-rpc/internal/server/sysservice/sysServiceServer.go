@@ -38,6 +38,11 @@ func (s *SysServiceServer) UserProfile(ctx context.Context, in *pb.IdReq) (*pb.U
 	return l.UserProfile(in)
 }
 
+func (s *SysServiceServer) UserAuthContext(ctx context.Context, in *pb.UserAuthContextReq) (*pb.UserAuthContextResp, error) {
+	l := sysservicelogic.NewUserAuthContextLogic(ctx, s.svcCtx)
+	return l.UserAuthContext(in)
+}
+
 func (s *SysServiceServer) UserCreate(ctx context.Context, in *pb.UserCreateReq) (*pb.Ack, error) {
 	l := sysservicelogic.NewUserCreateLogic(ctx, s.svcCtx)
 	return l.UserCreate(in)
@@ -123,6 +128,21 @@ func (s *SysServiceServer) RolePermissions(ctx context.Context, in *pb.RolePermi
 	return l.RolePermissions(in)
 }
 
+func (s *SysServiceServer) RoleUsers(ctx context.Context, in *pb.RoleUsersReq) (*pb.UserListResp, error) {
+	l := sysservicelogic.NewRoleUsersLogic(ctx, s.svcCtx)
+	return l.RoleUsers(in)
+}
+
+func (s *SysServiceServer) RoleAssignUsers(ctx context.Context, in *pb.RoleUsersReq) (*pb.Ack, error) {
+	l := sysservicelogic.NewRoleAssignUsersLogic(ctx, s.svcCtx)
+	return l.RoleAssignUsers(in)
+}
+
+func (s *SysServiceServer) RoleRemoveUsers(ctx context.Context, in *pb.RoleUsersReq) (*pb.Ack, error) {
+	l := sysservicelogic.NewRoleRemoveUsersLogic(ctx, s.svcCtx)
+	return l.RoleRemoveUsers(in)
+}
+
 func (s *SysServiceServer) RoleMenus(ctx context.Context, in *pb.RoleMenusReq) (*pb.MenuIdsResp, error) {
 	l := sysservicelogic.NewRoleMenusLogic(ctx, s.svcCtx)
 	return l.RoleMenus(in)
@@ -146,6 +166,51 @@ func (s *SysServiceServer) RoleDetail(ctx context.Context, in *pb.IdReq) (*pb.Ro
 func (s *SysServiceServer) RoleDelete(ctx context.Context, in *pb.IdReq) (*pb.Ack, error) {
 	l := sysservicelogic.NewRoleDeleteLogic(ctx, s.svcCtx)
 	return l.RoleDelete(in)
+}
+
+func (s *SysServiceServer) ApiPermissionTree(ctx context.Context, in *pb.Empty) (*pb.ApiPermissionListResp, error) {
+	l := sysservicelogic.NewApiPermissionTreeLogic(ctx, s.svcCtx)
+	return l.ApiPermissionTree(in)
+}
+
+func (s *SysServiceServer) ApiPermissionList(ctx context.Context, in *pb.Empty) (*pb.ApiPermissionListResp, error) {
+	l := sysservicelogic.NewApiPermissionListLogic(ctx, s.svcCtx)
+	return l.ApiPermissionList(in)
+}
+
+func (s *SysServiceServer) ApiPermissionCreate(ctx context.Context, in *pb.ApiPermissionSaveReq) (*pb.ApiPermission, error) {
+	l := sysservicelogic.NewApiPermissionCreateLogic(ctx, s.svcCtx)
+	return l.ApiPermissionCreate(in)
+}
+
+func (s *SysServiceServer) ApiPermissionUpdate(ctx context.Context, in *pb.ApiPermissionSaveReq) (*pb.Ack, error) {
+	l := sysservicelogic.NewApiPermissionUpdateLogic(ctx, s.svcCtx)
+	return l.ApiPermissionUpdate(in)
+}
+
+func (s *SysServiceServer) ApiPermissionDelete(ctx context.Context, in *pb.IdReq) (*pb.Ack, error) {
+	l := sysservicelogic.NewApiPermissionDeleteLogic(ctx, s.svcCtx)
+	return l.ApiPermissionDelete(in)
+}
+
+func (s *SysServiceServer) RoleApiPermissions(ctx context.Context, in *pb.IdReq) (*pb.ApiPermissionIdsResp, error) {
+	l := sysservicelogic.NewRoleApiPermissionsLogic(ctx, s.svcCtx)
+	return l.RoleApiPermissions(in)
+}
+
+func (s *SysServiceServer) RoleApiPermissionsAssign(ctx context.Context, in *pb.RoleApiPermissionsReq) (*pb.Ack, error) {
+	l := sysservicelogic.NewRoleApiPermissionsAssignLogic(ctx, s.svcCtx)
+	return l.RoleApiPermissionsAssign(in)
+}
+
+func (s *SysServiceServer) UserApiPermissions(ctx context.Context, in *pb.IdReq) (*pb.ApiPermissionIdsResp, error) {
+	l := sysservicelogic.NewUserApiPermissionsLogic(ctx, s.svcCtx)
+	return l.UserApiPermissions(in)
+}
+
+func (s *SysServiceServer) UserApiPermissionsAssign(ctx context.Context, in *pb.UserApiPermissionsReq) (*pb.Ack, error) {
+	l := sysservicelogic.NewUserApiPermissionsAssignLogic(ctx, s.svcCtx)
+	return l.UserApiPermissionsAssign(in)
 }
 
 func (s *SysServiceServer) OrgCreate(ctx context.Context, in *pb.OrgCreateReq) (*pb.Ack, error) {

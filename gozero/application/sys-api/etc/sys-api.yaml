@@ -7,9 +7,6 @@ SysRpc:
   Target: 127.0.0.1:9002
   NonBlock: true
 
-Postgres:
-  Dsn: "host=127.0.0.1 user=postgres password=post123 dbname=nai-tizi port=5433 sslmode=disable TimeZone=Asia/Shanghai"
-
 Redis:
   Addr: "127.0.0.1:6379"
   Password: "123456"
@@ -21,11 +18,3 @@ Jwt:
 
 Auth:
   TokenHeader: "Authorization"
-
-Captcha:
-  Image:
-    Enabled: false
-  Sms:
-    Enabled: true
-  Email:
-    Enabled: true

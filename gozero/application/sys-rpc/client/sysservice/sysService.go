@@ -15,6 +15,11 @@ import (
 
 type (
 	Ack                        = pb.Ack
+	ApiPermission              = pb.ApiPermission
+	ApiPermissionIdsReq        = pb.ApiPermissionIdsReq
+	ApiPermissionIdsResp       = pb.ApiPermissionIdsResp
+	ApiPermissionListResp      = pb.ApiPermissionListResp
+	ApiPermissionSaveReq       = pb.ApiPermissionSaveReq
 	AssignRoleReq              = pb.AssignRoleReq
 	Attachment                 = pb.Attachment
 	AttachmentBindReq          = pb.AttachmentBindReq
@@ -80,6 +85,7 @@ type (
 	PingResp                   = pb.PingResp
 	RemoveRoleReq              = pb.RemoveRoleReq
 	Role                       = pb.Role
+	RoleApiPermissionsReq      = pb.RoleApiPermissionsReq
 	RoleCreateReq              = pb.RoleCreateReq
 	RoleListResp               = pb.RoleListResp
 	RoleMenusAssignReq         = pb.RoleMenusAssignReq
@@ -91,6 +97,7 @@ type (
 	RolePermissionsQueryReq    = pb.RolePermissionsQueryReq
 	RolePermissionsResp        = pb.RolePermissionsResp
 	RoleUpdateReq              = pb.RoleUpdateReq
+	RoleUsersReq               = pb.RoleUsersReq
 	StorageEnv                 = pb.StorageEnv
 	StorageEnvDefaultReq       = pb.StorageEnvDefaultReq
 	StorageEnvListResp         = pb.StorageEnvListResp
@@ -101,6 +108,9 @@ type (
 	StorageEnvTestResp         = pb.StorageEnvTestResp
 	StringIdReq                = pb.StringIdReq
 	User                       = pb.User
+	UserApiPermissionsReq      = pb.UserApiPermissionsReq
+	UserAuthContextReq         = pb.UserAuthContextReq
+	UserAuthContextResp        = pb.UserAuthContextResp
 	UserChangePasswordReq      = pb.UserChangePasswordReq
 	UserCreateReq              = pb.UserCreateReq
 	UserImportReq              = pb.UserImportReq
@@ -116,6 +126,7 @@ type (
 		Ping(ctx context.Context, in *PingReq, opts ...grpc.CallOption) (*PingResp, error)
 		AuthLogin(ctx context.Context, in *AuthLoginReq, opts ...grpc.CallOption) (*AuthLoginResp, error)
 		UserProfile(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*User, error)
+		UserAuthContext(ctx context.Context, in *UserAuthContextReq, opts ...grpc.CallOption) (*UserAuthContextResp, error)
 		UserCreate(ctx context.Context, in *UserCreateReq, opts ...grpc.CallOption) (*Ack, error)
 		UserImport(ctx context.Context, in *UserImportReq, opts ...grpc.CallOption) (*Ack, error)
 		UserPage(ctx context.Context, in *UserPageReq, opts ...grpc.CallOption) (*UserPageResp, error)
@@ -133,11 +144,23 @@ type (
 		RolePermissionAdd(ctx context.Context, in *RolePermissionReq, opts ...grpc.CallOption) (*Ack, error)
 		RolePermissionDelete(ctx context.Context, in *RolePermissionReq, opts ...grpc.CallOption) (*Ack, error)
 		RolePermissions(ctx context.Context, in *RolePermissionsQueryReq, opts ...grpc.CallOption) (*RolePermissionsResp, error)
+		RoleUsers(ctx context.Context, in *RoleUsersReq, opts ...grpc.CallOption) (*UserListResp, error)
+		RoleAssignUsers(ctx context.Context, in *RoleUsersReq, opts ...grpc.CallOption) (*Ack, error)
+		RoleRemoveUsers(ctx context.Context, in *RoleUsersReq, opts ...grpc.CallOption) (*Ack, error)
 		RoleMenus(ctx context.Context, in *RoleMenusReq, opts ...grpc.CallOption) (*MenuIdsResp, error)
 		RoleAssignMenus(ctx context.Context, in *RoleMenusAssignReq, opts ...grpc.CallOption) (*Ack, error)
 		RoleUpdate(ctx context.Context, in *RoleUpdateReq, opts ...grpc.CallOption) (*Ack, error)
 		RoleDetail(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Role, error)
 		RoleDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error)
+		ApiPermissionTree(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ApiPermissionListResp, error)
+		ApiPermissionList(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ApiPermissionListResp, error)
+		ApiPermissionCreate(ctx context.Context, in *ApiPermissionSaveReq, opts ...grpc.CallOption) (*ApiPermission, error)
+		ApiPermissionUpdate(ctx context.Context, in *ApiPermissionSaveReq, opts ...grpc.CallOption) (*Ack, error)
+		ApiPermissionDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error)
+		RoleApiPermissions(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*ApiPermissionIdsResp, error)
+		RoleApiPermissionsAssign(ctx context.Context, in *RoleApiPermissionsReq, opts ...grpc.CallOption) (*Ack, error)
+		UserApiPermissions(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*ApiPermissionIdsResp, error)
+		UserApiPermissionsAssign(ctx context.Context, in *UserApiPermissionsReq, opts ...grpc.CallOption) (*Ack, error)
 		OrgCreate(ctx context.Context, in *OrgCreateReq, opts ...grpc.CallOption) (*Ack, error)
 		OrgPage(ctx context.Context, in *OrgPageReq, opts ...grpc.CallOption) (*OrgPageResp, error)
 		OrgTree(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*OrgTreeResp, error)
@@ -230,6 +253,11 @@ func (m *defaultSysService) UserProfile(ctx context.Context, in *IdReq, opts ...
 	return client.UserProfile(ctx, in, opts...)
 }
 
+func (m *defaultSysService) UserAuthContext(ctx context.Context, in *UserAuthContextReq, opts ...grpc.CallOption) (*UserAuthContextResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.UserAuthContext(ctx, in, opts...)
+}
+
 func (m *defaultSysService) UserCreate(ctx context.Context, in *UserCreateReq, opts ...grpc.CallOption) (*Ack, error) {
 	client := pb.NewSysServiceClient(m.cli.Conn())
 	return client.UserCreate(ctx, in, opts...)
@@ -315,6 +343,21 @@ func (m *defaultSysService) RolePermissions(ctx context.Context, in *RolePermiss
 	return client.RolePermissions(ctx, in, opts...)
 }
 
+func (m *defaultSysService) RoleUsers(ctx context.Context, in *RoleUsersReq, opts ...grpc.CallOption) (*UserListResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.RoleUsers(ctx, in, opts...)
+}
+
+func (m *defaultSysService) RoleAssignUsers(ctx context.Context, in *RoleUsersReq, opts ...grpc.CallOption) (*Ack, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.RoleAssignUsers(ctx, in, opts...)
+}
+
+func (m *defaultSysService) RoleRemoveUsers(ctx context.Context, in *RoleUsersReq, opts ...grpc.CallOption) (*Ack, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.RoleRemoveUsers(ctx, in, opts...)
+}
+
 func (m *defaultSysService) RoleMenus(ctx context.Context, in *RoleMenusReq, opts ...grpc.CallOption) (*MenuIdsResp, error) {
 	client := pb.NewSysServiceClient(m.cli.Conn())
 	return client.RoleMenus(ctx, in, opts...)
@@ -338,6 +381,51 @@ func (m *defaultSysService) RoleDetail(ctx context.Context, in *IdReq, opts ...g
 func (m *defaultSysService) RoleDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error) {
 	client := pb.NewSysServiceClient(m.cli.Conn())
 	return client.RoleDelete(ctx, in, opts...)
+}
+
+func (m *defaultSysService) ApiPermissionTree(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ApiPermissionListResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.ApiPermissionTree(ctx, in, opts...)
+}
+
+func (m *defaultSysService) ApiPermissionList(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*ApiPermissionListResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.ApiPermissionList(ctx, in, opts...)
+}
+
+func (m *defaultSysService) ApiPermissionCreate(ctx context.Context, in *ApiPermissionSaveReq, opts ...grpc.CallOption) (*ApiPermission, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.ApiPermissionCreate(ctx, in, opts...)
+}
+
+func (m *defaultSysService) ApiPermissionUpdate(ctx context.Context, in *ApiPermissionSaveReq, opts ...grpc.CallOption) (*Ack, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.ApiPermissionUpdate(ctx, in, opts...)
+}
+
+func (m *defaultSysService) ApiPermissionDelete(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*Ack, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.ApiPermissionDelete(ctx, in, opts...)
+}
+
+func (m *defaultSysService) RoleApiPermissions(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*ApiPermissionIdsResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.RoleApiPermissions(ctx, in, opts...)
+}
+
+func (m *defaultSysService) RoleApiPermissionsAssign(ctx context.Context, in *RoleApiPermissionsReq, opts ...grpc.CallOption) (*Ack, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.RoleApiPermissionsAssign(ctx, in, opts...)
+}
+
+func (m *defaultSysService) UserApiPermissions(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*ApiPermissionIdsResp, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.UserApiPermissions(ctx, in, opts...)
+}
+
+func (m *defaultSysService) UserApiPermissionsAssign(ctx context.Context, in *UserApiPermissionsReq, opts ...grpc.CallOption) (*Ack, error) {
+	client := pb.NewSysServiceClient(m.cli.Conn())
+	return client.UserApiPermissionsAssign(ctx, in, opts...)
 }
 
 func (m *defaultSysService) OrgCreate(ctx context.Context, in *OrgCreateReq, opts ...grpc.CallOption) (*Ack, error) {

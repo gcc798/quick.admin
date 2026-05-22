@@ -48,6 +48,7 @@ func (l *AuthLoginLogic) AuthLogin(in *pb.AuthLoginReq) (*pb.AuthLoginResp, erro
 			Email:       nullString(user.Email),
 			Avatar:      nullString(user.Avatar),
 			UserType:    int32(user.UserType),
+			OrgId:       nullInt64(user.OrgId),
 		},
 	}, nil
 }

@@ -10,6 +10,7 @@ import (
 	"github.com/gcc798/nai-tizi/application/sys-api/internal/config"
 	"github.com/gcc798/nai-tizi/application/sys-api/internal/handler"
 	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
+	"github.com/gcc798/nai-tizi/common/middleware"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
@@ -25,6 +26,25 @@ func main() {
 
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
+
+	server.Use(middleware.PanicRecoveryMiddleware)
+	server.Use(middleware.NewJWTAuthMiddleware(middleware.JWTAuthConfig{
+		Secret:      c.Jwt.Secret,
+		TokenHeader: c.Auth.TokenHeader,
+		WhiteList: []string{
+			"/login",
+			"/logout",
+			"/auth/login",
+			"/auth/logout",
+			"/auth/refresh",
+			"/captcha/*",
+			"/resource/sms/code",
+			"/health",
+			"/health/ready",
+			"/health/live",
+			"/health/startup",
+		},
+	}).Handle)
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
