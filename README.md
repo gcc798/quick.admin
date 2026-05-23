@@ -6,8 +6,8 @@
 
 当前仓库更偏向工程骨架与实现对照集合，重点是：
 
-- 保留 `native` 作为业务基线
-- 提供 `gozero`、`kratos` 两套重写实现
+- 保留 `native` 作为基准工程和业务基线
+- 提供 `gozero`、`kratos` 两套重写实现，其同步更新进度可能相对 `native` 滞后
 - 提供 `web-react` 作为当前推荐的 React 前端工程
 - 保留 `web` 作为历史 Vue 前端工程，当前暂时废弃
 
@@ -15,11 +15,13 @@
 
 - `native/`
   - 原始后端实现
-  - 作为业务基线和对照参考
+  - 作为基准工程、业务基线和对照参考
 - `gozero/`
   - 基于 go-zero 的后端重写版本
+  - 同步更新进度可能相对 `native` 滞后
 - `kratos/`
   - 基于 Kratos 的后端重写版本
+  - 同步更新进度可能相对 `native` 滞后
 - `web-react/`
   - React + TypeScript 前端工程
   - 当前推荐用于前端开发和联调
@@ -44,7 +46,7 @@ quick.admin/
 
 ### `native/`
 
-原始业务后端。
+原始业务后端，也是当前仓库的基准工程。
 
 特点：
 
@@ -59,6 +61,7 @@ quick.admin/
 
 - 保留了 `sys-api` / `sys-rpc` 分层
 - 主要用于和原始实现做框架迁移对照
+- 功能同步和接口更新可能相对 `native` 滞后
 
 ### `kratos/`
 
@@ -67,6 +70,7 @@ quick.admin/
 特点：
 
 - 当前采用 monorepo 结构
+- 功能同步和接口更新可能相对 `native` 滞后
 - 主要服务位于：
   - `kratos/application/sys-api`
   - `kratos/application/sys-rpc`
@@ -100,8 +104,8 @@ quick.admin/
 
 ## 当前约定
 
-- `native/` 作为业务基线
-- `gozero/` 和 `kratos/` 是两套独立重写实现
+- `native/` 作为基准工程和业务基线
+- `gozero/` 和 `kratos/` 是两套独立重写实现，同步更新进度可能相对 `native/` 滞后
 - `web-react/` 是当前推荐前端工程
 - `web/` 是历史 Vue 版本，当前暂时废弃
 - 前端联调时，需要明确当前对接的是哪一套后端
