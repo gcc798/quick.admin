@@ -9,6 +9,7 @@ import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { OrgRecord } from '@/types/system';
 import { orgApi } from '@/api/org';
+import { isZeroStatus, toOptionalNumber } from '@/utils/number';
 import { OrgModal } from './OrgModal';
 
 function collectKeys(nodes: OrgRecord[]): SnowflakeId[] {
@@ -70,7 +71,7 @@ function filterTree(
           node.orgName.toLowerCase().includes(normalizedName)) &&
         (!normalizedCode ||
           (node.orgCode ?? '').toLowerCase().includes(normalizedCode)) &&
-        (status === undefined || node.status === status);
+        (status === undefined || toOptionalNumber(node.status) === status);
 
       if (selfMatch || children.length) {
         return {
@@ -129,8 +130,8 @@ export default function OrgPage() {
         dataIndex: 'status',
         width: 100,
         render: (value) => (
-          <Tag color={value === 0 ? 'success' : 'error'}>
-            {value === 0 ? '正常' : '停用'}
+          <Tag color={isZeroStatus(value) ? 'success' : 'error'}>
+            {isZeroStatus(value) ? '正常' : '停用'}
           </Tag>
         ),
       },
@@ -184,7 +185,7 @@ export default function OrgPage() {
   );
 
   const handleSearch = (values: Record<string, unknown> = form.getFieldsValue()) => {
-    const status = typeof values.status === 'number' ? values.status : undefined;
+    const status = toOptionalNumber(values.status);
     const filtered = filterTree(
       fullTree,
       typeof values.orgName === 'string' ? values.orgName : '',

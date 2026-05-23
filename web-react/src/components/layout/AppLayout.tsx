@@ -15,6 +15,7 @@ import { useAppStore } from '@/store/app';
 import { useAuthStore } from '@/store/auth';
 import { getMenuIconNode } from '@/utils/icons';
 import { findFirstNavigablePath, isMenuHidden, joinMenuPath } from '@/utils/menu';
+import { isNumericValue } from '@/utils/number';
 
 const { Header, Sider, Content } = Layout;
 
@@ -41,7 +42,7 @@ function findMenuTrail(
     const fullPath = joinMenuPath(parentPath, menu.path);
     const nextTrail = [...trail, menu];
 
-    if (fullPath === pathname && menu.menuType !== 2) {
+    if (fullPath === pathname && !isNumericValue(menu.menuType, 2)) {
       return nextTrail;
     }
 
@@ -60,12 +61,12 @@ function buildMenuItems(
   parentPath = '',
 ): ItemType[] {
   return menuTree
-    .filter((menu) => !isMenuHidden(menu) && menu.menuType !== 2)
+    .filter((menu) => !isMenuHidden(menu) && !isNumericValue(menu.menuType, 2))
     .map((menu) => {
       const fullPath = joinMenuPath(parentPath, menu.path);
       const icon = getMenuIconNode(menu.icon);
       const targetPath =
-        menu.menuType === 1
+        isNumericValue(menu.menuType, 1)
           ? fullPath
           : findFirstNavigablePath(menu.children ?? [], fullPath) ?? fullPath;
       const childItems = buildMenuItems(menu.children ?? [], navigate, fullPath);

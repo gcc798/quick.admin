@@ -7,6 +7,7 @@ import type { DictRecord } from '@/types/system';
 import { dictApi } from '@/api/dict';
 import { BasicModal } from '@/components/common/BasicModal';
 import { TableAction } from '@/components/common/TableAction';
+import { isZeroStatus } from '@/utils/number';
 import { DictModal } from './DictModal';
 
 interface DictSubItemsModalProps {
@@ -63,8 +64,8 @@ export function DictSubItemsModal({
       dataIndex: 'status',
       width: 100,
       render: (value) => (
-        <Tag color={value === 0 ? 'success' : 'error'}>
-          {value === 0 ? '正常' : '停用'}
+        <Tag color={isZeroStatus(value) ? 'success' : 'error'}>
+          {isZeroStatus(value) ? '正常' : '停用'}
         </Tag>
       ),
     },

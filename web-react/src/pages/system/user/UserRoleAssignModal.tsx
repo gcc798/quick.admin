@@ -6,6 +6,7 @@ import { BasicModal } from '@/components/common/BasicModal';
 import { roleApi } from '@/api/role';
 import type { SnowflakeId } from '@/types/api';
 import type { RoleRecord, UserRecord } from '@/types/system';
+import { isZeroStatus } from '@/utils/number';
 
 interface UserRoleAssignModalProps {
   open: boolean;
@@ -102,8 +103,8 @@ export function UserRoleAssignModal({
       dataIndex: 'status',
       width: 90,
       render: (value) => (
-        <Tag color={value === 0 ? 'success' : 'error'}>
-          {value === 0 ? '正常' : '停用'}
+        <Tag color={isZeroStatus(value) ? 'success' : 'error'}>
+          {isZeroStatus(value) ? '正常' : '停用'}
         </Tag>
       ),
     },

@@ -11,6 +11,7 @@ import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { UserRecord } from '@/types/system';
 import { userApi } from '@/api/user';
+import { isZeroStatus } from '@/utils/number';
 import { UserRoleAssignModal } from './UserRoleAssignModal';
 import { UserModal } from './UserModal';
 
@@ -61,8 +62,8 @@ export default function UserPage() {
       dataIndex: 'status',
       width: 100,
       render: (value) => (
-        <Tag color={value === 0 ? 'success' : 'error'}>
-          {value === 0 ? '正常' : '停用'}
+        <Tag color={isZeroStatus(value) ? 'success' : 'error'}>
+          {isZeroStatus(value) ? '正常' : '停用'}
         </Tag>
       ),
     },

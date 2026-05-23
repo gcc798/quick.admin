@@ -7,6 +7,7 @@ import { PermissionGate } from '@/components/common/PermissionGate';
 import { TableAction } from '@/components/common/TableAction';
 import type { SnowflakeId } from '@/types/api';
 import type { ApiPermissionRecord } from '@/types/system';
+import { isNumericValue, isZeroStatus, toNumberValue } from '@/utils/number';
 import { ApiPermissionModal } from './ApiPermissionModal';
 
 function collectKeys(nodes: ApiPermissionRecord[]): SnowflakeId[] {
@@ -74,8 +75,9 @@ export default function ApiPermissionPage() {
       dataIndex: 'nodeType',
       width: 100,
       render: (value) => {
-        const label = value === 0 ? '模块' : value === 1 ? '分组' : '权限';
-        const color = value === 0 ? 'blue' : value === 1 ? 'cyan' : 'green';
+        const nodeType = toNumberValue(value);
+        const label = nodeType === 0 ? '模块' : nodeType === 1 ? '分组' : '权限';
+        const color = nodeType === 0 ? 'blue' : nodeType === 1 ? 'cyan' : 'green';
         return <Tag color={color}>{label}</Tag>;
       },
     },
@@ -86,7 +88,7 @@ export default function ApiPermissionPage() {
       title: '状态',
       dataIndex: 'status',
       width: 100,
-      render: (value) => <Tag color={value === 0 ? 'success' : 'error'}>{value === 0 ? '正常' : '停用'}</Tag>,
+      render: (value) => <Tag color={isZeroStatus(value) ? 'success' : 'error'}>{isZeroStatus(value) ? '正常' : '停用'}</Tag>,
     },
     {
       title: '操作',
@@ -110,7 +112,7 @@ export default function ApiPermissionPage() {
               key: 'addChild',
               label: '新增子级',
               permission: 'api_permission.create',
-              hidden: record.nodeType === 2,
+              hidden: isNumericValue(record.nodeType, 2),
               onClick: () => {
                 setCurrentId(undefined);
                 setParentId(record.id);

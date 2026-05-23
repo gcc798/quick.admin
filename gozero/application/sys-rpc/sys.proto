@@ -318,6 +318,7 @@ message Menu {
   string created_time = 17;
   string updated_time = 18;
   repeated Menu children = 19;
+  int64 update_by = 20;
 }
 
 message MenuReq {

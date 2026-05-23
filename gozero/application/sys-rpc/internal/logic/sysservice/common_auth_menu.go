@@ -55,6 +55,7 @@ type menuRow struct {
 	Icon        sql.NullString `db:"icon"`
 	Remark      sql.NullString `db:"remark"`
 	CreateBy    sql.NullInt64  `db:"create_by"`
+	UpdateBy    sql.NullInt64  `db:"update_by"`
 	CreatedTime sql.NullTime   `db:"created_time"`
 	UpdatedTime sql.NullTime   `db:"updated_time"`
 }
@@ -264,7 +265,7 @@ func getUserByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*pb
 func getAllMenus(ctx context.Context, svcCtx *svc.ServiceContext) ([]menuRow, error) {
 	var rows []menuRow
 	err := svcCtx.DB.QueryRowsCtx(ctx, &rows, `
-		select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, created_time, updated_time
+		select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, update_by, created_time, updated_time
 		from public.s_menu where status = 0 order by sort asc, id asc
 	`)
 	return rows, err
@@ -286,7 +287,7 @@ func getUserMenus(ctx context.Context, svcCtx *svc.ServiceContext, userId int64)
 	}
 	var rows []menuRow
 	err := svcCtx.DB.QueryRowsCtx(ctx, &rows, `
-		select distinct m.id, m.menu_name, m.parent_id, m.sort, m.path, m.component, m.query, m.is_frame, m.is_cache, m.menu_type, m.visible, m.status, m.perms, m.icon, m.remark, m.create_by, m.created_time, m.updated_time
+		select distinct m.id, m.menu_name, m.parent_id, m.sort, m.path, m.component, m.query, m.is_frame, m.is_cache, m.menu_type, m.visible, m.status, m.perms, m.icon, m.remark, m.create_by, m.update_by, m.created_time, m.updated_time
 		from public.s_menu m
 		join public.m_role_menu rm on rm.menu_id = m.id
 		join public.m_user_role mur on mur.role_id = rm.role_id
@@ -329,7 +330,7 @@ func withAncestorMenus(ctx context.Context, svcCtx *svc.ServiceContext, menus []
 			args[i] = id
 		}
 		query := fmt.Sprintf(`
-			select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, created_time, updated_time
+			select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, update_by, created_time, updated_time
 			from public.s_menu
 			where id in (%s) and status = 0
 		`, strings.Join(placeholders, ", "))
@@ -369,7 +370,7 @@ func withAncestorMenus(ctx context.Context, svcCtx *svc.ServiceContext, menus []
 func getMenuByID(ctx context.Context, svcCtx *svc.ServiceContext, id int64) (*pb.Menu, error) {
 	var row menuRow
 	err := svcCtx.DB.QueryRowCtx(ctx, &row, `
-		select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, created_time, updated_time
+		select id, menu_name, parent_id, sort, path, component, query, is_frame, is_cache, menu_type, visible, status, perms, icon, remark, create_by, update_by, created_time, updated_time
 		from public.s_menu where id = $1 limit 1
 	`, id)
 	if err != nil {
@@ -420,6 +421,7 @@ func toMenuPB(row menuRow) *pb.Menu {
 		Icon:        nullString(row.Icon),
 		Remark:      nullString(row.Remark),
 		CreateBy:    nullInt64(row.CreateBy),
+		UpdateBy:    nullInt64(row.UpdateBy),
 		CreatedTime: nullTime(row.CreatedTime),
 		UpdatedTime: nullTime(row.UpdatedTime),
 	}

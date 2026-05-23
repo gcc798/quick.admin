@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { menuApi } from '@/api/menu';
 import type { MenuRecord } from '@/types/menu';
-import { extractPermissions } from '@/utils/menu';
+import { extractPermissions, normalizeMenuTree } from '@/utils/menu';
 import { hasPermission as checkPermission } from '@/utils/permissions';
 
 interface PermissionState {
@@ -32,7 +32,7 @@ export const usePermissionStore = create<PermissionState>()(
         set({ isMenuLoading: true, menuLoadError: '' });
 
         try {
-          const menuTree = await menuApi.getUserMenuTree();
+          const menuTree = normalizeMenuTree(await menuApi.getUserMenuTree());
           set({
             menuTree,
             permissions: extractPermissions(menuTree),
@@ -66,6 +66,20 @@ export const usePermissionStore = create<PermissionState>()(
     {
       name: 'web-react-permission',
       storage: createJSONStorage(() => sessionStorage),
+      version: 2,
+      migrate: (persistedState) => {
+        const state = (persistedState ?? {}) as Partial<PermissionState>;
+        const menuTree = normalizeMenuTree(state.menuTree);
+
+        return {
+          ...state,
+          menuTree,
+          permissions: extractPermissions(menuTree),
+          isMenuLoaded: menuTree.length > 0 ? state.isMenuLoaded : false,
+          isMenuLoading: false,
+          menuLoadError: '',
+        } satisfies Partial<PermissionState>;
+      },
     },
   ),
 );

@@ -1,6 +1,47 @@
 import type { ItemType } from 'antd/es/menu/interface';
 import type { MenuRecord, MenuRouteRecord } from '@/types/menu';
 import { getMenuIconNode } from './icons';
+import { isNumericValue, toNumberValue, toOptionalNumber } from './number';
+
+function toStringValue(value: unknown) {
+  return typeof value === 'string' ? value : '';
+}
+
+export function normalizeMenuRecord(raw: unknown): MenuRecord {
+  const source = (raw ?? {}) as Record<string, unknown>;
+  const children = normalizeMenuTree(source.children);
+  const menu: MenuRecord = {
+    id: (source.id ?? '') as MenuRecord['id'],
+    menuName: toStringValue(source.menuName),
+    parentId: (source.parentId ?? 0) as MenuRecord['parentId'],
+    sort: toOptionalNumber(source.sort),
+    path: toStringValue(source.path),
+    component: toStringValue(source.component),
+    query: toStringValue(source.query),
+    isFrame: toOptionalNumber(source.isFrame),
+    isCache: toOptionalNumber(source.isCache),
+    menuType: toNumberValue(source.menuType),
+    visible: toOptionalNumber(source.visible),
+    status: toOptionalNumber(source.status),
+    perms: toStringValue(source.perms),
+    icon: toStringValue(source.icon),
+    remark: toStringValue(source.remark),
+  };
+
+  if (children.length > 0) {
+    menu.children = children;
+  }
+
+  return menu;
+}
+
+export function normalizeMenuTree(raw: unknown): MenuRecord[] {
+  if (!Array.isArray(raw)) {
+    return [];
+  }
+
+  return raw.map(normalizeMenuRecord);
+}
 
 export function joinMenuPath(parentPath: string, currentPath: string) {
   if (!currentPath) {
@@ -16,7 +57,7 @@ export function joinMenuPath(parentPath: string, currentPath: string) {
 }
 
 export function isMenuHidden(menu: MenuRecord) {
-  return menu.visible === 1 || menu.status === 1;
+  return isNumericValue(menu.visible, 1) || isNumericValue(menu.status, 1);
 }
 
 export function findFirstNavigablePath(
@@ -24,13 +65,13 @@ export function findFirstNavigablePath(
   parentPath = '',
 ): string | null {
   for (const menu of menuTree) {
-    if (isMenuHidden(menu) || menu.menuType === 2) {
+    if (isMenuHidden(menu) || isNumericValue(menu.menuType, 2)) {
       continue;
     }
 
     const fullPath = joinMenuPath(parentPath, menu.path);
 
-    if (menu.menuType === 1) {
+    if (isNumericValue(menu.menuType, 1)) {
       return fullPath;
     }
 
@@ -77,7 +118,7 @@ export function flattenLeafMenus(
 
     const fullPath = joinMenuPath(parentPath, menu.path);
 
-    if (menu.menuType === 1) {
+    if (isNumericValue(menu.menuType, 1)) {
       routes.push({ ...menu, fullPath });
     }
 
@@ -94,7 +135,7 @@ export function buildSidebarMenus(
   parentPath = '',
 ): ItemType[] {
   return menuTree
-    .filter((menu) => !isMenuHidden(menu) && menu.menuType !== 2)
+    .filter((menu) => !isMenuHidden(menu) && !isNumericValue(menu.menuType, 2))
     .map((menu) => {
       const fullPath = joinMenuPath(parentPath, menu.path);
       const icon = getMenuIconNode(menu.icon);

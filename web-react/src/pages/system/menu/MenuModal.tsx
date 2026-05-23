@@ -8,6 +8,7 @@ import { apiPermissionApi } from '@/api/apiPermission';
 import { menuApi } from '@/api/menu';
 import { BasicForm } from '@/components/common/BasicForm';
 import { BasicModal } from '@/components/common/BasicModal';
+import { isNumericValue } from '@/utils/number';
 
 interface MenuModalProps {
   open: boolean;
@@ -71,7 +72,7 @@ export function MenuModal({
         name: 'icon',
         label: '菜单图标',
         component: 'IconPicker',
-        hidden: (values) => values.menuType === 2,
+        hidden: (values) => isNumericValue(values.menuType, 2),
       },
       {
         name: 'menuName',
@@ -90,28 +91,28 @@ export function MenuModal({
         name: 'path',
         label: '路由地址',
         component: 'Input',
-        hidden: (values) => values.menuType === 2,
+        hidden: (values) => isNumericValue(values.menuType, 2),
         helpMessage: '例如：system 或 user',
       },
       {
         name: 'component',
         label: '组件路径',
         component: 'Input',
-        hidden: (values) => values.menuType !== 1,
+        hidden: (values) => !isNumericValue(values.menuType, 1),
         helpMessage: '例如：system/user/index',
       },
       {
         name: 'perms',
         label: '权限标识',
         component: 'Select',
-        hidden: (values) => values.menuType === 0,
+        hidden: (values) => isNumericValue(values.menuType, 0),
         props: {
           allowClear: true,
           showSearch: true,
           optionFilterProp: 'label',
           placeholder: '请选择 API 权限标识',
           options: apiPermissions
-            .filter((item) => item.status === 0)
+            .filter((item) => isNumericValue(item.status, 0))
             .map((item) => ({
               label: `${item.code} - ${item.name}`,
               value: item.code,
@@ -122,14 +123,14 @@ export function MenuModal({
         name: 'query',
         label: '路由参数',
         component: 'Input',
-        hidden: (values) => values.menuType !== 1,
+        hidden: (values) => !isNumericValue(values.menuType, 1),
       },
       {
         name: 'isFrame',
         label: '是否外链',
         component: 'RadioGroup',
         initialValue: 0,
-        hidden: (values) => values.menuType === 2,
+        hidden: (values) => isNumericValue(values.menuType, 2),
         props: {
           options: [
             { label: '否', value: 0 },
@@ -142,7 +143,7 @@ export function MenuModal({
         label: '是否缓存',
         component: 'RadioGroup',
         initialValue: 0,
-        hidden: (values) => values.menuType !== 1,
+        hidden: (values) => !isNumericValue(values.menuType, 1),
         props: {
           options: [
             { label: '不缓存', value: 0 },
@@ -155,7 +156,7 @@ export function MenuModal({
         label: '显示状态',
         component: 'RadioGroup',
         initialValue: 0,
-        hidden: (values) => values.menuType === 2,
+        hidden: (values) => isNumericValue(values.menuType, 2),
         props: {
           options: [
             { label: '显示', value: 0 },

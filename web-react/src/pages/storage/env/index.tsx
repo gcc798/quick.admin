@@ -10,6 +10,7 @@ import type { SnowflakeId } from '@/types/api';
 import type { FormSchema } from '@/types/form';
 import type { StorageEnvRecord } from '@/types/system';
 import { storageEnvApi } from '@/api/storageenv';
+import { isZeroStatus } from '@/utils/number';
 import { EnvModal } from './EnvModal';
 
 const searchSchemas: FormSchema[] = [
@@ -105,8 +106,8 @@ export default function StorageEnvPage() {
       dataIndex: 'status',
       width: 100,
       render: (value) => (
-        <Tag color={value === 0 ? 'success' : 'error'}>
-          {value === 0 ? '正常' : '停用'}
+        <Tag color={isZeroStatus(value) ? 'success' : 'error'}>
+          {isZeroStatus(value) ? '正常' : '停用'}
         </Tag>
       ),
     },

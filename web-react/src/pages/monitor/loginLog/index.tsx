@@ -7,6 +7,7 @@ import { PermissionGate } from '@/components/common/PermissionGate';
 import type { FormSchema } from '@/types/form';
 import type { LoginLogRecord } from '@/types/system';
 import { loginLogApi } from '@/api/loginlog';
+import { isZeroStatus } from '@/utils/number';
 
 const searchSchemas: FormSchema[] = [
   {
@@ -51,8 +52,8 @@ export default function LoginLogPage() {
       dataIndex: 'status',
       width: 100,
       render: (value) => (
-        <Tag color={value === 0 ? 'success' : 'error'}>
-          {value === 0 ? '成功' : '失败'}
+        <Tag color={isZeroStatus(value) ? 'success' : 'error'}>
+          {isZeroStatus(value) ? '成功' : '失败'}
         </Tag>
       ),
     },

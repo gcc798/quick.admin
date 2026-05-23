@@ -3730,6 +3730,7 @@ type Menu struct {
 	CreatedTime   string                 `protobuf:"bytes,17,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
 	UpdatedTime   string                 `protobuf:"bytes,18,opt,name=updated_time,json=updatedTime,proto3" json:"updated_time,omitempty"`
 	Children      []*Menu                `protobuf:"bytes,19,rep,name=children,proto3" json:"children,omitempty"`
+	UpdateBy      int64                  `protobuf:"varint,20,opt,name=update_by,json=updateBy,proto3" json:"update_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3895,6 +3896,13 @@ func (x *Menu) GetChildren() []*Menu {
 		return x.Children
 	}
 	return nil
+}
+
+func (x *Menu) GetUpdateBy() int64 {
+	if x != nil {
+		return x.UpdateBy
+	}
+	return 0
 }
 
 type MenuReq struct {
@@ -8357,7 +8365,7 @@ const file_sys_proto_rawDesc = "" +
 	"\arecords\x18\x01 \x03(\v2\a.pb.OrgR\arecords\x12 \n" +
 	"\x04page\x18\x02 \x01(\v2\f.pb.PageInfoR\x04page\"0\n" +
 	"\vOrgTreeResp\x12!\n" +
-	"\arecords\x18\x01 \x03(\v2\a.pb.OrgR\arecords\"\xfc\x03\n" +
+	"\arecords\x18\x01 \x03(\v2\a.pb.OrgR\arecords\"\x99\x04\n" +
 	"\x04Menu\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tmenu_name\x18\x02 \x01(\tR\bmenuName\x12\x1b\n" +
@@ -8378,7 +8386,8 @@ const file_sys_proto_rawDesc = "" +
 	"\tcreate_by\x18\x10 \x01(\x03R\bcreateBy\x12!\n" +
 	"\fcreated_time\x18\x11 \x01(\tR\vcreatedTime\x12!\n" +
 	"\fupdated_time\x18\x12 \x01(\tR\vupdatedTime\x12$\n" +
-	"\bchildren\x18\x13 \x03(\v2\b.pb.MenuR\bchildren\"\xb0\x03\n" +
+	"\bchildren\x18\x13 \x03(\v2\b.pb.MenuR\bchildren\x12\x1b\n" +
+	"\tupdate_by\x18\x14 \x01(\x03R\bupdateBy\"\xb0\x03\n" +
 	"\aMenuReq\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1b\n" +
 	"\tmenu_name\x18\x02 \x01(\tR\bmenuName\x12\x1b\n" +

@@ -7,6 +7,7 @@ import { TableAction } from '@/components/common/TableAction';
 import type { SnowflakeId } from '@/types/api';
 import { getMenuIconNode } from '@/utils/icons';
 import type { MenuRecord } from '@/types/menu';
+import { isNumericValue, isZeroStatus, toNumberValue } from '@/utils/number';
 import { menuApi } from '@/api/menu';
 import { MenuModal } from './MenuModal';
 
@@ -65,8 +66,9 @@ export default function MenuPage() {
       dataIndex: 'menuType',
       width: 100,
       render: (value) => {
-        const color = value === 0 ? 'blue' : value === 1 ? 'green' : 'orange';
-        const text = value === 0 ? '目录' : value === 1 ? '菜单' : '按钮';
+        const menuType = toNumberValue(value);
+        const color = menuType === 0 ? 'blue' : menuType === 1 ? 'green' : 'orange';
+        const text = menuType === 0 ? '目录' : menuType === 1 ? '菜单' : '按钮';
         return <Tag color={color}>{text}</Tag>;
       },
     },
@@ -93,8 +95,8 @@ export default function MenuPage() {
       dataIndex: 'status',
       width: 100,
       render: (value) => (
-        <Tag color={value === 0 ? 'success' : 'error'}>
-          {value === 0 ? '正常' : '停用'}
+        <Tag color={isZeroStatus(value) ? 'success' : 'error'}>
+          {isZeroStatus(value) ? '正常' : '停用'}
         </Tag>
       ),
     },
@@ -129,7 +131,7 @@ export default function MenuPage() {
               key: 'addChild',
               label: '新增子菜单',
               permission: 'menu.create',
-              hidden: record.menuType === 2,
+              hidden: isNumericValue(record.menuType, 2),
               onClick: () => {
                 setCurrentMenuId(undefined);
                 setParentId(record.id);

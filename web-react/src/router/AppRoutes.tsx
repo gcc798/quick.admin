@@ -10,6 +10,7 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { useAuthStore } from '@/store/auth';
 import { usePermissionStore } from '@/store/permission';
 import { findFirstNavigablePath, flattenLeafMenus, isMenuHidden, joinMenuPath } from '@/utils/menu';
+import { isNumericValue } from '@/utils/number';
 
 const LoginPage = lazy(() => import('@/pages/auth/login'));
 const DashboardPage = lazy(() => import('@/pages/dashboard'));
@@ -106,7 +107,7 @@ function buildDirectoryRedirectRoutes(
 
     const fullPath = joinMenuPath(parentPath, menu.path);
 
-    if (menu.menuType === 0 && menu.children?.length) {
+    if (isNumericValue(menu.menuType, 0) && menu.children?.length) {
       const targetPath = findFirstNavigablePath(menu.children, fullPath);
 
       if (targetPath) {

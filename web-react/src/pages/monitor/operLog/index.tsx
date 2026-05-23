@@ -7,6 +7,7 @@ import { PermissionGate } from '@/components/common/PermissionGate';
 import type { FormSchema } from '@/types/form';
 import type { OperLogRecord } from '@/types/system';
 import { operLogApi } from '@/api/operlog';
+import { isZeroStatus } from '@/utils/number';
 
 const searchSchemas: FormSchema[] = [
   {
@@ -74,8 +75,8 @@ export default function OperLogPage() {
       dataIndex: 'status',
       width: 100,
       render: (value) => (
-        <Tag color={value === '0' || value === 0 ? 'success' : 'error'}>
-          {value === '0' || value === 0 ? '成功' : '失败'}
+        <Tag color={isZeroStatus(value) ? 'success' : 'error'}>
+          {isZeroStatus(value) ? '成功' : '失败'}
         </Tag>
       ),
     },
@@ -154,8 +155,8 @@ export default function OperLogPage() {
           <Descriptions.Item label="IP">{currentRecord?.operIp}</Descriptions.Item>
           <Descriptions.Item label="地点">{currentRecord?.operLocation || '-'}</Descriptions.Item>
           <Descriptions.Item label="状态">
-            <Tag color={currentRecord?.status === '0' || currentRecord?.status === 0 ? 'success' : 'error'}>
-              {currentRecord?.status === '0' || currentRecord?.status === 0 ? '成功' : '失败'}
+            <Tag color={isZeroStatus(currentRecord?.status) ? 'success' : 'error'}>
+              {isZeroStatus(currentRecord?.status) ? '成功' : '失败'}
             </Tag>
           </Descriptions.Item>
           <Descriptions.Item label="时间" span={2}>

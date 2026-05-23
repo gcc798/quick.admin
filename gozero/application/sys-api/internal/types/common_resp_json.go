@@ -63,7 +63,10 @@ func normalizeResponseValue(value interface{}) interface{} {
 }
 
 func normalizeProtoMessage(msg proto.Message) interface{} {
-	raw, err := protojson.MarshalOptions{UseProtoNames: false}.Marshal(msg)
+	raw, err := protojson.MarshalOptions{
+		UseProtoNames:   false,
+		EmitUnpopulated: true,
+	}.Marshal(msg)
 	if err != nil {
 		return msg
 	}
