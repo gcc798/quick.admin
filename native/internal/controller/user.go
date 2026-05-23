@@ -3,14 +3,14 @@ package controller
 import (
 	"strconv"
 
-	"github.com/gcc798/nai-tizi/internal/container"
-	"github.com/gcc798/nai-tizi/internal/domain/model"
-	"github.com/gcc798/nai-tizi/internal/domain/request"
-	"github.com/gcc798/nai-tizi/internal/domain/response"
-	"github.com/gcc798/nai-tizi/internal/service"
-	"github.com/gcc798/nai-tizi/internal/utils"
-	_ "github.com/gcc798/nai-tizi/internal/utils/pagination"
-	"github.com/gcc798/nai-tizi/internal/validator"
+	"github.com/gcc798/quick.admin/internal/container"
+	"github.com/gcc798/quick.admin/internal/domain/model"
+	"github.com/gcc798/quick.admin/internal/domain/request"
+	"github.com/gcc798/quick.admin/internal/domain/response"
+	"github.com/gcc798/quick.admin/internal/service"
+	"github.com/gcc798/quick.admin/internal/utils"
+	_ "github.com/gcc798/quick.admin/internal/utils/pagination"
+	"github.com/gcc798/quick.admin/internal/validator"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	logging "github.com/gcc798/nai-tizi/internal/logger"
+	logging "github.com/gcc798/quick.admin/internal/logger"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 	"gopkg.in/gomail.v2"

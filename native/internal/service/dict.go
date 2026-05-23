@@ -5,10 +5,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gcc798/nai-tizi/internal/domain/model"
-	"github.com/gcc798/nai-tizi/internal/domain/request"
-	logging "github.com/gcc798/nai-tizi/internal/logger"
-	"github.com/gcc798/nai-tizi/internal/utils/pagination"
+	"github.com/gcc798/quick.admin/internal/domain/model"
+	"github.com/gcc798/quick.admin/internal/domain/request"
+	logging "github.com/gcc798/quick.admin/internal/logger"
+	"github.com/gcc798/quick.admin/internal/utils/pagination"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )

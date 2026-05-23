@@ -1,5 +1,5 @@
 -- Development seed data for the upgraded scaffold.
--- Safe to rerun in the nai-tizi development database.
+-- Safe to rerun in the quick-admin development database.
 
 BEGIN;
 

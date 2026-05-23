@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gcc798/nai-tizi/internal/container"
+	"github.com/gcc798/quick.admin/internal/container"
 	"github.com/gin-gonic/gin"
 )
 

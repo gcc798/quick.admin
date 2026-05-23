@@ -56,7 +56,7 @@ db.Create(user)
 如果需要提前生成ID：
 
 ```go
-import "github.com/gcc798/nai-tizi/internal/utils/idgen"
+import "github.com/gcc798/quick.admin/internal/utils/idgen"
 
 // 生成ID（返回错误）
 id, err := idgen.NextID()

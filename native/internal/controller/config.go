@@ -3,11 +3,11 @@ package controller
 import (
 	"strconv"
 
-	"github.com/gcc798/nai-tizi/internal/container"
-	"github.com/gcc798/nai-tizi/internal/domain/request"
-	"github.com/gcc798/nai-tizi/internal/domain/response"
-	"github.com/gcc798/nai-tizi/internal/service"
-	_ "github.com/gcc798/nai-tizi/internal/utils/pagination"
+	"github.com/gcc798/quick.admin/internal/container"
+	"github.com/gcc798/quick.admin/internal/domain/request"
+	"github.com/gcc798/quick.admin/internal/domain/response"
+	"github.com/gcc798/quick.admin/internal/service"
+	_ "github.com/gcc798/quick.admin/internal/utils/pagination"
 	"github.com/gin-gonic/gin"
 )
 

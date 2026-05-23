@@ -1,8 +1,8 @@
 package response
 
 import (
-	"github.com/gcc798/nai-tizi/internal/domain/model"
-	"github.com/gcc798/nai-tizi/internal/utils"
+	"github.com/gcc798/quick.admin/internal/domain/model"
+	"github.com/gcc798/quick.admin/internal/utils"
 )
 
 // LoginLogResponse 登录日志响应

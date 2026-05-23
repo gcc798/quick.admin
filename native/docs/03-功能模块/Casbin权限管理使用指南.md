@@ -81,7 +81,7 @@ m = g(r.sub, p.sub, r.dom) && r.dom == p.dom && keyMatch2(r.obj, p.obj) && keyMa
 ### 1. 初始化数据库
 执行 SQL 脚本：
 ```bash
-psql -U postgres -d nai-tizi -f scripts/sql/002_init_rbac_tables.sql
+psql -U postgres -d quick.admin -f scripts/sql/002_init_rbac_tables.sql
 ```
 
 ### 2. 默认数据

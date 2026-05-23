@@ -4,7 +4,7 @@
 
 ## 项目是什么
 
-`nai-tizi` 是一个后台系统脚手架工程。本质是一套后端业务逻辑，分别用三套 Go 后端实现承载：
+`quick.admin` 是一个后台系统脚手架工程。本质是一套后端业务逻辑，分别用三套 Go 后端实现承载：
 
 - `native/`：开发者从零手搓的原生 Go 实现，是业务基线。
 - `kratos/`：基于 Kratos 开源微服务框架的实现。
@@ -23,7 +23,7 @@
 ## 目录速览
 
 ```text
-nai-tizi/
+quick.admin/
 ├── native/      # 手搓原生 Go 后端，业务基线
 ├── kratos/      # Kratos 微服务框架实现
 ├── gozero/      # go-zero 微服务框架实现

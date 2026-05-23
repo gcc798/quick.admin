@@ -3,7 +3,7 @@ server:
   port: 9009
 
 database:
-  dsn: "host=127.0.0.1 user=postgres password=your-password dbname=nai-tizi port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+  dsn: "host=127.0.0.1 user=postgres password=your-password dbname=quick-admin port=5432 sslmode=disable TimeZone=Asia/Shanghai"
   maxOpenConns: 100
   maxIdleConns: 10
   connMaxLifetimeMinutes: 60

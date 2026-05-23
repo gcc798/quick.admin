@@ -15,9 +15,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/gcc798/nai-tizi/internal/config"
-	"github.com/gcc798/nai-tizi/internal/domain/model"
-	"github.com/gcc798/nai-tizi/internal/utils"
+	"github.com/gcc798/quick.admin/internal/config"
+	"github.com/gcc798/quick.admin/internal/domain/model"
+	"github.com/gcc798/quick.admin/internal/utils"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

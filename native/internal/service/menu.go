@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/gcc798/nai-tizi/internal/domain/model"
+	"github.com/gcc798/quick.admin/internal/domain/model"
 	"gorm.io/gorm"
 )
 

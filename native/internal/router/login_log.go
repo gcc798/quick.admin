@@ -1,9 +1,9 @@
 package router
 
 import (
-	"github.com/gcc798/nai-tizi/internal/constants"
-	"github.com/gcc798/nai-tizi/internal/controller"
-	"github.com/gcc798/nai-tizi/internal/middleware"
+	"github.com/gcc798/quick.admin/internal/constants"
+	"github.com/gcc798/quick.admin/internal/controller"
+	"github.com/gcc798/quick.admin/internal/middleware"
 	"github.com/gin-gonic/gin"
 )
 

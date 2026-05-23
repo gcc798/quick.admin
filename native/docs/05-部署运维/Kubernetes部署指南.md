@@ -32,46 +32,46 @@
 
 ```bash
 # 1. 创建命名空间
-kubectl create namespace nai-tizi
+kubectl create namespace quick.admin
 
 # 2. 创建 Secret（从模板复制并修改）
 cp k8s/secret.yaml.example k8s/secret.yaml
 # 编辑 secret.yaml，填入真实密码
-kubectl apply -f k8s/secret.yaml -n nai-tizi
+kubectl apply -f k8s/secret.yaml -n quick.admin
 
 # 3. 创建 ConfigMap
-kubectl apply -f k8s/configmap.yaml -n nai-tizi
+kubectl apply -f k8s/configmap.yaml -n quick.admin
 
 # 4. 部署应用
-kubectl apply -f k8s/deployment.yaml -n nai-tizi
+kubectl apply -f k8s/deployment.yaml -n quick.admin
 
 # 5. 创建 Service
-kubectl apply -f k8s/service.yaml -n nai-tizi
+kubectl apply -f k8s/service.yaml -n quick.admin
 
 # 6. 创建 Ingress
-kubectl apply -f k8s/ingress.yaml -n nai-tizi
+kubectl apply -f k8s/ingress.yaml -n quick.admin
 
 # 7. 创建 HPA
-kubectl apply -f k8s/hpa.yaml -n nai-tizi
+kubectl apply -f k8s/hpa.yaml -n quick.admin
 ```
 
 ### 验证部署
 
 ```bash
 # 查看 Pod 状态
-kubectl get pods -n nai-tizi
+kubectl get pods -n quick.admin
 
 # 查看 Service
-kubectl get svc -n nai-tizi
+kubectl get svc -n quick.admin
 
 # 查看 Ingress
-kubectl get ingress -n nai-tizi
+kubectl get ingress -n quick.admin
 
 # 查看 HPA
-kubectl get hpa -n nai-tizi
+kubectl get hpa -n quick.admin
 
 # 查看 Pod 日志
-kubectl logs -f <pod-name> -n nai-tizi
+kubectl logs -f <pod-name> -n quick.admin
 ```
 
 ---
@@ -97,8 +97,8 @@ kubectl logs -f <pod-name> -n nai-tizi
 **文件：** `k8s/service.yaml`
 
 **服务类型：**
-1. **nai-tizi-api** - 主服务（端口 80）
-2. **nai-tizi-api-metrics** - Prometheus 指标服务（端口 8080）
+1. **quick.admin-api** - 主服务（端口 80）
+2. **quick.admin-api-metrics** - Prometheus 指标服务（端口 8080）
 
 ### ConfigMap 配置
 
@@ -127,7 +127,7 @@ cp k8s/secret.yaml.example k8s/secret.yaml
 vim k8s/secret.yaml
 
 # 应用配置
-kubectl apply -f k8s/secret.yaml -n nai-tizi
+kubectl apply -f k8s/secret.yaml -n quick.admin
 
 # 删除本地文件（安全考虑）
 rm k8s/secret.yaml
@@ -174,74 +174,74 @@ spec:
 
 ```bash
 # 查看所有资源
-kubectl get all -n nai-tizi
+kubectl get all -n quick.admin
 
 # 查看 Pod 详情
-kubectl describe pod <pod-name> -n nai-tizi
+kubectl describe pod <pod-name> -n quick.admin
 
 # 查看 Pod 日志
-kubectl logs -f <pod-name> -n nai-tizi
+kubectl logs -f <pod-name> -n quick.admin
 
 # 查看最近的事件
-kubectl get events -n nai-tizi --sort-by='.lastTimestamp'
+kubectl get events -n quick.admin --sort-by='.lastTimestamp'
 ```
 
 ### 更新配置
 
 ```bash
 # 更新 ConfigMap
-kubectl apply -f k8s/configmap.yaml -n nai-tizi
+kubectl apply -f k8s/configmap.yaml -n quick.admin
 
 # 更新 Secret
-kubectl apply -f k8s/secret.yaml -n nai-tizi
+kubectl apply -f k8s/secret.yaml -n quick.admin
 
 # 重启 Pod 以应用新配置
-kubectl rollout restart deployment/nai-tizi-api -n nai-tizi
+kubectl rollout restart deployment/quick.admin-api -n quick.admin
 ```
 
 ### 滚动更新
 
 ```bash
 # 更新镜像
-kubectl set image deployment/nai-tizi-api api=ghcr.io/your-org/nai-tizi:v1.1.0 -n nai-tizi
+kubectl set image deployment/quick.admin-api api=ghcr.io/your-org/quick.admin:v1.1.0 -n quick.admin
 
 # 查看滚动更新状态
-kubectl rollout status deployment/nai-tizi-api -n nai-tizi
+kubectl rollout status deployment/quick.admin-api -n quick.admin
 
 # 查看滚动更新历史
-kubectl rollout history deployment/nai-tizi-api -n nai-tizi
+kubectl rollout history deployment/quick.admin-api -n quick.admin
 
 # 回滚到上一个版本
-kubectl rollout undo deployment/nai-tizi-api -n nai-tizi
+kubectl rollout undo deployment/quick.admin-api -n quick.admin
 
 # 回滚到指定版本
-kubectl rollout undo deployment/nai-tizi-api --to-revision=2 -n nai-tizi
+kubectl rollout undo deployment/quick.admin-api --to-revision=2 -n quick.admin
 ```
 
 ### 扩缩容
 
 ```bash
 # 手动扩容
-kubectl scale deployment/nai-tizi-api --replicas=5 -n nai-tizi
+kubectl scale deployment/quick.admin-api --replicas=5 -n quick.admin
 
 # 查看 HPA 状态
-kubectl get hpa -n nai-tizi
+kubectl get hpa -n quick.admin
 
 # 查看 HPA 详情
-kubectl describe hpa nai-tizi-api-hpa -n nai-tizi
+kubectl describe hpa quick.admin-api-hpa -n quick.admin
 ```
 
 ### 调试
 
 ```bash
 # 进入 Pod
-kubectl exec -it <pod-name> -n nai-tizi -- sh
+kubectl exec -it <pod-name> -n quick.admin -- sh
 
 # 端口转发
-kubectl port-forward <pod-name> 8080:8080 -n nai-tizi
+kubectl port-forward <pod-name> 8080:8080 -n quick.admin
 
 # 查看资源使用
-kubectl top pods -n nai-tizi
+kubectl top pods -n quick.admin
 kubectl top nodes
 ```
 
@@ -260,7 +260,7 @@ scrape_configs:
     - role: pod
       namespaces:
         names:
-        - nai-tizi
+        - quick.admin
     relabel_configs:
     - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
       action: keep
@@ -298,14 +298,14 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: nai-tizi-api
-  namespace: nai-tizi
+  name: quick.admin-api
+  namespace: quick.admin
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: nai-tizi-api
-  namespace: nai-tizi
+  name: quick.admin-api
+  namespace: quick.admin
 rules:
 - apiGroups: [""]
   resources: ["configmaps", "secrets"]
@@ -314,14 +314,14 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: nai-tizi-api
-  namespace: nai-tizi
+  name: quick.admin-api
+  namespace: quick.admin
 subjects:
 - kind: ServiceAccount
-  name: nai-tizi-api
+  name: quick.admin-api
 roleRef:
   kind: Role
-  name: nai-tizi-api
+  name: quick.admin-api
   apiGroup: rbac.authorization.k8s.io
 ```
 
@@ -333,12 +333,12 @@ roleRef:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: nai-tizi-api-netpol
-  namespace: nai-tizi
+  name: quick.admin-api-netpol
+  namespace: quick.admin
 spec:
   podSelector:
     matchLabels:
-      app: nai-tizi-api
+      app: quick.admin-api
   policyTypes:
   - Ingress
   - Egress
@@ -366,7 +366,7 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: nai-tizi
+  name: quick.admin
   labels:
     pod-security.kubernetes.io/enforce: restricted
     pod-security.kubernetes.io/audit: restricted
@@ -409,10 +409,10 @@ metadata:
 ```yaml
 - name: Deploy to Kubernetes
   run: |
-    kubectl set image deployment/nai-tizi-api \
+    kubectl set image deployment/quick.admin-api \
       api=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
-      -n nai-tizi
-    kubectl rollout status deployment/nai-tizi-api -n nai-tizi
+      -n quick.admin
+    kubectl rollout status deployment/quick.admin-api -n quick.admin
 ```
 
 ---

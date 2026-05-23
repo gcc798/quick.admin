@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 
-	logging "github.com/gcc798/nai-tizi/internal/logger"
+	logging "github.com/gcc798/quick.admin/internal/logger"
 	"go.uber.org/zap"
 )
 

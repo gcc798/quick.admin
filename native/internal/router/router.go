@@ -1,10 +1,10 @@
 package router
 
 import (
-	"github.com/gcc798/nai-tizi/internal/bootstrap"
-	"github.com/gcc798/nai-tizi/internal/container"
-	"github.com/gcc798/nai-tizi/internal/middleware"
-	"github.com/gcc798/nai-tizi/internal/service"
+	"github.com/gcc798/quick.admin/internal/bootstrap"
+	"github.com/gcc798/quick.admin/internal/container"
+	"github.com/gcc798/quick.admin/internal/middleware"
+	"github.com/gcc798/quick.admin/internal/service"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	swaggerFiles "github.com/swaggo/files"

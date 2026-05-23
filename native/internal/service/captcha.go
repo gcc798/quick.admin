@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/gcc798/nai-tizi/pkg/captcha"
+	"github.com/gcc798/quick.admin/pkg/captcha"
 )
 
 // CaptchaService 验证码服务接口

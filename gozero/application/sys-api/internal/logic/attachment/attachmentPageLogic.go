@@ -6,10 +6,10 @@ package attachment
 import (
 	"context"
 
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/logic/commonutil"
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/types"
-	"github.com/gcc798/nai-tizi/application/sys-rpc/client/sysservice"
+	"github.com/gcc798/quick.admin/application/sys-api/internal/logic/commonutil"
+	"github.com/gcc798/quick.admin/application/sys-api/internal/svc"
+	"github.com/gcc798/quick.admin/application/sys-api/internal/types"
+	"github.com/gcc798/quick.admin/application/sys-rpc/client/sysservice"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

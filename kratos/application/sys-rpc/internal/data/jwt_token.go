@@ -23,7 +23,7 @@ type JWTClaims struct {
 
 func NewJWTManager(secret string, expireSeconds int64, issuer string) *JWTManager {
 	if strings.TrimSpace(secret) == "" {
-		secret = "nai-tizi-kratos-secret"
+		secret = "quick-admin-kratos-secret"
 	}
 	if strings.TrimSpace(issuer) == "" {
 		issuer = "NTZ-go"

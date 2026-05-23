@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gcc798/nai-tizi/internal/container"
-	"github.com/gcc798/nai-tizi/internal/domain/model"
+	"github.com/gcc798/quick.admin/internal/container"
+	"github.com/gcc798/quick.admin/internal/domain/model"
 	"github.com/gin-gonic/gin"
 )
 

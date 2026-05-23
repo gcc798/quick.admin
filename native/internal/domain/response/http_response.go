@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"github.com/gcc798/nai-tizi/internal/utils/errors"
+	"github.com/gcc798/quick.admin/internal/utils/errors"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )

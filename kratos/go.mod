@@ -1,4 +1,4 @@
-module github.com/gcc798/nai-tizi/kratos
+module github.com/gcc798/quick.admin/kratos
 
 go 1.24.0
 

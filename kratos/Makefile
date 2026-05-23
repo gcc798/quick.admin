@@ -10,7 +10,7 @@ CONF_PROTO_FILES := application/sys-api/internal/conf/conf.proto application/sys
 PROTOBUF_INCLUDE := /opt/homebrew/include/google/protobuf
 
 export PATH := /Users/guoc/dev/code_go/bin:$(PATH)
-export GOCACHE := /tmp/nai-tizi-kratos-go-build
+export GOCACHE := /tmp/quick-admin-kratos-go-build
 
 .PHONY: help init prepare-third-party clean-proto clean-conf conf proto openapi proto-all proto-add-health proto-client proto-server-sys-api proto-server-sys-rpc ent wire fmt build-sys-api build-sys-rpc build-all test
 
@@ -60,7 +60,7 @@ proto:
 		$(PROTO_FILES)
 
 openapi:
-	tmp_root=$$(mktemp -d /tmp/nai-tizi-openapi.XXXXXX); \
+	tmp_root=$$(mktemp -d /tmp/quick-admin-openapi.XXXXXX); \
 	rm -f $(KRATOS_ROOT)/openapi.yaml; \
 	find $(API_DIR) -name 'openapi.yaml' -delete; \
 	find $(API_DIR) -name '*.openapi.yaml' -delete; \

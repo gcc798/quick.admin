@@ -44,7 +44,7 @@ func serveSwaggerIndex(w http.ResponseWriter) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>nai-tizi swagger</title>
+  <title>quick-admin swagger</title>
   <style>
     html { box-sizing: border-box; overflow: -moz-scrollbars-vertical; overflow-y: scroll; }
     *, *:before, *:after { box-sizing: inherit; }

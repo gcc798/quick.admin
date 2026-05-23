@@ -6,9 +6,9 @@ package apipermission
 import (
 	"net/http"
 
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/logic/apipermission"
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/types"
+	"github.com/gcc798/quick.admin/application/sys-api/internal/logic/apipermission"
+	"github.com/gcc798/quick.admin/application/sys-api/internal/svc"
+	"github.com/gcc798/quick.admin/application/sys-api/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

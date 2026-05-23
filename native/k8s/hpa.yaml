@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: nai-tizi-api-hpa
+  name: quick-admin-api-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: nai-tizi-api
+    name: quick-admin-api
   minReplicas: 2
   maxReplicas: 10
   metrics:

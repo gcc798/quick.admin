@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/gcc798/nai-tizi/internal/utils"
+	"github.com/gcc798/quick.admin/internal/utils"
 	"gorm.io/gorm"
 )
 

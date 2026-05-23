@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
-	commonauth "github.com/gcc798/nai-tizi/common/auth"
+	"github.com/gcc798/quick.admin/application/sys-api/internal/svc"
+	commonauth "github.com/gcc798/quick.admin/common/auth"
 )
 
 func BearerToken(r *http.Request, header string) string {

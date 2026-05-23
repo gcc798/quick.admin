@@ -10,11 +10,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gcc798/nai-tizi/internal/domain/model"
-	"github.com/gcc798/nai-tizi/internal/domain/request"
-	"github.com/gcc798/nai-tizi/internal/logger"
-	"github.com/gcc798/nai-tizi/internal/utils/pagination"
-	"github.com/gcc798/nai-tizi/pkg/storage"
+	"github.com/gcc798/quick.admin/internal/domain/model"
+	"github.com/gcc798/quick.admin/internal/domain/request"
+	"github.com/gcc798/quick.admin/internal/logger"
+	"github.com/gcc798/quick.admin/internal/utils/pagination"
+	"github.com/gcc798/quick.admin/pkg/storage"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )

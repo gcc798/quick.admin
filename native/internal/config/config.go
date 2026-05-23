@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	AppEnvVar       = "NAI_TIZI_APP_ENV"
+	AppEnvVar       = "quick_admin_APP_ENV"
 	LegacyAppEnvVar = "ADCS_APP_ENV"
 )
 

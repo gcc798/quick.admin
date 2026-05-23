@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nai-tizi-ingress
+  name: quick-admin-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -10,7 +10,7 @@ spec:
   tls:
   - hosts:
     - api.yourdomain.com
-    secretName: nai-tizi-tls
+    secretName: quick-admin-tls
   rules:
   - host: api.yourdomain.com
     http:
@@ -19,6 +19,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nai-tizi-api
+            name: quick-admin-api
             port:
               number: 80

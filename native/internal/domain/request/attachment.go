@@ -3,7 +3,7 @@ package request
 import (
 	"mime/multipart"
 
-	"github.com/gcc798/nai-tizi/internal/utils"
+	"github.com/gcc798/quick.admin/internal/utils"
 )
 
 // UploadFileRequest 上传文件请求（步骤1：只上传文件）

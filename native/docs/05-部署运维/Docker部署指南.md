@@ -142,7 +142,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: nai-tizi-api
+    container_name: quick.admin-api
     ports:
       - "8080:8080"
     environment:
@@ -151,7 +151,7 @@ services:
       - DB_PORT=5432
       - DB_USER=postgres
       - DB_PASSWORD=postgres
-      - DB_NAME=nai_tizi
+      - DB_NAME=quick_admin
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     depends_on:
@@ -169,11 +169,11 @@ services:
   # PostgreSQL 数据库
   postgres:
     image: postgres:15-alpine
-    container_name: nai-tizi-postgres
+    container_name: quick.admin-postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=nai_tizi
+      - POSTGRES_DB=quick_admin
     ports:
       - "5432:5432"
     volumes:
@@ -191,7 +191,7 @@ services:
   # Redis 缓存
   redis:
     image: redis:7-alpine
-    container_name: nai-tizi-redis
+    container_name: quick.admin-redis
     ports:
       - "6379:6379"
     volumes:
@@ -208,7 +208,7 @@ services:
   # MinIO 对象存储
   minio:
     image: minio/minio:latest
-    container_name: nai-tizi-minio
+    container_name: quick.admin-minio
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -244,8 +244,8 @@ version: '3.8'
 
 services:
   api:
-    image: nai-tizi-api:latest
-    container_name: nai-tizi-api-prod
+    image: quick.admin-api:latest
+    container_name: quick.admin-api-prod
     ports:
       - "8080:8080"
     environment:
@@ -295,13 +295,13 @@ networks:
 
 ```bash
 # 构建镜像
-docker build -t nai-tizi-api:latest .
+docker build -t quick.admin-api:latest .
 
 # 构建并指定平台
-docker build --platform linux/amd64 -t nai-tizi-api:latest .
+docker build --platform linux/amd64 -t quick.admin-api:latest .
 
 # 查看镜像
-docker images | grep nai-tizi
+docker images | grep quick.admin
 ```
 
 ### 运行容器
@@ -327,13 +327,13 @@ docker-compose down -v
 
 ```bash
 # 进入 API 容器
-docker exec -it nai-tizi-api sh
+docker exec -it quick.admin-api sh
 
 # 进入 PostgreSQL 容器
-docker exec -it nai-tizi-postgres psql -U postgres -d nai_tizi
+docker exec -it quick.admin-postgres psql -U postgres -d quick_admin
 
 # 进入 Redis 容器
-docker exec -it nai-tizi-redis redis-cli
+docker exec -it quick.admin-redis redis-cli
 ```
 
 ---
@@ -348,7 +348,7 @@ DB_HOST=postgres
 DB_PORT=5432
 DB_USER=postgres
 DB_PASSWORD=your_secure_password
-DB_NAME=nai_tizi
+DB_NAME=quick_admin
 
 # Redis 配置
 REDIS_HOST=redis
@@ -421,7 +421,7 @@ logging:
 ```bash
 # 克隆代码
 git clone <repository-url>
-cd nai-tizi
+cd quick.admin
 
 # 配置环境变量
 cp .env.example .env
@@ -450,11 +450,11 @@ docker-compose logs -f
 
 ```bash
 # 进入数据库容器
-docker exec -it nai-tizi-postgres psql -U postgres -d nai_tizi
+docker exec -it quick.admin-postgres psql -U postgres -d quick_admin
 
 # 或者从外部执行 SQL
-docker exec -i nai-tizi-postgres psql -U postgres -d nai_tizi < scripts/sql/pgsql.sql
-docker exec -i nai-tizi-postgres psql -U postgres -d nai_tizi < scripts/sql/insert.sql
+docker exec -i quick.admin-postgres psql -U postgres -d quick_admin < scripts/sql/pgsql.sql
+docker exec -i quick.admin-postgres psql -U postgres -d quick_admin < scripts/sql/insert.sql
 ```
 
 ### 4. 验证部署
@@ -496,7 +496,7 @@ docker-compose restart api
 docker-compose logs postgres
 
 # 测试数据库连接
-docker exec -it nai-tizi-postgres psql -U postgres -d nai_tizi -c "SELECT 1"
+docker exec -it quick.admin-postgres psql -U postgres -d quick_admin -c "SELECT 1"
 ```
 
 **3. 端口冲突**

@@ -2,7 +2,7 @@ global:
   scrape_interval: 15s
   evaluation_interval: 15s
   external_labels:
-    cluster: 'nai-tizi'
+    cluster: 'quick-admin'
     environment: 'production'
 
 # 告警规则文件
@@ -17,7 +17,7 @@ scrape_configs:
       - targets: ['localhost:9090']
 
   # 应用监控
-  - job_name: 'nai-tizi-api'
+  - job_name: 'quick-admin-api'
     metrics_path: '/metrics'
     static_configs:
       - targets: ['api:9009']

@@ -1,4 +1,4 @@
-module github.com/gcc798/nai-tizi
+module github.com/gcc798/quick.admin
 
 go 1.25.0
 

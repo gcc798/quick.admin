@@ -1,8 +1,8 @@
-# nai-tizi
+# quick.admin
 
 ## 项目说明
 
-这是一个极简脚手架仓库，用来并行放置 `nai-tizi` 的多套后端实现和前端工程，便于保留业务基线、承载不同框架版本以及统一开展开发与联调。
+这是一个极简脚手架仓库，用来并行放置 `quick.admin` 的多套后端实现和前端工程，便于保留业务基线、承载不同框架版本以及统一开展开发与联调。
 
 当前仓库更偏向工程骨架与实现对照集合，重点是：
 
@@ -30,7 +30,7 @@
 ## 仓库结构
 
 ```text
-nai-tizi/
+quick.admin/
 ├── native/
 ├── gozero/
 ├── kratos/
@@ -86,7 +86,7 @@ nai-tizi/
 - 对接后端接口
 - 用于替代原 `web` Vue 版本
 - 默认开发服务端口为 `3001`
-- 详细说明见 [web-react/README.md](/Users/guoc/dev/code_go/src/nai-tizi/web-react/README.md)
+- 详细说明见 [web-react/README.md](/Users/guoc/dev/code_go/src/quick.admin/web-react/README.md)
 
 ### `web/`
 
@@ -113,7 +113,7 @@ nai-tizi/
 
 目录：
 
-- [/Users/guoc/dev/code_go/src/nai-tizi/kratos](/Users/guoc/dev/code_go/src/nai-tizi/kratos)
+- [/Users/guoc/dev/code_go/src/quick.admin/kratos](/Users/guoc/dev/code_go/src/quick.admin/kratos)
 
 常用命令：
 
@@ -131,13 +131,13 @@ make build-all
 
 目录：
 
-- [/Users/guoc/dev/code_go/src/nai-tizi/gozero](/Users/guoc/dev/code_go/src/nai-tizi/gozero)
+- [/Users/guoc/dev/code_go/src/quick.admin/gozero](/Users/guoc/dev/code_go/src/quick.admin/gozero)
 
 ### 开发前端
 
 目录：
 
-- [/Users/guoc/dev/code_go/src/nai-tizi/web-react](/Users/guoc/dev/code_go/src/nai-tizi/web-react)
+- [/Users/guoc/dev/code_go/src/quick.admin/web-react](/Users/guoc/dev/code_go/src/quick.admin/web-react)
 
 常用命令：
 

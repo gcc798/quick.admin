@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gcc798/nai-tizi/internal/domain/model"
-	logging "github.com/gcc798/nai-tizi/internal/logger"
+	"github.com/gcc798/quick.admin/internal/domain/model"
+	logging "github.com/gcc798/quick.admin/internal/logger"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )

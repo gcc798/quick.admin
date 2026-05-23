@@ -11,21 +11,21 @@ import (
 	"syscall"
 	"time"
 
-	_ "github.com/gcc798/nai-tizi/docs/swagger" // 导入 Swagger 文档
-	"github.com/gcc798/nai-tizi/internal/bootstrap"
-	"github.com/gcc798/nai-tizi/internal/config"
-	"github.com/gcc798/nai-tizi/internal/container"
-	ilogger "github.com/gcc798/nai-tizi/internal/logger"
-	"github.com/gcc798/nai-tizi/internal/middleware"
-	"github.com/gcc798/nai-tizi/internal/router"
-	"github.com/gcc798/nai-tizi/internal/validator"
+	_ "github.com/gcc798/quick.admin/docs/swagger" // 导入 Swagger 文档
+	"github.com/gcc798/quick.admin/internal/bootstrap"
+	"github.com/gcc798/quick.admin/internal/config"
+	"github.com/gcc798/quick.admin/internal/container"
+	ilogger "github.com/gcc798/quick.admin/internal/logger"
+	"github.com/gcc798/quick.admin/internal/middleware"
+	"github.com/gcc798/quick.admin/internal/router"
+	"github.com/gcc798/quick.admin/internal/validator"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
 
 //	@title			NTZ API 文档
 //	@version		1.0
-//	@description	Nai-Tizi RESTful API 接口文档，支持双 Token 认证机制
+//	@description	Quick Admin RESTful API 接口文档，支持双 Token 认证机制
 //	@termsOfService	https://example.com/terms/
 
 //	@contact.name	技术支持

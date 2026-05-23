@@ -8901,7 +8901,7 @@ const file_sys_proto_rawDesc = "" +
 	"\fCaptchaImage\x12\x0e.pb.CaptchaReq\x1a\x13.pb.CaptchaDataResp\x126\n" +
 	"\n" +
 	"CaptchaSms\x12\x13.pb.CaptchaPhoneReq\x1a\x13.pb.CaptchaDataResp\x128\n" +
-	"\fCaptchaEmail\x12\x13.pb.CaptchaEmailReq\x1a\x13.pb.CaptchaDataRespB3Z1github.com/gcc798/nai-tizi/application/sys-rpc/pbb\x06proto3"
+	"\fCaptchaEmail\x12\x13.pb.CaptchaEmailReq\x1a\x13.pb.CaptchaDataRespB6Z4github.com/gcc798/quick.admin/application/sys-rpc/pbb\x06proto3"
 
 var (
 	file_sys_proto_rawDescOnce sync.Once

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	logging "github.com/gcc798/nai-tizi/internal/logger"
+	logging "github.com/gcc798/quick.admin/internal/logger"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"go.uber.org/zap"
 )

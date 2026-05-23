@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gcc798/nai-tizi/internal/domain/model"
-	"github.com/gcc798/nai-tizi/pkg/jwt"
+	"github.com/gcc798/quick.admin/internal/domain/model"
+	"github.com/gcc798/quick.admin/pkg/jwt"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

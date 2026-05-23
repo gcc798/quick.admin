@@ -264,7 +264,7 @@ make swagger
 ### Q2: Swagger UI 显示 404？
 
 A: 检查：
-1. 是否导入了 docs 包：`_ "github.com/gcc798/nai-tizi/docs/swagger"`
+1. 是否导入了 docs 包：`_ "github.com/gcc798/quick.admin/docs/swagger"`
 2. 是否注册了路由：`r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))`
 
 ### Q3: 结构体字段没有显示？

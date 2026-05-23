@@ -4,7 +4,7 @@ groups:
     rules:
       # API 可用性告警
       - alert: APIDown
-        expr: up{job="nai-tizi-api"} == 0
+        expr: up{job="quick-admin-api"} == 0
         for: 1m
         labels:
           severity: critical

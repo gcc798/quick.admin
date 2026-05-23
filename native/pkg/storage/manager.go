@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/gcc798/nai-tizi/internal/constants"
-	"github.com/gcc798/nai-tizi/internal/domain/model"
-	"github.com/gcc798/nai-tizi/internal/logger"
+	"github.com/gcc798/quick.admin/internal/constants"
+	"github.com/gcc798/quick.admin/internal/domain/model"
+	"github.com/gcc798/quick.admin/internal/logger"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )

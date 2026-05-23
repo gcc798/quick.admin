@@ -5,7 +5,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/gcc798/nai-tizi/common/auth"
+	"github.com/gcc798/quick.admin/common/auth"
 )
 
 type JWTAuthConfig struct {

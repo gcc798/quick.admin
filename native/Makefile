@@ -32,8 +32,8 @@ run: swagger
 # 编译项目
 build: swagger
 	@echo "正在编译项目..."
-	@go build -o bin/nai-tizi cmd/api/main.go
-	@echo "✅ 编译完成: bin/nai-tizi"
+	@go build -o bin/quick-admin cmd/api/main.go
+	@echo "✅ 编译完成: bin/quick-admin"
 
 # 运行测试
 test:

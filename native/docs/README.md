@@ -77,7 +77,7 @@ docs/
 `swagger/` 由 `make swagger` 生成，并被 `cmd/api/main.go` 通过空导入加载：
 
 ```go
-_ "github.com/gcc798/nai-tizi/docs/swagger"
+_ "github.com/gcc798/quick.admin/docs/swagger"
 ```
 
 如果删除 `swagger/`，`go test ./...` 和构建会失败。需要更新接口文档时，在 `native` 目录执行：

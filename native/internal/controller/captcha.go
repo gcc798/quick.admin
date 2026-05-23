@@ -3,9 +3,9 @@ package controller
 import (
 	"context"
 
-	"github.com/gcc798/nai-tizi/internal/domain/response"
-	"github.com/gcc798/nai-tizi/internal/service"
-	"github.com/gcc798/nai-tizi/pkg/captcha"
+	"github.com/gcc798/quick.admin/internal/domain/response"
+	"github.com/gcc798/quick.admin/internal/service"
+	"github.com/gcc798/quick.admin/pkg/captcha"
 
 	"github.com/gin-gonic/gin"
 )

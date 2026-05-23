@@ -1,7 +1,7 @@
 package captcha
 
 import (
-	"github.com/gcc798/nai-tizi/pkg/thirdparty/email"
+	"github.com/gcc798/quick.admin/pkg/thirdparty/email"
 )
 
 // EmailManagerAdapter 适配器，将 email.Manager 适配为 EmailProvider 接口

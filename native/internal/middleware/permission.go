@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"github.com/gcc798/nai-tizi/internal/domain/response"
-	"github.com/gcc798/nai-tizi/internal/service"
+	"github.com/gcc798/quick.admin/internal/domain/response"
+	"github.com/gcc798/quick.admin/internal/service"
 	"github.com/gin-gonic/gin"
 )
 

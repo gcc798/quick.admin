@@ -1,10 +1,10 @@
 package bootstrap
 
 import (
-	"github.com/gcc798/nai-tizi/internal/container"
-	"github.com/gcc798/nai-tizi/internal/jobs"
-	"github.com/gcc798/nai-tizi/internal/logger"
-	"github.com/gcc798/nai-tizi/internal/messaging/websocket"
+	"github.com/gcc798/quick.admin/internal/container"
+	"github.com/gcc798/quick.admin/internal/jobs"
+	"github.com/gcc798/quick.admin/internal/logger"
+	"github.com/gcc798/quick.admin/internal/messaging/websocket"
 )
 
 // Bootstrap wires optional scaffold components without binding concrete business logic.

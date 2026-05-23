@@ -6,9 +6,9 @@ package menu
 import (
 	"net/http"
 
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/logic/menu"
-	"github.com/gcc798/nai-tizi/application/sys-api/internal/svc"
-	commonauth "github.com/gcc798/nai-tizi/common/auth"
+	"github.com/gcc798/quick.admin/application/sys-api/internal/logic/menu"
+	"github.com/gcc798/quick.admin/application/sys-api/internal/svc"
+	commonauth "github.com/gcc798/quick.admin/common/auth"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

@@ -6,7 +6,7 @@ services:
     build:
       context: ..
       dockerfile: Dockerfile
-    container_name: nai-tizi-api
+    container_name: quick-admin-api
     ports:
       - "8080:8080"
     environment:
@@ -15,7 +15,7 @@ services:
       - DB_PORT=5432
       - DB_USER=postgres
       - DB_PASSWORD=postgres
-      - DB_NAME=nai_tizi
+      - DB_NAME=quick_admin
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     depends_on:
@@ -33,11 +33,11 @@ services:
   # PostgreSQL 数据库
   postgres:
     image: postgres:15-alpine
-    container_name: nai-tizi-postgres
+    container_name: quick-admin-postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=nai_tizi
+      - POSTGRES_DB=quick_admin
     ports:
       - "5432:5432"
     volumes:
@@ -55,7 +55,7 @@ services:
   # Redis 缓存
   redis:
     image: redis:7-alpine
-    container_name: nai-tizi-redis
+    container_name: quick-admin-redis
     ports:
       - "6379:6379"
     volumes:
@@ -72,7 +72,7 @@ services:
   # MinIO 对象存储
   minio:
     image: minio/minio:latest
-    container_name: nai-tizi-minio
+    container_name: quick-admin-minio
     ports:
       - "9000:9000"
       - "9001:9001"

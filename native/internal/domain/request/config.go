@@ -3,7 +3,7 @@ package request
 import (
 	"encoding/json"
 
-	"github.com/gcc798/nai-tizi/internal/utils/pagination"
+	"github.com/gcc798/quick.admin/internal/utils/pagination"
 )
 
 // CreateConfigRequest 创建配置请求
